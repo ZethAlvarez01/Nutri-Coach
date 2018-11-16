@@ -1,0 +1,33 @@
+/* 
+    Created on : 11/11/2018, 08:39:35 PM
+    Author     : Zeth
+*/
+
+/* Estilos pleca */
+
+#pleca {
+    background: white;
+    height: 95px;
+}
+
+#logoSEP img {
+    height: 95px;
+    float: left;
+}
+
+#logoIPN a {
+    float: right;
+    margin-top: 30px;
+    margin-left: 10px;
+    color: #807e82;
+    font-size: 15px;
+    /*font-family: Soberana;
+    Buscar tipografia redactada en el documento de identidad
+    */
+}
+
+#logoIPN img {
+    margin-top: 10px;
+    height: 70px;
+    float: right;
+}

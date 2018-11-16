@@ -1,0 +1,47 @@
+/* 
+    Created on : 11/11/2018, 11:45:01 PM
+    Author     : Zeth
+*/
+
+#barra {
+    height: 70px;
+    background: rgb(108,29,69);
+}
+
+#imagen{
+    margin-top: 80px;
+    width: 250px;
+}
+
+#contenido {
+    margin-top: 50px;
+    height: 400px;
+}
+
+.grid-container {
+  margin: 0px auto;
+  margin-top: 70px;
+  display: grid;
+  width: 800px;
+  height: 370px;
+  grid-template-columns: auto auto auto auto;
+}
+.grid-item {
+  
+  border: 1px solid white;
+  height: 180px;
+  width: 200px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.grid-item:hover {
+    cursor: pointer;
+    border: 1px solid #D8D8D8;
+}
+
+.imagenActor{
+  margin-top: 10px;
+  width: 110px;
+  height: 150px;  
+}

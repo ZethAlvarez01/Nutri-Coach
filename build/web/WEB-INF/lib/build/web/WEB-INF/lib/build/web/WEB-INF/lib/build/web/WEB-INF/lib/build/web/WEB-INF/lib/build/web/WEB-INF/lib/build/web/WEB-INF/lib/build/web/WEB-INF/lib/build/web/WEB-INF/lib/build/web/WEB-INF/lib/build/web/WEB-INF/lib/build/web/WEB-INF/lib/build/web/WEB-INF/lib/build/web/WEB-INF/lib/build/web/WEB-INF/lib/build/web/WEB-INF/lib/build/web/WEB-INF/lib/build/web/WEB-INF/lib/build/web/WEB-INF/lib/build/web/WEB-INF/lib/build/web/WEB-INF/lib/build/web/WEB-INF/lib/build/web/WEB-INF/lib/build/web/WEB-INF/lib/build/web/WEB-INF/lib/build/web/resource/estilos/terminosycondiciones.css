@@ -1,0 +1,36 @@
+/* 
+    Created on : 11/11/2018, 10:17:57 PM
+    Author     : Zeth
+*/
+#barra {
+    height: 70px;
+    background: rgb(108,29,69);
+}
+
+#imagen{
+    width: 300px;
+}
+
+#contenido {
+    height: 700px;
+}
+
+#texto{
+    margin: auto;
+    width: 65%;
+    height: 400px;
+    background-color: white;
+    overflow: auto;
+    margin-top: 45px;
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px solid #848484;
+}
+
+#parrafo{
+    text-align: justify;
+}
+
+ul{
+    margin-left: 45px;
+}

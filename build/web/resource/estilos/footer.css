@@ -1,0 +1,48 @@
+/* 
+    Created on : 11/11/2018, 10:12:59 PM
+    Author     : Zeth
+*/
+/*Estilos footer*/
+
+footer {
+    background: #393b3c;
+    color: white;
+    text-align: center;
+}
+
+#visita {
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 30px;
+}
+
+hr {
+    opacity: 0.4;
+}
+
+#redes {
+    display: block;
+    width: 217px;
+    margin: 0px auto;
+    list-style: none;
+    margin-bottom: 100px;
+    margin-top: 30px;
+}
+
+#redes li {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: all 300ms;
+}
+
+#redes li:hover {
+    opacity: 0.8;
+    transform: scale(1.1, 1.1);
+}
+
+.hiperfooter{
+    color: white;
+    padding: 0px 50px;
+}
+

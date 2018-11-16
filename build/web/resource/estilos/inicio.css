@@ -1,0 +1,119 @@
+/* 
+    Created on : 11/11/2018, 08:55:00 PM
+    Author     : Zeth
+*/
+/*Barra Inicio de sesión*/
+
+#login {
+    height: 70px;
+    background: rgb(108,29,69);
+}
+
+#login form {
+    float: right;
+    margin-top: 8px;
+}
+
+input {
+    width: 32%;
+}
+
+#login form p {
+    margin-top: 5px;
+}
+
+#login input {
+    border: none;
+    padding: 6px;
+    border-radius: 2px;
+}
+
+.boton {
+    border: 1px solid white;
+    border-radius: 2px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 30px;
+    background-color: rgb(108,29,69);
+    cursor: pointer;
+}
+
+.boton:hover{
+    background: rgb(255,255,255,0.5);
+    transition: 0.5s;
+}
+
+.hiperlogin{
+    
+    color: white;
+    font-size: 14px;
+    padding: 4px 10px 0px 0px;
+}
+
+.hiperlogin a:hover{
+    color: #F5A9A9;
+}
+
+/*Estilos Slider principal*/
+
+#contenido {
+    height: 450px;
+}
+
+#imagen{
+    width: 550px;
+    float: right;
+    margin-top: 50px;
+}
+
+#contenido #banner {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+#contenido .texto {
+    position: absolute;
+    top: 210px;
+}
+
+#contenido #bienvenido {
+    font-size: 40px;
+}
+
+#contenido p {
+    font-size: 18px;
+    margin-top: 30px;
+    width: 40%;
+}
+
+#leer {
+    margin-top: 50px;
+    width: 120px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    color: black;
+    font-size: 20px;
+}
+
+#leer:hover{
+    background: rgb(0,0,0,0.3);
+    transition: 0.5s;
+}
+
+/*Error*/
+
+.error {
+         color: #ff0000;
+      }
+
+.errorblock {
+ color: #000;
+ background-color: #ffEEEE;
+ border: 3px solid #ff0000;
+ padding: 8px;
+ margin: 16px;
+}
