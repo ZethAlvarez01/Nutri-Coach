@@ -25,10 +25,10 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
   - [X] Login
 
 **Conexion con mysql**
-- [ ] Registro en la base de datos
-  - [ ] Nutriologo
-  - [ ] Paciete
-  - [ ] Psicologo
-  - [ ] Administrador
+- [X] Registro en la base de datos
+  - [X] Nutriologo
+  - [X] Paciete
+  - [X] Psicologo
+  - [X] Administrador
 - [X] Login funcionando
 
