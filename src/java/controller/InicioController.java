@@ -7,9 +7,9 @@ import models.Foro;
 import models.Nutriologo;
 import models.Login;
 import models.LoginValidar;
-import models.NeuralNet.Implement;
-import models.NeuralNet.Matrix;
-import models.NeuralNet.Neural_layer;
+import models.NeuralNet.Implementacion;
+import models.NeuralNet.libMatrices;
+import models.NeuralNet.Capa_neuronas;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +33,11 @@ public class InicioController {
     
     private int[] topology={42,5,6};
     
-    static ArrayList<Neural_layer> create_nn(int[] topology,int act_f){
-       ArrayList<Neural_layer> nn=new ArrayList<>();
+    static ArrayList<Capa_neuronas> create_nn(int[] topology,int act_f){
+       ArrayList<Capa_neuronas> nn=new ArrayList<>();
        
        for(int i=0;i<topology.length-1;i++){
-           Neural_layer l=new Neural_layer(topology[i],topology[i+1],act_f);
+           Capa_neuronas l=new Capa_neuronas(topology[i],topology[i+1],act_f);
            nn.add(l);
        }
        
@@ -46,7 +46,6 @@ public class InicioController {
     
     private JdbcTemplate jdbcTemplate;
     private LoginValidar loginValidar;
-    private Foro foro;
 
     public InicioController() {
         this.loginValidar=new LoginValidar();
@@ -83,15 +82,15 @@ public class InicioController {
             if(datos.size()>=1){
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foro");
-                ArrayList<Neural_layer> neural_net;
-                Matrix op=new Matrix();
+                ArrayList<Capa_neuronas> neural_net;
+                libMatrices op=new libMatrices();
                 double[] x={0,1,0,1,0,1,0,1,0,1,
                             1,1,0,1,0,1,0,1,0,1,
                             1,1,0,1,0,1,0,1,0,1,
                             1,1,0,1,0,1,0,1,0,1,
                             0,0};
                 neural_net=create_nn(topology,0);
-                Implement exe=new Implement(neural_net,x);
+                Implementacion exe=new Implementacion(neural_net,x);
                 double[][] output=exe.Implement();
                 System.out.println("Entrada: ");
                 double[][] xa=new double[1][];
@@ -116,15 +115,15 @@ public class InicioController {
                 if(datos.size()>=1){
                     ModelAndView mv=new ModelAndView();
                     mv.setViewName("foro");
-                    ArrayList<Neural_layer> neural_net;
-                    Matrix op=new Matrix();
+                    ArrayList<Capa_neuronas> neural_net;
+                    libMatrices op=new libMatrices();
                     double[] x={0,1,0,1,0,1,0,1,0,1,
                                 1,1,0,1,0,1,0,1,0,1,
                                 1,1,0,1,0,1,0,1,0,1,
                                 1,1,0,1,0,1,0,1,0,1,
                                 0,0};
                     neural_net=create_nn(topology,0);
-                    Implement exe=new Implement(neural_net,x);
+                    Implementacion exe=new Implementacion(neural_net,x);
                     double[][] output=exe.Implement();
                     System.out.println("Entrada: ");
                     double[][] xa=new double[1][];
@@ -149,8 +148,8 @@ public class InicioController {
                    if(datos.size()>=1){
                         ModelAndView mv=new ModelAndView();
                         mv.setViewName("foro");
-                        ArrayList<Neural_layer> neural_net;
-                        Matrix op=new Matrix();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
                         double[] x={0,1,0,1,0,1,0,1,0,1,
                                     1,1,0,1,0,1,0,1,0,1,
                                     1,1,0,1,0,1,0,1,0,1,
@@ -159,7 +158,7 @@ public class InicioController {
 
                         neural_net=create_nn(topology,0);
 
-                        Implement exe=new Implement(neural_net,x);
+                        Implementacion exe=new Implementacion(neural_net,x);
                         double[][] output=exe.Implement();
 
                         System.out.println("Entrada: ");
@@ -185,8 +184,8 @@ public class InicioController {
                         if(datos.size()>=1){
                         ModelAndView mv=new ModelAndView();
                         mv.setViewName("foro");
-                        ArrayList<Neural_layer> neural_net;
-                        Matrix op=new Matrix();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
                         double[] x={0,1,0,1,0,1,0,1,0,1,
                                     1,1,0,1,0,1,0,1,0,1,
                                     1,1,0,1,0,1,0,1,0,1,
@@ -195,7 +194,7 @@ public class InicioController {
 
                         neural_net=create_nn(topology,0);
 
-                        Implement exe=new Implement(neural_net,x);
+                        Implementacion exe=new Implementacion(neural_net,x);
                         double[][] output=exe.Implement();
 
                         System.out.println("Entrada: ");

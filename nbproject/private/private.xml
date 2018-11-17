@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/src/java/models/Conexion.java</file>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/web/resource/estilos/foro.css</file>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/src/java/controller/InicioController.java</file>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/src/java/models/Foro.java</file>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/web/WEB-INF/jsp/expedientePaciente.jsp</file>
-            <file>file:/C:/Users/zetok/Desktop/Jessie%20correo/Nutri-Coach/web/WEB-INF/jsp/foro.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/NeuralNet/Capa_neuronas.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/NeuralNet/Implementacion.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/controller/InicioController.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

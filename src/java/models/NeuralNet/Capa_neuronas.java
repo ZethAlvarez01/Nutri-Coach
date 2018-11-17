@@ -1,13 +1,13 @@
 package models.NeuralNet;
 
-public class Neural_layer {
+public class Capa_neuronas {
     int n_conn;
     int n_neuronas;
     int act_f;
     double b[][];
     double w[][];
     
-    public Neural_layer(int n_conn,int n_neuronas,int act_f){
+    public Capa_neuronas(int n_conn,int n_neuronas,int act_f){
         this.n_conn=n_conn;
         this.n_neuronas=n_neuronas;
         this.act_f=act_f;
@@ -25,11 +25,6 @@ public class Neural_layer {
         
     }
 
-    Neural_layer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     public double act_f(double x){
         switch(act_f){
             case 0:

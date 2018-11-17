@@ -1,9 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
-import models.NeuralNet.Implement;
-import models.NeuralNet.Matrix;
-import models.NeuralNet.Neural_layer;
+import models.NeuralNet.Implementacion;
+import models.NeuralNet.libMatrices;
+import models.NeuralNet.Capa_neuronas;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
