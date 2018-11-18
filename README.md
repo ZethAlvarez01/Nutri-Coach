@@ -32,3 +32,6 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
   - [X] Administrador
 - [X] Login funcionando
 
+
+**Responsive**
+- [ ] Todo

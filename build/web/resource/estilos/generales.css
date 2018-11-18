@@ -7,7 +7,8 @@
 * {
     margin: 0px;
     padding: 0px;
-    text-decoration: none;
+    text-decoration: none;   
+    font-family:'Soberana Titular';
 }
 
 body {
@@ -32,7 +33,7 @@ body {
     margin-left: 80%;
     margin-top: 50px;
     padding: 10px 35px;
-    background: rgb(108,29,69);
+    background: rgb(108,29,69); /*Pantone 222 C */
     color: white;
     border-radius: 5px;
     font-size: 20px;
@@ -42,3 +43,4 @@ body {
     background: rgb(0,0,0,0.4);
     transition: 0.5s;
 }
+

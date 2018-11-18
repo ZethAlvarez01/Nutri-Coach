@@ -8,6 +8,8 @@ footer {
     background: #393b3c;
     color: white;
     text-align: center;
+    position: absolute;
+    bottom: 0;
 }
 
 #visita {

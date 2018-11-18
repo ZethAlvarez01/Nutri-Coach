@@ -49,11 +49,7 @@ public class VistaController {
     public ModelAndView foro(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("foro");
-        
-        
-        
         return mv;
     }
-    
     
 }

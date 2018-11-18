@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import models.Administrador;
-import models.AdministradorValidar;
 import models.Conexion;
+import models.Login;
+import models.LoginValidar;
 import models.Nutriologo;
 import models.NutriologoValidar;
 import models.Paciente;
@@ -30,7 +30,6 @@ public class RegistroController {
     
     private PacienteValidar pacienteValidar;
     private NutriologoValidar nutriologoValidar;
-    private AdministradorValidar administradorValidar;
     private PsicologoValidar psicologoValidar;
     private JdbcTemplate jdbcTemplate;
     
@@ -38,11 +37,14 @@ public class RegistroController {
     public RegistroController() {
         this.pacienteValidar=new PacienteValidar();
         this.nutriologoValidar=new NutriologoValidar();
-        this.administradorValidar=new AdministradorValidar();
         this.psicologoValidar=new PsicologoValidar();
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
+    
+ 
+/////////////////////
+    
     
     @RequestMapping(value="registroN.htm",method=RequestMethod.GET)
     public ModelAndView formularioN(){
@@ -205,58 +207,4 @@ public class RegistroController {
             }
         }
     }
-    
-/////////////////////////////////////////////////////////////////////////////
-    
-    @RequestMapping(value="registroA.htm",method=RequestMethod.GET)
-    public ModelAndView formularioA(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("registroA");
-        mv.addObject("registroA",new Administrador());
-        return mv;
-    }
-    
-    @RequestMapping(value="registroA.htm",method=RequestMethod.POST)
-    public ModelAndView formularioA(
-                        @ModelAttribute("Administrador") Administrador administrador,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.administradorValidar.validate(administrador, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("registroA");
-            mv.addObject("registroA",new Administrador());
-            return mv;
-        }else{
-            
-            if(administrador.getContraseña().equals(administrador.getContraseña2())){
-
-                String sql="insert into administrador values("+administrador.getNo_empleado()+",'"+administrador.getNombre()+"','"+administrador.getAp_uno()+"','"+administrador.getAp_dos()+"','"+administrador.getCargo()+"','"+administrador.getContraseña()+"','"+administrador.getTelefono()+"');";
-
-                this.jdbcTemplate.update(sql);
-            
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("exito4");
-            
-            mv.addObject("no_empleado",administrador.getNo_empleado());
-            mv.addObject("nombre",administrador.getNombre());
-            mv.addObject("ap_uno",administrador.getAp_uno());
-            mv.addObject("ap_dos",administrador.getAp_dos());
-            mv.addObject("telefono",administrador.getTelefono());
-            mv.addObject("cargo",administrador.getCargo());
-            mv.addObject("correo",administrador.getCorreo());
-            mv.addObject("contraseña",administrador.getContraseña());
-            mv.addObject("contraseña2",administrador.getContraseña2());
-            
-            return mv;
-            
-            }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("registroA");
-                mv.addObject("registroA",new Administrador());
-                return mv;  
-            }
-        }
-    }  
 }

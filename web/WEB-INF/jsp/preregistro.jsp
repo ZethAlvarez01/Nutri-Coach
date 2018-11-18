@@ -58,7 +58,6 @@
                 
                 <div class="grid-container">
                     <a href="<c:url value="/registroP.htm" />"><div class="grid-item"><img class="imagenActor" src="<c:url value="/resource/imagenes/paciente.png" />" alt="Paciente"></div></a>
-                    <a href="<c:url value="/registroA.htm" />"><div class="grid-item"><img class="imagenActor" src="<c:url value="/resource/imagenes/admin.png" />" alt="Administrador"></div></a>
                     <a href="<c:url value="/registroN.htm" />"><div class="grid-item"><img class="imagenActor" src="<c:url value="/resource/imagenes/nutriologo.png" />" alt="Nutriólogo"></div></a>
                     <a href="<c:url value="/registroPs.htm" />"><div class="grid-item"><img class="imagenActor" src="<c:url value="/resource/imagenes/psicologo.png" />" alt="Psicólogo"></div></a>
                 </div>                

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Inicio
-    Created on : 11/11/2018, 12:07:13 AM
+    Document   : login
+    Created on : 18/11/2018, 02:00:06 AM
     Author     : Zeth
 --%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -32,7 +32,7 @@
                     <div id="logoIPN">
                         <a href="https://www.ipn.mx">
                             <p>Instituto Politécnico Nacional</p>
-                            <p>"La Técnica al Servicio de la Patria"</p>
+                            "La Técnica al Servicio de la Patria"
                         </a>
                         <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                     </div>
@@ -41,52 +41,33 @@
             <!--Fin container-->
         </header>    
         
-        <div id="login">
-            <div class="container">
-                <form:form method="POST" commandName="loginO">
-                    <form:errors path = "*" cssClass = "errorblock" element = "div" />
-                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
-                    <form:errors path = "Usuario" cssClass = "error" />
-                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
-                    <form:errors path="Pass" element="div"/> 
-                    <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>
-                    <p class="hiperlogin" style="color: white;">¿No tienes una cuenta?  <a class="hiperlogin" href="<c:url value="/preregistro.htm" />">Regístrate </a>
-                      ¿Olvidaste tu contraseña?  <a class="hiperlogin" href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
-                </form:form>
-                <div id="divBoton">
-                        <button id="btnResponsive" href="<c:url value="/login.htm" />">Iniciar sesión</button>
-                </div>      
-            </div>
-            <!--Fin container-->
-        </div>
-        <!--Fin login-->
-        
-        <div id="contenido">
+         <div id="contenido">
             <div class="container">
                 
                 <div id="imagendiv">
                     <img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach">
                 </div>
-                <div class="texto">
-                    <p id="bienvenido">Bienvenido</p>
-                    <p id="texto" align="justify">
-                        Este es un prototipo de sistema web que permitite apoyar tanto a especialistas en el área de nutrición, y miembros de la comunidad que deseen mejorar su estilo de vida a través de su alimentación.
-                    </p>
-                    <a href="<c:url value="/leermas.htm" />">
-                        <div id="leer">Conoce más</div>
-                    </a>
-                </div>
+                
+                <form:form method="POST" commandName="loginO">
+                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                    <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>                  
+                </form:form>
 
             </div>
             <!--Fin container-->
         </div>
-        <!--Fin contenido-->
+        <!--Fin contenido-->            
+                    
+        <div id="barra">
+            <div class="container">
+                        <a href="<c:url value="/inicio.htm" />"><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            </div>
+        </div> 
         
         <footer>
             <div class="container">
-                <center>
                     <p id="visita">Visita nuestras redes sociales</p>
-                </center>
                 <hr>
                 <ul id="redes">
                     <li>
@@ -110,8 +91,6 @@
                 <br/>
                 <p>
                     <a class="hiperfooter" href="<c:url value="/tyc.htm" />">Términos y condiciones</a>
-                    <br/>
-                    <br/>
                     <a  class="hiperfooter" href="<c:url value="/politicas.htm" />">Políticas de privacidad</a>
                 </p>
                 <br/>

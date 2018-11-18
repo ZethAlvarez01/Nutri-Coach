@@ -42,7 +42,7 @@ input {
 
 .boton:hover{
     background: rgb(255,255,255,0.5);
-    transition: 0.5s;
+    -moz-transition: 0.5s;
 }
 
 .hiperlogin{
@@ -65,7 +65,7 @@ input {
 #imagen{
     width: 550px;
     float: right;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 #contenido #banner {
@@ -76,7 +76,6 @@ input {
 
 #contenido .texto {
     position: absolute;
-    top: 210px;
 }
 
 #contenido #bienvenido {
@@ -85,11 +84,12 @@ input {
 
 #contenido p {
     font-size: 18px;
-    margin-top: 30px;
-    width: 40%;
+    margin-top: 50px;
+    width: 500px;
 }
 
 #leer {
+    text-align: center;
     margin-top: 50px;
     width: 120px;
     border: 2px solid black;
@@ -116,4 +116,211 @@ input {
  border: 3px solid #ff0000;
  padding: 8px;
  margin: 16px;
+}
+
+#btnResponsive{
+    display: none;
+}
+
+@media all and (max-height: 1024px){
+    fotter{
+        bottom: 0;
+        position: absolute;
+    }
+     
+    #contenido{
+        height: 570px;
+    }
+}
+
+@media all and (max-width: 768px){
+    #logoSEP{
+        display: none;
+    }
+    
+    #logoIPN{
+        float: left;
+    }
+    
+    #login form{
+        display: none;
+    }
+    
+    #divBoton{
+        padding: 10px;
+    }
+    
+    #btnResponsive{
+        display: block;
+        float: right;
+        border: 3px solid white;      
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 17px;
+        width: 50%;
+        padding: 10px 20px;
+        background-color: rgb(108,29,69);
+        cursor: pointer;
+    }
+
+    #leer{
+        margin-top: 90px;
+        float: left;
+    }
+    
+    #contenido {
+        height: 570px;
+    }
+    
+
+    #imagen{
+        margin-left: 12%;
+        width: 80%;
+        float: left;
+        margin-top: 10px;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 30%;
+        font-size: 40px;
+    }
+    
+    #contenido p{
+        width: 90%;
+    }
+    
+    .hiperfooter{
+        font-size: 20px;
+    }
+    
+}
+
+
+@media all and (max-width: 321px){
+    #logoIPN p{
+        font-size: 14px;
+    }
+    
+    #btnResponsive{
+        display: block;
+        float: right;
+        border: 3px solid white;      
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+        width: 60%;
+        padding: 10px 15px;
+        background-color: rgb(108,29,69);
+        cursor: pointer;
+    }
+    
+    
+    .hiperfooter{
+        font-size: 17px;
+    }
+    
+}
+
+@media all and (width: 1024px){
+    
+    #imagen{
+        float: left;
+        margin-left: 20%;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 30%;
+        font-size: 40px;
+    }
+    
+    #contenido p{
+        width: 90%;
+    }
+    
+    #contenido{
+        height: 920px;
+    }
+}
+
+@media all and (width: 823px) and (height: 411px){
+    
+     #imagen{
+        margin-top: 10px;
+        width: 50%;
+        float: left;
+        margin-left: 29%;
+    }
+    
+    #contenido p{
+        width: 90%;
+    }
+    
+    #contenido{
+        height: 500px;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 130px;
+        font-size: 40px;
+    }
+    
+}
+
+@media all and (width: 812px) and (height: 375px){
+
+    #imagen{
+        margin-top: 10px;
+        width: 60%;
+        float: left;
+        margin-left: 26%;
+    }
+    
+    #contenido p{
+        width: 93%;
+    }
+    
+    #contenido{
+        height: 500px;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 20%;
+        font-size: 40px;
+    }
+
+}
+
+
+@media all and (width: 1024px) and (height: 768px){
+    
+    #imagen{
+        margin-top: 10px;
+        width: 50%;
+        float: left;
+        margin-left: 26%;
+    }
+    
+    #contenido p{
+        width: 93%;
+    }
+    
+    #contenido{
+        height: 500px;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 20%;
+        font-size: 40px;
+    }
+
+    
 }

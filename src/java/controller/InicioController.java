@@ -29,8 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("inicio.htm")
 public class InicioController {
     
-    
-    
     private int[] topology={42,5,6};
     
     static ArrayList<Capa_neuronas> create_nn(int[] topology,int act_f){
@@ -53,8 +51,6 @@ public class InicioController {
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
     
-    
-
     @RequestMapping(method=RequestMethod.GET)
     public ModelAndView inicio(){
         return new ModelAndView("inicio","loginO",new Login());
