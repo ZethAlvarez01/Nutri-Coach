@@ -36,4 +36,5 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 **Responsive**
 - [ ] Horizontales de preregistro
 - [ ] logins (Solo Vertical)
+- [ ] Acomodar pantalla completa
 
