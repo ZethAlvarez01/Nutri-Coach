@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/estilosR/generalesR.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/terminosycondiciones.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />

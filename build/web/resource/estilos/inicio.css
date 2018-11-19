@@ -65,7 +65,7 @@ input {
 #imagen{
     width: 550px;
     float: right;
-    margin-top: 20px;
+    margin-top: 10%;
 }
 
 #contenido #banner {
@@ -80,11 +80,12 @@ input {
 
 #contenido #bienvenido {
     font-size: 40px;
+    margin-top: 30%;
 }
 
 #contenido p {
     font-size: 18px;
-    margin-top: 50px;
+    margin-top: 90px;
     width: 500px;
 }
 
@@ -121,6 +122,7 @@ input {
 #btnResponsive{
     display: none;
 }
+
 
 @media all and (max-height: 1024px){
     fotter{
@@ -184,7 +186,7 @@ input {
     
     #contenido #bienvenido{
         text-align: center;
-        margin-top: 30%;
+        margin-top: 40%;
         font-size: 40px;
     }
     
@@ -298,7 +300,6 @@ input {
 
 }
 
-
 @media all and (width: 1024px) and (height: 768px){
     
     #imagen{
@@ -322,5 +323,54 @@ input {
         font-size: 40px;
     }
 
+}
+
+@media all and (width: 768px) and (height: 1024px){
+     #contenido #bienvenido{
+        text-align: center;
+        margin-top: 200px;
+        font-size: 40px;
+    }
+    
+    #leer{
+        margin-top: 20px;
+        float: left;
+    } 
+}
+
+@media all and (min-width: 768px){
+    #imagen{
+       width: 60%; 
+    }
+}
+
+@media all and (min-height: 1024px){
+    footer{
+        bottom: 0px;
+        position: absolute;
+        width: 100%;
+    }
+}
+
+@media all and (min-width: 874px) and (max-width: 1490px){
+    #imagen{
+       width: 500px; 
+    }
+}
+
+@media all and (width: 760px){
+    #imagen{
+        width: 550px;
+    }
+    
+    #contenido #bienvenido{
+        text-align: center;
+        margin-top: 250px;
+        font-size: 45px;
+    }
+    
+    #leer{
+        margin-top: 50px;
+    }
     
 }

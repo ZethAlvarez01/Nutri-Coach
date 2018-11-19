@@ -110,9 +110,8 @@
                 <br/>
                 <p>
                     <a class="hiperfooter" href="<c:url value="/tyc.htm" />">Términos y condiciones</a>
-                    <br/>
-                    <br/>
-                    <a  class="hiperfooter" href="<c:url value="/politicas.htm" />">Políticas de privacidad</a>
+
+                    <a  class="hiperfooter" id="politicas" href="<c:url value="/politicas.htm" />">Políticas de privacidad</a>
                 </p>
                 <br/>
                 
