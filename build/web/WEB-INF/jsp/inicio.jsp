@@ -64,9 +64,7 @@
         <div id="contenido">
             <div class="container">
                 
-                <div id="imagendiv">
                     <img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach">
-                </div>
                 <div class="texto">
                     <p id="bienvenido">Bienvenido</p>
                     <p id="texto" align="justify">

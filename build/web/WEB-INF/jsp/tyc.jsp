@@ -12,9 +12,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/estilosR/generalesR.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/terminosycondiciones.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/tyc.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <title>Nutri-Coach</title>
     </head>
@@ -30,7 +29,7 @@
                     <div id="logoIPN">
                         <a href="https://www.ipn.mx">
                             <p>Instituto Politécnico Nacional</p>
-                            "La Técnica al Servicio de la Patria"
+                            <p>"La Técnica al Servicio de la Patria"</p>
                         </a>
                         <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                     </div>

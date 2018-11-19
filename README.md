@@ -14,7 +14,7 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 - [X] Recuperar contraseña
 - [ ] Expediente
 - [X] Recomendaciones
-- [X] Leer mas  **Falta rellenar**
+- [ ] Leer mas  **Falta rellenar**
 
 **Funcionalidad**
 - [ ] Validaciones de formularios **Falta validacion de tipos**
@@ -34,4 +34,6 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 
 
 **Responsive**
-- [ ] Todo
+- [ ] Horizontales de preregistro
+- [ ] logins (Solo Vertical)
+

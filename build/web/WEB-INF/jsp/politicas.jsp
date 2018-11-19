@@ -13,7 +13,7 @@
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/terminosycondiciones.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/tyc.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <title>Nutri-Coach</title>
     </head>

@@ -30,7 +30,7 @@
                     <div id="logoIPN">
                         <a href="https://www.ipn.mx">
                             <p>Instituto Politécnico Nacional</p>
-                            "La Técnica al Servicio de la Patria"
+                            <p>"La Técnica al Servicio de la Patria"</p>
                         </a>
                         <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                     </div>
@@ -52,7 +52,7 @@
                 
                 <center><h1>Tipo de usuario</h1>
                 <br/>
-                <p>Selecciona el tipo de usuario que eres:</p>
+                <p id="texto">Selecciona el tipo de usuario que eres:</p>
                 <br/>
                 </center>
                 

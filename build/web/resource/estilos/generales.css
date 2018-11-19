@@ -43,13 +43,3 @@ body {
     background: rgb(0,0,0,0.4);
     transition: 0.5s;
 }
-
-@media all and (max-width: 768px){
-    #logoSEP{
-        display: none;
-    }
-    
-    #logoIPN{
-        float: left;
-    }
-}

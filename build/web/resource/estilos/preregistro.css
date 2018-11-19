@@ -24,7 +24,7 @@
   display: grid;
   width: 800px;
   height: 370px;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto;
 }
 .grid-item {
   
@@ -44,4 +44,181 @@
   margin-top: 10px;
   width: 110px;
   height: 150px;  
+}
+
+footer{
+    width: 100%;
+    botton: 0px;
+}
+
+@media all and (max-width: 655px){
+    #logoSEP{
+        display: none;
+    }
+    
+    #imagen{
+        margin-left: 10%;
+    }
+    
+    #logoIPN{
+        float: left;
+    }    
+    
+    .regresar{
+        display: none;
+    }
+
+    h1{
+       margin-top: 120px;
+    }
+    
+    #contenido{
+        height: 400px;
+    }
+    
+    .grid-container {
+        margin-top: 20px;
+        display: grid;
+        width: 250px;
+        height: 250px;
+        grid-template-columns: auto auto;
+    }
+    
+    .grid-item {
+        margin: 0px auto;
+        border: 1px solid white;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        border-radius: 5px;
+    }
+      
+      .imagenActor{
+        width: 80px;
+        height: 100px;  
+      }
+    
+}
+
+@media all and (max-width: 329px){
+    #logoIPN p{
+        font-size: 14px;
+    }
+}
+
+@media all and (orientation:landscape){
+    #imagen{
+        width: 250px;
+        margin-left: 28%;
+    }     
+}
+
+@media all and (width: 768px) and (height:1024px){
+    
+    h1{
+        margin-top: 150px;
+    }
+    
+    .grid-container {
+        margin-top: 20px;
+        display: grid;
+        width: 250px;
+        height: 250px;
+        grid-template-columns: auto auto;
+    }
+    
+    .grid-item {
+        margin: 0px auto;
+        border: 1px solid white;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        border-radius: 5px;
+    }
+      
+    .imagenActor{
+        width: 80px;
+        height: 100px;  
+    }
+    
+    footer{
+        bottom: 0px;
+        position: absolute;
+    }
+}
+
+@media all and (width: 1024px) and (height:768px){
+    .grid-container {
+        margin-top: 20px;
+        display: grid;
+        width: 250px;
+        height: 250px;
+        grid-template-columns: auto auto;
+    }
+    
+    .grid-item {
+        margin: 0px auto;
+        border: 1px solid white;
+        height: 100px;
+        width: 100px;
+        text-align: center;
+        border-radius: 5px;
+    }
+      
+    .imagenActor{
+        width: 80px;
+        height: 100px;  
+    }
+    
+    h1{
+        margin-top: 150px;
+    }
+    
+    #contenido{
+        height: 400px;
+    }
+}
+
+@media all and (width: 1024px) and (height:1366px){
+   
+    #contenido{
+        height: 500px;
+    }
+    
+    h1{
+        font-size: 40px;
+        margin-top: 200px;
+    }
+    
+    #texto{
+        font-size: 20px;
+    }
+    
+    .grid-container {
+        margin-top: 50px;
+        display: grid;
+        width: 500px;
+        height: 500px;
+        grid-template-columns: auto auto;
+    }
+    
+    .grid-item {
+        margin: 0px auto;
+        border: 1px solid white;
+        height: 200px;
+        width: 200px;
+        text-align: center;
+        border-radius: 5px;
+    }
+    
+    .imagenActor{
+        width: 150px;
+        height: 180px;  
+    }
+    
+    footer{
+        bottom: 0;
+        position: absolute;
+    }
+    
 }
