@@ -24,6 +24,13 @@ public class VistaController {
         return mv;
     }
     
+    @RequestMapping("login.htm")
+    public ModelAndView login(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("login");
+        return mv;
+    }
+    
     @RequestMapping("tyc.htm")
     public ModelAndView tyc(){
         ModelAndView mv=new ModelAndView();

@@ -53,7 +53,7 @@
                 
                 <center><h1>Registro para el paciente</h1>
                     <br/>
-                    <p>Favor de introducir sus datos correspondientes para complerar su registro:</p>
+                    <p>Favor de introducir sus datos correspondientes para completar su registro:</p>
                 </center>
                 <div id="formulario">
                     <form:form method="POST" commandName="registroP">
@@ -61,9 +61,9 @@
                         <form:input path="nombre" placeholder="Nombre"/>
                         <form:input path="ap_uno" placeholder="Primer apellido"/>
                         <form:input path="ap_dos" placeholder="Segundo apellido"/>
-                        <form:radiobutton path="sexo" class="Radio" value="H"/><label >Hombre</label>
-                        <form:radiobutton path="sexo" class="Radio" value="M"/><label >Mujer</label>
-                        <form:radiobutton path="sexo" class="Radio" value="O"/><label >Otro</label>
+                        <form:radiobutton path="sexo" class="Radio" value="H"/><label class="sexo">Hombre</label><label class="sexoA">H</label>
+                        <form:radiobutton path="sexo" class="Radio" value="M"/><label class="sexo">Mujer</label><label class="sexoA">M</label>
+                        <form:radiobutton path="sexo" class="Radio" value="O"/><label>Otro</label>
                         <p><label>Fecha de nacimiento</label></p>
                         <form:input path="fecha_n" type="date" placeholder="Fecha de nacimiento"/>
                         <form:textarea path="domicilio" placeholder="Domicilio"/>
@@ -72,9 +72,9 @@
                         <form:input path="contraseña" type="password" placeholder="Contraseña"/>
                         <form:input path="contraseña2" type="password" placeholder="Repetir contraseña"/>
                         <form:errors path = "contraseña"/>
-                        <input type="checkbox" class="check" value="first_checkbox" required>
+                        <input id="check" type="checkbox" class="check" value="first_checkbox" required>
                             <center>
-                                <p class="modalBtn" style="color: black;">He leido y acepto los términos y condiciones.</p>
+                                <p id="tyc" class="modalBtn">He leido y acepto los términos y condiciones.</p>
                             </center>
                         <br/>
                         <form:button id="button" type="submit">Registrar</form:button>
@@ -125,7 +125,8 @@
             <span class="closeBtn">&times;</span>
             <div class="modal-content">
                 <div id="terminos">
-                                    <center><h1>Términos y condiciones de uso del sitio web Nutri-Coach.com</h1></center>
+                                    <center><h1 id="tycN">Términos y condiciones de uso del sitio web Nutri-Coach.com</h1></center>
+                                    <center><h1 id="tycA">Términos y condiciones Nutri-Coach.com</h1></center>
 
                 <div id="texto">
                     <p id="parrafo">

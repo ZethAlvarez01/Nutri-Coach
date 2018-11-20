@@ -15,7 +15,7 @@
 
 #contenido {
     margin-top: 50px;
-    height: 950px;
+    height: 900px;
 }
 
 #formulario{
@@ -29,7 +29,7 @@
   color:  #848484;
 }
 
-input, select, textarea{
+input, textarea{
     margin: 0px auto;
     width: 418px;
     margin-bottom: 10px;
@@ -54,8 +54,8 @@ textArea{
     height: 50px;
 }
 
-select{
-    width: 450px;
+.sexoA{
+    visibility:hidden;
 }
 
 #button {
@@ -80,11 +80,37 @@ select{
 
 footer{
     width: 100%;
+    botton: 0px;
 }
 
 @media all and (max-width: 655px){
     #logoSEP{
         display: none;
+    }
+    
+    #imagen{
+        margin-left: 10%;
+    }
+
+    #registroP p{
+        font-size: 20px;
+    }
+    
+    label{
+        font-size: 18px;
+    }
+    
+    #contenido{
+        height: 1100px;
+        margin-top: 130px;
+    }
+    
+    #check{
+        width: 100%;
+    }
+    
+    #tyc{
+        margin-top: 10px;
     }
     
     #logoIPN{
@@ -95,21 +121,34 @@ footer{
         display: none;
     }
     
-    #button{
-        width: 60%;
+    #formulario,#registroP{
+        margin-top: 40px;
+        width: 100%;
+        
     }
     
+    input,textarea{
+        width: 92%;
+        font-size: 18px;
+    }
+    
+    #button{
+        width: 100%;
+    }
+    
+    .sexo{
+        visibility:hidden;
+        display: none;
+    }
+    
+    .sexoA{
+        visibility: visible;
+    }
 }
+
 
 @media all and (max-width: 329px){
     #logoIPN p{
         font-size: 14px;
     }
-}
-
-@media all and (orientation:landscape){
-    #imagen{
-        width: 400px;
-        margin-left: 15%;
-    }     
 }
