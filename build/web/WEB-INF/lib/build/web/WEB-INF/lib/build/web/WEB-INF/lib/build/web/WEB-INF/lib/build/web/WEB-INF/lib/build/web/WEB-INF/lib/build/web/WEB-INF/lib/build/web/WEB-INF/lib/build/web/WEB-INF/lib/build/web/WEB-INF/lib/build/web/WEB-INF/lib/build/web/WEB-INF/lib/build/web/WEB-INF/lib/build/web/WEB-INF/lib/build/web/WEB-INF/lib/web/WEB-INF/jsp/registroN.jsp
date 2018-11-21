@@ -120,8 +120,8 @@
             <span class="closeBtn">&times;</span>
             <div class="modal-content">
                 <div id="terminos">
-                                    <center><h1>Términos y condiciones de uso del sitio web Nutri-Coach.com</h1></center>
-
+                                    <center><h1 id="tycN">Términos y condiciones de uso del sitio web Nutri-Coach.com</h1></center>
+                                    <center><h1 id="tycA">Términos y condiciones Nutri-Coach.com</h1></center>
                 <div id="texto">
                     <p id="parrafo">
                         Los siguientes términos y condiciones rigen el uso que usted le dé a este sitio web y a cualquiera de los contenidos disponibles por o a través de este sitio web, incluyendo cualquier contenido derivado del mismo. 

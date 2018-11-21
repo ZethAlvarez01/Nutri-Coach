@@ -16,7 +16,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/style.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/pleca.css" />" />
-        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/inicio.css" />" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/tyc.css" />" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/login.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/footer.css" />" />
         <title>Nutri-Coach</title>
     </head>
@@ -40,30 +41,34 @@
             </div>
             <!--Fin container-->
         </header>    
-        
-         <div id="contenido">
-            <div class="container">
-                
-                <div id="imagendiv">
-                    <img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach">
-                </div>
-                
-                <form:form method="POST">
-                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
-                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
-                    <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>                  
-                </form:form>
-
-            </div>
-            <!--Fin container-->
-        </div>
-        <!--Fin contenido-->            
                     
         <div id="barra">
             <div class="container">
                         <a href="<c:url value="/inicio.htm" />"><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
             </div>
         </div> 
+        
+         <div id="contenido">
+            <div class="container">
+                <center>
+                    <h1>Inicio de sesión</h1>
+                </center>
+                <form:form method="POST" commandName="login">
+                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                    <form:button id="button" type="submit">Iniciar sesión</form:button>
+                    <hr>
+                    <center>
+                    <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
+                    <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                    </center>
+                </form:form>
+
+            </div>
+            <!--Fin container-->
+        </div>
+        <!--Fin contenido-->            
+
         
         <footer>
             <div class="container">

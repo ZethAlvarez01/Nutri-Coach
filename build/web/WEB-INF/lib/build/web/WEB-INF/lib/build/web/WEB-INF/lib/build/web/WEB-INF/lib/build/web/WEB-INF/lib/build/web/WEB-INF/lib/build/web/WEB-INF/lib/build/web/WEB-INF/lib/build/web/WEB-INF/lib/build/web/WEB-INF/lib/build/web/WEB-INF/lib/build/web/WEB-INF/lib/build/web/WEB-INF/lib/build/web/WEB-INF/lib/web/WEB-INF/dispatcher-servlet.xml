@@ -20,7 +20,7 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">indexController</prop>
-                <prop key="inicio.htm">InicioController</prop>
+                <prop key="inicio.htm">InicioController</prop>       
                 <prop key="recuperarC.htm">RecuperarController</prop>
                 <prop key="registroN.htm">RegistroController</prop>
                 <prop key="registroP.htm">RegistroController</prop>
@@ -31,6 +31,7 @@
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">VistaController</prop>
+                <prop key="login.htm">VistaController</prop>
             </props>
         </property>
     </bean>

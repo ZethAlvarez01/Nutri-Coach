@@ -17,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/style.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/tyc.css" />" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/login.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/footer.css" />" />
         <title>Nutri-Coach</title>
     </head>
@@ -49,13 +50,18 @@
         
          <div id="contenido">
             <div class="container">
-                
+                <center>
+                    <h1>Inicio de sesión</h1>
+                </center>
                 <form:form method="POST" commandName="login">
                     <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
                     <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
-                    <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>
-                    <p class="hiperlogin" style="color: white;">¿No tienes una cuenta?  <a class="hiperlogin" href="<c:url value="/preregistro.htm" />">Regístrate </a>
-                      ¿Olvidaste tu contraseña?  <a class="hiperlogin" href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                    <form:button id="button" type="submit">Iniciar sesión</form:button>
+                    <hr>
+                    <center>
+                    <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
+                    <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                    </center>
                 </form:form>
 
             </div>
