@@ -59,4 +59,11 @@ public class VistaController {
         return mv;
     }
     
+    @RequestMapping("expedientePaciente.htm")
+    public ModelAndView expedientePaciente(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("expedientePaciente");
+        return mv;
+    }
+    
 }

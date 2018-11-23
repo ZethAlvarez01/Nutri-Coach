@@ -2,7 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import models.Conexion;
+import models.ConsultaEvolucion;
 import models.Foro;
 import models.Nutriologo;
 import models.Login;
@@ -11,6 +14,7 @@ import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
 import models.NeuralNet.Capa_neuronas;
 import models.NeuralNet.Crear_RN;
+import models.NeuralNet.Tratamiento;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,143 +64,111 @@ public class InicioController {
             mv.addObject("loginO",new Login());
             return mv;
         }else{
-            String sql="select * from administrador where contraseña='"+
-            login.getPass()+"' and no_empleado="+login.getUsuario()+";";
-            List datos=this.jdbcTemplate.queryForList(sql);
-            System.out.println(datos);
-            
-            if(datos.size()>=1){
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("foro");
-                ArrayList<Capa_neuronas> neural_net;
-                libMatrices op=new libMatrices();
-                 double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
-                    
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
-
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
-                Implementacion exe=new Implementacion(neural_net,x);
-                double[][] output=exe.Implement();
-                System.out.println("Entrada: ");
-                double[][] xa=new double[1][];
-                xa[0]=x;
-                op.print(xa);
-                System.out.println("Salida: ");
-                op.print(output);
-                mv.addObject("salida1",output[0][0]);
-                mv.addObject("salida2",output[0][1]);
-                mv.addObject("salida3",output[0][2]);
-                mv.addObject("salida4",output[0][3]);
-                mv.addObject("salida5",output[0][4]);
-                mv.addObject("salida6",output[0][5]);
-                mv.addObject("nombre","Administrador");
-                return mv;
-            }else{
-                sql="select * from paciente where contraseña='"+
+                String sql="select nombre from paciente where contraseña='"+
                 login.getPass()+"' and no_boleta="+login.getUsuario()+";";
-                datos=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datos);
+                //List datos=this.jdbcTemplate.queryForList(sql);
+                List datosL=this.jdbcTemplate.queryForList(sql);
+                System.out.println(datosL.get(0));
                 
-                if(datos.size()>=1){
+                if(datosL.size()>=1){
                     ModelAndView mv=new ModelAndView();
-                    mv.setViewName("foro");
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op=new libMatrices();
-                     double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    mv.setViewName("expedientePaciente");
+                    mv.addObject("datos",datosL);
                     
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
+                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+login.getUsuario()+"');";
+                    List datosEv=this.jdbcTemplate.queryForList(sql);
+                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
+                    //List datas=evo.consulta();
+                    System.out.println(datosEv);
+                    mv.addObject("datas",datosEv);
+                    sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                            + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                            + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+login.getUsuario()+"';";
 
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
-                    Implementacion exe=new Implementacion(neural_net,x);
-                    double[][] output=exe.Implement();
-                    System.out.println("Entrada: ");
-                    double[][] xa=new double[1][];
-                    xa[0]=x;
-                    op.print(xa);
-                    System.out.println("Salida: ");
-                    op.print(output);
-                    mv.addObject("salida1",output[0][0]);
-                    mv.addObject("salida2",output[0][1]);
-                    mv.addObject("salida3",output[0][2]);
-                    mv.addObject("salida4",output[0][3]);
-                    mv.addObject("salida5",output[0][4]);
-                    mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Paciente");
-                    return mv;
-                }else{
-                   sql="select * from nutriologo where contraseña='"+
-                   login.getPass()+"' and no_empleado="+login.getUsuario()+";";
-                   datos=this.jdbcTemplate.queryForList(sql);
-                   System.out.println(datos); 
-                   
-                   if(datos.size()>=1){
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("foro");
+                    List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                    for(Map<String, Object> row : rows){
+                       String edad = row.get("edad").toString();
+                       String sexo = row.get("sexo").toString();
+                       String peso = row.get("peso").toString();
+                       String altura = row.get("altura").toString();
+                       String ansiedad = row.get("ansiedad").toString();
+                       String depresion = row.get("depresion").toString();
+                       String ira = row.get("ira").toString();
+                       String estres = row.get("estres").toString();
+                       String felicidad = row.get("felicidad").toString();
+                       String dulce = row.get("dulce").toString();
+                       String amarga = row.get("amarga").toString();
+                       String salada = row.get("salada").toString();
+                       String picante = row.get("picante").toString();
+                       String acida = row.get("acida").toString();
+                       String act_f = row.get("act_f").toString();
+                       String suplementos = row.get("suplementos").toString();
+                       String motivacional = row.get("motivacional").toString();
+                       String preparacionA = row.get("preparacionA").toString();
+                       String beneficiosA = row.get("beneficiosA").toString();
+                       String deportes = row.get("deportes").toString();
+                       String medicamentos = row.get("medicamentos").toString();
+                       String salud= row.get("salud").toString();
+                       
+                       double pesoD=Double.parseDouble(peso);
+                       int pesoI=(int)pesoD;
+                       String pesoS=pesoI+"";
+                       
+                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
+                       
+                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
+                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
+                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
+                               deportes,medicamentos,salud);
+                       
+                        double[] x=tr.vector();
                         ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
-                         double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
-                    
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
 
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
+                        Crear_RN redRecomendaciones=new Crear_RN();
+                        neural_net=redRecomendaciones.create_nn(topology,0);
+
+                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+
+                        neural_net.get(0).w=pesos.get(0);
+                        neural_net.get(0).b=pesos.get(1);
+
+                        neural_net.get(1).w=pesos.get(2);
+                        neural_net.get(1).b=pesos.get(3);
+
                         Implementacion exe=new Implementacion(neural_net,x);
                         double[][] output=exe.Implement();
-
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
                         op.print(xa);
+
                         System.out.println("Salida: ");
                         op.print(output);
-                        mv.addObject("salida1",output[0][0]);
-                        mv.addObject("salida2",output[0][1]);
-                        mv.addObject("salida3",output[0][2]);
-                        mv.addObject("salida4",output[0][3]);
-                        mv.addObject("salida5",output[0][4]);
-                        mv.addObject("salida6",output[0][5]);
-                        mv.addObject("nombre","Nutriologo");
-                        return mv;    
-                   }else{
+
+                        ArrayList<String> salida=tr.seleccion(output[0]);
+                    
+                       System.out.println(salida);
+                       mv.addObject("respuesta",salida.get(0));
+                     }
+                    
+                    
+                    
+                    //System.out.println(datas);
+                    
+                    return mv;
+            }else{
                         sql="select * from psicologo where contraseña='"+
                         login.getPass()+"' and no_empleado="+login.getUsuario()+";";
-                        datos=this.jdbcTemplate.queryForList(sql);
-                        System.out.println(datos);  
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
                         
-                        if(datos.size()>=1){
+                        if(datosL.size()>=1){
                         ModelAndView mv=new ModelAndView();
                         mv.setViewName("foro");
                         ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
+                        
                          double[] x={0,0,1,0,1,1,1,1,0,0,
                                  1,0,1,1,0,1,1,0,1,0,
                                  0,1,0,0,1,0,0,1,0,0,
@@ -236,10 +208,48 @@ public class InicioController {
                         mv.addObject("loginO",new Login());
                         return mv; 
                         }
-                   }
-                }
+                }}
+    }
+    
+    
+    @RequestMapping(value="login.htm",method=RequestMethod.GET)
+    public ModelAndView formularioLogin(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("login");
+        mv.addObject("login",new Login());
+        return mv;
+    }
+  
+    @RequestMapping(value="login.htm",method=RequestMethod.POST)
+    public ModelAndView formularioLogin(
+                        @ModelAttribute("Login") Login login,
+                        BindingResult resultado,
+                        SessionStatus status
+                        ){
+        this.loginValidar.validate(login, resultado);
+        if(resultado.hasErrors()){
+            ModelAndView mv=new ModelAndView();
+            mv.setViewName("login");
+            mv.addObject("login",new Login());
+            return mv;
+        }else{
+                String sql="select nombre from paciente where contraseña='"+
+                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
+                List datos=this.jdbcTemplate.queryForList(sql);
+                System.out.println(datos);
+                
+                if(datos.size()>=1){
+                    ModelAndView mv=new ModelAndView();
+                    mv.setViewName("expedientePaciente");                    
+                    return mv;
+            }else{
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("login");
+                mv.addObject("login",new Login());
+                return mv;
             }
         }
     }
+    
 }
                 

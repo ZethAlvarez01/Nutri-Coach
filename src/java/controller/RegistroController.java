@@ -52,77 +52,7 @@ public class RegistroController {
     }
     
 //////////////////////////////////////////    
-    @RequestMapping(value="login.htm",method=RequestMethod.GET)
-    public ModelAndView formularioLogin(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("login");
-        mv.addObject("login",new Login());
-        return mv;
-    }
-  
-    @RequestMapping(value="login.htm",method=RequestMethod.POST)
-    public ModelAndView formularioLogin(
-                        @ModelAttribute("Login") Login login,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.loginValidar.validate(login, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("login");
-            mv.addObject("login",new Login());
-            return mv;
-        }else{
-            String sql="select nombre from paciente where contraseña='"+
-                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
-                List datos=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datos);
-                
-                if(datos.size()>=1){
-                    ModelAndView mv=new ModelAndView();
-                    mv.setViewName("foro");
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op=new libMatrices();
-                     double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
-                    
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
 
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
-                    
-                    Implementacion exe=new Implementacion(neural_net,x);
-                    double[][] output=exe.Implement();
-                    System.out.println("Entrada: ");
-                    double[][] xa=new double[1][];
-                    xa[0]=x;
-                    op.print(xa);
-                    System.out.println("Salida: ");
-                    op.print(output);
-                    mv.addObject("salida1",output[0][0]);
-                    mv.addObject("salida2",output[0][1]);
-                    mv.addObject("salida3",output[0][2]);
-                    mv.addObject("salida4",output[0][3]);
-                    mv.addObject("salida5",output[0][4]);
-                    mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Hola "+datos.get(0));
-                    return mv;
-            }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("login");
-                mv.addObject("login",new Login());
-                return mv;
-            }
-        }
-    }
     
     
 ///////////////////////////////////////////
@@ -150,7 +80,7 @@ public class RegistroController {
             
              if(nutriologo.getContraseña().equals(nutriologo.getContraseña2())){
 
-                String sql="insert into nutriologo values("+nutriologo.getNo_cedula()+",'"+nutriologo.getNombre()+"','"+nutriologo.getAp_uno()+"','"+nutriologo.getAp_dos()+"','"+nutriologo.getTelefono()+"','"+nutriologo.getConsultorio()+"','"+nutriologo.getCorreo()+"',"+nutriologo.getNo_empleado()+",'"+nutriologo.getContraseña()+"','"+nutriologo.getInstitucion()+"');";
+                String sql="insert into nutriologo values("+nutriologo.getNo_cedula()+",'"+nutriologo.getNombre()+"','"+nutriologo.getAp_uno()+"','"+nutriologo.getAp_dos()+"','"+nutriologo.getTelefono()+"','"+nutriologo.getConsultorio()+"','"+nutriologo.getCorreo()+"','"+nutriologo.getContraseña()+"','"+nutriologo.getInstitucion()+"',"+nutriologo.getNo_empleado()+");";
 
                 this.jdbcTemplate.update(sql);
             
@@ -162,7 +92,7 @@ public class RegistroController {
                 mv.addObject("ap_uno",nutriologo.getAp_uno());
                 mv.addObject("ap_dos",nutriologo.getAp_dos());
                 mv.addObject("institucion",nutriologo.getInstitucion());
-                mv.addObject("telefono",nutriologo.getConsultorio());
+                mv.addObject("telefono",nutriologo.getTelefono());
                 mv.addObject("consultorio",nutriologo.getConsultorio());
                 mv.addObject("correo",nutriologo.getCorreo());
                 mv.addObject("contraseña",nutriologo.getContraseña());

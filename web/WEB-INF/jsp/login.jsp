@@ -50,20 +50,22 @@
         
          <div id="contenido">
             <div class="container">
-                <center>
-                    <h1>Inicio de sesión</h1>
-                </center>
-                <form:form method="POST" commandName="login">
-                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
-                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
-                    <form:button id="button" type="submit">Iniciar sesión</form:button>
-                    <hr>
+                
+                <div id="caja">
                     <center>
-                    <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
-                    <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                        <h1>Inicio de sesión</h1>
                     </center>
-                </form:form>
-
+                    <form:form method="POST" commandName="login">
+                        <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                        <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                        <form:button id="button" type="submit">Iniciar sesión</form:button>
+                        <hr>
+                        <center>
+                        <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
+                        <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                        </center>
+                    </form:form>
+                </div>
             </div>
             <!--Fin container-->
         </div>
