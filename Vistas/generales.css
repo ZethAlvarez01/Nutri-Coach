@@ -1,0 +1,58 @@
+/* 
+    Created on : 11/11/2018, 08:36:43 PM
+    Author     : Zeth
+*/
+
+
+/* Estilos generales*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: 'Soberana Titular';
+}
+
+#barra {
+    height: 70px;
+    background: rgb(108, 29, 69);
+}
+
+#imagen {
+    margin-top: 5px;
+    width: 170px;
+}
+
+body {
+    background: white;
+}
+
+.clearfix {
+    clear: both;
+    float: none;
+}
+
+.container {
+    width: 85%;
+    margin: 0px auto;
+}
+
+
+/*Boton de regresar*/
+
+.regresar {
+    position: absolute;
+    margin-left: 75%;
+    margin-top: 50px;
+    padding: 10px 35px;
+    background: rgb(108, 29, 69);
+    /*Pantone 222 C */
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.regresar:hover {
+    background: rgb(0, 0, 0, 0.4);
+    transition: 0.5s;
+}

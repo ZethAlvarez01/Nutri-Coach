@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png " />
+    <link rel="stylesheet" href="generales.css " />
+    <link rel="stylesheet" href="pleca.css" />
+    <link rel="stylesheet" href="footer.css " />
+    <link rel="stylesheet" href="contenido_diario.css">
+    <script type="text/javascript" src="script.js"></script>
+    <title>Nutri-Coach</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="logo-sep.png" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="logo-ipn.jpg " alt="Instituto Politécnico Nacional">
+                </div>
+            </div>
+        </div>
+        <!--Fin container-->
+    </header>
+
+    <div id="barra">
+        <div class="container">
+            <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+        </div>
+    </div>
+
+    <div id="contenido">
+        <div class="container">
+            <h2>Mi diario <img id="editar" src="edit.png" alt="editar">
+            </h2>
+
+            <p id="midiario">Escribe en este diario cualquier sentimientos o pensamiento que te tengas sobre la comida y lo que ingeriste durante el día.</p>
+            <div id="diario">
+                <div id="hoja">
+                    <label id="fecha"></label>
+                    <script>
+                        fecha();
+                    </script>
+                    <p id="nueva_hoja">Nueva hoja</p>
+                    <p class="titulo">Hoja del dia #</p>
+                    <p class="titulo">Titulo para hoy: <input type="text"></p>
+                    <p class="titulo" id="em">¿Cómo te sientes hoy?</p>
+                    <div id="emogis">
+                        <div id="feliz"><img src="feliz.png" alt="Feliz" class="emogi"></div>
+                        <div id="triste"><img src="trste.png" alt="Triste" class="emogi"></div>
+                        <div id="ansiedad"><img src="ansiedad.png" alt="Ansiedad" class="emogi"></div>
+                        <div id="estres"><img src="estres.png" alt="Estres" class="emogi"></div>
+                        <div id="ira"><img src="ira.png" alt="Ira" class="emogi"></div>
+                    </div>
+                    <br>
+                    <p class="titulo">Platícame tu día:</p>
+                    <br>
+                    <textarea id="areaTxt" rows="10" cols="50" name="comentario" placeholder="¡Exprésate!"></textarea>
+                    <div id="boton">
+                        Guardar
+                    </div>
+                </div>
+                <div id="historial">
+                    <div class="dias">
+                        <div id="dia">
+                            <label>
+                                Día #
+                                <br>
+                                Titulo
+                                <br>
+                                Hoy me siento feliz
+                            </label>
+                        </div>
+                        <div id="explorar">
+                            Explorar
+                        </div>
+                    </div>
+
+                    <div class="dias">
+                        <div id="dia">
+                            <label>
+                                    Día #
+                                    <br>
+                                    Titulo
+                                    <br>
+                                    Hoy me siento feliz
+                                </label>
+                        </div>
+                        <div id="explorar">
+                            Explorar
+                        </div>
+                    </div>
+
+                    <div class="dias">
+                        <div id="dia">
+                            <label>
+                                    Día #
+                                    <br>
+                                    Titulo
+                                    <br>
+                                    Hoy me siento feliz
+                                </label>
+                        </div>
+                        <div id="explorar">
+                            Explorar
+                        </div>
+                    </div>
+
+                    <div class="dias">
+                        <div id="dia">
+                            <label>
+                                        Día #
+                                        <br>
+                                        Titulo
+                                        <br>
+                                        Hoy me siento feliz
+                                    </label>
+                        </div>
+                        <div id="explorar">
+                            Explorar
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin contenido-->
+    <footer>
+        <div class="container">
+            <p id="visita"></p>
+            <ul id="redes">
+                <li>
+                    <a href="https://www.facebook.com/escomipnmx/">
+                        <img src="facebook.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/escomunidad">
+                        <img src="twitter.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ipn_oficial/">
+                        <img src="instagram.png" />
+                    </a>
+                </li>
+            </ul>
+            <!--Fin Redes sociales-->
+            <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+            <br/>
+            <p>
+                <a class="hiperfooter" href="tyc.htm ">Términos y condiciones</a>
+
+                <a class="hiperfooter" id="politicas" href="politicas.htm ">Políticas de privacidad</a>
+            </p>
+            <br/>
+
+            <!--Fin Modal Términos y condiciones-->
+        </div>
+    </footer>
+</body>
+
+</html>

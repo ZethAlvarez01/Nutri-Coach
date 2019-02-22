@@ -1,0 +1,180 @@
+#contenido {
+    height: 900px;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#fecha {
+    width: 100px;
+}
+
+#editar {
+    cursor: pointer;
+    width: 15px;
+}
+
+#midiario {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#diario {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 700px;
+}
+
+#hoja {
+    padding: 20px;
+    grid-column-start: 1;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+}
+
+#historial {
+    grid-column-start: 2;
+}
+
+.emogi {
+    cursor: pointer;
+    width: 50px;
+    padding: 10px;
+}
+
+.emogi:hover {
+    border-radius: 10px;
+    background: #ccc;
+}
+
+#emogis {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+#feliz {
+    margin: 0 auto;
+    grid-column: 1;
+}
+
+#triste {
+    margin: 0 auto;
+    grid-column: 2;
+}
+
+#ansiedad {
+    margin: 0 auto;
+    grid-column: 3;
+}
+
+#estres {
+    margin: 0 auto;
+    grid-column: 4;
+}
+
+#ira {
+    margin: 0 auto;
+    grid-column: 5;
+}
+
+#boton {
+    cursor: pointer;
+    border: solid 1px rgb(108, 29, 69);
+    padding: 15px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+    background: rgb(108, 29, 69);
+    color: white;
+}
+
+#boton:hover {
+    background: #45122C;
+}
+
+#nueva_hoja {
+    font-size: 25px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.titulo {
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+#em {
+    padding-bottom: 10px;
+}
+
+input {
+    font-size: 20px;
+    border: solid 1px #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+#areaTxt {
+    font-size: 18px;
+    width: 100%;
+    border: solid 1px #ccc;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+/* Fin de la hoja del diario */
+
+#historial {
+    border: solid 1px #ccc;
+    border-radius: 10px;
+}
+
+.dias {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 95%;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+}
+
+#dia {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 10px;
+}
+
+#explorar {
+    grid-column-start: 4;
+    grid-column-end: 6;
+    cursor: pointer;
+    background: #06A8CA;
+    border: solid 1px #06A8CA;
+    color: white;
+    border-radius: 7px;
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#explorar:hover {
+    background: #0586A2;
+}
+
+#viajar {
+    vertical-align: bottom;
+}
