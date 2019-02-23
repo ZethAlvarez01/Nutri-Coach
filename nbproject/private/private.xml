@@ -3,11 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/estilos/expediente.css</file>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/estilos/login.css</file>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/NeuralNet/Tratamiento.java</file>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/expedientePaciente.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/inicio.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/estilos/style.css</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/controller/RecuperarController.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/leermas.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/estilos/leermas.css</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/controller/VistaController.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/LoginValidar.java</file>
             <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/controller/InicioController.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/PacienteValidar.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/Psicologo.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/Conexion.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/politicas.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/login.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/estilos/footer.css</file>
         </group>
     </open-files>
 </project-private>

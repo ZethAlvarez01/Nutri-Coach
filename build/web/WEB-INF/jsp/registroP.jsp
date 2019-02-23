@@ -56,22 +56,52 @@
                     <p>Favor de introducir sus datos correspondientes para completar su registro:</p>
                 </center>
                 <div id="formulario">
-                    <form:form method="POST" commandName="registroP">
+                   <form:form method="POST" commandName="Paciente">
                         <form:input path="no_boleta" placeholder="No. de Boleta o empleado" />
-                        <form:input path="nombre" placeholder="Nombre"/>
+                         <form:errors path="no_boleta"/>
+                         <p>
+                        <form:input path="nombre" placeholder="Nombre" />
+                         <form:errors path="nombre" style="color: red;"/>
+                         </p>
+                         <p>
                         <form:input path="ap_uno" placeholder="Primer apellido"/>
+                        <form:errors path="ap_uno" style="color: red;"/>
+                        </p>
+                        <p>
                         <form:input path="ap_dos" placeholder="Segundo apellido"/>
+                        <form:errors path="ap_dos" style="color: red;"/>
+                        </p>
+                        <p>
                         <form:radiobutton path="sexo" class="Radio" value="H"/><label class="sexo">Hombre</label><label class="sexoA">H</label>
                         <form:radiobutton path="sexo" class="Radio" value="M"/><label class="sexo">Mujer</label><label class="sexoA">M</label>
                         <form:radiobutton path="sexo" class="Radio" value="O"/><label>Otro</label>
-                        <p><label>Fecha de nacimiento</label></p>
+                        <form:errors path="sexo" style="color: red;"/>
+                        </p>
+                        <p>
                         <form:input path="fecha_n" type="date" placeholder="Fecha de nacimiento"/>
+                        <form:errors path="fecha_n" style="color: red;"/>
+                        </p>
+                        <p>
                         <form:textarea path="domicilio" placeholder="Domicilio"/>
+                        <form:errors path="domicilio" style="color: red;"/>
+                        </p>
+                        
+                         <p>
                         <form:input path="telefono"  placeholder="Teléfono"/>
+                        <form:errors path="telefono" style="color: red;"/>
+                        </p>
+                        <p>
                         <form:input path="correo" type="email" placeholder="Correo"/>
-                        <form:input path="contraseña" type="password" placeholder="Contraseña"/>
-                        <form:input path="contraseña2" type="password" placeholder="Repetir contraseña"/>
-                        <form:errors path = "contraseña"/>
+                        <form:errors path="correo" style="color: red;"/>
+                        </p>
+                        <p>
+                        <form:password path="contraseña"  placeholder="Contraseña"/>
+                        <form:errors path="contraseña" style="color: red;"/>
+                        </p>
+                        <p>
+                        <form:password path="contraseña2"  placeholder="Repetir contraseña"/>
+                        <form:errors path="contraseña2" style="color: red;"/>
+                        </p>
                         <input id="check" type="checkbox" class="check" value="first_checkbox" required>
                             <center>
                                 <p id="tyc" class="modalBtn">He leido y acepto los términos y condiciones.</p>

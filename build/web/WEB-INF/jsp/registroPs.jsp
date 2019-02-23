@@ -55,16 +55,44 @@
                     <p>Favor de introducir sus datos correspondientes para complerar su registro:</p>
                 </center>
                 <div id="formulario">
-                    <form:form method="POST" commandName="registroPs">
-                        <form:input path="no_cedula" placeholder="No. de cédula profesional" />
+                     <form:form method="post" commandName="Psicologo">
+                    
+                  
+                    
+                    <form:input path="no_cedula" placeholder="No. de cédula profesional" />
+                       <form:errors path="no_cedula"/>
+                        <p>
                         <form:input path="no_empleado" placeholder="No. de empleado" />
+                       <form:errors path="no_empleado" />
+                        </p>
+                        <p>
                         <form:input path="nombre" placeholder="Nombre"/>
+                        <form:errors path="nombre" />
+                        </p>
+                         <p>
                         <form:input path="ap_uno" placeholder="Primer apellido"/>
+                        <form:errors path="ap_uno" />
+                        </p>
+                        <p>
                         <form:input path="ap_dos" placeholder="Segundo apellido"/>
+                        <form:errors path="ap_dos" />
+                        </p>
+                        <p>
                         <form:input path="telefono"  placeholder="Teléfono"/>
+                        <form:errors path="telefono" />
+                        </p>
+                        <p>
                         <form:input path="correo" type="email" placeholder="Correo"/>
-                        <form:input path="contraseña" type="password" placeholder="Contraseña"/>
-                        <form:input path="contraseña2" type="password" placeholder="Repetir contraseña"/>
+                        <form:errors path="correo" />
+                        </p>
+                        <p>
+                        <form:password path="contraseña"  placeholder="Contraseña"/>
+                        <form:errors path="contraseña" />
+                        </p>
+                        <p>
+                         <form:password showPassword="true" path="contraseña2"  placeholder="Repetir contraseña"/>
+                        <form:errors path="contraseña2" />
+                        </p>
                         <input type="checkbox" class="check" value="first_checkbox" required>
                         <center>
                             <p class="modalBtn" style="color: black;">He leido y acepto los términos y condiciones.</p>
