@@ -1,0 +1,228 @@
+#contenido {
+    height: 900px;
+    background: white;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px 1fr;
+}
+
+
+/* Lista de usuarios */
+
+#notificaciones {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row: 1;
+    background: white;
+    border-bottom: solid 1px #ccc;
+}
+
+#notificaciones img {
+    width: 40px;
+    margin: 0 auto;
+    float: right;
+    padding: 4px 0px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+#listado {
+    grid-column: 1;
+    grid-row: 2;
+    border-right: solid 1px #ddd;
+    background: white;
+    height: 850px;
+}
+
+#numero_usuarios {
+    text-align: left;
+    font-size: 12px;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+
+#encabezado_lista {
+    height: 150px;
+    text-align: center;
+}
+
+#sub-titulo {
+    font-size: 18px;
+    margin: 10px;
+    font-style: bold;
+}
+
+#encabezado_lista input {
+    height: 25px;
+    width: 80%;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    padding: 5px;
+}
+
+select {
+    outline: none;
+    width: 84%;
+    border-radius: 5px;
+    padding: 5px;
+    height: 37px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: solid 1px #ccc;
+}
+
+#lista {
+    height: 690px;
+    overflow-y: scroll;
+}
+
+#lista::-webkit-scrollbar {
+    display: none;
+}
+
+.usuario {
+    background: white;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    cursor: pointer;
+}
+
+.usuario:hover {
+    background: #ddd;
+}
+
+.usuario img {
+    grid-column: 1;
+    border-radius: 50%;
+    height: 50px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.usuario p {
+    grid-column: 2;
+}
+
+#texto_user {
+    padding: 10px;
+}
+
+#nombre {
+    font-size: 14px;
+}
+
+#nombre-info {
+    font-size: 14px;
+    color: #888;
+    padding-top: 5px;
+}
+
+#informacion {
+    grid-column: 2/6;
+    grid-row: 2;
+    background: white;
+}
+
+h3 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+/* Informacion */
+
+#informacion {
+    display: grid;
+    grid-template-columns: 1fr 1fr 250px;
+    grid-template-rows: 80px 1fr;
+}
+
+#estado {
+    background: white;
+}
+
+#h3 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 1;
+    background: white;
+}
+
+#info_general {
+    text-align: justify;
+    padding: 20px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background: white;
+}
+
+#foto_info {
+    width: 150px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+#info_completa {
+    margin-top: 20px;
+    height: 650px;
+    overflow-y: scroll;
+}
+
+#info_completa::-webkit-scrollbar {
+    display: none;
+}
+
+#titulo_derecha {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#boton {
+    cursor: pointer;
+    text-align: center;
+    width: 60%;
+    padding: 10px;
+    border: solid 1px rgb(108, 29, 69);
+    border-radius: 10px;
+    background: rgb(108, 29, 69);
+    margin: 40px auto;
+    color: white;
+    outline: none;
+}
+
+#boton:hover {
+    background: #45122C;
+}
+
+#asunto {
+    padding: 5px;
+    width: 200px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}
+
+#textarea {
+    padding: 5px;
+    width: 200px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+}
+
+#botones {
+    padding: 50px 70px 30px;
+    font-size: 18px;
+}

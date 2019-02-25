@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png " />
+    <link rel="stylesheet" href="generales.css " />
+    <link rel="stylesheet" href="pleca.css" />
+    <link rel="stylesheet" href="footer.css " />
+    <link rel="stylesheet" href="contenido_diario_psicologo.css">
+    <script type="text/javascript" src="script.js"></script>
+    <title>Nutri-Coach</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="logo-sep.png" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="logo-ipn.jpg " alt="Instituto Politécnico Nacional">
+                </div>
+            </div>
+        </div>
+        <!--Fin container-->
+    </header>
+
+    <div id="barra">
+        <div class="container">
+            <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+        </div>
+    </div>
+
+    <div id="contenido">
+        <div class="container">
+            <div id="grid">
+                <div id="informacion">
+                    <h2>
+                        Notas del paciente
+                    </h2>
+                    <p id="nombre_paciente">Nombre Primer apellido Segundo Apellido</p>
+                    <select id="historial_dias">
+                        <option>Dia #1 Titulo</option>
+                        <option>Dia #2 Titulo</option>
+                        <option>Dia #3 Titulo</option>
+                        <option>Dia #4 Titulo</option>
+                        <option>Dia #5 Titulo</option>
+                        <option>Dia #6 Titulo</option>
+                        <option>Dia #7 Titulo</option>
+                        <option>Dia #8 Titulo</option>
+                    </select>
+
+                    <div id="diario">
+                        <div class="dias">
+                            <p id="fecha"></p>
+                            <script>
+                                fecha();
+                            </script>
+                            <br>
+                            <p id="titulo">Hoy Lunes...</p>
+                            <br>
+                            <div id="escrito">
+                                <p id="escritoT">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br>                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque,
+                                    maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque
+                                    expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias
+                                    voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam
+                                    vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam
+                                    accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium
+                                    fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus
+                                    quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique.
+                                </p>
+                                <br>
+                                <img id="imagen_adjunta" src="">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="observaciones">
+                        <h3>Observaciones</h3>
+                        <textarea id="areaTxt" rows="10" cols="50" name="comentario" placeholder="Observaciones del especialista"></textarea>
+                    </div>
+                    <button id="insertar_a">Insertar archivos</button><label id="n_archivo">nombre_archivo.ext</label>
+                    <div id="boton">
+                        Guardar
+                    </div>
+                </div>
+                <div id="listado">
+                    <div id="encabezado_lista">
+                        <p id="sub-titulo">Listado de pacientes</p>
+                        <input type="text" placeholder="Buscar paciente">
+                        <p id="numero_pacientes">Número de pacientes: ?</p>
+                    </div>
+                    <div id="lista">
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                        <div class="paciente">
+                            <img src="foto-prueba.png" alt="Foto">
+                            <div id="texto_paciente">
+                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre-info">Mas informacion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin contenido-->
+    <footer>
+        <div class="container">
+            <p id="visita"></p>
+            <ul id="redes">
+                <li>
+                    <a href="https://www.facebook.com/escomipnmx/">
+                        <img src="facebook.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/escomunidad">
+                        <img src="twitter.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ipn_oficial/">
+                        <img src="instagram.png" />
+                    </a>
+                </li>
+            </ul>
+            <!--Fin Redes sociales-->
+            <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+            <br/>
+            <p>
+                <a class="hiperfooter" href="tyc.htm ">Términos y condiciones</a>
+
+                <a class="hiperfooter" id="politicas" href="politicas.htm ">Políticas de privacidad</a>
+            </p>
+            <br/>
+
+            <!--Fin Modal Términos y condiciones-->
+        </div>
+    </footer>
+</body>
+
+</html>

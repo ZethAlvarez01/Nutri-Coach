@@ -1,5 +1,5 @@
 #contenido {
-    height: 900px;
+    height: 1050px;
 }
 
 h2 {
@@ -25,19 +25,20 @@ h2 {
 #diario {
     margin-top: 40px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 700px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: 850px;
 }
 
 #hoja {
     padding: 20px;
-    grid-column-start: 1;
+    grid-column: 1/4;
     border: solid 1px #f6f6f6;
     border-radius: 10px;
 }
 
 #historial {
-    grid-column-start: 2;
+    grid-column: 4/8;
+    padding: 20px;
 }
 
 .emogi {
@@ -86,7 +87,7 @@ h2 {
     border: solid 1px rgb(108, 29, 69);
     padding: 15px;
     border-radius: 10px;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
     margin-top: 30px;
@@ -101,12 +102,15 @@ h2 {
 #nueva_hoja {
     font-size: 25px;
     font-weight: bold;
-    padding-top: 10px;
 }
 
 .titulo {
     font-size: 20px;
     padding-top: 10px;
+}
+
+#intitulo {
+    font-style: italic;
 }
 
 #em {
@@ -137,50 +141,75 @@ input {
     border-radius: 10px;
 }
 
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#fecha2 {
+    font-weight: bold;
+}
+
 .dias {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    width: 95%;
-    height: 80px;
-    margin: 0 auto;
     margin-top: 20px;
-    border: solid 1px #f6f6f6;
-    border-radius: 5px;
-}
-
-#dia {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    /*border: solid 1px;*/
     padding: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
-#explorar {
-    grid-column-start: 4;
-    grid-column-end: 6;
-    cursor: pointer;
-    background: #06A8CA;
-    border: solid 1px #06A8CA;
-    color: white;
-    border-radius: 7px;
+.dias::-webkit-scrollbar {
+    display: none;
+}
+
+#escrito {
     width: 90%;
-    height: 40px;
     margin: 0 auto;
+    text-align: justify;
+}
+
+#observacion {
+    text-align: justify;
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*border: solid 1px;*/
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
-#explorar:hover {
-    background: #0586A2;
+#observacion::-webkit-scrollbar {
+    display: none;
 }
 
-#viajar {
-    vertical-align: bottom;
+#escritoO {
+    margin: 0 auto;
+    width: 90%;
 }
+
+#titulo {
+    font-size: 20px;
+    font-style: italic;
+}
+
+#imagen_adjunta {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#fechaObser {
+    font-weight: bold;
+}
+
+
+/* Insertar archivo adjunto al diario*/
 
 #insertar_a {
     cursor: pointer;
+    font-size: 16px;
     margin-top: 20px;
     padding: 10px;
     width: 200px;
@@ -188,4 +217,16 @@ input {
 
 #n_archivo {
     margin-left: 10px;
+}
+
+
+/* ComboBox */
+
+select {
+    outline: none;
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px #ccc;
 }
