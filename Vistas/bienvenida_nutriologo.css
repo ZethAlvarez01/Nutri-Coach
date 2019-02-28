@@ -1,4 +1,56 @@
 #contenido {
-    height: 500px;
-    background: green;
+    height: 950px;
+    background: white;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px 1fr;
+}
+
+#encabezado_lista {
+    height: 100px;
+    text-align: center;
+}
+
+#lista {
+    height: 780px;
+    overflow-y: scroll;
+}
+
+#grid_info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.casillas {
+    border: solid 1px #f6f6f6;
+    border-radius: 3px;
+    height: 400px;
+}
+
+#resumen {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#graficas {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#observacion {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#historial_act {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.casillas h3 {
+    font-size: 24px;
 }

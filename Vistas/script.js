@@ -60,4 +60,15 @@ function fecha2() {
     document.getElementById("fecha2").innerHTML = "Ciudad de México a " + date.getDay() + " de " + meses[date.getMonth()] + " de " + date.getFullYear();
 }
 
+function confirmacion() {
+    var mensaje = "El estado del paciente cambio.";
+    var opcion = confirm("¿Deseas cambiar estado del usuario?");
+    if (opcion == true) {
+        alert(mensaje);
+    } else {
+        alert("Estado NO cambiado");
+    }
+
+}
+
 /* Falta codigo para cambair emogis de color al seleccionar */

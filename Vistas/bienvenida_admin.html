@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="pleca.css" />
     <link rel="stylesheet" href="footer.css " />
     <link rel="stylesheet" href="bienvenida_admin.css">
+    <link rel="stylesheet" href="vista_usuarios.css">
     <script type="text/javascript" src="script.js"></script>
     <title>Nutri-Coach</title>
 </head>
@@ -48,7 +49,10 @@
                     <a href="verificacion_cuentas.html">
                         <img src="friend-request.png" alt="">
                     </a>
-                    <img src="paper.png" alt="">
+                    <a href="mensajeria.html">
+                        <img src="paper.png" alt="">
+                    </a>
+
                 </div>
                 <div id="listado">
                     <div id="encabezado_lista">
@@ -224,12 +228,13 @@
 
                     <div id="estado">
                         <h2 id="titulo_derecha">Cambiar estado del usuario</h2>
+                        <p id="estado"></p>
                         <div id="botones">
-                            <input type="radio" name="group1" class="radioB" value="activo"> Activo<br>
-                            <input type="radio" name="group1" class="radioB" value="activo"> Dar de baja<br>
+                            <input type="radio" id="activo" name="group1" class="radioB" value="activo"> <label class="c_estado">Activo</label><br>
+                            <input type="radio" id="baja" name="group1" class="radioB" value="activo"> <label class="c_estado">Dar de baja</label>
                         </div>
 
-                        <div id="boton">Guardar cambio</div>
+                        <div id="boton" onclick="confirmacion()">Guardar cambio</div>
 
 
                         <h2 id="titulo_derecha">Enviar mensajes</h2>

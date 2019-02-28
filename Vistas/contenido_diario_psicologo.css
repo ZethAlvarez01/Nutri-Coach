@@ -114,12 +114,23 @@ h2 {
     margin-bottom: 30px;
 }
 
-#historial_dias {
-    width: 300px;
-    font-size: 18px;
-    margin: 20px 0px;
+.historial_dias {
     outline: none;
+    font-size: 16px;
     padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+}
+
+#mes,
+#semana {
+    width: 200px;
+}
+
+#hoja {
+    margin: 5px 10px;
+    width: 250px;
 }
 
 #fecha {
