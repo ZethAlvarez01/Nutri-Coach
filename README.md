@@ -2,6 +2,7 @@
 Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a especialista en el área de nutrición al igual que a sus pacientes y personas en general que deseen mejorar su estilo de vida.
 
 **Vistas pendientes**
+**Front-end**
 - [X] Inicio
 - [X] Pre-registro
 - [X] Modal para terminos y condiciones en el registro
@@ -17,6 +18,7 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 - [ ] Leer mas  **Falta rellenar**
 
 **Funcionalidad**
+**Back-end**
 - [ ] Validaciones de formularios **Falta validacion de tipos**
   - [X] Nutriologo
   - [X] Paciete
