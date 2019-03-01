@@ -178,6 +178,7 @@
                     </div>
                     <div id="info_general">
                         <h2>Datos Generales</h2>
+                        <p id="etiqueta_estado">Activo</p>
                         <div id="datos">
                             <p id="fecha"></p>
                             <script>
@@ -231,15 +232,16 @@
                         <p id="estado"></p>
                         <div id="botones">
                             <input type="radio" id="activo" name="group1" class="radioB" value="activo"> <label class="c_estado">Activo</label><br>
+                            <input type="radio" id="bloquear" name="group1" class="radioB" value="activo"> <label class="c_estado">Bloquear</label><br>
                             <input type="radio" id="baja" name="group1" class="radioB" value="activo"> <label class="c_estado">Dar de baja</label>
                         </div>
 
                         <div id="boton" onclick="confirmacion()">Guardar cambio</div>
 
-
                         <h2 id="titulo_derecha">Enviar mensajes</h2>
-                        <input type="text" id="asunto" placeholder="Asunto">
+                        <br>
                         <textarea id="textarea" cols="30" rows="10" placeholder="Mensaje"></textarea>
+
                         <div id="boton">Enviar mensaje</div>
 
 

@@ -71,4 +71,8 @@ function confirmacion() {
 
 }
 
+function expandir() {
+    alert("Expandir informacion");
+}
+
 /* Falta codigo para cambair emogis de color al seleccionar */
