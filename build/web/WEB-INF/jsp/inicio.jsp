@@ -43,9 +43,11 @@
         
         <div id="login">
             <div class="container">
-                <form:form method="POST" commandName="loginO">
+                <form:form method="POST" commandName="Login">
                     <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                    <form:errors path="Usuario"/>
                     <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                    <form:errors path="Pass"/>
                     <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>
                     <p class="hiperlogin" style="color: white;">¿No tienes una cuenta?  <a class="hiperlogin" href="<c:url value="/preregistro.htm" />">Regístrate </a>
                       ¿Olvidaste tu contraseña?  <a class="hiperlogin" href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>

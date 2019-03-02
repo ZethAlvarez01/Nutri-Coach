@@ -8,8 +8,10 @@ import models.Conexion;
 import models.ConsultaEvolucion;
 import models.Foro;
 import models.Nutriologo;
+
 import models.Login;
 import models.LoginValidar;
+
 import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
 import models.NeuralNet.Capa_neuronas;
@@ -31,41 +33,51 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Zeth
  */
 @Controller
-@RequestMapping("inicio.htm")
+
 public class InicioController {
     
     private int[] topology={42,5,6};
     
     
     private JdbcTemplate jdbcTemplate;
-    private LoginValidar loginValidar;
+    private LoginValidar LoginValidar;
 
     public InicioController() {
-        this.loginValidar=new LoginValidar();
+        this.LoginValidar=new LoginValidar();
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
     
-    @RequestMapping(method=RequestMethod.GET)
+    
+    
+   ////////////////////////////////////////////////////
+    
+    @RequestMapping(value="inicio.htm",method=RequestMethod.GET)
+    
     public ModelAndView inicio(){
-        return new ModelAndView("inicio","loginO",new Login());
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("inicio");
+        mv.addObject("Login",new Login());
+        return mv;
+
+       
     }
     
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value="inicio.htm", method=RequestMethod.POST)
     public ModelAndView inicio(
-                        @ModelAttribute("Usuario") @Validated Login login,
+                        @ModelAttribute("Login") @Validated Login lo,
                         BindingResult resultado,
                         SessionStatus status
                         ){
-        this.loginValidar.validate(login, resultado);
+        this.LoginValidar.validate(lo, resultado);
         if(resultado.hasErrors()){
             ModelAndView mv=new ModelAndView();
             mv.setViewName("inicio");
-            mv.addObject("loginO",new Login());
+            mv.addObject("Login",new Login());
             return mv;
         }else{
                 String sql="select nombre from paciente where contraseña='"+
-                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
+                lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 //List datos=this.jdbcTemplate.queryForList(sql);
                 List datosL=this.jdbcTemplate.queryForList(sql);
                 System.out.println(datosL.get(0));
@@ -75,7 +87,7 @@ public class InicioController {
                     mv.setViewName("expedientePaciente");
                     mv.addObject("datos",datosL);
                     
-                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+login.getUsuario()+"');";
+                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
                     List datosEv=this.jdbcTemplate.queryForList(sql);
                     //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
                     //List datas=evo.consulta();
@@ -83,7 +95,7 @@ public class InicioController {
                     mv.addObject("datas",datosEv);
                     sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
                             + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
-                            + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+login.getUsuario()+"';";
+                            + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
 
                     List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
                     for(Map<String, Object> row : rows){
@@ -159,7 +171,7 @@ public class InicioController {
                     return mv;
             }else{
                         sql="select * from psicologo where contraseña='"+
-                        login.getPass()+"' and no_empleado="+login.getUsuario()+";";
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
                         
@@ -222,19 +234,19 @@ public class InicioController {
   
     @RequestMapping(value="login.htm",method=RequestMethod.POST)
     public ModelAndView formularioLogin(
-                        @ModelAttribute("Login") Login login,
+                        @ModelAttribute("Login") Login lo,
                         BindingResult resultado,
                         SessionStatus status
                         ){
-        this.loginValidar.validate(login, resultado);
+        this.LoginValidar.validate(lo, resultado);
         if(resultado.hasErrors()){
             ModelAndView mv=new ModelAndView();
             mv.setViewName("login");
-            mv.addObject("login",new Login());
+            mv.addObject("Login",new Login());
             return mv;
         }else{
                 String sql="select nombre from paciente where contraseña='"+
-                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
+                lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 List datos=this.jdbcTemplate.queryForList(sql);
                 System.out.println(datos);
                 
@@ -245,7 +257,7 @@ public class InicioController {
             }else{
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("login");
-                mv.addObject("login",new Login());
+                mv.addObject("Login",new Login());
                 return mv;
             }
         }

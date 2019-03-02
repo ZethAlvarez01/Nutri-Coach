@@ -54,8 +54,9 @@
                     <p>Te ayudamos a recuperar tu contraseña. Para recuperar tu contraseña solo necesitamos tu correo ligado a la tu cuenta de Nutri-Coach para que recibas un correo con las instrucciones de recuperación.</p>
                     </center>
                     <div id="formulario">
-                        <form:form method="POST" commandName="recuperarC">
-                           <form:input id="correo" path="correo" placeholder="Correo"/>
+                        <form:form method="POST" commandName="Recuperar">
+                        <form:input path="correo" type="email" placeholder="Correo"/>
+                        <form:errors path="correo" />
                            <form:button id="button" class="button" type="submit">Recuperar contraseña</form:button>
                         </form:form>
                     </div>

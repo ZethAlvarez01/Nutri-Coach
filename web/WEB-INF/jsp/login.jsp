@@ -55,9 +55,11 @@
                     <center>
                         <h1>Inicio de sesión</h1>
                     </center>
-                    <form:form method="POST" commandName="login">
+                    <form:form method="POST" commandName="Login">
                         <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                        <form:errors path="Usuario"/>
                         <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                        <form:errors path="Pass"/>
                         <form:button id="button" type="submit">Iniciar sesión</form:button>
                         <hr>
                         <center>

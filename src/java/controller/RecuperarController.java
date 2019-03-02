@@ -18,42 +18,63 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Zeth
  */
 @Controller
-@RequestMapping("recupearC.htm")
 public class RecuperarController {
     
-    private RecuperarValidar Validar;
+    private RecuperarValidar RecuperarValidar;
 
     public RecuperarController() {
-        this.Validar=new RecuperarValidar();
+        this.RecuperarValidar=new RecuperarValidar();
     }
     
     
 
-    @RequestMapping(method=RequestMethod.GET)
-    public ModelAndView inicio(){
-        return new ModelAndView("recuperarC","recuperarC",new Recuperar());
+    @RequestMapping(value="recuperarC.htm", method = RequestMethod.GET)
+    public ModelAndView recuperarC(){
+       
+       ModelAndView mav = new ModelAndView();
+       
+       mav.setViewName("recuperarC");
+       
+       mav.addObject("Recuperar",new Recuperar());
+       
+       return mav;
+            }
+    
+    @RequestMapping(value="recuperarC.htm", method=RequestMethod.POST)
+    public ModelAndView recuperarC(@ModelAttribute("Recuperar") Recuperar r, BindingResult result, SessionStatus status){
+         this.RecuperarValidar.validate(r, result);
+                        
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             ModelAndView mav= new ModelAndView(); 
+             mav.setViewName("recuperarC");
+             mav.addObject("Recuperar",new Recuperar() );
+             return mav;
+         }
+         else{
+             
+             //El usuario ingreso bien los datos
+             
+            
+             
+             
+             ModelAndView mav= new ModelAndView();
+             mav.setViewName("exito4"); //Pasamos a la vista de nombre exito4
+             mav.addObject("Correo",r.getCorreo()); //Se agrega el campo Correo al modelo
+             System.out.println(r.getCorreo());
+             
+             
+             
+             
+             return mav;
+         } 
+      
+        
+        
     }
     
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView inicio(
-                        @ModelAttribute("Recuperar") @Validated Recuperar recuperar,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.Validar.validate(recuperar, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("recuperarC");
-            mv.addObject("recuperarC",new Recuperar());
-            mv.addObject("correo",recuperar.getCorreo());
-            return mv;
-        }else{
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("exito0_1");
-           mv.addObject("correo",recuperar.getCorreo());
-
-            return mv;
-        }
-    }
+    
+    
 
 }
