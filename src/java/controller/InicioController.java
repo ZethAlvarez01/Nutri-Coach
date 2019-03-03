@@ -30,7 +30,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 /**
  *
- * @author Zeth
+ * @author Nutri-Coach
  */
 @Controller
 
@@ -43,7 +43,7 @@ public class InicioController {
     private LoginValidar LoginValidar;
 
     public InicioController() {
-        this.LoginValidar=new LoginValidar();
+        this.LoginValidar=new LoginValidar();                       // INSTANCIA DE LA CLASE LoginValidar
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
@@ -52,12 +52,14 @@ public class InicioController {
     
    ////////////////////////////////////////////////////
     
-    @RequestMapping(value="inicio.htm",method=RequestMethod.GET)
+    //PAGINA DE INICIO
     
-    public ModelAndView inicio(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("inicio");
-        mv.addObject("Login",new Login());
+    @RequestMapping(value="inicio.htm",method=RequestMethod.GET)     // SE UTILIZARÁ LA VISTA inicio y se aplicará el método GET
+    
+    public ModelAndView inicio(){                
+        ModelAndView mv=new ModelAndView();                  // SE CREA EL MODELO
+        mv.setViewName("inicio");                            // SE NOMBRA EL MODELO
+        mv.addObject("Login",new Login());                   // SE AGREGA EL OBJETO Login AL MODELO
         return mv;
 
        
@@ -70,12 +72,18 @@ public class InicioController {
                         SessionStatus status
                         ){
         this.LoginValidar.validate(lo, resultado);
+       
+      // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES   
+        
         if(resultado.hasErrors()){
+            //volvemos al formulario porque los datos ingresados son incorrectos
+            
             ModelAndView mv=new ModelAndView();
             mv.setViewName("inicio");
             mv.addObject("Login",new Login());
             return mv;
         }else{
+               //El usuario ingreso bien los datos
                 String sql="select nombre from paciente where contraseña='"+
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 //List datos=this.jdbcTemplate.queryForList(sql);
@@ -224,11 +232,11 @@ public class InicioController {
     }
     
     
-    @RequestMapping(value="login.htm",method=RequestMethod.GET)
+    @RequestMapping(value="login.htm",method=RequestMethod.GET)         // SE UTILIZARÁ LA VISTA login y se aplicará el método GET
     public ModelAndView formularioLogin(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("login");
-        mv.addObject("login",new Login());
+        ModelAndView mv=new ModelAndView();                            // SE CREA EL MODELO
+        mv.setViewName("login");                                       // SE NOMBRA EL MODELO
+        mv.addObject("login",new Login());                             // SE AGREGA EL OBJETO login AL MODELO
         return mv;
     }
   
@@ -239,12 +247,16 @@ public class InicioController {
                         SessionStatus status
                         ){
         this.LoginValidar.validate(lo, resultado);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES
         if(resultado.hasErrors()){
+            
+            //volvemos al formulario porque los datos ingresados son incorrectos
             ModelAndView mv=new ModelAndView();
             mv.setViewName("login");
             mv.addObject("Login",new Login());
             return mv;
         }else{
+             //El usuario ingreso bien los datos
                 String sql="select nombre from paciente where contraseña='"+
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 List datos=this.jdbcTemplate.queryForList(sql);
