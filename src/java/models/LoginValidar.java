@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 /**
  *
- * @author Zeth
+ * @author Nutri-Coach
  */
 public class LoginValidar implements Validator{
 
