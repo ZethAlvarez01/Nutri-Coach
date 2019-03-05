@@ -15,41 +15,45 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 /**
  *
- * @author Zeth
+ * @author Nutri-Coach
  */
 @Controller
+
 public class RecuperarController {
     
     private RecuperarValidar RecuperarValidar;
 
     public RecuperarController() {
-        this.RecuperarValidar=new RecuperarValidar();
+        this.RecuperarValidar=new RecuperarValidar(); // INSTANCIA DE LA CLASE RecuperarValidar
     }
     
     
 
-    @RequestMapping(value="recuperarC.htm", method = RequestMethod.GET)
+    @RequestMapping(value="recuperarC.htm", method = RequestMethod.GET) // SE UTILIZARÁ LA VISTA recuperarC y se aplicará el método GET
     public ModelAndView recuperarC(){
        
-       ModelAndView mav = new ModelAndView();
+       ModelAndView mav = new ModelAndView();            //CREACIÓN DEL MODELO
        
-       mav.setViewName("recuperarC");
+       mav.setViewName("recuperarC");                   // SE NOMBRA AL MODELO
        
-       mav.addObject("Recuperar",new Recuperar());
+       mav.addObject("Recuperar",new Recuperar());      // SE AGREGA EL OBJETO Recupear AL MODELO
        
        return mav;
             }
     
+    
+    
+       /////Recibimos y validamos los datos de nuestro formulario
     @RequestMapping(value="recuperarC.htm", method=RequestMethod.POST)
     public ModelAndView recuperarC(@ModelAttribute("Recuperar") Recuperar r, BindingResult result, SessionStatus status){
          this.RecuperarValidar.validate(r, result);
-                        
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES              
          if(result.hasErrors()){
              
              //volvemos al formulario porque los datos ingresados son incorrectos
-             ModelAndView mav= new ModelAndView(); 
-             mav.setViewName("recuperarC");
-             mav.addObject("Recuperar",new Recuperar() );
+             ModelAndView mav= new ModelAndView();          // CREACIÓN DEL MODELO
+             mav.setViewName("recuperarC");                // SE NOMBRA AL MODELO
+             mav.addObject("Recuperar",new Recuperar() );  // SE AGREGA EL OBJETO Recuperar al modelo
              return mav;
          }
          else{
