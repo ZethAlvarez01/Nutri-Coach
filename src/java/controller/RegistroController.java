@@ -94,27 +94,27 @@ public class RegistroController {
               
              ModelAndView mav= new ModelAndView();
              mav.setViewName("exito1"); //Pasamos a la vista de nombre exito
-             mav.addObject("No_cedula",n.getNo_cedula()); //Se agrega el campo No_cedula al modelo
+             mav.addObject("no_cedula",n.getNo_cedula()); //Se agrega el campo No_cedula al modelo
              System.out.println(n.getNo_cedula());
-             mav.addObject("No_empleado",n.getNo_empleado()); //Se agrega el campo No_empleado al modelo
+             mav.addObject("no_empleado",n.getNo_empleado()); //Se agrega el campo No_empleado al modelo
              System.out.println(n.getNo_empleado());
-             mav.addObject("Nombre",n.getNombre()); //Se agrega el campo Nombre al modelo
+             mav.addObject("nombre",n.getNombre()); //Se agrega el campo Nombre al modelo
              System.out.println(n.getNombre());
-             mav.addObject("Ap_uno",n.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+             mav.addObject("ap_uno",n.getAp_uno()); //Se agrega el campo Ap_uno al modelo
              System.out.println(n.getAp_uno());
-             mav.addObject("Ap_dos",n.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+             mav.addObject("ap_dos",n.getAp_dos()); //Se agrega el campo Ap_dos al modelo
              System.out.println(n.getAp_dos());
-             mav.addObject("Institucion",n.getInstitucion()); //Se agrega el campo InstituciÃ³n al modelo
+             mav.addObject("institucion",n.getInstitucion()); //Se agrega el campo InstituciÃ³n al modelo
              System.out.println(n.getInstitucion());
-             mav.addObject("Consultorio",n.getConsultorio()); //Se agrega el campo Consultorio al modelo
+             mav.addObject("consultorio",n.getConsultorio()); //Se agrega el campo Consultorio al modelo
              System.out.println(n.getConsultorio());
-             mav.addObject("Telefono",n.getTelefono()); //Se agrega el campo Telefono al modelo
+             mav.addObject("telefono",n.getTelefono()); //Se agrega el campo Telefono al modelo
              System.out.println(n.getTelefono());
-             mav.addObject("Correo",n.getCorreo()); //Se agrega el campo Correo al modelo
+             mav.addObject("correo",n.getCorreo()); //Se agrega el campo Correo al modelo
              System.out.println(n.getCorreo());
-             mav.addObject("Contraseña",n.getContraseña()); //Se agrega el campo Contraseña al modelo
+             mav.addObject("contraseña",n.getContraseña()); //Se agrega el campo Contraseña al modelo
              System.out.println(n.getContraseña());
-             mav.addObject("Contraseña2",n.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+             mav.addObject("contraseña2",n.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
              System.out.println(n.getContraseña2());
 
              return mav;
@@ -171,27 +171,27 @@ public class RegistroController {
                 ModelAndView mav=new ModelAndView();
             
                 mav.setViewName("exito2"); //Pasamos a la vista de nombre exito3
-                mav.addObject("No_boleta",p.getNo_boleta()); //Se agrega el campo No_boleta al modelo
+                mav.addObject("no_boleta",p.getNo_boleta()); //Se agrega el campo No_boleta al modelo
                  System.out.println(p.getNo_boleta()+" Este es el número de boleta");
-                mav.addObject("Nombre",p.getNombre()); //Se agrega el campo Nombre al modelo
+                mav.addObject("nombre",p.getNombre()); //Se agrega el campo Nombre al modelo
                 System.out.println(p.getNombre()+" Este es el nombre");
-                mav.addObject("Ap_uno",p.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+                mav.addObject("ap_uno",p.getAp_uno()); //Se agrega el campo Ap_uno al modelo
                 System.out.println(p.getAp_uno()+ " Este es el primer apellido");
-                mav.addObject("Ap_dos",p.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+                mav.addObject("ap_dos",p.getAp_dos()); //Se agrega el campo Ap_dos al modelo
                 System.out.println(p.getAp_dos() + " Este es el segundo paterno");
                 mav.addObject("sexo",p.getSexo()); //Se agrega el campo Sexo al modelo
                 System.out.println(p.getSexo() + " Este es el sexo" );
-                mav.addObject("Fecha_n",p.getFecha_n()); //Se agrega el campo Fecha_n al modelo
+                mav.addObject("fecha_n",p.getFecha_n()); //Se agrega el campo Fecha_n al modelo
                 System.out.println(p.getFecha_n()+ " Esta es la fecha");
-                mav.addObject("Telefono",p.getTelefono()); //Se agrega el campo Telefono al modelo
+                mav.addObject("telefono",p.getTelefono()); //Se agrega el campo Telefono al modelo
                 System.out.println(p.getTelefono()+ " Este es el telefono");
-                mav.addObject("Domicilio",p.getDomicilio()); //Se agrega el campo Domicilio al modelo
+                mav.addObject("domicilio",p.getDomicilio()); //Se agrega el campo Domicilio al modelo
                 System.out.println(p.getDomicilio()+ "Este es el domicilio");
-                mav.addObject("Correo",p.getCorreo()); //Se agrega el campo Correo al modelo
+                mav.addObject("correo",p.getCorreo()); //Se agrega el campo Correo al modelo
                 System.out.println(p.getCorreo()+ " Este es el correo");
-                mav.addObject("Contraseña",p.getContraseña()); //Se agrega el campo Contraseña al modelo
+                mav.addObject("contraseña",p.getContraseña()); //Se agrega el campo Contraseña al modelo
                 System.out.println(p.getContraseña()+" ESTA ES LA CONTRASEÑA1");
-                mav.addObject("Contraseña2",p.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+                mav.addObject("contraseña2",p.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
                 System.out.println(p.getContraseña2()+" ESTA ES LA CONTRASEÑA2");
 
                 return mav;
@@ -244,23 +244,23 @@ public class RegistroController {
                 ModelAndView mav=new ModelAndView();
                 
                 mav.setViewName("exito3"); //Pasamos a la vista de nombre exito
-                mav.addObject("No_cedula",ps.getNo_cedula()); //Se agrega el campo No_cedula al modelo
+                mav.addObject("no_cedula",ps.getNo_cedula()); //Se agrega el campo No_cedula al modelo
                 System.out.println(ps.getNo_cedula());
-                mav.addObject("No_empleado",ps.getNo_empleado()); //Se agrega el campo No_empleado al modelo
+                mav.addObject("no_empleado",ps.getNo_empleado()); //Se agrega el campo No_empleado al modelo
                 System.out.println(ps.getNo_empleado());
-                mav.addObject("Nombre",ps.getNombre()); //Se agrega el campo Nombre al modelo
+                mav.addObject("nombre",ps.getNombre()); //Se agrega el campo Nombre al modelo
                 System.out.println(ps.getNombre());
-             mav.addObject("Ap_uno",ps.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+             mav.addObject("ap_uno",ps.getAp_uno()); //Se agrega el campo Ap_uno al modelo
              System.out.println(ps.getAp_uno());
-             mav.addObject("Ap_dos",ps.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+             mav.addObject("ap_dos",ps.getAp_dos()); //Se agrega el campo Ap_dos al modelo
              System.out.println(ps.getAp_dos());
-             mav.addObject("Telefono",ps.getTelefono()); //Se agrega el campo Telefono al modelo
+             mav.addObject("telefono",ps.getTelefono()); //Se agrega el campo Telefono al modelo
              System.out.println(ps.getTelefono());
-             mav.addObject("Correo",ps.getCorreo()); //Se agrega el campo Correo al modelo
+             mav.addObject("correo",ps.getCorreo()); //Se agrega el campo Correo al modelo
              System.out.println(ps.getCorreo());
-             mav.addObject("Contraseña",ps.getContraseña()); //Se agrega el campo Contraseña al modelo
+             mav.addObject("contraseña",ps.getContraseña()); //Se agrega el campo Contraseña al modelo
              System.out.println(ps.getContraseña());
-             mav.addObject("Contraseña2",ps.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+             mav.addObject("contraseña2",ps.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
              System.out.println(ps.getContraseña2());
 
                 return mav;
