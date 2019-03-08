@@ -1,0 +1,24 @@
+    #contenido {
+        height: 600px;
+    }
+    
+    h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    
+    table {
+        width: 500px;
+    }
+    
+    .n_fila {
+        display: inline;
+        padding: 20px
+    }
+    
+    td {
+        display: inline;
+        padding: 40px;
+    }
