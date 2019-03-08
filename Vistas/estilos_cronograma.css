@@ -1,5 +1,5 @@
     #contenido {
-        height: 600px;
+        height: 700px;
     }
     
     h1 {
@@ -10,15 +10,39 @@
     }
     
     table {
-        width: 500px;
-    }
-    
-    .n_fila {
-        display: inline;
-        padding: 20px
+        width: 1000px;
     }
     
     td {
-        display: inline;
-        padding: 40px;
+        text-align: center;
+        width: 70px;
+        height: 70px;
+        border: solid 1px #ccc;
+    }
+    
+    td:hover {
+        cursor: pointer;
+        background: red;
+    }
+    
+    .c_dia {
+        text-align: center;
+        display: inline-block;
+        width: 70px;
+        background: #eee;
+        border: solid 1px #eee;
+        margin: 1px;
+        padding: 5px 0px;
+    }
+    
+    #lunes {
+        margin-left: 4px;
+    }
+    
+    select {
+        font-size: 20px;
+        width: 200px;
+        padding: 10px;
+        outline: none;
+        border: none;
     }

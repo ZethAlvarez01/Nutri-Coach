@@ -59,15 +59,32 @@
                         <option value="Octubre">Octubre</option>
                         <option value="Noviembre">Noviembre</option>
                         <option value="Diciembre">Diciembre</option>
-                        <script>
-                            actualizar();
-                        </script>
+                        
                 </select>
+                <br>
+                <select name="Anio" id="anio" class="anio" onchange="mover_mes();">
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                </select>
+
+                <script>
+                    actualizar();
+                </script>
 
                 <br>
                 <br>
                 <table class="tabla">
                     <thead id="tabla">
+                        <div class="c_dia" id="lunes">Lun.</div>
+                        <div class="c_dia">Mar.</div>
+                        <div class="c_dia">Mié.</div>
+                        <div class="c_dia">Jue.</div>
+                        <div class="c_dia">Vie.</div>
+                        <div class="c_dia">Sáb.</div>
+                        <div class="c_dia">Dom.</div>
                         <script>
                             dias();
                         </script>

@@ -1,18 +1,12 @@
 function dias() {
     var dia_text = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
 
-
     let tabla = document.getElementById("tabla");
-    for (var i = 0; i < 7; i++) {
-        let fila = document.createElement("TR");
-        fila.className += "n_fila";
-        tabla.appendChild(fila);
-        fila.innerHTML = dia_text[i];
-    }
 
     let cuerpoT = document.createElement("TBODY");
     cuerpoT.setAttribute('id', 'cuerpo');
     tabla.appendChild(cuerpoT);
+
 
     ////////////////////////////////////////////
 
@@ -44,6 +38,8 @@ function dias() {
             } else if (flg == 1 && dias_c <= fecha2) {
                 dia.innerHTML = dias_c;
                 dias_c++;
+            } else {
+                dia.innerHTML = " ";
             }
 
 
@@ -65,9 +61,7 @@ function numerar() {
     }
 }
 
-function mover_mes() {
-    let valor = document.getElementById("cajaMes").value;
-    console.log(valor);
+function numero_mes(valor) {
 
     let numero = 0;
     switch (valor) {
@@ -109,6 +103,25 @@ function mover_mes() {
             break;
     }
 
+    return numero;
+}
+
+function mover_mes() {
+    /* Seleccion del mes */
+
+    let valorM = document.getElementById("cajaMes").value;
+    console.log(valorM);
+
+    let numero = numero_mes(valorM);
+
+    /* Seleccion del año */
+
+    let valorA = document.getElementById("anio").value;
+    console.log(valorA);
+
+
+    /* Mato lo que traiga el calendario */
+
     let matar = document.getElementById("cuerpo").remove();
 
     let cuerpoT = document.createElement("TBODY");
@@ -118,10 +131,10 @@ function mover_mes() {
     ////////////////////////////////////////////
 
     let fecha = new Date();
-    var dt = new Date(numero + 1 + ' ' + 1 + ', ' + fecha.getFullYear() + ' 12:00:00');
+    var dt = new Date(numero + 1 + ' ' + 1 + ', ' + valorA + ' 12:00:00');
     //alert(dt.getUTCDay());
 
-    let fecha2 = new Date(fecha.getFullYear(), numero + 1, 0).getDate();
+    let fecha2 = new Date(valorA, numero + 1, 0).getDate();
     console.log(fecha2);
 
     let dias_c = 1;
@@ -145,6 +158,8 @@ function mover_mes() {
             } else if (flg == 1 && dias_c <= fecha2) {
                 dia.innerHTML = dias_c;
                 dias_c++;
+            } else {
+                dia.innerHTML = " ";
             }
 
 
@@ -162,4 +177,8 @@ function actualizar() {
     let fecha = new Date();
 
     caja.value = mes[fecha.getMonth()];
+
+    let caja2 = document.getElementById("anio");
+
+    caja2.value = fecha.getFullYear();
 }
