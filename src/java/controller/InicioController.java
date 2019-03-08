@@ -225,7 +225,7 @@ public class InicioController {
                    }else{
                         ModelAndView mv=new ModelAndView();
                         mv.setViewName("inicio");
-                        mv.addObject("loginO",new Login());
+                        mv.addObject("Login",new Login());
                         return mv; 
                         }
                 }}
@@ -236,7 +236,7 @@ public class InicioController {
     public ModelAndView formularioLogin(){
         ModelAndView mv=new ModelAndView();                            // SE CREA EL MODELO
         mv.setViewName("login");                                       // SE NOMBRA EL MODELO
-        mv.addObject("login",new Login());                             // SE AGREGA EL OBJETO login AL MODELO
+        mv.addObject("Login",new Login());                             // SE AGREGA EL OBJETO login AL MODELO
         return mv;
     }
   
