@@ -84,16 +84,17 @@ public class InicioController {
             return mv;
         }else{
                //El usuario ingreso bien los datos
-                String sql="select nombre from paciente where contraseña='"+
+                String sql="select nombre from paciente where contraseña='"+ // Busca el usuario como paciente en la base de datos
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 //List datos=this.jdbcTemplate.queryForList(sql);
                 List datosL=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datosL.get(0));
+//                System.out.println(datosL.get(0));
                 
                 if(datosL.size()>=1){
-                    ModelAndView mv=new ModelAndView();
-                    mv.setViewName("expedientePaciente");
-                    mv.addObject("datos",datosL);
+                                                          // Si se encuentra el paciente se procede a acceder a su expediente
+                    ModelAndView mv=new ModelAndView();   // Creación del modelo
+                    mv.setViewName("expedientePaciente");  //nombra al modelo
+                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                     
                     sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
                     List datosEv=this.jdbcTemplate.queryForList(sql);
@@ -101,11 +102,11 @@ public class InicioController {
                     //List datas=evo.consulta();
                     System.out.println(datosEv);
                     mv.addObject("datas",datosEv);
-                    sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
-                            + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
-                            + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
+                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
 
-                    List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
                     for(Map<String, Object> row : rows){
                        String edad = row.get("edad").toString();
                        String sexo = row.get("sexo").toString();
@@ -177,16 +178,17 @@ public class InicioController {
                     //System.out.println(datas);
                     
                     return mv;
-            }else{
-                        sql="select * from psicologo where contraseña='"+
+            }
+                else{
+                        sql="select * from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
                         
-                        if(datosL.size()>=1){
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("foro");
-                        ArrayList<Capa_neuronas> neural_net;
+                        if(datosL.size()>=1){                                      // Si se encuentra el usuario se procede a acceder a su vista de bienvenida
+                        ModelAndView mv=new ModelAndView();                      // Creación del modelo
+                        mv.setViewName("foro");                                   // Nombra al modelo
+                       /* ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
                         
                          double[] x={0,0,1,0,1,1,1,1,0,0,
@@ -220,15 +222,36 @@ public class InicioController {
                         mv.addObject("salida4",output[0][3]);
                         mv.addObject("salida5",output[0][4]);
                         mv.addObject("salida6",output[0][5]);
-                        mv.addObject("nombre","Psicologo");
+                        mv.addObject("nombre","Psicologo");*/
                         return mv;    
-                   }else{
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("inicio");
-                        mv.addObject("Login",new Login());
+                   }
+                        
+                        else{
+                            
+                        sql="select * from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
+                            
+                            
+                        if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
+                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                         mv.setViewName("foro");                                            // Nombra al modelo
+                         return mv;
+                        
+                        
+                        }
+                        else{                                                               // Si no se encuentra el usuario en la base de datos se procede a regresar a la pagina de inicio
+                             ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                        mv.setViewName("inicio");                                           // Nombra al modelo
+                        mv.addObject("Login",new Login());                                  // Agrega el objeto Login al modelo
                         return mv; 
                         }
-                }}
+                            
+                       
+                        }
+                }
+        }
     }
     
     
@@ -257,20 +280,52 @@ public class InicioController {
             return mv;
         }else{
              //El usuario ingreso bien los datos
-                String sql="select nombre from paciente where contraseña='"+
+                String sql="select nombre from paciente where contraseña='"+               // Su busca al usuario como paciente en la base de datos
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 List datos=this.jdbcTemplate.queryForList(sql);
                 System.out.println(datos);
                 
-                if(datos.size()>=1){
-                    ModelAndView mv=new ModelAndView();
-                    mv.setViewName("expedientePaciente");                    
+                if(datos.size()>=1){                                                     // Si se encuentra en la base se procede a acceder a su vista de bienvenida
+                    ModelAndView mv=new ModelAndView();                                  // Creación del modelo
+                    mv.setViewName("expedientePaciente");                                // Nombra al modelo
                     return mv;
             }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("login");
-                mv.addObject("Login",new Login());
+               
+                String sql2="select nombre from psicologo where contraseña='"+            // Se busca al usuario como psicologo en la base de datos
+                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";                 
+                List datos2=this.jdbcTemplate.queryForList(sql2);
+                System.out.println(datos);  
+                    
+                    if(datos2.size()>=1){                                                 // Si se encuentra en la base se procede a acceder a su vista de Bienvenida
+                    ModelAndView mv=new ModelAndView();                                   // Creación del modelo
+                    mv.setViewName("foro");                                               // Nombra al modelo
+                    return mv;
+            }
+                    else{
+                 String sql3="select nombre from nutriologo where contraseña='"+         // Se busca el usuario como nutriologo en la base de datos
+                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                List datos3=this.jdbcTemplate.queryForList(sql3);
+                System.out.println(datos);  
+                
+                if(datos3.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
+                    ModelAndView mv=new ModelAndView();                                      // Creación del modelo
+                    mv.setViewName("foro");                                                  // Nombra al modelo
+                    return mv;
+            }
+                else{                                                                        // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
+                     ModelAndView mv=new ModelAndView();                                     // Creación del modelo
+                mv.setViewName("login");                                                     // Se nombra el modelo
+                mv.addObject("Login",new Login());                                           // Se agrega el objeto Login al modelo
                 return mv;
+                }
+                
+                
+                    }
+                    
+                    
+                    
+                    
+                
             }
         }
     }
