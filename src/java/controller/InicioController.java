@@ -241,11 +241,29 @@ public class InicioController {
                         
                         
                         }
-                        else{                                                               // Si no se encuentra el usuario en la base de datos se procede a regresar a la pagina de inicio
-                             ModelAndView mv=new ModelAndView();                            // Creación del modelo
-                        mv.setViewName("inicio");                                           // Nombra al modelo
-                        mv.addObject("Login",new Login());                                  // Agrega el objeto Login al modelo
-                        return mv; 
+                        else{ 
+                            
+                         sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
+
+                        if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
+                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                         mv.setViewName("foro");                                            // Nombra al modelo
+                         return mv;
+                        
+                        
+                        }
+                        else{                                                           // Si no se encuentra el usuario en la base de datos se procede a regresar a la pagina de inicio
+                         ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                        mv.setViewName("inicio");                                       // Nombra al modelo
+                        mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                        return mv;    
+                        }
+
+                                 
+                             
                         }
                             
                        
@@ -312,11 +330,27 @@ public class InicioController {
                     mv.setViewName("foro");                                                  // Nombra al modelo
                     return mv;
             }
-                else{                                                                        // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
-                     ModelAndView mv=new ModelAndView();                                     // Creación del modelo
+                else{   
+                    String sql4="select nombre from administrador where contraseña='"+         // Se busca el usuario como administrador en la base de datos
+                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                List datos4=this.jdbcTemplate.queryForList(sql4);
+                System.out.println(datos);  
+                
+                if(datos4.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
+                    ModelAndView mv=new ModelAndView();                                      // Creación del modelo
+                    mv.setViewName("foro");                                                  // Nombra al modelo
+                    return mv;
+            }
+                else{                                                                    // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
+                    ModelAndView mv=new ModelAndView();                                     // Creación del modelo
                 mv.setViewName("login");                                                     // Se nombra el modelo
                 mv.addObject("Login",new Login());                                           // Se agrega el objeto Login al modelo
                 return mv;
+                }
+
+
+                       
+                     
                 }
                 
                 
