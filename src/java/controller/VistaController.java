@@ -66,4 +66,44 @@ public class VistaController {
         return mv;
     }
     
+    @RequestMapping("bienvenida_admin.htm")
+    public ModelAndView bienvenida_admin(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("bienvenida_admin");
+        return mv;
+    }
+    
+     @RequestMapping("bienvenida_nutriologo.htm")
+    public ModelAndView bienvenida_nutriologo(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("bienvenida_nutriologo");
+        return mv;
+    }
+    
+     @RequestMapping("bienvenida_psicologo.htm")
+    public ModelAndView bienvenida_psicologo(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("bienvenida_psicologo");
+        return mv;
+    }
+     @RequestMapping("mensajeria.htm")
+    public ModelAndView mensajeria(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("mensajeria");
+        return mv;
+    }
+     @RequestMapping("verificacion_cuentas.htm")
+    public ModelAndView verificacion_cuentas(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("verificacion_cuentas");
+        return mv;
+    }
+    
+     @RequestMapping("diario_psicologo_solo_paciente.htm")
+    public ModelAndView diario_psicologo_solo_paciente(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("diario_psicologo_solo_paciente");
+        return mv;
+    }
+    
 }

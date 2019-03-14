@@ -21,11 +21,13 @@ import models.Psicologo;
 import models.PsicologoValidar;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -87,7 +89,7 @@ public class RegistroController {
               //El usuario ingreso bien los datos
              if(n.getContraseña().equals(n.getContraseña2())){
 
-                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"',"+n.getNo_empleado()+");";
+                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"');";
 
                 this.jdbcTemplate.update(sql);
             
@@ -172,7 +174,7 @@ public class RegistroController {
             
                 mav.setViewName("exito2"); //Pasamos a la vista de nombre exito3
                 mav.addObject("no_boleta",p.getNo_boleta()); //Se agrega el campo No_boleta al modelo
-                 System.out.println(p.getNo_boleta()+" Este es el número de boleta");
+                System.out.println(p.getNo_boleta()+" Este es el número de boleta");
                 mav.addObject("nombre",p.getNombre()); //Se agrega el campo Nombre al modelo
                 System.out.println(p.getNombre()+" Este es el nombre");
                 mav.addObject("ap_uno",p.getAp_uno()); //Se agrega el campo Ap_uno al modelo
@@ -223,8 +225,12 @@ public class RegistroController {
           //Recibimos y validamos los datos de nuestro formulario
      @RequestMapping(value="registroPs.htm",method = RequestMethod.POST)
      public ModelAndView registroPS(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){
+   
          this.PsicologoValidar.validate(ps, result);
+   
           // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         
+        
          if(result.hasErrors()){
              
              //volvemos al formulario porque los datos ingresados son incorrectos
@@ -271,5 +277,9 @@ public class RegistroController {
                 return mav;
             }
         }
-    }
+    
+   
+   
+     }
+     
 }

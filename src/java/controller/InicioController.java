@@ -187,7 +187,7 @@ public class InicioController {
                         
                         if(datosL.size()>=1){                                      // Si se encuentra el usuario se procede a acceder a su vista de bienvenida
                         ModelAndView mv=new ModelAndView();                      // Creación del modelo
-                        mv.setViewName("foro");                                   // Nombra al modelo
+                        mv.setViewName("bienvenida_psicologo");                                   // Nombra al modelo
                        /* ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
                         
@@ -236,7 +236,7 @@ public class InicioController {
                             
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
                          ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                         mv.setViewName("foro");                                            // Nombra al modelo
+                         mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
                          return mv;
                         
                         
@@ -250,7 +250,7 @@ public class InicioController {
 
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
                          ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                         mv.setViewName("foro");                                            // Nombra al modelo
+                         mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
                          return mv;
                         
                         
@@ -316,7 +316,7 @@ public class InicioController {
                     
                     if(datos2.size()>=1){                                                 // Si se encuentra en la base se procede a acceder a su vista de Bienvenida
                     ModelAndView mv=new ModelAndView();                                   // Creación del modelo
-                    mv.setViewName("foro");                                               // Nombra al modelo
+                    mv.setViewName("bienvenida_psicologo");                                               // Nombra al modelo
                     return mv;
             }
                     else{
@@ -338,7 +338,7 @@ public class InicioController {
                 
                 if(datos4.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
                     ModelAndView mv=new ModelAndView();                                      // Creación del modelo
-                    mv.setViewName("foro");                                                  // Nombra al modelo
+                    mv.setViewName("bienvenida_admin");                                                  // Nombra al modelo
                     return mv;
             }
                 else{                                                                    // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
