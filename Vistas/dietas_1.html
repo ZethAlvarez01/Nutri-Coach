@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="dietas_1.css " />
     <link rel="stylesheet" href="contenido.css " />
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script_dieta.js"></script>
+
     <title>Nutri-Coach</title>
 
 </head>
@@ -78,8 +80,8 @@
             <div class="menu_t">
                 <h5 id="menu_t">Tipo de menú</h5>
                 <button class="boton smae" onclick="TypeDiet(event, 'smae')">SMAE</button>
-                <button class="boton platillos" onclick="TypeDiet(event, 'platillos')">Platillos</button>
-                <button class="boton agregar" onclick="TypeDiet(event, 'agregar')">Agregar</button>
+                <button class="boton platillos" onclick="TypeDiet(event, 'platillos')">Precargados</button>
+                <button class="boton agregar" onclick="TypeDiet(event, 'agregar')">Agregar alimento</button>
             </div>
 
             <div class="pestanas_menus">
@@ -97,7 +99,7 @@
                     fecha();
                 </script>
                 <div id="smae" class="dieta" style="display: none;">
-                    <h3>SMAE</h3>
+                    <h3>Dieta con base SMAE</h3>
                     <label id="text">Menú de la semana del ? al ? de 20??</label>
                     <div id="opciones">
                         <img src="print.png" alt="Imprimir" class="guardar">
@@ -129,35 +131,72 @@
                     </div>
                 </div>
                 <div id="platillos" class="dieta" style="display: none;">
-                    <h3>Platillos</h3>
-                    <div id="opciones">
-                        <img src="print.png" alt="Imprimir" class="guardar">
-                        <img src="save.png" alt="Guardar" class="guardar">
-                        <img src="network.png" alt="Compartir" class="guardar">
+                    <h3>Dieta sencilla</h3>
+                    <div id="dietas">
+                        <div id="lateral">
+                            <div id="titulo_comida" class="">t</div>
+
+                            <div id="desayuno" class=""></div>
+                            <div id="col1" class=""></div>
+                            <div id="comida" class=""></div>
+                            <div id="col2" class=""></div>
+                            <div id="cena" class=""></div>
+                        </div>
+                        <div id="tabla_menus">
+                            <table class="tabla">
+                                <thead id="tabla">
+                                    <div class="c_dia" id="lunes">Lun.</div>
+                                    <div class="c_dia">Mar.</div>
+                                    <div class="c_dia">Mié.</div>
+                                    <div class="c_dia">Jue.</div>
+                                    <div class="c_dia">Vie.</div>
+                                    <div class="c_dia">Sáb.</div>
+                                    <div class="c_dia">Dom.</div>
+                                    <script>
+                                        dias();
+                                    </script>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="opcion">
+                            <select name="" id="des">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="colac1">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="com">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="colac2">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="cen">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                        </div>
                     </div>
-                    <div id="calendario_S" class="grid">
-                        <div id="lunes" class="calendar">
-                            <p>Lunes</p>
-                        </div>
-                        <div id="martes" class="calendar">
-                            <p>Martes</p>
-                        </div>
-                        <div id="miercoles" class="calendar">
-                            <p>Miércoles</p>
-                        </div>
-                        <div id="jueves" class="calendar">
-                            <p>Jueves</p>
-                        </div>
-                        <div id="viernes" class="calendar">
-                            <p>Viernes</p>
-                        </div>
-                        <div id="sabado" class="calendar">
-                            <p>Sábado</p>
-                        </div>
-                        <div id="domingo" class="calendar">
-                            <p>Domingo</p>
-                        </div>
-                    </div>
+                    <div id="boton">Generar dieta</div>
+                    <div id="boton">Guardar dieta</div>
                 </div>
                 <div id="agregar" class="dieta" style="display: none;">
                     <h3>Agregar alimentos nuevos</h3>

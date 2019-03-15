@@ -62,3 +62,95 @@ label {
     border-top: solid 1px;
     border-color: #A16E88;
 }
+
+
+/*////////////*/
+
+#lunes {
+    margin-left: 4px;
+}
+
+.c_dia {
+    text-align: center;
+    display: inline-block;
+    margin: 1px;
+    width: 120px;
+    background: #eee;
+    padding: 10px 0px;
+}
+
+.dia {
+    height: 70px;
+    width: 120px;
+    background: #ccc;
+}
+
+#dietas {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: 1fr;
+    margin-left: 30px;
+}
+
+#lateral {
+    display: grid;
+    grid-template-rows: 38px 70px 70px 70px 70px 70px;
+    grid-template-columns: 1fr;
+}
+
+#titulo_comida {
+    grid-row: 1;
+    background: violet;
+    padding: 10px 0px;
+}
+
+#desayuno {
+    grid-row: 2;
+    background: red;
+}
+
+#col1 {
+    grid-row: 3;
+    background: blueviolet;
+}
+
+#comida {
+    grid-row: 4;
+    background: red;
+}
+
+#col2 {
+    grid-row: 5;
+    background: blueviolet;
+}
+
+#cena {
+    grid-row: 6;
+    background: red;
+}
+
+#opcion {
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 38px 70px 70px 70px 70px 70px;
+}
+
+#des {
+    grid-row: 2;
+}
+
+#colac1 {
+    grid-row: 3;
+}
+
+#com {
+    grid-row: 4;
+}
+
+#colac2 {
+    grid-row: 5;
+}
+
+#cen {
+    grid-row: 6;
+}
