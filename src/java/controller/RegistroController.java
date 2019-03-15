@@ -89,7 +89,7 @@ public class RegistroController {
               //El usuario ingreso bien los datos
              if(n.getContraseña().equals(n.getContraseña2())){
 
-                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"');";
+                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"',0);";
 
                 this.jdbcTemplate.update(sql);
             

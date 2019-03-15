@@ -232,18 +232,32 @@ public class InicioController {
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
-                            
+                        String sql2="select estatus from nutriologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
+                        List estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
+                       // System.out.println(estatus.get(0).toString().charAt(9));
                             
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
-                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                         mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
-                         return mv;
+                         
+                            if(estatus.get(0).toString().charAt(9)=='0' || estatus.get(0).toString().charAt(9)=='2'){ // Se verifica el estatus del usuario
+                                ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                mv.setViewName("suspendido");                                            // Nombra al modelo
+                                return mv;
+                            }
+                            else{
+                                ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
+                                return mv; 
+                            }
+                            
+                        
                         
                         
                         }
                         else{ 
                             
-                         sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
+                        sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
