@@ -39,6 +39,9 @@
                 <prop key="mensajeria.htm">VistaController</prop>
                 <prop key="verificacion_cuentas.htm">VistaController</prop>
                 <prop key="diario_psicologo_solo_paciente.htm">VistaController</prop>
+                <prop key="cambiarC.htm">VistaController</prop>
+                <prop key="suspendido.htm">VistaController</prop>
+                
                 
             </props>
         </property>
