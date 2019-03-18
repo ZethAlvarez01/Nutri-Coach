@@ -166,7 +166,7 @@ public class RegistroController {
 
                 Period periodo = Period.between(fechaNac, ahora);
 
-                String sql="insert into paciente values("+p.getNo_boleta()+",0,'"+p.getNombre()+"','"+p.getAp_uno()+"','"+p.getAp_dos()+"',"+periodo.getYears()+",'"+p.getSexo()+"','"+p.getFecha_n()+"','"+p.getTelefono()+"','"+p.getDomicilio()+"','"+p.getCorreo()+"','"+p.getContraseña()+"');";
+                String sql="insert into paciente values("+p.getNo_boleta()+",0,'"+p.getNombre()+"','"+p.getAp_uno()+"','"+p.getAp_dos()+"',"+periodo.getYears()+",'"+p.getSexo()+"','"+p.getFecha_n()+"','"+p.getTelefono()+"','"+p.getDomicilio()+"','"+p.getCorreo()+"','"+p.getContraseña()+"',1);";
 
                 this.jdbcTemplate.update(sql);
 
@@ -243,7 +243,7 @@ public class RegistroController {
                  //El usuario ingreso bien los datos
             if(ps.getContraseña().equals(ps.getContraseña2())){
 
-                String sql="insert into psicologo values("+ps.getNo_cedula()+",'"+ps.getNombre()+"','"+ps.getAp_uno()+"','"+ps.getAp_dos()+"','"+ps.getTelefono()+"','"+ps.getCorreo()+"',"+ps.getNo_empleado()+",'"+ps.getContraseña()+"');";
+                String sql="insert into psicologo values("+ps.getNo_cedula()+",'"+ps.getNombre()+"','"+ps.getAp_uno()+"','"+ps.getAp_dos()+"','"+ps.getTelefono()+"','"+ps.getCorreo()+"',"+ps.getNo_empleado()+",'"+ps.getContraseña()+"',0);";
 
                 this.jdbcTemplate.update(sql);
             

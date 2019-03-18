@@ -89,10 +89,29 @@ public class InicioController {
                 //List datos=this.jdbcTemplate.queryForList(sql);
                 List datosL=this.jdbcTemplate.queryForList(sql);
 //                System.out.println(datosL.get(0));
-                
+                String sql2="select estatus from paciente where contraseña='"+lo.getPass()+"' and no_boleta="+lo.getUsuario()+";"; // Extraemos su estatus
+                        List estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
                 if(datosL.size()>=1){
-                                                          // Si se encuentra el paciente se procede a acceder a su expediente
-                    ModelAndView mv=new ModelAndView();   // Creación del modelo
+                                                          // Si se encuentra el paciente se procede a verificar su estatus
+                                                          
+                    switch (estatus.get(0).toString().charAt(9)) {                     // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '2':                                           // Si se encuentra en 2 su cuenta se encuentra suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
+                                {
+                                   ModelAndView mv=new ModelAndView();   // Creación del modelo
                     mv.setViewName("expedientePaciente");  //nombra al modelo
                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                     
@@ -178,52 +197,89 @@ public class InicioController {
                     //System.out.println(datas);
                     
                     return mv;
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
+                            }                                      
+                    
             }
                 else{
                         sql="select * from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
+                        sql2="select estatus from psicologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
+                        estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
                         
-                        if(datosL.size()>=1){                                      // Si se encuentra el usuario se procede a acceder a su vista de bienvenida
-                        ModelAndView mv=new ModelAndView();                      // Creación del modelo
-                        mv.setViewName("bienvenida_psicologo");                                   // Nombra al modelo
-                       /* ArrayList<Capa_neuronas> neural_net;
-                        libMatrices op=new libMatrices();
                         
-                         double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
-                    
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
-
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
-
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
-
-                        System.out.println("Entrada: ");
-                        double[][] xa=new double[1][];
-                        xa[0]=x;
-                        op.print(xa);
-                        System.out.println("Salida: ");
-                        op.print(output);
-                        mv.addObject("salida1",output[0][0]);
-                        mv.addObject("salida2",output[0][1]);
-                        mv.addObject("salida3",output[0][2]);
-                        mv.addObject("salida4",output[0][3]);
-                        mv.addObject("salida5",output[0][4]);
-                        mv.addObject("salida6",output[0][5]);
-                        mv.addObject("nombre","Psicologo");*/
-                        return mv;    
+                        if(datosL.size()>=1){                                      // Si se encuentra el usuario se procede a verificar su estatus
+                            switch (estatus.get(0).toString().charAt(9)) {         // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                            
+                                case '2':                                         // si su estatus es 2 la cuenta se encuentra suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("bienvenida_psicologo");                                            // Nombra al modelo
+                                    return mv;
+                                    /* ArrayList<Capa_neuronas> neural_net;
+                            libMatrices op=new libMatrices();
+                            double[] x={0,0,1,0,1,1,1,1,0,0,
+                            1,0,1,1,0,1,1,0,1,0,
+                            0,1,0,0,1,0,0,1,0,0,
+                            1,0,0,0,1,0,0,0,0,1,
+                            0,0};
+                            Crear_RN redRecomendaciones=new Crear_RN();
+                            neural_net=redRecomendaciones.create_nn(topology,0);
+                            ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                            neural_net.get(0).w=pesos.get(0);
+                            neural_net.get(0).b=pesos.get(1);
+                            neural_net.get(1).w=pesos.get(2);
+                            neural_net.get(1).b=pesos.get(3);
+                            Implementacion exe=new Implementacion(neural_net,x);
+                            double[][] output=exe.Implement();
+                            System.out.println("Entrada: ");
+                            double[][] xa=new double[1][];
+                            xa[0]=x;
+                            op.print(xa);
+                            System.out.println("Salida: ");
+                            op.print(output);
+                            mv.addObject("salida1",output[0][0]);
+                            mv.addObject("salida2",output[0][1]);
+                            mv.addObject("salida3",output[0][2]);
+                            mv.addObject("salida4",output[0][3]);
+                            mv.addObject("salida5",output[0][4]);
+                            mv.addObject("salida6",output[0][5]);
+                            mv.addObject("nombre","Psicologo");*/
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
+                            }
+                        
                    }
                         
                         else{
@@ -232,23 +288,41 @@ public class InicioController {
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
-                        String sql2="select estatus from nutriologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
-                        List estatus=this.jdbcTemplate.queryForList(sql2);
+                        sql2="select estatus from nutriologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
+                        estatus=this.jdbcTemplate.queryForList(sql2);
                         System.out.println("ESOS FUERON LOS DATOS"); 
                         System.out.println(estatus);
                        // System.out.println(estatus.get(0).toString().charAt(9));
                             
-                        if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
-                         
-                            if(estatus.get(0).toString().charAt(9)=='0' || estatus.get(0).toString().charAt(9)=='2'){ // Se verifica el estatus del usuario
-                                ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                mv.setViewName("suspendido");                                            // Nombra al modelo
-                                return mv;
-                            }
-                            else{
-                                ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
-                                return mv; 
+                        if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a verificar su estatus
+                            // Se verifica el estatus del usuario
+                            switch (estatus.get(0).toString().charAt(9)) {            // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '2':                                                  // Si su estatus es 2 se tiene una cuenta suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
                             }
                             
                         
@@ -312,45 +386,272 @@ public class InicioController {
             return mv;
         }else{
              //El usuario ingreso bien los datos
-                String sql="select nombre from paciente where contraseña='"+               // Su busca al usuario como paciente en la base de datos
+               String sql="select nombre from paciente where contraseña='"+ // Busca el usuario como paciente en la base de datos
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
-                List datos=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datos);
+                //List datos=this.jdbcTemplate.queryForList(sql);
+                List datosL=this.jdbcTemplate.queryForList(sql);
+//                System.out.println(datosL.get(0));
+                String sql2="select estatus from paciente where contraseña='"+lo.getPass()+"' and no_boleta="+lo.getUsuario()+";"; // Extraemos su estatus
+                        List estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
                 
-                if(datos.size()>=1){                                                     // Si se encuentra en la base se procede a acceder a su vista de bienvenida
-                    ModelAndView mv=new ModelAndView();                                  // Creación del modelo
-                    mv.setViewName("expedientePaciente");                                // Nombra al modelo
+                if(datosL.size()>=1){                                                     // Si se encuentra en la base se procede a acceder a su vista de bienvenida
+                    
+                                                          
+                    switch (estatus.get(0).toString().charAt(9)) {                     // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '2':                                           // Si se encuentra en 2 su cuenta se encuentra suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
+                                {
+                                   ModelAndView mv=new ModelAndView();   // Creación del modelo
+                    mv.setViewName("expedientePaciente");  //nombra al modelo
+                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                    
+                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
+                    List datosEv=this.jdbcTemplate.queryForList(sql);
+                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
+                    //List datas=evo.consulta();
+                    System.out.println(datosEv);
+                    mv.addObject("datas",datosEv);
+                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
+
+                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                    for(Map<String, Object> row : rows){
+                       String edad = row.get("edad").toString();
+                       String sexo = row.get("sexo").toString();
+                       String peso = row.get("peso").toString();
+                       String altura = row.get("altura").toString();
+                       String ansiedad = row.get("ansiedad").toString();
+                       String depresion = row.get("depresion").toString();
+                       String ira = row.get("ira").toString();
+                       String estres = row.get("estres").toString();
+                       String felicidad = row.get("felicidad").toString();
+                       String dulce = row.get("dulce").toString();
+                       String amarga = row.get("amarga").toString();
+                       String salada = row.get("salada").toString();
+                       String picante = row.get("picante").toString();
+                       String acida = row.get("acida").toString();
+                       String act_f = row.get("act_f").toString();
+                       String suplementos = row.get("suplementos").toString();
+                       String motivacional = row.get("motivacional").toString();
+                       String preparacionA = row.get("preparacionA").toString();
+                       String beneficiosA = row.get("beneficiosA").toString();
+                       String deportes = row.get("deportes").toString();
+                       String medicamentos = row.get("medicamentos").toString();
+                       String salud= row.get("salud").toString();
+                       
+                       double pesoD=Double.parseDouble(peso);
+                       int pesoI=(int)pesoD;
+                       String pesoS=pesoI+"";
+                       
+                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
+                       
+                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
+                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
+                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
+                               deportes,medicamentos,salud);
+                       
+                        double[] x=tr.vector();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
+
+                        Crear_RN redRecomendaciones=new Crear_RN();
+                        neural_net=redRecomendaciones.create_nn(topology,0);
+
+                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+
+                        neural_net.get(0).w=pesos.get(0);
+                        neural_net.get(0).b=pesos.get(1);
+
+                        neural_net.get(1).w=pesos.get(2);
+                        neural_net.get(1).b=pesos.get(3);
+
+                        Implementacion exe=new Implementacion(neural_net,x);
+                        double[][] output=exe.Implement();
+                        System.out.println("Entrada: ");
+                        double[][] xa=new double[1][];
+                        xa[0]=x;
+                        op.print(xa);
+
+                        System.out.println("Salida: ");
+                        op.print(output);
+
+                        ArrayList<String> salida=tr.seleccion(output[0]);
+                    
+                       System.out.println(salida);
+                       mv.addObject("respuesta",salida.get(0));
+                     }
+                    
+                    
+                    
+                    //System.out.println(datas);
+                    
                     return mv;
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
+                            }                                      
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
             }else{
                
-                String sql2="select nombre from psicologo where contraseña='"+            // Se busca al usuario como psicologo en la base de datos
-                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";                 
-                List datos2=this.jdbcTemplate.queryForList(sql2);
-                System.out.println(datos);  
+                sql="select * from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
+                        sql2="select estatus from psicologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
+                        estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
                     
-                    if(datos2.size()>=1){                                                 // Si se encuentra en la base se procede a acceder a su vista de Bienvenida
-                    ModelAndView mv=new ModelAndView();                                   // Creación del modelo
-                    mv.setViewName("bienvenida_psicologo");                                               // Nombra al modelo
-                    return mv;
+                    if(datosL.size()>=1){                                                 // Si se encuentra en la base se procede a acceder a su vista de Bienvenida
+                   
+                        switch (estatus.get(0).toString().charAt(9)) {         // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                            
+                                case '2':                                         // si su estatus es 2 la cuenta se encuentra suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("bienvenida_psicologo");                                            // Nombra al modelo
+                                    return mv;
+                                    /* ArrayList<Capa_neuronas> neural_net;
+                            libMatrices op=new libMatrices();
+                            double[] x={0,0,1,0,1,1,1,1,0,0,
+                            1,0,1,1,0,1,1,0,1,0,
+                            0,1,0,0,1,0,0,1,0,0,
+                            1,0,0,0,1,0,0,0,0,1,
+                            0,0};
+                            Crear_RN redRecomendaciones=new Crear_RN();
+                            neural_net=redRecomendaciones.create_nn(topology,0);
+                            ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                            neural_net.get(0).w=pesos.get(0);
+                            neural_net.get(0).b=pesos.get(1);
+                            neural_net.get(1).w=pesos.get(2);
+                            neural_net.get(1).b=pesos.get(3);
+                            Implementacion exe=new Implementacion(neural_net,x);
+                            double[][] output=exe.Implement();
+                            System.out.println("Entrada: ");
+                            double[][] xa=new double[1][];
+                            xa[0]=x;
+                            op.print(xa);
+                            System.out.println("Salida: ");
+                            op.print(output);
+                            mv.addObject("salida1",output[0][0]);
+                            mv.addObject("salida2",output[0][1]);
+                            mv.addObject("salida3",output[0][2]);
+                            mv.addObject("salida4",output[0][3]);
+                            mv.addObject("salida5",output[0][4]);
+                            mv.addObject("salida6",output[0][5]);
+                            mv.addObject("nombre","Psicologo");*/
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
+                            }
+                        
+                        
+                        
+                        
+                        
             }
                     else{
-                 String sql3="select nombre from nutriologo where contraseña='"+         // Se busca el usuario como nutriologo en la base de datos
-                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
-                List datos3=this.jdbcTemplate.queryForList(sql3);
-                System.out.println(datos);  
+                  sql="select * from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
+                        sql2="select estatus from nutriologo where contraseña='"+lo.getPass()+"' and no_empleado="+lo.getUsuario()+";"; // Extraemos su estatus
+                        estatus=this.jdbcTemplate.queryForList(sql2);
+                        System.out.println("ESOS FUERON LOS DATOS"); 
+                        System.out.println(estatus);
+                      
                 
-                if(datos3.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
-                    ModelAndView mv=new ModelAndView();                                      // Creación del modelo
-                    mv.setViewName("foro");                                                  // Nombra al modelo
-                    return mv;
+                if(datosL.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
+                    
+                    
+                    // Se verifica el estatus del usuario
+                            switch (estatus.get(0).toString().charAt(9)) {            // Si su estatus es 0 se notifica como en espera de ser aprobado
+                                case '0':
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("espera_Aprobacion");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '2':                                                  // Si su estatus es 2 se tiene una cuenta suspendida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                default:
+                                {
+                                    
+                                    ModelAndView mv=new ModelAndView();                            // Creación del modelo
+                                    mv.setViewName("inicio");                                       // Nombra al modelo
+                                    mv.addObject("Login",new Login());                              // Agrega el objeto Login al modelo
+                                    return mv;
+                                }
+                            }
+                    
+                    
+                    
+                    
+                    
+                    
             }
                 else{   
-                    String sql4="select nombre from administrador where contraseña='"+         // Se busca el usuario como administrador en la base de datos
-                lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
-                List datos4=this.jdbcTemplate.queryForList(sql4);
-                System.out.println(datos);  
+                   sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
+                        lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
+                        datosL=this.jdbcTemplate.queryForList(sql);
+                        System.out.println(datosL);  
                 
-                if(datos4.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
+                if(datosL.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
                     ModelAndView mv=new ModelAndView();                                      // Creación del modelo
                     mv.setViewName("bienvenida_admin");                                                  // Nombra al modelo
                     return mv;
