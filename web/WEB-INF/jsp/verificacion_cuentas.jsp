@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_verificacion.css" />" />
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
+    <script type="text/javascript" src="resource/scrips/script.js"/></script>  
     <title>Nutri-Coach</title>
 
 </head>
@@ -66,27 +67,48 @@
                     <h3>Solicitudes de especialistas</h3>
                     <br>
                     <div class="casillas">
-                        <div id="info">
-
-                        </div>
-                        <div id="aprobar">
-                            Aprobar
-                        </div>
-                        <div id="rechazar">
-                            Rechazar
-                        </div>
+                        <c:forEach items="${ListaN}" var="item"> 
+                            <div id="info">
+                                
+                                <p>${item.nombre} ${item.ap_uno} ${item.ap_dos} No_Empleado: ${item.no_empleado}  No_Cedula ${item.no_cedula} 
+                                puesto: <c:out value="${puesto}"/></p>
+                            </div>
+                             <form:form method="POST" commandName="Nutriologo">
+                                <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                            <form:button id="aprobar" type="submit" name="aprobarN" value="Aprobar">aprobar</form:button>
+                            <form:button id="rechazar" type="submit" name="rechazarN" value="Rechazar" >Rechazar</form:button>
+                        </form:form>
+                            </c:forEach> 
+                        
+                                                                     
+                        
                     </div>
-                    <div class="casillas">
-                        <div id="info">
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                          
 
-                        </div>
-                        <div id="aprobar">
-                            Aprobar
-                        </div>
-                        <div id="rechazar">
-                            Rechazar
-                        </div>
+                    
+                     <div class="casillas">
+                                                <c:forEach items="${ListaPs}" var="item"> 
+                            <div id="info">
+                                
+                                <p>${item.nombre} ${item.ap_uno} ${item.ap_dos} No_Empleado: ${item.no_empleado}  No_Cedula ${item.no_cedula} 
+                                puesto: <c:out value="${puesto2}"/></p>
+                            </div>
+                             <form:form method="POST" commandName="Psicologo">
+                                <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                            <form:button id="aprobar" type="submit" name="aprobarPs" value="Aprobar">aprobar</form:button>
+                            <form:button id="rechazar" type="submit" name="rechazarPs" value="Rechazar" >Rechazar</form:button>
+                        </form:form>
+                            </c:forEach> 
+                        
+                                                                     
+                        
                     </div>
+                    
+                   
 
                 </div>
 
@@ -95,58 +117,63 @@
                     <h3>Nutriólogo</h3>
                     <br>
                     <div class="casillas">
-                        <div id="info"></div>
-                        <div id="aprobar">
-                            Aprobar
-                        </div>
-                        <div id="rechazar">
-                            Rechazar
-                        </div>
+                        <c:forEach items="${ListaN}" var="item"> 
+                            <div id="info">
+                                
+                                <p>${item.nombre} ${item.ap_uno} ${item.ap_dos} No_Empleado: ${item.no_empleado}  No_Cedula ${item.no_cedula} 
+                               </p>
+                            </div>
+                            
+                            
+                             <form:form method="POST" commandName="Nutriologo">
+                                <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                            <form:button id="aprobar" type="submit" name="aprobarN" value="Aprobar">aprobar</form:button>
+                            <form:button id="rechazar" type="submit" name="rechazarN" value="Rechazar" >Rechazar</form:button>
+                        </form:form>
+                            
+                            
+                            </c:forEach> 
+                        
+                                                                     
+                        
+                    </div>
 
                     </div>
-                    <div class="casillas">
-                        <div id="info"></div>
-                        <div id="aprobar">
-                            Aprobar
-                        </div>
-                        <div id="rechazar">
-                            Rechazar
-                        </div>
-
-                    </div>
-                </div>
+                
                 <div id="psicologo" class="especialista" style="display: none;">
                     <h3>Psicólogo</h3>
                     <br>
                     <div class="casillas">
-                        <div id="info"></div>
-                        <div id="aprobar">
-                            Aprobar
-                        </div>
-                        <div id="rechazar">
-                            Rechazar
-                        </div>
-
+                                                <c:forEach items="${ListaPs}" var="item"> 
+                                                   
+                            <div id="info">
+                                
+                                <p>
+                                    ${item.nombre} ${item.ap_uno} ${item.ap_dos} No_Empleado: ${item.no_empleado}  No_cedula: ${item.no_cedula}
+                                 
+                                  
+                                </p>
+                                
+                            </div>
+                             <form:form method="POST" commandName="Psicologo">
+                                <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                            <form:button id="aprobar" type="submit" name="aprobarPs" value="Aprobar">aprobar</form:button>
+                            <form:button id="rechazar" type="submit" name="rechazarPs" value="Rechazar" >Rechazar</form:button>
+                        </form:form>
+                            </c:forEach> 
+                        
+                                                                     
+                        
                     </div>
                 </div>
 
-                <h3 id="info_g">Información general</h3>
-                <br>
-
-                <div class="informacion">
-                    <div id="especialidad">
-                        <label>Nombre</label>
+                
                     </div>
-                    <div id="curriculum">
-                        <label>Contenido general</label>
-                    </div>
-                </div>
-
             </div>
 
         </div>
 
-    </div>
+  
     <!--Fin contenido-->
     <footer>
             <div class="container">
