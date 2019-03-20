@@ -101,12 +101,12 @@ public class VistaController {
         mv.setViewName("mensajeria");
         return mv;
     }
-     @RequestMapping("verificacion_cuentas.htm")
+/*     @RequestMapping("verificacion_cuentas.htm")
     public ModelAndView verificacion_cuentas(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("verificacion_cuentas");
         return mv;
-    }
+    }*/
     
      @RequestMapping("diario_psicologo_solo_paciente.htm")
     public ModelAndView diario_psicologo_solo_paciente(){
@@ -114,7 +114,25 @@ public class VistaController {
         mv.setViewName("diario_psicologo_solo_paciente");
         return mv;
     }
+      @RequestMapping("suspendido.htm")
+    public ModelAndView suspendido(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("suspendido");
+        return mv;
+    }
+    @RequestMapping("Rechazado.htm")
+    public ModelAndView Rechazado(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("Rechazado");
+        return mv;
+    }
     
+    @RequestMapping("espera_Aprobacion.htm")
+    public ModelAndView espera_Aprobacion(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("espera_Aprobacion");
+        return mv;
+    }
     
     
     
