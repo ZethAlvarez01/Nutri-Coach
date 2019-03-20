@@ -109,6 +109,12 @@ public class InicioController {
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
                                     return mv;
                                 }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
+                                    return mv;
+                                }
                                 case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
                                 {
                                    ModelAndView mv=new ModelAndView();   // Creación del modelo
@@ -235,6 +241,12 @@ public class InicioController {
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
                                     return mv;
                                 }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
+                                    return mv;
+                                }
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
@@ -307,6 +319,12 @@ public class InicioController {
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
                                     return mv;
                                 }
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
@@ -410,6 +428,12 @@ public class InicioController {
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
                                     return mv;
                                 }
                                 case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
@@ -545,6 +569,12 @@ public class InicioController {
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
                                     return mv;
                                 }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
+                                    return mv;
+                                }
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
@@ -621,6 +651,12 @@ public class InicioController {
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("suspendido");                                            // Nombra al modelo
+                                    return mv;
+                                }
+                                 case '4':                                           // Si se encuentra en 4 su cuenta se encuentra rechazado
+                                {
+                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("Rechazado");                                            // Nombra al modelo
                                     return mv;
                                 }
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
