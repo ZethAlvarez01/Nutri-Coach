@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `nutricoach` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `nutricoach`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Win64 (x86_64)
 --
 -- Host: localhost    Database: nutricoach
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,8 +28,8 @@ CREATE TABLE `administrador` (
   `ap_uno` varchar(40) NOT NULL,
   `ap_dos` varchar(40) DEFAULT NULL,
   `cargo` varchar(45) DEFAULT NULL,
-  `contraseña` varchar(20) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
+  `contraseña` varchar(20) DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`no_empleado`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +40,7 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
-INSERT INTO `administrador` VALUES (2014310030,'Zeth','Alvarez','Hernandez','Administrador','12345','5547131440'),(11111111,'Juan','Martinez','Salinas','Administrador','Admin1234','55443322');
+INSERT INTO `administrador` VALUES (2014310030,'Zeth','Alvarez','Hernandez','Administrador',NULL,NULL),(11111111,'Juan','Martinez','Salinas','Administrador',NULL,NULL);
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,9 +470,9 @@ CREATE TABLE `nutriologo` (
   `consultorio` varchar(100) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `no_empleado` int(11) DEFAULT NULL,
-  `contraseña` varchar(20) NOT NULL,
-  `institucion` varchar(50) NOT NULL,
-  `estatus` int(1) DEFAULT NULL,
+  `contraseña` varchar(20) DEFAULT NULL,
+  `institucion` varchar(50) DEFAULT NULL,
+  `estatus` int(11) DEFAULT NULL,
   PRIMARY KEY (`no_cedula`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -485,7 +483,7 @@ CREATE TABLE `nutriologo` (
 
 LOCK TABLES `nutriologo` WRITE;
 /*!40000 ALTER TABLE `nutriologo` DISABLE KEYS */;
-INSERT INTO `nutriologo` VALUES (123123,'Juan','Martínez','Salinas','56500835','jjjjjjjjjj','ejemplo@ejemplo.com',1312213,'Juan1234','IPN',2),(123456789,'Miguel','Aguirre','Hernandez','5533442211','OOIUUYYYUI','ejemplo@ejemplo.com',123456789,'Migue1234','IPN',0),(987654321,'Zeth','Alvarez','Hernandez','55112244','JUYRRLKASHDU','ejemplo@ejemplo.com',987654321,'Zeth1234','ESCOM',1);
+INSERT INTO `nutriologo` VALUES (123123,'Juan','Mart?nez','Salinas','56500835','jjjjjjjjjj','ejemplo@ejemplo.com',1312213,NULL,NULL,NULL),(123456789,'Miguel','Aguirre','Hernandez','5533442211','OOIUUYYYUI','ejemplo@ejemplo.com',123456789,NULL,NULL,NULL),(987654321,'Zeth','Alvarez','Hernandez','55112244','JUYRRLKASHDU','ejemplo@ejemplo.com',987654321,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `nutriologo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +506,7 @@ CREATE TABLE `paciente` (
   `telefono` varchar(15) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `contraseña` varchar(20) NOT NULL,
+  `contraseña` varchar(20) DEFAULT NULL,
   `estatus` int(11) DEFAULT NULL,
   PRIMARY KEY (`no_boleta`),
   KEY `no_cedula` (`no_cedula`)
@@ -521,7 +519,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (2014630304,0,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1);
+INSERT INTO `paciente` VALUES (2014630304,0,'Alexis Israel','Rodrigues',' Alm?zan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com',NULL,NULL),(2014310030,0,'Zeth','Alvarez','Hernandez',24,'H','1995-03-18','5547131440','Trompillo #23 col. 20 de Noviembre Del. Venustiano Carranza Del. Venistiano Carranza','zetokaiba2000@hotmail.com','Excaliburpipper2',1);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,7 +538,7 @@ CREATE TABLE `psicologo` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `no_empleado` int(11) NOT NULL,
-  `contraseña` varchar(20) NOT NULL,
+  `contraseña` varchar(20) DEFAULT NULL,
   `estatus` int(11) DEFAULT NULL,
   PRIMARY KEY (`no_cedula`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -552,7 +550,7 @@ CREATE TABLE `psicologo` (
 
 LOCK TABLES `psicologo` WRITE;
 /*!40000 ALTER TABLE `psicologo` DISABLE KEYS */;
-INSERT INTO `psicologo` VALUES (234234,'Pedro','Perez','Perez','55555555','ejemplo@ejemplo.com',5452453,'Pedro1234',0);
+INSERT INTO `psicologo` VALUES (234234,'Pedro','Perez','Perez','55555555','ejemplo@ejemplo.com',5452453,NULL,NULL);
 /*!40000 ALTER TABLE `psicologo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -616,4 +614,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-17 19:21:53
+-- Dump completed on 2019-03-20 20:35:58

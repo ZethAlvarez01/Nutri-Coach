@@ -1,0 +1,98 @@
+    #contenido {
+        height: 900px;
+    }
+    
+    h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    
+    #calendario {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+    }
+    
+    #cita {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        grid-template-rows: 1;
+        width: 80%;
+        margin-bottom: 5px;
+        margin-left: 5px;
+    }
+    
+    #tipo {
+        grid-column: 1;
+        grid-row: 1;
+        background: #099441;
+        height: 100px;
+        width: 20px;
+    }
+    
+    #tipo:hover {
+        cursor: pointer;
+    }
+    
+    #cont {
+        border-top: solid 1px #ddd;
+        border-bottom: solid 1px #ddd;
+        border-right: solid 1px #ddd;
+    }
+    
+    #cita:hover {
+        background: #ddd;
+        cursor: pointer;
+    }
+    
+    #dia {
+        grid-column: 1;
+    }
+    
+    #fecha_dia {
+        font-size: 100px;
+        text-align: center;
+        color: #888;
+    }
+    
+    #mes_anio {
+        font-size: 30px;
+        text-align: center;
+        color: #888;
+    }
+    
+    #citas {
+        grid-column: 2;
+        height: 700px;
+        overflow-y: scroll;
+    }
+    
+    #citas::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .tipo_c {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-top: 5px;
+    }
+    
+    #tipos_citas {
+        display: grid;
+        grid-template-columns: 30px 150px 30px 200px 30px 200px;
+        margin: 20px;
+    }
+    
+    .texto_c {
+        font-size: 18px;
+        width: 150px;
+        height: 30px;
+        padding-top: 10px;
+        margin-left: 10px;
+    }
+    
+    #cont {
+        padding: 20px;
+    }

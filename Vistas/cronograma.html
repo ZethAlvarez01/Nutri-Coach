@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="pleca.css" />
     <link rel="stylesheet" href="footer.css " />
     <link rel="stylesheet" href="estilos_cronograma.css">
+    <link rel="stylesheet" href="bienvenida_calendario_nutriologo.css">
     <script type="text/javascript" src="calendario.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="barra_script.js"></script>
+    <script type="text/javascript" src="bienvenida_nutri.js"></script>
+
     <title>Nutri-Coach</title>
 </head>
 
-<body>
+<body onscroll="bajar()">
     <header>
         <div class="container">
             <div id="pleca">
@@ -38,58 +42,95 @@
 
     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <ul id="menu_nutrio">
+                        <li><a class="texto_menu" href="">Mensajes</a></li>
+                        <li><a class="texto_menu" href="">Pacientes</a></li>
+                        <li><a class="texto_menu" href="">Foro</a></li>
+                        <li><a class="texto_menu" href="">Dietas</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div id="contenido">
         <div class="container">
-            <h1>Calendario de citas</h1>
+            <h1>Bienvenido $nombreUsuario</h1>
+            <p id="txt-bnv">¡Hola $nombreUsuario! Estas son tus citas programadas para hoy.</p>
             <div id="calendario">
-                <select name="Mes" id="cajaMes" class="cajaMes" onchange="mover_mes();">
-                        <option value="Enero">Enero</option>
-                        <option value="Febrero">Febrero</option>
-                        <option value="Marzo">Marzo</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Mayo">Mayo</option>
-                        <option value="Junio">Junio</option>
-                        <option value="Julio">Julio</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Septiembre">Septiembre</option>
-                        <option value="Octubre">Octubre</option>
-                        <option value="Noviembre">Noviembre</option>
-                        <option value="Diciembre">Diciembre</option>
-                        
-                </select>
-                <br>
-                <select name="Anio" id="anio" class="anio" onchange="mover_mes();">
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                </select>
+                <div id="calendar">
+                    <div id="combo_box">
+                        <select name="Mes" id="cajaMes" class="caja" onchange="mover_mes();">
+                                    <option value="Enero">Enero</option>
+                                    <option value="Febrero">Febrero</option>
+                                    <option value="Marzo">Marzo</option>
+                                    <option value="Abril">Abril</option>
+                                    <option value="Mayo">Mayo</option>
+                                    <option value="Junio">Junio</option>
+                                    <option value="Julio">Julio</option>
+                                    <option value="Agosto">Agosto</option>
+                                    <option value="Septiembre">Septiembre</option>
+                                    <option value="Octubre">Octubre</option>
+                                    <option value="Noviembre">Noviembre</option>
+                                    <option value="Diciembre">Diciembre</option>
+                                    
+                            </select>
 
-                <script>
-                    actualizar();
-                </script>
+                        <select name="Anio" id="anio" class="caja" onchange="mover_mes();">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
 
-                <br>
-                <br>
-                <table class="tabla">
-                    <thead id="tabla">
-                        <div class="c_dia" id="lunes">Lun.</div>
-                        <div class="c_dia">Mar.</div>
-                        <div class="c_dia">Mié.</div>
-                        <div class="c_dia">Jue.</div>
-                        <div class="c_dia">Vie.</div>
-                        <div class="c_dia">Sáb.</div>
-                        <div class="c_dia">Dom.</div>
+                    </div>
+                    <script>
+                        actualizar();
+                    </script>
+
+                    <br>
+                    <table class="tabla">
+                        <thead id="tabla">
+                            <div class="c_dia" id="lunes">Lun.</div>
+                            <div class="c_dia">Mar.</div>
+                            <div class="c_dia">Mié.</div>
+                            <div class="c_dia">Jue.</div>
+                            <div class="c_dia">Vie.</div>
+                            <div class="c_dia">Sáb.</div>
+                            <div class="c_dia">Dom.</div>
+                            <script>
+                                dias();
+                            </script>
+                        </thead>
+                    </table>
+
+                </div>
+                <div id="agenda">
+                    <div id="dia">
+                        <p id="fecha_dia"></p>
+                        <p id="mes_anio"></p>
                         <script>
-                            dias();
+                            fecha();
                         </script>
-                    </thead>
-                </table>
+                    </div>
+                    <div id="citas">
+
+                        <script>
+                            generarCitas();
+                        </script>
+
+                    </div>
+
+
+                </div>
+
             </div>
 
         </div>

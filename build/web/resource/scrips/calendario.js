@@ -29,8 +29,6 @@ function dias() {
         for (var d = 0; d < 7; d++) {
             let dia = document.createElement("TD");
             dia.className = "dia_clase";
-            dia.setAttribute('onclick', 'myFunction(this)');
-
             let numero = 0;
 
             if (d == dt.getUTCDay() && flg == 0) {
@@ -39,13 +37,6 @@ function dias() {
                 flg = 1;
             } else if (flg == 1 && dias_c <= fecha2) {
                 dia.innerHTML = dias_c;
-
-                let dia_act = new Date();
-                if (dias_c == dia_act.getDate()) {
-                    dia.style.background += "rgb(108, 29, 69)";
-                    dia.style.color += "white";
-                }
-
                 dias_c++;
             } else {
                 dia.innerHTML = " ";
@@ -158,45 +149,20 @@ function mover_mes() {
         for (var d = 0; d < 7; d++) {
             let dia = document.createElement("TD");
             dia.className = "dia_clase";
-            dia.setAttribute('onclick', 'myFunction(this)');
-
             let numero = 0;
 
             if (d == dt.getUTCDay() && flg == 0) {
                 dia.innerHTML = dias_c;
-
-                var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "octubre", "Noviembre", "Diciembre"];
-                let valorA = document.getElementById("anio").value;
-                let valorM = document.getElementById("cajaMes").value;
-
-
-                let dia_act = new Date();
-                if (dias_c == dia_act.getDate() && valorA == dia_act.getFullYear() && valorM == mes[dia_act.getMonth()]) {
-                    dia.style.background += "rgb(108, 29, 69)";
-                    dia.style.color += "white";
-                }
-
-
                 dias_c++;
                 flg = 1;
             } else if (flg == 1 && dias_c <= fecha2) {
                 dia.innerHTML = dias_c;
-
-                var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "octubre", "Noviembre", "Diciembre"];
-                let valorA = document.getElementById("anio").value;
-                let valorM = document.getElementById("cajaMes").value;
-
-                let dia_act = new Date();
-                if (dias_c == dia_act.getDate() && valorA == dia_act.getFullYear() && valorM == mes[dia_act.getMonth()]) {
-                    dia.style.background += "rgb(108, 29, 69)";
-                    dia.style.color += "white";
-                }
-
-
                 dias_c++;
             } else {
                 dia.innerHTML = " ";
             }
+
+
 
             fila.appendChild(dia);
         }
@@ -215,36 +181,4 @@ function actualizar() {
     let caja2 = document.getElementById("anio");
 
     caja2.value = fecha.getFullYear();
-}
-
-function myFunction(obj) {
-    var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "octubre", "Noviembre", "Diciembre"];
-
-    var fecha = new Date();
-    var tabla = document.getElementsByClassName("dia_clase");
-
-    let valorA = document.getElementById("anio").value;
-    let valorM = document.getElementById("cajaMes").value;
-
-    for (i = 0; i < 42; i++) {
-        tabla[i].style.background = "white";
-        if (tabla[i].innerHTML == fecha.getDate() && valorM == mes[fecha.getMonth()] && valorA == fecha.getFullYear()) {
-
-            tabla[i].style.background = "rgb(108, 29, 69)";
-
-        }
-    }
-
-
-    var fecha_dia = document.getElementById("fecha_dia");
-    var mes_anio = document.getElementById("mes_anio");
-
-    if (obj.innerHTML != " ") {
-        obj.style.background = "red";
-        fecha_dia.innerHTML = obj.innerHTML;
-        mes_anio.innerHTML = valorM + " " + valorA;
-    }
-
-
-
 }

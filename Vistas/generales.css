@@ -18,6 +18,19 @@
     background: rgb(108, 29, 69);
 }
 
+#cont_barra {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+}
+
+#imagen_barra {
+    grid-column: 1;
+}
+
+#menu {
+    grid-column: 2;
+}
+
 #imagen {
     margin-top: 5px;
     width: 170px;
@@ -35,6 +48,35 @@ body {
 .container {
     width: 85%;
     margin: 0px auto;
+}
+
+#menu_nutrio {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: rgb(108, 29, 69);
+    float: right;
+    width: 800px;
+}
+
+#menu_nutrio li {
+    float: left;
+    width: 200px;
+}
+
+#menu_nutrio li a {
+    height: 70px;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 70px;
+}
+
+#menu_nutrio li a:hover {
+    background: rgb(255, 255, 255, 0.3);
 }
 
 
@@ -55,4 +97,26 @@ body {
 .regresar:hover {
     background: rgb(0, 0, 0, 0.4);
     transition: 0.5s;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgb(108, 29, 69, 0.5);
+}
+
+.fijar {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }

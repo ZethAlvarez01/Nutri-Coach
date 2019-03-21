@@ -1,0 +1,48 @@
+    #contenido {
+        height: 700px;
+    }
+    
+    h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    
+    table {
+        width: 1000px;
+    }
+    
+    td {
+        text-align: center;
+        width: 70px;
+        height: 70px;
+        border: solid 1px #ccc;
+    }
+    
+    td:hover {
+        cursor: pointer;
+        background: red;
+    }
+    
+    .c_dia {
+        text-align: center;
+        display: inline-block;
+        width: 70px;
+        background: #eee;
+        border: solid 1px #eee;
+        margin: 1px;
+        padding: 5px 0px;
+    }
+    
+    #lunes {
+        margin-left: 4px;
+    }
+    
+    select {
+        font-size: 20px;
+        width: 200px;
+        padding: 10px;
+        outline: none;
+        border: none;
+    }
