@@ -78,26 +78,28 @@
 
                     <div id="paciente" class="listaUsuarios" style="display: block;">
 
-                        <div class="usuario">
-                            <c:forEach items="${ListaP}" var="item"> 
+                         <c:forEach items="${ListaP}" var="item"> 
+                        <div class="usuario" onclick="TypeDiv('${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' domicilio: ${item.domicilio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
+                           
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
+                            <div id="texto_user"> 
                                 <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
                                 <p id="nombre-info">Mas informacion</p>
                             </div>
                                 
                                 
                            
-                             
+                             </div>
                             </c:forEach> 
                             
                             
-                        </div>
+                        
                     </div>
                             
                     <div id="psicologo" class="listaUsuarios"  style="display: none;">
-                        <div class="usuario">
-                             <c:forEach items="${ListaPs}" var="item"> 
+                         <c:forEach items="${ListaPs}" var="item"> 
+                        <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}',' telefono:${item.telefono}','  correo:${item.correo}','','${item.estatus}')" name="usuario">
+                           
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user">
                                 <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
@@ -105,16 +107,17 @@
                             </div>
                                 
                                 
-                           
+                            </div>
                              
                             </c:forEach> 
-                        </div>
+                       
                      </div>
                             
                        <div id="nutriologo" class="listaUsuarios" style="display: none">      
-                        <div class="usuario">
+                         <c:forEach items="${ListaN}" var="item" > 
+                            <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Institucion: ${item.institucion}',' consultorio: ${item.consultorio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
+                        
                             
-                             <c:forEach items="${ListaN}" var="item"> 
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user">
                                 <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
@@ -123,9 +126,9 @@
                                 
                                 
                            
-                             
+                               </div>
                             </c:forEach> 
-                        </div>
+                      
                         
 
                     </div>
@@ -138,18 +141,20 @@
                     </div>
                     <div id="info_general">
                         <h2>Datos Generales</h2>
-                        <p id="etiqueta_estado">Activo</p>
+                        <p id="etiqueta_estado" style="display: none;">Activo</p>
                         <div id="datos">
                             <p id="fecha"></p>
                             <script>
                                 fecha();
                             </script>
-                            <div id="info_completa">
+                            <div id="info_completa" style="display: none;" name="info_completa">
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto de perfil" id="foto_info">
                                
-                                <p>ID</p>
-                                <p>Nombre</p>
-                                <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, repudiandae quod illo consequuntur ad nihil expedita in a, recusandae accusantium tenetur vel, fugit vero aperiam. Fugit totam porro iusto enim.
+                                <p id="num_boleta">ID</p>
+                                <p id="nombreUser">Nombre Completo:</p> 
+                                <p id="datosGenerales">  EDAD: SEXO: FECHA DE NACIMIENTO:  </p>
+                                <p id="datosGenerales2">  DOMICILIO:  </p>
+                                <p id="datosGenerales3">   TELEFONO:  CORREO: </p>
                                 <br>
                                 <br>
                                 <br>
@@ -192,12 +197,14 @@
                         <h2 id="titulo_derecha">Cambiar estado del usuario</h2>
                         <p id="estado"></p>
                         <div id="botones">
-                            <input type="radio" id="activo" name="group1" class="radioB" value="activo"> <label class="c_estado">Activo</label><br>
+                            <input type="radio" id="activo" name="group1" class="radioB" value="activo" > <label class="c_estado">Activo</label><br>
                             <input type="radio" id="bloquear" name="group1" class="radioB" value="activo"> <label class="c_estado">Suspender</label><br>
                             <input type="radio" id="baja" name="group1" class="radioB" value="activo"> <label class="c_estado">Dar de baja</label>
                         </div>
 
+                        
                         <div id="boton" onclick="confirmacion()">Guardar cambio</div>
+                        
 
                         <h2 id="titulo_derecha">Enviar mensajes</h2>
                         <br>
