@@ -17,6 +17,8 @@ import models.NeuralNet.libMatrices;
 import models.NeuralNet.Capa_neuronas;
 import models.NeuralNet.Crear_RN;
 import models.NeuralNet.Tratamiento;
+import models.Paciente;
+import models.Psicologo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -330,7 +332,8 @@ public class InicioController {
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
+                                    mv.setViewName("cronograma");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                                     return mv;
                                 }
                                 default:
@@ -357,6 +360,59 @@ public class InicioController {
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
                          ModelAndView mv=new ModelAndView();                                // Creación del modelo
                          mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
+                         System.out.println("Pasando datos"); 
+      
+                         sql=" select * from paciente where estatus <> 4 order by ap_uno asc;";
+
+            
+      
+              datosL=this.jdbcTemplate.queryForList(sql);
+                  
+             mv.addObject("ListaP",datosL);       // SE AGREGA EL OBJETO LISTA DE PACIENTES AL MODELO     
+            
+             System.out.println(datosL);
+             
+             
+      
+       
+             mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
+          
+             
+              sql2=" select * from nutriologo where estatus <> 4 order by ap_uno asc;";
+
+            
+      
+             List datosL2=this.jdbcTemplate.queryForList(sql2);
+                  
+             mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
+            
+             System.out.println(datosL2);
+             
+             
+      
+       
+             mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+                  
+       
+             
+             
+             String sql3=" select * from psicologo where estatus <> 4 order by ap_uno asc;";
+
+            
+      
+             List datosL3=this.jdbcTemplate.queryForList(sql3);
+                  
+             mv.addObject("ListaPs",datosL3);       // SE AGREGA EL OBJETO LISTA DE PSICOLOGOS AL MODELO     
+            
+             System.out.println(datosL3);
+             
+             
+      
+       
+             mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+             
+             
+       
                          return mv;
                         
                         
@@ -662,7 +718,8 @@ public class InicioController {
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("bienvenida_nutriologo");                                            // Nombra al modelo
+                                    mv.setViewName("cronograma");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                                     return mv;
                                 }
                                 default:

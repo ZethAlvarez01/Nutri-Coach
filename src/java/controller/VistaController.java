@@ -89,6 +89,14 @@ public class VistaController {
         return mv;
     }
     
+    
+       @RequestMapping("cronograma.htm")
+    public ModelAndView cronograma(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("cronograma");
+        return mv;
+    }
+    
      @RequestMapping("bienvenida_psicologo.htm")
     public ModelAndView bienvenida_psicologo(){
         ModelAndView mv=new ModelAndView();
