@@ -2,41 +2,46 @@
 Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a especialista en el área de nutrición al igual que a sus pacientes y personas en general que deseen mejorar su estilo de vida.
 
 **Vistas pendientes**
-**Front-end**
-- [X] Inicio
-- [X] Pre-registro
-- [X] Modal para terminos y condiciones en el registro
-- [X] Nutriologo
-- [X] Paciete
-- [X] Psicologo
-- [X] Administrador
-- [X] Terminos y condiciones
-- [X] Politicas de privacidad
-- [X] Recuperar contraseña
-- [ ] Expediente
-- [X] Recomendaciones
-- [ ] Leer mas  **Falta rellenar**
+- [ ] Seleccionar Div de cada usuario y poder visualizar información completa
+- [ ] Arreglar CSS para la opcion de visualizar todos
 
-**Funcionalidad**
-**Back-end**
-- [ ] Validaciones de formularios **Falta validacion de tipos**
-  - [X] Nutriologo
-  - [X] Paciete
-  - [X] Psicologo
-  - [X] Administrador
-  - [X] Login
+**PANTALLA cronograma y cronograma psicologo**
 
-**Conexion con mysql**
-- [X] Registro en la base de datos
-  - [X] Nutriologo
-  - [X] Paciete
-  - [X] Psicologo
-  - [X] Administrador
-- [X] Login funcionando
+- [ ] al momento de ir a otra pagina y regresar desaparece el nombre del especialista, 
+se reacomoda página **CORREGIR**
+
+**PANTALLA cronograma**
+
+- [ ] conectar cronograma con dietas 
+
+**PANTALLA DIETA, FORO, PACIENTES**
+
+- [ ] cambiar barra de menús
+
+**PANTALLA INICIO**
+
+- [ ] se desacomoda al mostrar las validaciones **CORREGIR CSS
+
+**PANTALLA recuperarC**
+
+- [ ] envíar correo de recuperación
+
+**PANTALLA cambioC**
+
+- [ ] Cambiar de controllador de vistas a controlador de recuperación cuando el sistema pueda enviar correo
+
+**PANTALLA expediente**
+
+- [ ] añadir opción para generar primera cita
 
 
-**Responsive**
-- [ ] Horizontales de preregistro
-- [ ] logins (Solo Vertical)
-- [ ] Acomodar pantalla completa
+**GENERAR PANTALLA DE PRIMERA CITA**
+
+
+
+
+**CREAR MODULO DE PRIMERA CITA**
+
+
+**ACTIVAR PANTALLA DIETAS**
 
