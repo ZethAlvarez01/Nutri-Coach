@@ -85,6 +85,52 @@ if(document.getElementById("listaUsuarios").value==="pacientes"){
 
 }
 
+function TypeDiv(ID,nombre,generales,generales2,generales3,estado,usuario) {
+  var cambio = document.getElementById("usuario");
+  
+  document.getElementById("info_completa");
+  
+  
+  document.getElementById("info_completa").style.display = "block"; 
+  document.getElementById("num_boleta").innerHTML=ID;
+  document.getElementById("nombreUser").innerHTML=nombre;
+  document.getElementById("datosGenerales").innerHTML=generales;
+  document.getElementById("datosGenerales2").innerHTML=generales2;
+  document.getElementById("datosGenerales3").innerHTML=generales3;
+  
+  if(usuario==="paciente"){
+     document.getElementById("estadoP").style.display = "block";  
+  }
+   if(usuario==="nutriologo"){
+     document.getElementById("estadoN").style.display = "block";  
+  }
+   if(usuario==="psicologo"){
+     document.getElementById("estadoPs").style.display = "block";  
+  }
+  
+
+  if(estado.valueOf()==1){
+    document.getElementById("etiqueta_estado").innerHTML="Activo"; 
+    document.getElementById('activo').checked = true;
+    
+  }
+    if(estado.valueOf()==2){
+    document.getElementById("etiqueta_estado").innerHTML="Suspendido"; 
+    document.getElementById('bloquear').checked = true;
+  }
+   if(estado.valueOf()==3){
+    document.getElementById("etiqueta_estado").innerHTML="De baja"; 
+    document.getElementById('baja').checked = true;
+  }
+    document.getElementById("etiqueta_estado").style.display="block"; 
+
+}
+
+
+
+
+
+
 
 function fecha() {
     var date = new Date();
