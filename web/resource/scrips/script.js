@@ -35,15 +35,53 @@ function TypeEspe(evt, typediet) {
     tablinks = document.getElementsByClassName("boton");
     document.getElementById(typediet).style.display = "block";
     var y = document.getElementsByClassName(typediet);
-    var smae = document.getElementsByClassName("nutriologo");
+    var smae = document.getElementsByClassName("psicologo");
     smae[0].style += "background: white;";
-    var platillos = document.getElementsByClassName("psicologo");
+    var platillos = document.getElementsByClassName("nutriologo");
     platillos[0].style += "background: white;";
     var todos = document.getElementsByClassName("todos");
     todos[0].style += "background: white;";
 
     y[0].style = "background: rgb(108, 29, 69); color: white;";
 
+
+}
+function TypeOption() {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("listaUsuarios");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+        
+    }
+   
+    var cod = document.getElementById("listaUsuarios").value;
+    if(document.getElementById("listaUsuarios").value==="nutriologos"){
+    
+    document.getElementById("nutriologo").style.display = "block";
+    var y = document.getElementsByClassName("nutriologo");
+    var nutri = document.getElementsByClassName("nutriologo");
+    nutri[0].style += "background: white;";
+    
+}
+
+if(document.getElementById("listaUsuarios").value==="pacientes"){
+    
+    document.getElementById("paciente").style.display = "block";
+    var y = document.getElementsByClassName("paciente");
+    var pacien = document.getElementsByClassName("paciente");
+    pacien[0].style += "background: white;";
+}
+
+    if(document.getElementById("listaUsuarios").value==="psicologos"){
+   
+    document.getElementById("psicologo").style.display = "block";
+    var y = document.getElementsByClassName("psicologo");
+    var psico = document.getElementsByClassName("psicologo");
+    psico[0].style += "background: white;";
+}
+    
+    y[0].style = "background: rgb(108, 29, 69); color: white;";
+    
 
 }
 
