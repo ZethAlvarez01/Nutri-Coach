@@ -252,7 +252,8 @@ public class InicioController {
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("bienvenida_psicologo");                                            // Nombra al modelo
+                                    mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                                     return mv;
                                     /* ArrayList<Capa_neuronas> neural_net;
                             libMatrices op=new libMatrices();
@@ -362,7 +363,7 @@ public class InicioController {
                          mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
                          System.out.println("Pasando datos"); 
       
-                         sql=" select * from paciente where estatus <> 4 order by ap_uno asc;";
+                         sql=" select * from paciente where estatus <> 4 and estatus and estatus <> 0 order by ap_uno asc;";
 
             
       
@@ -378,7 +379,7 @@ public class InicioController {
              mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
           
              
-              sql2=" select * from nutriologo where estatus <> 4 order by ap_uno asc;";
+              sql2=" select * from nutriologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
 
             
       
@@ -396,7 +397,7 @@ public class InicioController {
        
              
              
-             String sql3=" select * from psicologo where estatus <> 4 order by ap_uno asc;";
+             String sql3=" select * from psicologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
 
             
       
@@ -634,7 +635,8 @@ public class InicioController {
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("bienvenida_psicologo");                                            // Nombra al modelo
+                                    mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
                                     return mv;
                                     /* ArrayList<Capa_neuronas> neural_net;
                             libMatrices op=new libMatrices();
