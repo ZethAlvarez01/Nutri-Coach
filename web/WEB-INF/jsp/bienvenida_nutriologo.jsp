@@ -44,9 +44,22 @@
         <!--Fin container-->
     </header>
 
-     <div id="barra">
+    <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <ul id="menu_nutrio">
+                        <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="">Dietas</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 

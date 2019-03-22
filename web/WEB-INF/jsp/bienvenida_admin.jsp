@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_admin.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         
          
         <title>Nutri-Coach</title>
@@ -65,118 +65,68 @@
 
                 </div>
                 <div id="listado">
-                    <div id="encabezado_lista">
+                    <div id="encabezado_lista" >
                         <p id="sub-titulo">Listado de usuarios</p>
-                        <select>
-                            <option value="pacientes">Pacientes</option>
-                            <option value="nutriologos">Nutriólogos</option>
-                            <option value="psicologos">Psicólogos</option>
+                        <select id="listaUsuarios" onchange="TypeOption()" name="listaUsuarios" >
+                            <option  value="pacientes"  >Pacientes</option>
+                            <option  value="nutriologos" >Nutriólogos</option>
+                            <option  value="psicologos">Psicólogos</option>
                         </select>
                         <input type="text" placeholder="Buscar usuario">
                         <p id="numero_usuarios">Número de usuarios: ?</p>
                     </div>
 
-                    <div id="lista">
+                    <div id="paciente" class="listaUsuarios" style="display: block;">
 
                         <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
+                            <c:forEach items="${ListaP}" var="item"> 
+                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
                                 <p id="nombre-info">Mas informacion</p>
                             </div>
+                                
+                                
+                           
+                             
+                            </c:forEach> 
+                            
+                            
                         </div>
-
+                    </div>
+                            
+                    <div id="psicologo" class="listaUsuarios"  style="display: none;">
                         <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
+                             <c:forEach items="${ListaPs}" var="item"> 
+                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
                                 <p id="nombre-info">Mas informacion</p>
                             </div>
+                                
+                                
+                           
+                             
+                            </c:forEach> 
                         </div>
+                     </div>
+                            
+                       <div id="nutriologo" class="listaUsuarios" style="display: none">      
                         <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
+                            
+                             <c:forEach items="${ListaN}" var="item"> 
+                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
+                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
                                 <p id="nombre-info">Mas informacion</p>
                             </div>
+                                
+                                
+                           
+                             
+                            </c:forEach> 
                         </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                           <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                           <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
+                        
 
                     </div>
 
