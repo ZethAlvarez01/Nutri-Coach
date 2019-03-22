@@ -85,7 +85,7 @@
     margin-top: 20px;
 }
 
-#boton {
+#boton, #botonN, #botonP, #botonPs {
     cursor: pointer;
     text-align: center;
     width: 60%;

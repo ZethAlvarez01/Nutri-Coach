@@ -33,8 +33,10 @@
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">VistaController</prop>
                 <prop key="expedientePaciente.htm">VistaController</prop>
-                <prop key="bienvenida_admin.htm">VistaController</prop>
+                <prop key="bienvenida_admin.htm">ListadoUsuariosController</prop>
                 <prop key="bienvenida_nutriologo.htm">VistaController</prop>
+                <prop key="cronograma.htm">VistaController</prop>
+                <prop key="cronogramaPsicologo.htm">VistaController</prop>
                 <prop key="bienvenida_psicologo.htm">VistaController</prop>
                 <prop key="mensajeria.htm">VistaController</prop>
                 <prop key="verificacion_cuentas.htm">verificadorController</prop>
@@ -74,6 +76,9 @@
     
     <bean name="verificadorController"
           class="controller.verificadorController" />
+    
+     <bean name="ListadoUsuariosController"
+          class="controller.ListadoUsuariosController" />
     
 
 </beans>
