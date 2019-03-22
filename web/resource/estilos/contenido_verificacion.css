@@ -43,6 +43,25 @@
     background: #45122C;
 }
 
+#aprobarN {
+    cursor: pointer;
+    grid-column: 6;
+    background: rgb(108, 29, 69);
+    border: solid 1px rgb(108, 29, 69);
+    color: white;
+    border-radius: 7px;
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#aprobarN:hover {
+    background: #45122C;
+}
 #rechazar {
     grid-column: 7;
     background: white;
