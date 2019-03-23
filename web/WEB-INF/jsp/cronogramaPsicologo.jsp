@@ -61,10 +61,10 @@
                 </div>
                 <div id="menu">
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
-                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">Dietas</a></li>
+                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="">XXXXXXXXXXX</a></li>
                     </ul>
                 </div>
             </div>

@@ -48,22 +48,27 @@
 
     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <ul id="menu_nutrio">
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
+                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="">XXXXXXX</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div id="contenido">
         <div class="container">
             <div id="grid">
-                <div id="notificaciones">
-                    <a href="verificacion_cuentas.htm">
-                        <img src="<c:url value="/resource/imagenes/friend-request.png"/>" alt="">
-                    </a>
-                    <a href="mensajeria.htm">
-                        <img src="<c:url value="/resource/imagenes/paper.png"/>" alt="">
-                    </a>
-
-                </div>
+               
                 <div id="listado">
                     <div id="encabezado_lista" >
                         <p id="sub-titulo">Listado de usuarios</p>
@@ -73,11 +78,11 @@
                             <option  value="psicologos">Psicólogos</option>
                         </select>
                         <input type="text" placeholder="Buscar usuario">
-                        <p id="numero_usuarios">Número de usuarios: ?</p>
+                        
                     </div>
 
                     <div id="paciente" class="listaUsuarios" style="display: block;">
-
+                          <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
                          <c:forEach items="${ListaP}" var="item"> 
                         <div class="usuario" onclick="TypeDiv('${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' domicilio: ${item.domicilio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
                            
@@ -92,11 +97,12 @@
                              </div>
                             </c:forEach> 
                             
-                            
+                          
                         
                     </div>
                             
                     <div id="psicologo" class="listaUsuarios"  style="display: none;">
+                        <p id="numero_usuarios">Número de usuarios: ${LongitudPs}</p>  
                          <c:forEach items="${ListaPs}" var="item"> 
                         <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}',' telefono:${item.telefono}','  correo:${item.correo}','','${item.estatus}')" name="usuario">
                            
@@ -113,7 +119,8 @@
                        
                      </div>
                             
-                       <div id="nutriologo" class="listaUsuarios" style="display: none">      
+                       <div id="nutriologo" class="listaUsuarios" style="display: none">   
+                           <p id="numero_usuarios">Número de usuarios: ${LongitudN}</p>  
                          <c:forEach items="${ListaN}" var="item" > 
                             <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Institucion: ${item.institucion}',' consultorio: ${item.consultorio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
                         
