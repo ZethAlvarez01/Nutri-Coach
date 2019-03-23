@@ -52,9 +52,9 @@ public class ListadoUsuariosController {
             
              System.out.println(datosL);
              
-             
+             System.out.println(datosL.size());
       
-       
+             mv.addObject("LongitudP",datosL.size());   
              mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
           
              
@@ -67,7 +67,9 @@ public class ListadoUsuariosController {
              mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
             
              System.out.println(datosL2);
-             
+              System.out.println(datosL2.size());
+      
+             mv.addObject("LongitudN",datosL2.size()); 
              
       
        
@@ -85,7 +87,9 @@ public class ListadoUsuariosController {
              mv.addObject("ListaPs",datosL3);       // SE AGREGA EL OBJETO LISTA DE PSICOLOGOS AL MODELO     
             
              System.out.println(datosL3);
-             
+              System.out.println(datosL3.size());
+      
+             mv.addObject("LongitudPs",datosL3.size()); 
              
       
        

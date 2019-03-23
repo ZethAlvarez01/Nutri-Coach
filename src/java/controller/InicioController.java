@@ -372,7 +372,9 @@ public class InicioController {
              mv.addObject("ListaP",datosL);       // SE AGREGA EL OBJETO LISTA DE PACIENTES AL MODELO     
             
              System.out.println(datosL);
-             
+              System.out.println(datosL.size());
+      
+             mv.addObject("LongitudP",datosL.size()); 
              
       
        
@@ -388,7 +390,9 @@ public class InicioController {
              mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
             
              System.out.println(datosL2);
-             
+             System.out.println(datosL2.size());
+      
+             mv.addObject("LongitudN",datosL2.size()); 
              
       
        
@@ -407,7 +411,9 @@ public class InicioController {
             
              System.out.println(datosL3);
              
-             
+             System.out.println(datosL3.size());
+      
+             mv.addObject("LongitudPs",datosL3.size()); 
       
        
              mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO

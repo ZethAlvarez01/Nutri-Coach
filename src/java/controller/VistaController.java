@@ -68,6 +68,25 @@ public class VistaController {
         return mv;
     }
     
+     @RequestMapping("foroAdmin.htm")
+    public ModelAndView foroAdmin(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("foroAdmin");
+        return mv;
+    }
+     @RequestMapping("foroN.htm")
+    public ModelAndView foroN(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("foroN");
+        return mv;
+    }
+      @RequestMapping("foroPs.htm")
+    public ModelAndView foroPs(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("foroPs");
+        return mv;
+    }
+    
     @RequestMapping("expedientePaciente.htm")
     public ModelAndView expedientePaciente(){
         ModelAndView mv=new ModelAndView();
@@ -97,6 +116,14 @@ public class VistaController {
         return mv;
     }
     
+      @RequestMapping("cronogramaPsicologo.htm")
+    public ModelAndView cronogramaPsicologo(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("cronogramaPsicologo");
+        return mv;
+    }
+    
+    
      @RequestMapping("bienvenida_psicologo.htm")
     public ModelAndView bienvenida_psicologo(){
         ModelAndView mv=new ModelAndView();
@@ -107,6 +134,24 @@ public class VistaController {
     public ModelAndView mensajeria(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("mensajeria");
+        return mv;
+    }
+     @RequestMapping("mensajeriaAdmin.htm")
+    public ModelAndView mensajeriaAdmin(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("mensajeriaAdmin");
+        return mv;
+    }
+     @RequestMapping("mensajeriaN.htm")
+    public ModelAndView mensajeriaN(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("mensajeriaN");
+        return mv;
+    }
+     @RequestMapping("mensajeriaPs.htm")
+    public ModelAndView mensajeriaPs(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("mensajeriaPs");
         return mv;
     }
 /*     @RequestMapping("verificacion_cuentas.htm")
