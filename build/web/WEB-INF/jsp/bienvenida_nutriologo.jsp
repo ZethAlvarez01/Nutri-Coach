@@ -53,8 +53,8 @@
                 <div id="menu">
                     <ul id="menu_nutrio">
                         <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
                         <li><a class="texto_menu" href="">Dietas</a></li>
                     </ul>
                 </div>

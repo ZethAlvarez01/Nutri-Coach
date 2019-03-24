@@ -42,7 +42,7 @@
         <!--Fin container-->
     </header>
 
-      <div id="barra">
+   <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
@@ -50,10 +50,10 @@
                 </div>
                 <div id="menu">
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="">Dietas</a></li>
                     </ul>
                 </div>
             </div>

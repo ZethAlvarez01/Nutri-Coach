@@ -16,7 +16,7 @@
 
 
     <!--Scripts-->
-    <script type="text/javascript" src="calendario.js"></script>
+    <script type="text/javascript" src="calendario_primera_cita.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="barra_script.js"></script>
 
@@ -65,6 +65,8 @@
     <div id="contenido">
         <div class="container">
             <h1>Primera cita</h1>
+            <div id="texto">
+                Aquí podrás agendar tu primera cita. Solo ingresa algunos datos para conocer tu disponibilidad y la de un especialista, de esta forma te podremos atender a la brevedad. </div>
             <div id="calendario">
                 <div id="calendar">
                     <div id="combo_box">
@@ -114,7 +116,45 @@
                     </table>
 
                 </div>
+                <div id="programar">
 
+
+                    <p>Información de la cita</p>
+
+                    <div class="texto">Institución</div>
+                    <select id="institucion" class="primera_cita">
+                        <option value="nulo"></option>
+                        <option >Escuela Superior de Cómputo (ESCOM)</option>
+                    </select>
+
+                    <div class="texto">Nutriólogo</div>
+                    <select id="nutriologo" class="primera_cita">
+                        <option value="nulo">  </option>
+                        <option>Alvarez Hernandez Zeth</option>
+                    </select>
+
+                    <div class="texto">Dirección</div>
+                    <p id="direccion_nutri">
+                        Estado de no se donde
+                    </p>
+
+                    <div class="texto">Fecha de la cita</div>
+
+                    <p id="fecha_cita">No seleccionada...</p>
+
+                    <div class="texto">Horarios disponibles:</div>
+
+                    <select id="horas_disponibles" class="primera_cita">
+                        <option></option>
+                    </select>
+
+                    <section>
+                        Captcha
+                    </section>
+
+                    <div id="boton">Confirmar</div>
+
+                </div>
             </div>
         </div>
 

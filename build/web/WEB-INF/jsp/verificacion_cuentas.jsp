@@ -46,7 +46,20 @@
 
     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <ul id="menu_nutrio">
+                        <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="">XXXXXXXXXX</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
     <!--Fin barra-->
@@ -63,6 +76,7 @@
             <div class="pestanas_menus">
                 <h2>Aprobar especialista nuevo</h2>
                 <p id="solicitud">Estas son las solicitudes de especialistas que esperan ser aprobados para poder trabajar con Nutri-Coach. <br>Tu aceptas o rechazas dichas solicitudes.</p>
+               
                 <div id="todos" class="especialista" style="display: block;">
                     <h3>Solicitudes de especialistas</h3>
                     <br>

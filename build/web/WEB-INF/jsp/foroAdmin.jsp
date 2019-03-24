@@ -1,6 +1,6 @@
 <%-- 
-    Document   : expedientePaciente
-    Created on : 16/11/2018, 02:15:14 AM
+    Document   : foro
+    Created on : 15/11/2018, 01:13:11 AM
     Author     : Zeth
 --%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -14,13 +14,12 @@
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/expediente.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Nutri-Coach</title>
     </head>
     <body>
-        <header>
+         <header>
             <div class="container">
                 <div id="pleca">
                     <div id="logoSEP">
@@ -40,7 +39,7 @@
             <!--Fin container-->
         </header>    
                     
-          <div id="barra">
+       <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
@@ -48,67 +47,86 @@
                 </div>
                 <div id="menu">
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
+                        <li><a class="texto_menu" href="">XXXXXXX</a></li>
                     </ul>
                 </div>
             </div>
 
         </div>
     </div>
-
+                    
+        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+        
         <div id="contenido">
             <div class="container">
-                <c:forEach items="${datos}" var="dato">
-                    <h1>¡Hola, <c:out value="${dato.nombre}"/>!</h1>
-                </c:forEach>
-               
+                <center>
+                    <h1>Foro de Nutri-Coach</h1>
+                    <h2>${nombre}</h2>
+                </center>
+                
+                
                 <div class="grid-container">
-                    <div class="observaciones">
-                    <p class="titulo">Observaciones</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="estadisticas">
-                    <p class="titulo">Tu progreso</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="expediente">
-                    <p class="titulo">Expediente</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="recomendacion">
-                    <p class="titulo">Recomendación diaria</p>
-                    <p id="tipo">Tipo: <c:out value="${respuesta}"/></p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="dieta">
-                    <p class="titulo">Tu dieta de hoy</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="historial">
-                    <p>Historial</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>     
+                    <div class="item1"><p class="titulo">Recomendaciones</p>
+                        <hr>
+                        <ul>
+                            <li>Motivacionales: <c:out value="${salida1}"/></li>
+                            <li>Preparacion alimentos: <c:out value="${salida2}"/></li>
+                            <li>Beneficios alimentos: <c:out value="${salida3}"/></li>
+                            <li>Deportes: <c:out value="${salida4}"/></li>
+                            <li>Medicamentos: <c:out value="${salida5}"/></li>
+                            <li>Salud: <c:out value="${salida6}"/></li>
+                        </ul> 
+                    </div>  
+                        <div class="item2"><p class="titulo">Entradas recientes</p>
+                            <hr>
+                            <ul>
+                                <li>Entrada 1</li>
+                                <li>Entrada 2</li>
+                                <li>Entrada 3</li>
+                                <li>Entrada 4</li>
+                                <li>Entrada 5</li>
+                            </ul> 
+                        </div>
+                        <div class="item3"><p class="titulo">Historial</p>
+                            <hr>
+                            <table>
+                                <tr>
+                                   <td><strong>Fecha</strong></td>
+                                   <td><strong>Titulo</strong></td>
+                                   <td><strong>Comentarios</strong></td> 
+                                </tr>
+                                <tr>
+                                   <td>18/03/1995</td>
+                                   <td>Comida rica</td>
+                                   <td>25</td> 
+                                </tr>
+                                <tr>
+                                   <td>02/03/1996</td>
+                                   <td>Deportes</td>
+                                   <td>35</td> 
+                                </tr>
+                                <tr>
+                                   <td>30/03/1998</td>
+                                   <td>Suplementos y mas</td>
+                                   <td>21</td> 
+                                </tr>
+                                <tr>
+                                   <td>21/06/1997</td>
+                                   <td>Comida chatarra</td>
+                                   <td>120</td> 
+                                </tr>
+                            </table>
+                        </div>
                 </div>
+                
             </div>
             <!--Fin container-->
         </div>
-        <!--Fin contenido-->            
-                
+        <!--Fin contenido-->
+        
         <footer>
             <div class="container">
                 <center>
