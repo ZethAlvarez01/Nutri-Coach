@@ -124,12 +124,14 @@ public class VistaController {
     }
     
     
-     @RequestMapping("bienvenida_psicologo.htm")
+  /*   @RequestMapping("bienvenida_psicologo.htm")
     public ModelAndView bienvenida_psicologo(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("bienvenida_psicologo");
         return mv;
-    }
+    }*/
+    
+    
      @RequestMapping("mensajeria.htm")
     public ModelAndView mensajeria(){
         ModelAndView mv=new ModelAndView();
