@@ -40,7 +40,7 @@
                 <prop key="bienvenida_nutriologo.htm">VistaController</prop>
                 <prop key="cronograma.htm">VistaController</prop>
                 <prop key="cronogramaPsicologo.htm">VistaController</prop>
-                <prop key="bienvenida_psicologo.htm">VistaController</prop>
+                <prop key="bienvenida_psicologo.htm">PsicologoController</prop>
                 <prop key="mensajeria.htm">VistaController</prop>
                 <prop key="mensajeriaAdmin.htm">VistaController</prop>
                 <prop key="mensajeriaN.htm">VistaController</prop>
@@ -85,6 +85,9 @@
     
      <bean name="ListadoUsuariosController"
           class="controller.ListadoUsuariosController" />
+    
+     <bean name="PsicologoController"
+          class="controller.PsicologoController" />
     
 
 </beans>
