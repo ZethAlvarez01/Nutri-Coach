@@ -49,12 +49,20 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
-                    <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXXXXXXX</a></li>
-                    </ul>
+                    
+                         <ul id="menu_nutrio">
+                        <form:form method="POST" commandName="Psicologo">
+                           
+                        <li><form:button type="submit" class="texto_menu" name="cronograma" value="cronograma"></form:button></li>
+                        <li><form:button type="submit" class="texto_menu" name="mensajes" value="Mensajes"></form:button></li>
+                        <li><form:button type="submit" class="texto_menu" name="foro" value="Foro"></form:button></li>
+                        <li><form:button type="submit" class="texto_menu" name="XXXXXXX" value="XXXXXX"></form:button></li>
+                         </form:form>
+                        </ul>
+                        
+                            
+                        
+                 
                 </div>
             </div>
 
