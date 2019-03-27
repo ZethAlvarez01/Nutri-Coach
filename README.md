@@ -1,6 +1,9 @@
 ﻿# Nutri-Coach
 Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a especialista en el área de nutrición al igual que a sus pacientes y personas en general que deseen mejorar su estilo de vida.
 
+**Todo lo pishi responsivo**
+-[ ] 
+
 **Vistas pendientes**
 - [ ] Seleccionar Div de cada usuario y poder visualizar información completa
 - [ ] Arreglar CSS para la opcion de visualizar todos
@@ -44,4 +47,5 @@ se reacomoda página **CORREGIR**
 
 
 **ACTIVAR PANTALLA DIETAS**
+
 
