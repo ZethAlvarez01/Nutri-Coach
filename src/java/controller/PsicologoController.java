@@ -34,8 +34,8 @@ public class PsicologoController {
     }
      
            /////////////////////////////////////////////////////////////// 
-  //Verificador General
-    @RequestMapping(value="bienvenida_psicologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA cronogramaPsicologo y se aplicará el método GET
+  //pantalla de lista de pacientes de psicologo
+    @RequestMapping(value="bienvenida_psicologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_psicologo y se aplicará el método GET
     
      public ModelAndView bienvenida_psicologoController(){
        
@@ -46,10 +46,29 @@ public class PsicologoController {
 
                         
     }
+     
+     
+               /////////////////////////////////////////////////////////////// 
+  //Cronograma de psicologo
+    @RequestMapping(value="cronogramaPsicologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_psicologo y se aplicará el método GET
+    
+     public ModelAndView cronograma_Psicologo(){
+       
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("cronogramaPsicologo");
+                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+                return mv;       
+
+                        
+    }
+     
+     
+     
+     
     
     @RequestMapping(params="cronograma",method = RequestMethod.POST)
   
-     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){
+     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
         System.out.println("cronograma"); 
         
        
@@ -60,9 +79,73 @@ public class PsicologoController {
                 return mv;
                 
      }
+      /////////////////////////////////////////////
+     ///pantalla de vista mensajeriaPs
+      @RequestMapping(value="mensajeriaPs.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA mensajeriaPs y se aplicará el método GET
     
+     public ModelAndView mensajeriaN(){
+       
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("mensajeriaPs");
+                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+                return mv;       
+
+                        
+    }
+     
+     
+      /////////////////////////////////////////////
+     ///pantalla de vista foro
+      @RequestMapping(value="foroPs.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA foroPs y se aplicará el método GET
     
+     public ModelAndView foroN(){
+       
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("foroPs");
+                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+                return mv;       
+
+                        
+    }
+     
     
+    @RequestMapping(params="mensajes",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarMensajes(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+        System.out.println("mensajeria"); 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("mensajeriaPs");
+                return mv;
+                
+     }
+       @RequestMapping(params="foro",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarForo(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton foro se cambiara a la vista de foroPs
+        System.out.println("foro"); 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("foroPs");
+                return mv;
+                
+     }
+       public ModelAndView cambiarPaciente(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
+        System.out.println("paciente"); 
+        
+                
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("bienvenida_psicologo");
+                return mv;
+                
+     }
     
      
 }

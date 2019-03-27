@@ -74,18 +74,18 @@ public class VistaController {
         mv.setViewName("foroAdmin");
         return mv;
     }
-     @RequestMapping("foroN.htm")
+ /*    @RequestMapping("foroN.htm")
     public ModelAndView foroN(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("foroN");
         return mv;
-    }
-      @RequestMapping("foroPs.htm")
+    }*/
+ /*     @RequestMapping("foroPs.htm")
     public ModelAndView foroPs(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("foroPs");
         return mv;
-    }
+    }*/
     
     @RequestMapping("expedientePaciente.htm")
     public ModelAndView expedientePaciente(){
@@ -101,27 +101,27 @@ public class VistaController {
         return mv;
     }
     
-     @RequestMapping("bienvenida_nutriologo.htm")
+/*     @RequestMapping("bienvenida_nutriologo.htm")
     public ModelAndView bienvenida_nutriologo(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("bienvenida_nutriologo");
         return mv;
-    }
+    }*/
     
     
-       @RequestMapping("cronograma.htm")
+ /*      @RequestMapping("cronograma.htm")
     public ModelAndView cronograma(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("cronograma");
         return mv;
-    }
+    }*/
     
-      @RequestMapping("cronogramaPsicologo.htm")
+ /*     @RequestMapping("cronogramaPsicologo.htm")
     public ModelAndView cronogramaPsicologo(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("cronogramaPsicologo");
         return mv;
-    }
+    }*/
     
     
   /*   @RequestMapping("bienvenida_psicologo.htm")
@@ -144,18 +144,18 @@ public class VistaController {
         mv.setViewName("mensajeriaAdmin");
         return mv;
     }
-     @RequestMapping("mensajeriaN.htm")
+/*     @RequestMapping("mensajeriaN.htm")
     public ModelAndView mensajeriaN(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("mensajeriaN");
         return mv;
-    }
-     @RequestMapping("mensajeriaPs.htm")
+    }*/
+ /*    @RequestMapping("mensajeriaPs.htm")
     public ModelAndView mensajeriaPs(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("mensajeriaPs");
         return mv;
-    }
+    }*/
 /*     @RequestMapping("verificacion_cuentas.htm")
     public ModelAndView verificacion_cuentas(){
         ModelAndView mv=new ModelAndView();

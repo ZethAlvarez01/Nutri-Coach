@@ -218,7 +218,7 @@ public class InicioController {
                     
             }
                 else{
-                        sql="select * from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
+                        sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, correo, no_empleado, estatus from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
@@ -299,7 +299,7 @@ public class InicioController {
                         
                         else{
                             
-                        sql="select * from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
+                        sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, consultorio, correo, no_empleado, institucion, estatus from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
@@ -607,7 +607,7 @@ public class InicioController {
                     
             }else{
                
-                sql="select * from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
+                sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, correo, no_empleado, estatus from psicologo where contraseña='"+          // Procede a buscar al usuario en la base como psicologo
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
@@ -690,7 +690,7 @@ public class InicioController {
                         
             }
                     else{
-                  sql="select * from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
+                  sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, consultorio, correo, no_empleado, institucion, estatus from nutriologo from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
