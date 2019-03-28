@@ -33,18 +33,18 @@
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">VistaController</prop>
                 <prop key="foroAdmin.htm">VistaController</prop>
-                <prop key="foroN.htm">VistaController</prop>
-                <prop key="foroPs.htm">VistaController</prop>
+                <prop key="foroN.htm">nutriologoController</prop>
+                <prop key="foroPs.htm">PsicologoController</prop>
                 <prop key="expedientePaciente.htm">VistaController</prop>
                 <prop key="bienvenida_admin.htm">ListadoUsuariosController</prop>
-                <prop key="bienvenida_nutriologo.htm">VistaController</prop>
-                <prop key="cronograma.htm">VistaController</prop>
-                <prop key="cronogramaPsicologo.htm">VistaController</prop>
-                <prop key="bienvenida_psicologo.htm">VistaController</prop>
+                <prop key="bienvenida_nutriologo.htm">nutriologoController</prop>
+                <prop key="cronograma.htm">nutriologoController</prop>
+                <prop key="cronogramaPsicologo.htm">PsicologoController</prop>
+                <prop key="bienvenida_psicologo.htm">PsicologoController</prop>
                 <prop key="mensajeria.htm">VistaController</prop>
                 <prop key="mensajeriaAdmin.htm">VistaController</prop>
-                <prop key="mensajeriaN.htm">VistaController</prop>
-                <prop key="mensajeriaPs.htm">VistaController</prop>
+                <prop key="mensajeriaN.htm">nutriologoController</prop>
+                <prop key="mensajeriaPs.htm">PsicologoController</prop>
                 <prop key="verificacion_cuentas.htm">verificadorController</prop>
                 <prop key="diario_psicologo_solo_paciente.htm">VistaController</prop>
                 <prop key="cambiarC.htm">VistaController</prop>
@@ -85,6 +85,13 @@
     
      <bean name="ListadoUsuariosController"
           class="controller.ListadoUsuariosController" />
+    
+     <bean name="PsicologoController"
+          class="controller.PsicologoController" />
+     
+        <bean name="nutriologoController"
+          class="controller.nutriologoController" />
+    
     
 
 </beans>

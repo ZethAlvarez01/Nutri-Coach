@@ -13,12 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+    
+    <!-- Hojas de estilos -->
+    
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_psicologo.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
+    
+    <!-- Scrips -->
+    
     <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
+   
+   
     <title>Nutri-Coach</title>
 </head>
 
@@ -48,14 +57,14 @@
                 <div id="imagen_barra">
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-                <div id="menu">
-                    <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXXXXXXX</a></li>
-                    </ul>
-                </div>
+                <form:form id="menu_barra" method="POST" commandName="Psicologo">
+                        <ul id="menu_lista">
+                            <li><form:button type="submit" class="texto_menu" name="cronograma" value="cronograma"><div class="txt_btn">Cronograma</div></form:button></li>
+                            <li><form:button type="submit" class="texto_menu" name="mensajes" value="Mensajes"><div class="txt_btn">Mensajes</div></form:button></li>
+                            <li><form:button type="submit" class="texto_menu" name="foro" value="Foro"><div class="txt_btn">Foro</div></form:button></li>
+                            <li><form:button type="submit" class="texto_menu" name="XXXXXXX" value="XXXXXX"><div class="txt_btn">XXX</div></form:button></li>
+                        </ul>
+                </form:form>
             </div>
 
         </div>
