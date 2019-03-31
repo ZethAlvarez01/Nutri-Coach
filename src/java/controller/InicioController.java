@@ -690,7 +690,7 @@ public class InicioController {
                         
             }
                     else{
-                  sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, consultorio, correo, no_empleado, institucion, estatus from nutriologo from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
+                  sql="select no_cedula, nombre, ap_uno, ap_dos, telefono, consultorio, correo, no_empleado, institucion, estatus from nutriologo where contraseña='"+                // Se procede a buscar al usuario como nutriologo en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  

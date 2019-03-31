@@ -13,10 +13,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+    
+    <!-- Hojas de estilos -->
+    
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_diario_psicologo.css" />" />
+    
+    <!-- Scripts -->
+    
     <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
     
     <title>Nutri-Coach</title>
@@ -41,6 +47,7 @@
         </div>
         <!--Fin container-->
     </header>
+                
     <div id="barra">
         <div class="container">
             <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>

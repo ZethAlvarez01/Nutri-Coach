@@ -1,8 +1,3 @@
-<%-- 
-    Document   : foro
-    Created on : 15/11/2018, 01:13:11 AM
-    Author     : Zeth
---%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,13 +7,23 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+                
+        <!-- Scrips -->
+    
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+
         <title>Nutri-Coach</title>
     </head>
-    <body>
+    <body onscroll="bajar()">
          <header>
             <div class="container">
                 <div id="pleca">
@@ -39,7 +44,7 @@
             <!--Fin container-->
         </header>    
                     
-          <div id="barra">
+    <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">

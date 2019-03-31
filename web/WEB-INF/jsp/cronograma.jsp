@@ -50,8 +50,7 @@
             </div>
         </div>
         <!--Fin container-->
-    </header>
-                
+    </header>     
                 
     <div id="barra">
         <div class="container">
