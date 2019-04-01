@@ -98,6 +98,9 @@ function TypeDiv(ID,nombre,generales,generales2,generales3,estado,usuario) {
   document.getElementById("datosGenerales2").innerHTML=generales2;
   document.getElementById("datosGenerales3").innerHTML=generales3;
   
+  
+  
+  
   if(usuario==="paciente"){
      document.getElementById("estadoP").style.display = "block";  
   }
@@ -123,7 +126,28 @@ function TypeDiv(ID,nombre,generales,generales2,generales3,estado,usuario) {
     document.getElementById('baja').checked = true;
   }
     document.getElementById("etiqueta_estado").style.display="block"; 
+      document.getElementById("estado").style.display="block"; 
 
+}
+function TypeDivPaciente(ID,nombre,generales,generales2,generales3) {
+
+ 
+  
+  document.getElementById("informacion");
+  
+  
+  document.getElementById("informacion").style.display = "block"; 
+  document.getElementById("num_boleta").innerHTML=ID;
+  document.getElementById("nombreUser").innerHTML=nombre;
+  document.getElementById("datosGenerales").innerHTML=generales;
+  document.getElementById("datosGenerales2").innerHTML=generales2;
+  document.getElementById("datosGenerales3").innerHTML=generales3;
+  
+  
+  
+  
+  
+  
 }
 
 
