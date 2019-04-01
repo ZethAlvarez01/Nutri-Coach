@@ -13,26 +13,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-     
-    <!-- Hojas de estilos --> 
-     
+     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_nutriologo.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
-    
-    <!-- Scripts -->
-
-    <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-    
+    <script type="text/javascript" src="resource/scrips/script.js"/></script>    
     <title>Nutri-Coach</title>
 </head>
 
-   <body onscroll="bajar()">
+   <body>
     <header>
         <div class="container">
             <div id="pleca">
@@ -61,6 +52,7 @@
                 </div>
                 <div id="menu">
                     <ul id="menu_nutrio">
+                        
                         <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
                         <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
@@ -74,6 +66,9 @@
 
     <div id="contenido">
         <div class="container">
+             <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estas son tus citas programadas para hoy.</h1></p>
+                </c:forEach>
             <div id="grid">
                 <div id="notificaciones">
                     <a href="mensajeria.htm">
@@ -84,174 +79,46 @@
                     <div id="encabezado_lista">
                         <p id="sub-titulo">Listado de usuarios</p>
                         <input type="text" placeholder="Buscar usuario">
-                        <p id="numero_usuarios">Número de usuarios: ?</p>
+                        <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p> 
                     </div>
 
                     <div id="lista">
 
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
+                        
+                        <c:forEach items="${ListaP}" var="item"> 
+                        <div class="usuario" onclick="TypeDivPaciente('${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' domicilio: ${item.domicilio}',' telefono:${item.telefono}  correo:${item.correo}')" name="usuario">
+                           
+                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
+                            <div id="texto_user"> 
+                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
                                 <p id="nombre-info">Mas informacion</p>
                             </div>
-                        </div>
+                                
+                                
+                           
+                             </div>
+                            </c:forEach> 
+                        
+                                                             
 
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                           <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                        <div class="usuario">
-                            <img src="<c:url value="/resource/imagenes/deku.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">Nombre PrimerApellido</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                        </div>
-
-                    </div>
+                     </div>
 
                 </div>
 
-                <div id="informacion">
+                <div id="informacion" style="display: none;" name="informacion">
                     <div id="h3">
                         <h3>Informacion del paciente</h3>
                     </div>
-                    <p>Nombre PrimerApellido</p>
+                    <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto de perfil" id="foto_info">
+                               
+                                <p id="num_boleta">ID</p>
+                                <p id="nombreUser">Nombre Completo:</p> 
+                                <p id="datosGenerales">  EDAD: SEXO: FECHA DE NACIMIENTO:  </p>
+                                <p id="datosGenerales2">  DOMICILIO:  </p>
+                                <p id="datosGenerales3">   TELEFONO:  CORREO: </p>
                     <br>
                     <div id="grid_info">
-                        <div class="casillas" id="resumen">
+                        <div class="casillas" id="resumen" >
                             <h3 onclick="expandir()" style="cursor:pointer;">Expediente clínico</h3>
                             <p>Fecha de inicio</p>
                             <p>Cosas y mas cosas</p>
@@ -311,6 +178,9 @@
                     </div>
 
                 </div>
+                    
+                    
+                    
             </div>
         </div>
     </div>
