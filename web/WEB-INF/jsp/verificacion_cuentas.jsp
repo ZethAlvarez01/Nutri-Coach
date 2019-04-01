@@ -4,9 +4,11 @@
     Author     : jms-m
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,25 +16,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-    
-    <!-- Hojas de estilos -->
-    
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_verificacion.css" />" />
-
-    <!-- Scrips -->
-
     <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-    
     <title>Nutri-Coach</title>
 
 </head>
-    <body onscroll="bajar()">
+    <body>
     <header>
         <div class="container">
             <div id="pleca">
@@ -60,12 +53,22 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                    <c:forEach items="${ListaAdmin}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
-                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXXXXXX</a></li>
+                        <form:form method="post" commandName="Administrador">
+                            <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="bienvenida" value="Administración" formaction="bienvenida_admin.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li></li>
+                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
                 </div>
             </div>
 
@@ -85,7 +88,6 @@
             <div class="pestanas_menus">
                 <h2>Aprobar especialista nuevo</h2>
                 <p id="solicitud">Estas son las solicitudes de especialistas que esperan ser aprobados para poder trabajar con Nutri-Coach. <br>Tu aceptas o rechazas dichas solicitudes.</p>
-               
                 <div id="todos" class="especialista" style="display: block;">
                     <h3>Solicitudes de especialistas</h3>
                     <br>

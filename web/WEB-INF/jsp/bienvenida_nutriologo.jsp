@@ -51,13 +51,21 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        
-                        <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <form:form method="post" commandName="Nutriologo">
+                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronograma.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaN.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroN.htm"></li></li>
                         <li><a class="texto_menu" href="">Dietas</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                   
                 </div>
             </div>
 
@@ -67,13 +75,11 @@
     <div id="contenido">
         <div class="container">
              <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estas son tus citas programadas para hoy.</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus pacientes para hoy.</h1></p>
                 </c:forEach>
             <div id="grid">
                 <div id="notificaciones">
-                    <a href="mensajeria.htm">
-                        <img src="<c:url value="/resource/imagenes/paper.png"/>" alt="">
-                    </a>
+                   
                 </div>
                 <div id="listado">
                     <div id="encabezado_lista">

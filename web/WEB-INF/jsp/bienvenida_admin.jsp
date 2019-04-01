@@ -15,25 +15,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-        
-        <!-- Hojas de estilos -->
-        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_admin.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
-
-        <!-- Scripts -->
-        
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
         
          
         <title>Nutri-Coach</title>
     </head>
-    <body onscroll="bajar()">
+    <body>
     <header>
         <div class="container">
             <div id="pleca">
@@ -61,12 +53,22 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                    <c:forEach items="${ListaAdmin}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
-                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXXX</a></li>
+                        <form:form method="post" commandName="Administrador">
+                            <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li></li>
+                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
                 </div>
             </div>
 
@@ -208,7 +210,7 @@
                     </div>
 
 
-                    <div id="estado">
+                    <div id="estado" style="display: none;" name="estado">
                         <h2 id="titulo_derecha">Cambiar estado del usuario</h2>
                         <p id="estado"></p>
                         <div id="botones">
@@ -220,15 +222,19 @@
                         
                         <div id="boton" onclick="confirmacion()">Guardar cambio</div>
                         
-
+                       
                         <h2 id="titulo_derecha">Enviar mensajes</h2>
                         <br>
-                        <textarea id="textarea" cols="30" rows="10" placeholder="Mensaje"></textarea>
-
-                        <div id="boton">Enviar mensaje</div>
-
-
-
+                        <form:form method="POST" commandName="Mensaje">
+                        <form:textarea path="contenido" id="textarea" cols="30" rows="10" placeholder="Mensaje"/>
+                          
+                        
+                        <form:button id="boton" type="submit" name="EnviarMensaje" value="EnviarMensaje" >Enviar mensaje</form:button>
+                      
+                        
+                        
+                        </form:form>
+                                                        
                     </div>
 
                 </div>
