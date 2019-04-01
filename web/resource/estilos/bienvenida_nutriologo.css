@@ -33,6 +33,15 @@
     grid-template-rows: 1fr 1fr 300px;
 }
 
+#foto_info {
+    width: 150px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+
 .casillas {
     border: solid 1px #f6f6f6;
     border-radius: 3px;
