@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import models.Administrador;
 import models.Conexion;
 import models.ConsultaEvolucion;
 import models.Foro;
@@ -11,6 +12,7 @@ import models.Nutriologo;
 
 import models.Login;
 import models.LoginValidar;
+import models.Mensaje;
 
 import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
@@ -19,6 +21,7 @@ import models.NeuralNet.Crear_RN;
 import models.NeuralNet.Tratamiento;
 import models.Paciente;
 import models.Psicologo;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +31,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 /**
@@ -332,10 +336,22 @@ public class InicioController {
                                 }
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
-                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("cronograma");                                            // Nombra al modelo
-                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                                    return mv;
+                                  
+                                 ModelAndView mv=new ModelAndView();
+                                 
+                                 mv.setViewName("bienvenida_nutriologo");
+                                 mv.addObject("datos",datosL);
+                                 sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio from paciente where no_cedula="+lo.getUsuario();
+                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("ListaP",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 System.out.println(datosL2);
+                                 mv.addObject("LongitudP",datosL2.size()); // Pasa el tamaño de la lista
+                                 nutriologoController nutriologo = new nutriologoController();
+                                 nutriologo.trampa(datosL);
+                                
+                                   return mv;  
                                 }
                                 default:
                                 {
@@ -353,7 +369,7 @@ public class InicioController {
                         }
                         else{ 
                             
-                        sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
+                        sql="select no_empleado, nombre, ap_uno, ap_dos, telefono from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
@@ -362,7 +378,10 @@ public class InicioController {
                          ModelAndView mv=new ModelAndView();                                // Creación del modelo
                          mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
                          System.out.println("Pasando datos"); 
-      
+       
+                         mv.addObject("ListaAdmin",datosL);
+                         mv.addObject("Administrador",new Administrador());
+                         mv.addObject("Mensaje",new Mensaje());
                          sql=" select * from paciente where estatus <> 4 and estatus and estatus <> 0 order by ap_uno asc;";
 
             
@@ -747,15 +766,77 @@ public class InicioController {
                     
             }
                 else{   
-                   sql="select * from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
+                   sql="select no_empleado, nombre, ap_uno, ap_dos, telefono from administrador where contraseña='"+                // Se procede a buscar al usuario como administrador en la base de datos
                         lo.getPass()+"' and no_empleado="+lo.getUsuario()+";";
                         datosL=this.jdbcTemplate.queryForList(sql);
                         System.out.println(datosL);  
-                
-                if(datosL.size()>=1){                                                         // Si se enceuntra se procede a mostrar su vista de Bienvenida
-                    ModelAndView mv=new ModelAndView();                                      // Creación del modelo
-                    mv.setViewName("bienvenida_admin");                                                  // Nombra al modelo
-                    return mv;
+
+                        if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
+                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                         mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
+                         System.out.println("Pasando datos"); 
+       
+                         mv.addObject("ListaAdmin",datosL);
+                         mv.addObject("Administrador",new Administrador());
+                         mv.addObject("Mensaje",new Mensaje());
+                         sql=" select * from paciente where estatus <> 4 and estatus and estatus <> 0 order by ap_uno asc;";
+
+            
+      
+              datosL=this.jdbcTemplate.queryForList(sql);
+                  
+             mv.addObject("ListaP",datosL);       // SE AGREGA EL OBJETO LISTA DE PACIENTES AL MODELO     
+            
+             System.out.println(datosL);
+              System.out.println(datosL.size());
+      
+             mv.addObject("LongitudP",datosL.size()); 
+             
+      
+       
+             mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
+          
+             
+              sql2=" select * from nutriologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
+
+            
+      
+             List datosL2=this.jdbcTemplate.queryForList(sql2);
+                  
+             mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
+            
+             System.out.println(datosL2);
+             System.out.println(datosL2.size());
+      
+             mv.addObject("LongitudN",datosL2.size()); 
+             
+      
+       
+             mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+                  
+       
+             
+             
+             String sql3=" select * from psicologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
+
+            
+      
+             List datosL3=this.jdbcTemplate.queryForList(sql3);
+                  
+             mv.addObject("ListaPs",datosL3);       // SE AGREGA EL OBJETO LISTA DE PSICOLOGOS AL MODELO     
+            
+             System.out.println(datosL3);
+             
+             System.out.println(datosL3.size());
+      
+             mv.addObject("LongitudPs",datosL3.size()); 
+      
+       
+             mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+             
+             
+       
+                         return mv;
             }
                 else{                                                                    // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
                     ModelAndView mv=new ModelAndView();                                     // Creación del modelo
