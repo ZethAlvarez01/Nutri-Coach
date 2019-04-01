@@ -337,19 +337,11 @@ public class InicioController {
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
                                   
-                                 ModelAndView mv=new ModelAndView();
-                                 
-                                 mv.setViewName("bienvenida_nutriologo");
-                                 mv.addObject("datos",datosL);
-                                 sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio from paciente where no_cedula="+lo.getUsuario();
-                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
-                                 
-                                 mv.addObject("ListaP",datosL2);          // Pasa la lilsta completa
-                                 mv.addObject("Paciente",new Paciente());
-                                 System.out.println(datosL2);
-                                 mv.addObject("LongitudP",datosL2.size()); // Pasa el tamaño de la lista
-                                 nutriologoController nutriologo = new nutriologoController();
-                                 nutriologo.trampa(datosL);
+                                 ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("cronograma");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                                    mv.addObject("Nutriologo",new Nutriologo());
+                                   
                                 
                                    return mv;  
                                 }
@@ -747,6 +739,7 @@ public class InicioController {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("cronograma");                                            // Nombra al modelo
                                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                                    mv.addObject("Nutriologo",new Nutriologo());
                                     return mv;
                                 }
                                 default:

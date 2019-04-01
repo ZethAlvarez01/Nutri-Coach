@@ -32,8 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 
-@Scope(value = "session")
-@SessionAttributes("datos")
+
 public class nutriologoController {
    private JdbcTemplate jdbcTemplate;
    private List datos;
@@ -44,14 +43,7 @@ public class nutriologoController {
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
         
     }
-     public void trampa(List datos){
-          System.out.println("RECIBIENDO DATOS TRAMPA");
-          this.datos=datos;
-          System.out.println("DATOS TRAMPA: "+this.datos);
-          
-          
-        
-     }
+  
            /////////////////////////////////////////////////////////////// 
   //pantalla de lista de pacientes de nutriologo
     @RequestMapping(value="bienvenida_nutriologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_nutriologo y se aplicará el método GET
@@ -119,10 +111,120 @@ public class nutriologoController {
      
      
      
+      
+    @RequestMapping(params="pacientes",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarPacientes(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte cronograma"); 
+        System.out.println("AQUI ESTA EL CRONOGRAMA");
+       
+                System.out.println("NO_ EMPLEADO: "+n.getNo_empleado());
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("bienvenida_nutriologo");
+                
+                
+                String sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio from paciente where no_cedula="+n.getNo_empleado();
+                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("ListaP",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 System.out.println(datosL2);
+                                 mv.addObject("LongitudP",datosL2.size()); // Pasa el tamaño de la lista
+               
+                sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Nutriologo",new Nutriologo());
+                return mv;
+                
+     }
+    
      
+     @RequestMapping(params="mensajeria",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarMensajeria(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte mensajeria"); 
+        System.out.println("AQUI ESTA LA MENSAJERIA");
+       
+                System.out.println("NO_ EMPLEADO: "+n.getNo_empleado());
+                
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("mensajeriaN");
+                mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+                
+                String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                
+                
+                
+                return mv; 
+                
+              
+                
+          
+                
+     }
     
+     
+      @RequestMapping(params="foro",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarForo(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte Foro"); 
+        System.out.println("AQUI ESTA EL FORO");
+       
+                System.out.println("NO_ EMPLEADO: "+n.getNo_empleado());
+                
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("foroN");
+                mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+                
+                String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                
+                
+                
+                return mv; 
+                
+              
+                
+          
+                
+     }
     
+     
+     @RequestMapping(params="cronograma",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarCronograma(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte cronograma"); 
+        System.out.println("AQUI ESTA EL CRONOGRAMA");
+       
+                System.out.println("NO_ EMPLEADO: "+n.getNo_empleado());
+                
+                 String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 
+                
+                
+                  ModelAndView mv=new ModelAndView();                                // Creación del modelo
+                                    mv.setViewName("cronograma");                                            // Nombra al modelo
+                                    mv.addObject("datos",datosL2);         // agrega al modelo el objeto datos
+                                    mv.addObject("Nutriologo",new Nutriologo());
+                                    return mv;
+                
+     }
     
+     
+     
+     
      
 }
 
