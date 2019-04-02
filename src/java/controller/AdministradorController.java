@@ -222,7 +222,7 @@ public class AdministradorController {
              mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
              mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
              
-             sql="select nombre,ap_uno,ap_dos from administrador where no_empleado="+n.getNo_empleado();
+             sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+n.getNo_empleado();
                                  datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
@@ -303,7 +303,7 @@ public class AdministradorController {
              
              mv.addObject("Mensaje",new Mensaje());     // SE AGREGA EL OBJETO MENSAJE AL MODELO
        
-             sql="select nombre,ap_uno,ap_dos from administrador where no_empleado="+n.getNo_empleado();
+             sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+n.getNo_empleado();
                                  datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
@@ -327,7 +327,7 @@ public class AdministradorController {
                 mv.setViewName("mensajeriaAdmin");
                 mv.addObject("Administrador",new Administrador());     // SE AGREGA EL OBJETO ADMINISTRADOR AL MODELO
                 
-                String sql="select nombre,ap_uno,ap_dos from administrador where no_empleado="+n.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+n.getNo_empleado();
                                  List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
@@ -356,7 +356,7 @@ public class AdministradorController {
                 mv.setViewName("foroAdmin");
                 mv.addObject("Administrador",new Administrador());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
                 
-                String sql="select nombre,ap_uno,ap_dos from Administrador where no_empleado="+n.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from Administrador where no_empleado="+n.getNo_empleado();
                                  List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa

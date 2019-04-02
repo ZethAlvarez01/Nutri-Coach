@@ -110,7 +110,7 @@ public class PsicologoController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("cronogramaPsicologo");
                 
-                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -132,7 +132,7 @@ public class PsicologoController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("mensajeriaPs");
                 
-                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -152,7 +152,7 @@ public class PsicologoController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foroPs");
                 
-                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -172,7 +172,7 @@ public class PsicologoController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("bienvenida_psicologo");
                 
-                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa

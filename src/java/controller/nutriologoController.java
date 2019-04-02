@@ -155,7 +155,7 @@ public class nutriologoController {
                 mv.setViewName("mensajeriaN");
                 mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
                 
-                String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from nutriologo where no_empleado="+n.getNo_empleado();
                                  List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -184,7 +184,7 @@ public class nutriologoController {
                 mv.setViewName("foroN");
                 mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
                 
-                String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from nutriologo where no_empleado="+n.getNo_empleado();
                                  List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -208,7 +208,7 @@ public class nutriologoController {
        
                 System.out.println("NO_ EMPLEADO: "+n.getNo_empleado());
                 
-                 String sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+n.getNo_empleado();
+                 String sql="select nombre,ap_uno,ap_dos, no_empleado from nutriologo where no_empleado="+n.getNo_empleado();
                                  List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  

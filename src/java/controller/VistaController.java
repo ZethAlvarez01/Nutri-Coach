@@ -61,12 +61,12 @@ public class VistaController {
         return mv;
     }
     
-    @RequestMapping("foro.htm")
+   /* @RequestMapping("foro.htm")
     public ModelAndView foro(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("foro");
         return mv;
-    }
+    }*/
     
  /*    @RequestMapping("foroAdmin.htm")
     public ModelAndView foroAdmin(){
@@ -87,12 +87,12 @@ public class VistaController {
         return mv;
     }*/
     
-    @RequestMapping("expedientePaciente.htm")
+  /*  @RequestMapping("expedientePaciente.htm")
     public ModelAndView expedientePaciente(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("expedientePaciente");
         return mv;
-    }
+    }*/
     
  /*   @RequestMapping("bienvenida_admin.htm")
     public ModelAndView bienvenida_admin(){
@@ -132,12 +132,12 @@ public class VistaController {
     }*/
     
     
-     @RequestMapping("mensajeria.htm")
+/*     @RequestMapping("mensajeria.htm")
     public ModelAndView mensajeria(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("mensajeria");
         return mv;
-    }
+    }*/
   /*   @RequestMapping("mensajeriaAdmin.htm")
     public ModelAndView mensajeriaAdmin(){
         ModelAndView mv=new ModelAndView();

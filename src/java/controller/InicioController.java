@@ -90,7 +90,7 @@ public class InicioController {
             return mv;
         }else{
                //El usuario ingreso bien los datos
-                String sql="select nombre from paciente where contraseña='"+ // Busca el usuario como paciente en la base de datos
+                String sql="select nombre, ap_uno, ap_dos, edad, sexo, fecha_n, telefono, domicilio, correo, no_boleta from paciente where contraseña='"+ // Busca el usuario como paciente en la base de datos
                 lo.getPass()+"' and no_boleta="+lo.getUsuario()+";";
                 //List datos=this.jdbcTemplate.queryForList(sql);
                 List datosL=this.jdbcTemplate.queryForList(sql);
@@ -126,6 +126,7 @@ public class InicioController {
                                    ModelAndView mv=new ModelAndView();   // Creación del modelo
                     mv.setViewName("expedientePaciente");  //nombra al modelo
                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                    mv.addObject("Paciente",new Paciente());
                     
                     sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
                     List datosEv=this.jdbcTemplate.queryForList(sql);
@@ -516,6 +517,7 @@ public class InicioController {
                                    ModelAndView mv=new ModelAndView();   // Creación del modelo
                     mv.setViewName("expedientePaciente");  //nombra al modelo
                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                    mv.addObject("Paciente",new Paciente());
                     
                     sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
                     List datosEv=this.jdbcTemplate.queryForList(sql);
@@ -655,6 +657,7 @@ public class InicioController {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
                                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                                    mv.addObject("Psicologo",new Psicologo());
                                     return mv;
                                     /* ArrayList<Capa_neuronas> neural_net;
                             libMatrices op=new libMatrices();
