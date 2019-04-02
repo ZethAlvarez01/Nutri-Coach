@@ -73,6 +73,9 @@
 
     <div id="contenido">
         <div class="container">
+            <c:forEach items="${ListaAdmin}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus mensajes.</h1></p>
+                </c:forEach>
             <div id="grid">
                 <div id="listado">
                     <div id="encabezado_lista">

@@ -12,25 +12,14 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-        
-        <!-- Hojas de estilos -->
-        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/expediente.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        
-        <!-- Scrips -->
-    
-        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-        
         <title>Nutri-Coach</title>
     </head>
-    
-    <body body onscroll="bajar()">
+    <body>
         <header>
             <div class="container">
                 <div id="pleca">
@@ -51,19 +40,28 @@
             <!--Fin container-->
         </header>    
                     
-    <div id="barra">
+          <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:form method="post" commandName="Paciente">
+                              <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeria.htm"></li>
+                                
+                         
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foro.htm"></li>
+                        <li><a class="texto_menu" href="">XXXXXXXXXX</a></li>
+                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
                 </div>
             </div>
 

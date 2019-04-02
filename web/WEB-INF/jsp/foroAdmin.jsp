@@ -76,8 +76,10 @@
         <div id="contenido">
             <div class="container">
                 <center>
-                    <h1>Foro de Nutri-Coach</h1>
-                    <h2>${nombre}</h2>
+                  <h1>Foro de Nutri-Coach</h1>
+                    <h2> <c:forEach items="${ListaAdmin}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                </c:forEach></h2>
                 </center>
                 
                 
