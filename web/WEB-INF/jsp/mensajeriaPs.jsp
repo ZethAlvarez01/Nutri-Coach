@@ -6,31 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-    
-    <!-- Hojas de estilos -->
-    
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/mensajeria.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
-                                     
-    <!-- Scrips -->
-
-    <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-
+    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
     <title>Nutri-Coach</title>
 </head>
-    <body onscroll="bajar()">
+    <body>
     <header>
         <div class="container">
             <div id="pleca">
@@ -58,12 +50,21 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
-                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:form method="post" commandName="Psicologo">
+                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronogramaPsicologo.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_psicologo.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroPs.htm"></li></li>
+                        <li><a class="texto_menu" href="">XXXXXXXX</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                   
                 </div>
             </div>
 
@@ -72,6 +73,9 @@
 
     <div id="contenido">
         <div class="container">
+             <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estas son tus mensajes.</h1></p>
+                </c:forEach>
             <div id="grid">
                 <div id="listado">
                     <div id="encabezado_lista">

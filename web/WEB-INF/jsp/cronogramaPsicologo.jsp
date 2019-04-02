@@ -14,23 +14,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-     
-    <!-- Hojas de estilos -->
-     
+     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/estilos_cronograma.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_calendario_nutriologo.css" />" />
-    
-    <!-- Scripts -->
-    
     <script type="text/javascript" src="resource/scrips/calendario.js"/></script>  
     <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
     <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
    
+  
+
+    
     
         <title>Nutri-Coach</title>
     </head>
@@ -63,12 +60,23 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
-                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
+                        <form:form method="post" commandName="Psicologo">
+                            <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaPs.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_psicologo.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroPs.htm"></li></li>
                         <li><a class="texto_menu" href="">XXXXXXXXXXX</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
+                    
                 </div>
             </div>
 
