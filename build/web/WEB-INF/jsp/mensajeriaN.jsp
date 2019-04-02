@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,15 +22,15 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/mensajeria.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
-                                 
+                
     <!-- Scrips -->
 
     <script type="text/javascript" src="resource/scrips/script.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-
-    <title>Nutri-Coach</title>
-</head>
+    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
+        
+        <title>Nutri-Coach</title>
+    </head>
     <body onscroll="bajar()">
     <header>
         <div class="container">
@@ -58,19 +59,33 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
-                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <form:form method="post" commandName="Nutriologo">
+                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronograma.htm"></li>
+                                
+                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_nutriologo.htm"></li>
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroN.htm"></li></li>
                         <li><a class="texto_menu" href="">Dietas</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
                 </div>
             </div>
+
         </div>
     </div>
 
     <div id="contenido">
         <div class="container">
+             <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus mensajes.</h1></p>
+                </c:forEach>
             <div id="grid">
                 <div id="listado">
                     <div id="encabezado_lista">

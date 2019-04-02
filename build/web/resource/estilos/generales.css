@@ -28,6 +28,10 @@
     grid-column: 1;
 }
 
+#txt-bnv {
+    text-align: center;
+}
+
 #menu {
     grid-column: 2;
 }
@@ -79,6 +83,24 @@ body {
 #menu_nutrio li a:hover {
     background: rgb(255, 255, 255, 0.3);
 }
+
+
+#menu_nutrio li input  {
+    height: 70px;
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 70px;
+    background: rgb(108, 29, 69);
+    border: 0;
+}
+
+#menu_nutrio li input:hover {
+    background: rgb(255, 255, 255, 0.3);
+}
+
 
 
 /*Boton de regresar*/

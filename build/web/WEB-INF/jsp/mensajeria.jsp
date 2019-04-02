@@ -1,6 +1,13 @@
+<%-- 
+    Document   : mensajeria
+    Created on : 12-mar-2019, 23:54:39
+    Author     : jms-m
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html> 
 <html>
     <head>
     <meta charset="utf-8">
@@ -14,17 +21,16 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/mensajeria.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />   
-                         
+    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
+                
     <!-- Scrips -->
 
     <script type="text/javascript" src="resource/scrips/script.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
-    
-
-    <title>Nutri-Coach</title>
-</head>
+    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
+        
+        <title>Nutri-Coach</title>
+    </head>
     <body onscroll="bajar()">
     <header>
         <div class="container">
@@ -53,12 +59,22 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <form:form method="post" commandName="Paciente">
+                            <li><input type="submit" class="texto_menu" name="expediente" value="Expediente" formaction="expedientePaciente.htm"></li>
+                                
+                         
+                       
+                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foro.htm"></li>
                         <li><a class="texto_menu" href="">XXXXXX</a></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
                 </div>
             </div>
 
@@ -67,6 +83,9 @@
 
     <div id="contenido">
         <div class="container">
+             <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus mensajes.</h1></p>
+                </c:forEach>
             <div id="grid">
                 <div id="listado">
                     <div id="encabezado_lista">

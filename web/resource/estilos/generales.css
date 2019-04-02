@@ -16,6 +16,7 @@
 #barra {
     height: 70px;
     background: rgb(108, 29, 69);
+    z-index: 500;
 }
 
 #cont_barra {

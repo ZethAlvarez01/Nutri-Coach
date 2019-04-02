@@ -13,11 +13,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
               user-scalable=no"/>
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/style.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/inicio.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/footer.css" />" />
+        
         <title>Nutri-Coach</title>
     </head>
     <body>

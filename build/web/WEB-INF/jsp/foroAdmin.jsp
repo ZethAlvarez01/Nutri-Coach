@@ -19,12 +19,12 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-        
+                
         <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
         
         <title>Nutri-Coach</title>
     </head>
@@ -56,12 +56,25 @@
                     <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                    <c:forEach items="${ListaAdmin}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
-                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
-                        <li><a class="texto_menu" href="">XXXXXXX</a></li>
+                        <form:form method="post" commandName="Administrador">
+                          <li><input type="submit" class="texto_menu" name="bienvenida" value="Administración" formaction="bienvenida_admin.htm"></li>
+                         
+                          <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>
+                                
+                                                
+                        <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li></li>
+                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
+                    
+                    
                 </div>
             </div>
 
@@ -73,8 +86,10 @@
         <div id="contenido">
             <div class="container">
                 <center>
-                    <h1>Foro de Nutri-Coach</h1>
-                    <h2>${nombre}</h2>
+                  <h1>Foro de Nutri-Coach</h1>
+                    <h2> <c:forEach items="${ListaAdmin}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                </c:forEach></h2>
                 </center>
                 
                 
