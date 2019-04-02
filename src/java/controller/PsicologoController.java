@@ -65,20 +65,6 @@ public class PsicologoController {
      
      
      
-    
-    @RequestMapping(params="cronograma",method = RequestMethod.POST)
-  
-     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
-        System.out.println("cronograma"); 
-        
-       
-         
-                
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("cronogramaPsicologo");
-                return mv;
-                
-     }
       /////////////////////////////////////////////
      ///pantalla de vista mensajeriaPs
       @RequestMapping(value="mensajeriaPs.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA mensajeriaPs y se aplicará el método GET
@@ -108,8 +94,34 @@ public class PsicologoController {
                         
     }
      
+     
+     
+     
+     
     
-    @RequestMapping(params="mensajes",method = RequestMethod.POST)
+    @RequestMapping(params="cronograma",method = RequestMethod.POST)
+  
+     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte cronograma"); 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("cronogramaPsicologo");
+                
+                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                return mv;
+                
+     }
+     
+    
+    @RequestMapping(params="mensajeria",method = RequestMethod.POST)
   
      public ModelAndView cambiarMensajes(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
         System.out.println("mensajeria"); 
@@ -119,6 +131,13 @@ public class PsicologoController {
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("mensajeriaPs");
+                
+                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
                 return mv;
                 
      }
@@ -132,9 +151,18 @@ public class PsicologoController {
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foroPs");
+                
+                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
                 return mv;
                 
      }
+     
+     @RequestMapping(params="pacientes",method = RequestMethod.POST)
        public ModelAndView cambiarPaciente(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
         System.out.println("paciente"); 
         
@@ -143,6 +171,14 @@ public class PsicologoController {
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("bienvenida_psicologo");
+                
+                String sql="select nombre,ap_uno,ap_dos from psicologo where no_empleado="+ps.getNo_empleado();
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                
                 return mv;
                 
      }

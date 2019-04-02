@@ -258,6 +258,7 @@ public class InicioController {
                                     ModelAndView mv=new ModelAndView();                                // Creación del modelo
                                     mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
                                     mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
+                                    mv.addObject("Psicologo",new Psicologo());
                                     return mv;
                                     /* ArrayList<Capa_neuronas> neural_net;
                             libMatrices op=new libMatrices();
