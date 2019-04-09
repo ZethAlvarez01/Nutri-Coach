@@ -24,14 +24,14 @@ h1{
 
 .grid-container {
   margin: 0px auto;
-  margin-top: 70px;
+  margin-top: 30px;
   display: grid;
   width: 500px;
   height: 250px;
   grid-template-columns: auto auto;
 }
 .grid-item {
-  
+  margin: 0px auto;
   border: 1px solid white;
   height: 180px;
   width: 200px;
@@ -225,4 +225,15 @@ footer{
         position: absolute;
     }
     
+}
+
+@media all and (max-width: 721px){
+    
+    .grid-item{
+        margin: 0px auto;
+    }
+    
+    .regresar{
+        display: none;
+    }
 }

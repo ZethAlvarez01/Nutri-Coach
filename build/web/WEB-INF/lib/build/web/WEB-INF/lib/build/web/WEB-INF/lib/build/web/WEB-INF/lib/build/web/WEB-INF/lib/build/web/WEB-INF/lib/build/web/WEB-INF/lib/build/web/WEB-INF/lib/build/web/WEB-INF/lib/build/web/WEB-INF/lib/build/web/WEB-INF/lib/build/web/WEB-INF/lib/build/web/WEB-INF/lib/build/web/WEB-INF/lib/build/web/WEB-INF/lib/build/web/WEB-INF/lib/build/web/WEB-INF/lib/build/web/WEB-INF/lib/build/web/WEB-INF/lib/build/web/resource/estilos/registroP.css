@@ -29,7 +29,7 @@
   color:  #848484;
 }
 
-input, select, textarea{
+input, textarea{
     margin: 0px auto;
     width: 418px;
     margin-bottom: 10px;
@@ -80,6 +80,7 @@ select{
 
 footer{
     width: 100%;
+    botton: 0px;
 }
 
 @media all and (max-width: 655px){
@@ -95,21 +96,8 @@ footer{
         display: none;
     }
     
-    #button{
-        width: 60%;
+    #formulario{
+        width: 100px;
     }
     
-}
-
-@media all and (max-width: 329px){
-    #logoIPN p{
-        font-size: 14px;
-    }
-}
-
-@media all and (orientation:landscape){
-    #imagen{
-        width: 400px;
-        margin-left: 15%;
-    }     
 }

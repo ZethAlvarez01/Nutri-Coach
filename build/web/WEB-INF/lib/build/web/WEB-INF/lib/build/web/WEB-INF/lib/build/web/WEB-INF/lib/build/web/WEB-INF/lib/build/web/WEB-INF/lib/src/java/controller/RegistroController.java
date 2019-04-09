@@ -84,11 +84,11 @@ public class RegistroController {
                     mv.setViewName("foro");
                     ArrayList<Capa_neuronas> neural_net;
                     libMatrices op=new libMatrices();
-                    double[] x={0,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                0,0};
+                     double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
                     Crear_RN redRecomendaciones=new Crear_RN();
                     neural_net=redRecomendaciones.create_nn(topology,0);
                     

@@ -10,6 +10,7 @@ import models.LoginValidar;
 import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
 import models.NeuralNet.Capa_neuronas;
+import models.NeuralNet.Crear_RN;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,16 +32,6 @@ public class InicioController {
     
     private int[] topology={42,5,6};
     
-    static ArrayList<Capa_neuronas> create_nn(int[] topology,int act_f){
-       ArrayList<Capa_neuronas> nn=new ArrayList<>();
-       
-       for(int i=0;i<topology.length-1;i++){
-           Capa_neuronas l=new Capa_neuronas(topology[i],topology[i+1],act_f);
-           nn.add(l);
-       }
-       
-       return nn;
-    }
     
     private JdbcTemplate jdbcTemplate;
     private LoginValidar loginValidar;
@@ -79,12 +70,21 @@ public class InicioController {
                 mv.setViewName("foro");
                 ArrayList<Capa_neuronas> neural_net;
                 libMatrices op=new libMatrices();
-                double[] x={0,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            0,0};
-                neural_net=create_nn(topology,0);
+                 double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
+                    Crear_RN redRecomendaciones=new Crear_RN();
+                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    
+                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                    
+                    neural_net.get(0).w=pesos.get(0);
+                    neural_net.get(0).b=pesos.get(1);
+
+                    neural_net.get(1).w=pesos.get(2);
+                    neural_net.get(1).b=pesos.get(3);
                 Implementacion exe=new Implementacion(neural_net,x);
                 double[][] output=exe.Implement();
                 System.out.println("Entrada: ");
@@ -112,12 +112,21 @@ public class InicioController {
                     mv.setViewName("foro");
                     ArrayList<Capa_neuronas> neural_net;
                     libMatrices op=new libMatrices();
-                    double[] x={0,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                0,0};
-                    neural_net=create_nn(topology,0);
+                     double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
+                    Crear_RN redRecomendaciones=new Crear_RN();
+                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    
+                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                    
+                    neural_net.get(0).w=pesos.get(0);
+                    neural_net.get(0).b=pesos.get(1);
+
+                    neural_net.get(1).w=pesos.get(2);
+                    neural_net.get(1).b=pesos.get(3);
                     Implementacion exe=new Implementacion(neural_net,x);
                     double[][] output=exe.Implement();
                     System.out.println("Entrada: ");
@@ -145,14 +154,21 @@ public class InicioController {
                         mv.setViewName("foro");
                         ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
-                        double[] x={0,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    0,0};
+                         double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
+                    Crear_RN redRecomendaciones=new Crear_RN();
+                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    
+                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                    
+                    neural_net.get(0).w=pesos.get(0);
+                    neural_net.get(0).b=pesos.get(1);
 
-                        neural_net=create_nn(topology,0);
-
+                    neural_net.get(1).w=pesos.get(2);
+                    neural_net.get(1).b=pesos.get(3);
                         Implementacion exe=new Implementacion(neural_net,x);
                         double[][] output=exe.Implement();
 
@@ -181,13 +197,21 @@ public class InicioController {
                         mv.setViewName("foro");
                         ArrayList<Capa_neuronas> neural_net;
                         libMatrices op=new libMatrices();
-                        double[] x={0,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    0,0};
+                         double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
+                    Crear_RN redRecomendaciones=new Crear_RN();
+                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    
+                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                    
+                    neural_net.get(0).w=pesos.get(0);
+                    neural_net.get(0).b=pesos.get(1);
 
-                        neural_net=create_nn(topology,0);
+                    neural_net.get(1).w=pesos.get(2);
+                    neural_net.get(1).b=pesos.get(3);
 
                         Implementacion exe=new Implementacion(neural_net,x);
                         double[][] output=exe.Implement();

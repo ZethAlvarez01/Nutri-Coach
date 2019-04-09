@@ -15,7 +15,7 @@
 
 #contenido {
     margin-top: 150px;
-    height: 400px;
+    height: 150px;
 }
 
 #formulario{
@@ -65,11 +65,6 @@ footer{
     width: 100%;
 }
 
-    
-    footer{
-        bottom: 0px;
-        position: absolute;
-    }
 
 @media all and (max-width: 655px){
     #logoSEP{
@@ -156,7 +151,7 @@ footer{
     }
     
     #contenido{
-       height: 1000px;
+       height: 400px;
     }
     
     #correo{

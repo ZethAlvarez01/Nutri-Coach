@@ -12,279 +12,274 @@ import models.NeuralNet.Capa_neuronas;
 import models.NeuralNet.Crear_RN;
 import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
+
 import models.Nutriologo;
 import models.NutriologoValidar;
 import models.Paciente;
 import models.PacienteValidar;
 import models.Psicologo;
 import models.PsicologoValidar;
+
 import org.springframework.jdbc.core.JdbcTemplate;
+
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author Zeth
+ * @author Nutri-Coach
  */
 @Controller
 public class RegistroController {
     
-    private PacienteValidar pacienteValidar;
+    private PacienteValidar PacienteValidar;
     private NutriologoValidar nutriologoValidar;
-    private PsicologoValidar psicologoValidar;
+    private PsicologoValidar PsicologoValidar;
     private LoginValidar loginValidar;
     private JdbcTemplate jdbcTemplate;
     private int[] topology={42,5,6};
     
     
     public RegistroController() {
-        this.pacienteValidar=new PacienteValidar();
-        this.nutriologoValidar=new NutriologoValidar();
-        this.psicologoValidar=new PsicologoValidar();
+        this.PacienteValidar=new PacienteValidar();               // Instancia de la clase PacienteValidar
+        this.nutriologoValidar=new NutriologoValidar();           // Instancia de la clase nutriologoValidar
+        this.PsicologoValidar=new PsicologoValidar();             // instancia de la clase PsicologoValidar
         this.loginValidar=new LoginValidar();
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
     
 //////////////////////////////////////////    
-    @RequestMapping(value="login.htm",method=RequestMethod.GET)
-    public ModelAndView formularioLogin(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("login");
-        mv.addObject("login",new Login());
-        return mv;
-    }
-  
-    @RequestMapping(value="login.htm",method=RequestMethod.POST)
-    public ModelAndView formularioLogin(
-                        @ModelAttribute("Login") Login login,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.loginValidar.validate(login, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("login");
-            mv.addObject("login",new Login());
-            return mv;
-        }else{
-            String sql="select nombre from paciente where contraseña='"+
-                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
-                List datos=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datos);
-                
-                if(datos.size()>=1){
-                    ModelAndView mv=new ModelAndView();
-                    mv.setViewName("foro");
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op=new libMatrices();
-                     double[] x={0,0,1,0,1,1,1,1,0,0,
-                                 1,0,1,1,0,1,1,0,1,0,
-                                 0,1,0,0,1,0,0,1,0,0,
-                                 1,0,0,0,1,0,0,0,0,1,
-                                 0,0};
-                    Crear_RN redRecomendaciones=new Crear_RN();
-                    neural_net=redRecomendaciones.create_nn(topology,0);
-                    
-                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                    
-                    neural_net.get(0).w=pesos.get(0);
-                    neural_net.get(0).b=pesos.get(1);
 
-                    neural_net.get(1).w=pesos.get(2);
-                    neural_net.get(1).b=pesos.get(3);
-                    
-                    Implementacion exe=new Implementacion(neural_net,x);
-                    double[][] output=exe.Implement();
-                    System.out.println("Entrada: ");
-                    double[][] xa=new double[1][];
-                    xa[0]=x;
-                    op.print(xa);
-                    System.out.println("Salida: ");
-                    op.print(output);
-                    mv.addObject("salida1",output[0][0]);
-                    mv.addObject("salida2",output[0][1]);
-                    mv.addObject("salida3",output[0][2]);
-                    mv.addObject("salida4",output[0][3]);
-                    mv.addObject("salida5",output[0][4]);
-                    mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Hola "+datos.get(0));
-                    return mv;
-            }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("login");
-                mv.addObject("login",new Login());
-                return mv;
-            }
-        }
-    }
     
     
-///////////////////////////////////////////
-    @RequestMapping(value="registroN.htm",method=RequestMethod.GET)
-    public ModelAndView formularioN(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("registroN");
-        mv.addObject("registroN",new Nutriologo());
-        return mv;
+ /////////////////////////////////////////////////////////////// 
+  //REGISTRO DE NUTRIOLOGO
+    @RequestMapping(value="registroN.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA registroN y se aplicará el método GET
+    
+    public ModelAndView registroN(){
+       ModelAndView mav = new ModelAndView();              // CREACIÓN DEL MODELO
+       
+       mav.setViewName("registroN");                       // SE NOMBRA AL MODELO
+       
+       mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+       
+       return mav;
     }
   
-    @RequestMapping(value="registroN.htm",method=RequestMethod.POST)
-    public ModelAndView formularioN(
-                        @ModelAttribute("Nutriologo") Nutriologo nutriologo,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.nutriologoValidar.validate(nutriologo, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("registroN");
-            mv.addObject("registroN",new Nutriologo());
-            return mv;
-        }else{
-            
-             if(nutriologo.getContraseña().equals(nutriologo.getContraseña2())){
+   @RequestMapping(method = RequestMethod.POST)
+     public ModelAndView registroN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){
+         this.nutriologoValidar.validate(n, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             ModelAndView mav= new ModelAndView(); 
+             mav.setViewName("registroN");
+             mav.addObject("Nutriologo",new Nutriologo() );
+             return mav;
+         }
+        else{
+              //El usuario ingreso bien los datos
+             if(n.getContraseña().equals(n.getContraseña2())){
 
-                String sql="insert into nutriologo values("+nutriologo.getNo_cedula()+",'"+nutriologo.getNombre()+"','"+nutriologo.getAp_uno()+"','"+nutriologo.getAp_dos()+"','"+nutriologo.getTelefono()+"','"+nutriologo.getConsultorio()+"','"+nutriologo.getCorreo()+"',"+nutriologo.getNo_empleado()+",'"+nutriologo.getContraseña()+"','"+nutriologo.getInstitucion()+"');";
+                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"',0);";
 
                 this.jdbcTemplate.update(sql);
             
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("exito1");
-                mv.addObject("no_cedula",nutriologo.getNo_cedula());
-                mv.addObject("no_empleado",nutriologo.getNo_empleado());
-                mv.addObject("nombre",nutriologo.getNombre());
-                mv.addObject("ap_uno",nutriologo.getAp_uno());
-                mv.addObject("ap_dos",nutriologo.getAp_dos());
-                mv.addObject("institucion",nutriologo.getInstitucion());
-                mv.addObject("telefono",nutriologo.getConsultorio());
-                mv.addObject("consultorio",nutriologo.getConsultorio());
-                mv.addObject("correo",nutriologo.getCorreo());
-                mv.addObject("contraseña",nutriologo.getContraseña());
-                mv.addObject("contraseña2",nutriologo.getContraseña2());
+              
+             ModelAndView mav= new ModelAndView();
+             mav.setViewName("exito1"); //Pasamos a la vista de nombre exito
+             mav.addObject("no_cedula",n.getNo_cedula()); //Se agrega el campo No_cedula al modelo
+             System.out.println(n.getNo_cedula());
+             mav.addObject("no_empleado",n.getNo_empleado()); //Se agrega el campo No_empleado al modelo
+             System.out.println(n.getNo_empleado());
+             mav.addObject("nombre",n.getNombre()); //Se agrega el campo Nombre al modelo
+             System.out.println(n.getNombre());
+             mav.addObject("ap_uno",n.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+             System.out.println(n.getAp_uno());
+             mav.addObject("ap_dos",n.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+             System.out.println(n.getAp_dos());
+             mav.addObject("institucion",n.getInstitucion()); //Se agrega el campo InstituciÃ³n al modelo
+             System.out.println(n.getInstitucion());
+             mav.addObject("consultorio",n.getConsultorio()); //Se agrega el campo Consultorio al modelo
+             System.out.println(n.getConsultorio());
+             mav.addObject("telefono",n.getTelefono()); //Se agrega el campo Telefono al modelo
+             System.out.println(n.getTelefono());
+             mav.addObject("correo",n.getCorreo()); //Se agrega el campo Correo al modelo
+             System.out.println(n.getCorreo());
+             mav.addObject("contraseña",n.getContraseña()); //Se agrega el campo Contraseña al modelo
+             System.out.println(n.getContraseña());
+             mav.addObject("contraseña2",n.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+             System.out.println(n.getContraseña2());
 
-                return mv;
+             return mav;
              }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("registroN");
-                mv.addObject("registroN",new Nutriologo());
-                return mv;
+                ModelAndView mav=new ModelAndView();
+                mav.setViewName("registroN");
+                mav.addObject("Nutriologo",new Nutriologo());
+                return mav;
              }
         }
     }
-    ////////////////////////////////////////////////////////////////////
-    @RequestMapping(value="registroP.htm",method=RequestMethod.GET)
-    public ModelAndView formularioP(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("registroP");
-        mv.addObject("registroP",new Paciente());
-        return mv;
-    }
+   ///////////////////////////////////////////////////////////////////////// 
+  //REGISTRO DE PACIENTE
+   @RequestMapping(value="registroP.htm", method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA registroP y se aplicará el método GET
     
-    @RequestMapping(value="registroP.htm",method=RequestMethod.POST)
-    public ModelAndView formularioP(
-                        @ModelAttribute("Paciente") Paciente paciente,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.pacienteValidar.validate(paciente, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("registroP");
-            mv.addObject("registroP",new Paciente());
-            return mv;
-        }else{
-            
-            if(paciente.getContraseña().equals(paciente.getContraseña2())){
+    public ModelAndView registroP(){
+       ModelAndView mav = new ModelAndView();         // CREACIÓN DEL MODELO
+       
+       mav.setViewName("registroP");                  // SE NOMBRA AL MODELO
+       
+       mav.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
+       
+       return mav;
+    } 
+    
+    
+      /////Recibimos y validamos los datos de nuestro formulario
+     @RequestMapping(value="registroP.htm",method = RequestMethod.POST)
+     public ModelAndView registroP(@ModelAttribute("Paciente") Paciente p, BindingResult result, SessionStatus status){
+         this.PacienteValidar.validate(p, result);
+         // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             ModelAndView mav= new ModelAndView();     
+             mav.setViewName("registroP");
+             mav.addObject("Paciente",new Paciente() );
+             return mav;
+         }
+         else{
+            //El usuario ingreso bien los datos
+            if(p.getContraseña().equals(p.getContraseña2())){
                 
                 DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate fechaNac = LocalDate.parse(paciente.getFecha_n(), fmt);
+                LocalDate fechaNac = LocalDate.parse(p.getFecha_n(), fmt);
                 LocalDate ahora = LocalDate.now();
 
                 Period periodo = Period.between(fechaNac, ahora);
 
-                String sql="insert into paciente values("+paciente.getNo_boleta()+",0,'"+paciente.getNombre()+"','"+paciente.getAp_uno()+"','"+paciente.getAp_dos()+"',"+periodo.getYears()+",'"+paciente.getSexo()+"','"+paciente.getFecha_n()+"','"+paciente.getTelefono()+"','"+paciente.getDomicilio()+"','"+paciente.getCorreo()+"','"+paciente.getContraseña()+"');";
+                String sql="insert into paciente values("+p.getNo_boleta()+",0,'"+p.getNombre()+"','"+p.getAp_uno()+"','"+p.getAp_dos()+"',"+periodo.getYears()+",'"+p.getSexo()+"','"+p.getFecha_n()+"','"+p.getTelefono()+"','"+p.getDomicilio()+"','"+p.getCorreo()+"','"+p.getContraseña()+"',1);";
 
                 this.jdbcTemplate.update(sql);
 
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("exito2");
-                mv.addObject("no_boleta",paciente.getNo_boleta());
-                mv.addObject("nombre",paciente.getNombre());
-                mv.addObject("ap_uno",paciente.getAp_uno());
-                mv.addObject("ap_dos",paciente.getAp_dos());
-                mv.addObject("sexo",paciente.getSexo());
-                mv.addObject("fecha_n",paciente.getFecha_n());
-                mv.addObject("telefono",paciente.getTelefono());
-                mv.addObject("domicilio",paciente.getDomicilio());
-                mv.addObject("correo",paciente.getCorreo());
-                mv.addObject("contraseña",paciente.getContraseña());
-                mv.addObject("contraseña2",paciente.getContraseña2());
+                ModelAndView mav=new ModelAndView();
+            
+                mav.setViewName("exito2"); //Pasamos a la vista de nombre exito3
+                mav.addObject("no_boleta",p.getNo_boleta()); //Se agrega el campo No_boleta al modelo
+                System.out.println(p.getNo_boleta()+" Este es el número de boleta");
+                mav.addObject("nombre",p.getNombre()); //Se agrega el campo Nombre al modelo
+                System.out.println(p.getNombre()+" Este es el nombre");
+                mav.addObject("ap_uno",p.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+                System.out.println(p.getAp_uno()+ " Este es el primer apellido");
+                mav.addObject("ap_dos",p.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+                System.out.println(p.getAp_dos() + " Este es el segundo paterno");
+                mav.addObject("sexo",p.getSexo()); //Se agrega el campo Sexo al modelo
+                System.out.println(p.getSexo() + " Este es el sexo" );
+                mav.addObject("fecha_n",p.getFecha_n()); //Se agrega el campo Fecha_n al modelo
+                System.out.println(p.getFecha_n()+ " Esta es la fecha");
+                mav.addObject("telefono",p.getTelefono()); //Se agrega el campo Telefono al modelo
+                System.out.println(p.getTelefono()+ " Este es el telefono");
+                mav.addObject("domicilio",p.getDomicilio()); //Se agrega el campo Domicilio al modelo
+                System.out.println(p.getDomicilio()+ "Este es el domicilio");
+                mav.addObject("correo",p.getCorreo()); //Se agrega el campo Correo al modelo
+                System.out.println(p.getCorreo()+ " Este es el correo");
+                mav.addObject("contraseña",p.getContraseña()); //Se agrega el campo Contraseña al modelo
+                System.out.println(p.getContraseña()+" ESTA ES LA CONTRASEÑA1");
+                mav.addObject("contraseña2",p.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+                System.out.println(p.getContraseña2()+" ESTA ES LA CONTRASEÑA2");
 
-                return mv;
+                return mav;
             }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("registroP");
-                mv.addObject("registroP",new Paciente());
-                return mv;  
+                ModelAndView mav=new ModelAndView();
+                mav.setViewName("registroP");
+                mav.addObject("Paciente",new Paciente());
+                return mav;  
             }
             
         }
     }
   
-    //////////////////////////////////////////////////////////////////////
-    @RequestMapping(value="registroPs.htm",method=RequestMethod.GET)
-    public ModelAndView formularioPs(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("registroPs");
-        mv.addObject("registroPs",new Psicologo());
-        return mv;
-    }
+ ///////////////////////////////////////////////////////////////////// 
+  //REGISTRO DE PSICOLOGO
+   @RequestMapping(value="registroPs.htm", method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA registroPs y se aplicará el método GET
+    
+    public ModelAndView registroPs(){
+       ModelAndView mav = new ModelAndView();           // CREACIÓN DEL MODELO
+       
+       mav.setViewName("registroPs");                   // SE NOMBRA AL MODELO
+       
+       mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
+       
+       return mav;
+    } 
+    
   
-    @RequestMapping(value="registroPs.htm",method=RequestMethod.POST)
-    public ModelAndView formularioPs(
-                        @ModelAttribute("Psicologo") Psicologo psicologo,
-                        BindingResult resultado,
-                        SessionStatus status
-                        ){
-        this.psicologoValidar.validate(psicologo, resultado);
-        if(resultado.hasErrors()){
-            ModelAndView mv=new ModelAndView();
-            mv.setViewName("registroPs");
-            mv.addObject("registroPs",new Psicologo());
-            return mv;
-        }else{
-            
-            if(psicologo.getContraseña().equals(psicologo.getContraseña2())){
+          //Recibimos y validamos los datos de nuestro formulario
+     @RequestMapping(value="registroPs.htm",method = RequestMethod.POST)
+     public ModelAndView registroPS(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){
+   
+         this.PsicologoValidar.validate(ps, result);
+   
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         
+        
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             ModelAndView mav= new ModelAndView(); 
+             mav.setViewName("registroPs");
+             mav.addObject("Psicologo",new Psicologo() );
+             return mav;
+         }
+        else{
+                 //El usuario ingreso bien los datos
+            if(ps.getContraseña().equals(ps.getContraseña2())){
 
-                String sql="insert into psicologo values("+psicologo.getNo_cedula()+",'"+psicologo.getNombre()+"','"+psicologo.getAp_uno()+"','"+psicologo.getAp_dos()+"','"+psicologo.getTelefono()+"','"+psicologo.getCorreo()+"',"+psicologo.getNo_empleado()+",'"+psicologo.getContraseña()+"');";
+                String sql="insert into psicologo values("+ps.getNo_cedula()+",'"+ps.getNombre()+"','"+ps.getAp_uno()+"','"+ps.getAp_dos()+"','"+ps.getTelefono()+"','"+ps.getCorreo()+"',"+ps.getNo_empleado()+",'"+ps.getContraseña()+"',0);";
 
                 this.jdbcTemplate.update(sql);
             
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("exito3");
-                mv.addObject("no_cedula",psicologo.getNo_cedula());
-                mv.addObject("no_empleado",psicologo.getNo_empleado());
-                mv.addObject("nombre",psicologo.getNombre());
-                mv.addObject("ap_uno",psicologo.getAp_uno());
-                mv.addObject("ap_dos",psicologo.getAp_dos());
-                mv.addObject("telefono",psicologo.getTelefono());
-                mv.addObject("correo",psicologo.getCorreo());
-                mv.addObject("contraseña",psicologo.getContraseña());
-                mv.addObject("contraseña2",psicologo.getContraseña2());
+                ModelAndView mav=new ModelAndView();
+                
+                mav.setViewName("exito3"); //Pasamos a la vista de nombre exito
+                mav.addObject("no_cedula",ps.getNo_cedula()); //Se agrega el campo No_cedula al modelo
+                System.out.println(ps.getNo_cedula());
+                mav.addObject("no_empleado",ps.getNo_empleado()); //Se agrega el campo No_empleado al modelo
+                System.out.println(ps.getNo_empleado());
+                mav.addObject("nombre",ps.getNombre()); //Se agrega el campo Nombre al modelo
+                System.out.println(ps.getNombre());
+             mav.addObject("ap_uno",ps.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+             System.out.println(ps.getAp_uno());
+             mav.addObject("ap_dos",ps.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+             System.out.println(ps.getAp_dos());
+             mav.addObject("telefono",ps.getTelefono()); //Se agrega el campo Telefono al modelo
+             System.out.println(ps.getTelefono());
+             mav.addObject("correo",ps.getCorreo()); //Se agrega el campo Correo al modelo
+             System.out.println(ps.getCorreo());
+             mav.addObject("contraseña",ps.getContraseña()); //Se agrega el campo Contraseña al modelo
+             System.out.println(ps.getContraseña());
+             mav.addObject("contraseña2",ps.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+             System.out.println(ps.getContraseña2());
 
-                return mv;
+                return mav;
             }else{
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("registroPs");
-                mv.addObject("registroPs",new Psicologo());
-                return mv;
+                ModelAndView mav=new ModelAndView();
+                mav.setViewName("registroPs");
+                mav.addObject("Psicologo",new Psicologo());
+                return mav;
             }
         }
-    }
+    
+   
+   
+     }
+     
 }

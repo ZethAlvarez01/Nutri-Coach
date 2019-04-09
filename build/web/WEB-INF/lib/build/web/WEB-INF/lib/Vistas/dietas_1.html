@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png " />
+    <link rel="stylesheet" href="generales.css " />
+    <link rel="stylesheet" href="pleca.css" />
+    <link rel="stylesheet" href="footer.css " />
+    <link rel="stylesheet" href="dietas_1.css " />
+    <link rel="stylesheet" href="contenido.css " />
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script_dieta.js"></script>
+
+    <title>Nutri-Coach</title>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="logo-sep.png" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="logo-ipn.jpg " alt="Instituto Politécnico Nacional">
+                </div>
+            </div>
+        </div>
+        <!--Fin container-->
+    </header>
+
+    <div id="barra">
+        <div class="container">
+            <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+            <ul class="menu">
+                <li>
+                    <a href="#">
+                        <img id="foto" src="default.png" alt="Imagen_perfil">
+                    </a>
+                    <ul>
+                        <li id="data_usuario">
+                            <a class="a_ref">
+                                <label for="usuario">Nutriologo</label><br><br>
+                                <label for="peso">Paciente</label><br>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="a_ref">
+                                Cambiar paciente
+                            </a>
+                        </li>
+                        <li>
+                            <a class="a_ref">
+                                Configuración
+                            </a>
+                        </li>
+                        <li id="cerrar">
+                            <a id="Cerrar" class="a_ref">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="contenido">
+        <div id="grid">
+            <div class="menu_t">
+                <h5 id="menu_t">Tipo de menú</h5>
+                <button class="boton smae" onclick="TypeDiet(event, 'smae')">SMAE</button>
+                <button class="boton platillos" onclick="TypeDiet(event, 'platillos')">Precargados</button>
+                <button class="boton agregar" onclick="TypeDiet(event, 'agregar')">Agregar alimento</button>
+            </div>
+
+            <div class="pestanas_menus">
+                <h2>Generador de menús</h2>
+                <label>Paciente: </label>
+                <br>
+                <label>Expediente: </label>
+                <br>
+                <label>Nutriologo: </label>
+                <br>
+                <label>Cedula:</label>
+                <br><br>
+                <label id="fecha"></label>
+                <script>
+                    fecha();
+                </script>
+                <div id="smae" class="dieta" style="display: none;">
+                    <h3>Dieta con base SMAE</h3>
+                    <label id="text">Menú de la semana del ? al ? de 20??</label>
+                    <div id="opciones">
+                        <img src="print.png" alt="Imprimir" class="guardar">
+                        <img src="save.png" alt="Guardar" class="guardar">
+                        <img src="network.png" alt="Compartir" class="guardar">
+                    </div>
+                    <div id="calendario_S" class="grid">
+                        <div id="lunes" class="calendar">
+                            <p>Lunes</p>
+                        </div>
+                        <div id="martes" class="calendar">
+                            <p>Martes</p>
+                        </div>
+                        <div id="miercoles" class="calendar">
+                            <p>Miércoles</p>
+                        </div>
+                        <div id="jueves" class="calendar">
+                            <p>Jueves</p>
+                        </div>
+                        <div id="viernes" class="calendar">
+                            <p>Viernes</p>
+                        </div>
+                        <div id="sabado" class="calendar">
+                            <p>Sábado</p>
+                        </div>
+                        <div id="domingo" class="calendar">
+                            <p>Domingo</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="platillos" class="dieta" style="display: none;">
+                    <h3>Dieta sencilla</h3>
+                    <div id="dietas">
+                        <div id="lateral">
+                            <div id="titulo_comida" class="">t</div>
+
+                            <div id="desayuno" class=""></div>
+                            <div id="col1" class=""></div>
+                            <div id="comida" class=""></div>
+                            <div id="col2" class=""></div>
+                            <div id="cena" class=""></div>
+                        </div>
+                        <div id="tabla_menus">
+                            <table class="tabla">
+                                <thead id="tabla">
+                                    <div class="c_dia" id="lunes">Lun.</div>
+                                    <div class="c_dia">Mar.</div>
+                                    <div class="c_dia">Mié.</div>
+                                    <div class="c_dia">Jue.</div>
+                                    <div class="c_dia">Vie.</div>
+                                    <div class="c_dia">Sáb.</div>
+                                    <div class="c_dia">Dom.</div>
+                                    <script>
+                                        dias();
+                                    </script>
+                                </thead>
+                            </table>
+                        </div>
+                        <div id="opcion">
+                            <select name="" id="des">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="colac1">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="com">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="colac2">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                            <br>
+                            <select name="" id="cen">
+                                <option value="">Reperir diario</option>
+                                <option value="">Reperir cada 2 dias</option>
+                                <option value="">Reperir cada 3 dias</option>
+                                <option value="">Nuevo diario</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="boton">Generar dieta</div>
+                    <div id="boton">Guardar dieta</div>
+                </div>
+                <div id="agregar" class="dieta" style="display: none;">
+                    <h3>Agregar alimentos nuevos</h3>
+                    <div id="calendario_S">
+                        <form action="#">
+                            Alimento o platillo: <input type="text" name="alimento"> Grupo del sistema de equivalentes: <input type="text" name="grupo"> Subgrupo: <input type="text" name="subgrupo"> Raciones: <input type="text" name="raciones"> Proteínas
+                            (g): <input type="text" name="proteinas"> Lípidos (g): <input type="text" name="lipidos"> Hidratos de carbono (g): <input type="text" name="hdc"> Descripción: <textarea rows="4" cols="50"></textarea>
+                            <br><br>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--Fin contenido-->
+    <footer>
+        <div class="container">
+            <p id="visita"></p>
+            <ul id="redes">
+                <li>
+                    <a href="https://www.facebook.com/escomipnmx/">
+                        <img src="facebook.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/escomunidad">
+                        <img src="twitter.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ipn_oficial/">
+                        <img src="instagram.png" />
+                    </a>
+                </li>
+            </ul>
+            <!--Fin Redes sociales-->
+            <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+            <br/>
+            <p>
+                <a class="hiperfooter" href="tyc.htm ">Términos y condiciones</a>
+
+                <a class="hiperfooter" id="politicas" href="politicas.htm ">Políticas de privacidad</a>
+            </p>
+            <br/>
+
+            <!--Fin Modal Términos y condiciones-->
+        </div>
+    </footer>
+</body>
+
+</html>

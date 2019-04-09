@@ -14,7 +14,7 @@
 }
 
 #contenido {
-    margin-top: 100px;
+    margin-top: 150px;
     height: 400px;
 }
 
@@ -61,3 +61,28 @@ input{
     transition: 0.5s;
 }
 
+footer{
+    width: 100%;
+}
+
+@media all and (max-width: 655px){
+    #logoSEP{
+        display: none;
+    }
+    
+    #imagen{
+        margin-left: 25%;
+    }
+    
+    #logoIPN{
+        float: left;
+    }    
+    
+    .regresar{
+        display: none;
+    }
+    
+    input,#button{
+        width: 63vw;
+    }
+}

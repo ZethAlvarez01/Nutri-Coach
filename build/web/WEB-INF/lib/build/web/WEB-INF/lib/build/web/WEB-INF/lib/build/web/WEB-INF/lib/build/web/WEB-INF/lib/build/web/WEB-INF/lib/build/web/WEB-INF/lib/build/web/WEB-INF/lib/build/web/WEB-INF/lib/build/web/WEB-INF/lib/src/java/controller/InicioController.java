@@ -31,17 +31,6 @@ public class InicioController {
     
     private int[] topology={42,5,6};
     
-    static ArrayList<Capa_neuronas> create_nn(int[] topology,int act_f){
-       ArrayList<Capa_neuronas> nn=new ArrayList<>();
-       
-       for(int i=0;i<topology.length-1;i++){
-           Capa_neuronas l=new Capa_neuronas(topology[i],topology[i+1],act_f);
-           nn.add(l);
-       }
-       
-       return nn;
-    }
-    
     private JdbcTemplate jdbcTemplate;
     private LoginValidar loginValidar;
 
@@ -69,153 +58,10 @@ public class InicioController {
             mv.addObject("loginO",new Login());
             return mv;
         }else{
-            
-            String sql="select * from administrador where contraseña='"+
+            String sql="select * from psicologo where contraseña='"+
             login.getPass()+"' and no_empleado="+login.getUsuario()+";";
             List datos=this.jdbcTemplate.queryForList(sql);
-            System.out.println(datos);
-            
-            if(datos.size()>=1){
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("foro");
-                ArrayList<Capa_neuronas> neural_net;
-                libMatrices op=new libMatrices();
-                double[] x={0,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            1,1,0,1,0,1,0,1,0,1,
-                            0,0};
-                neural_net=create_nn(topology,0);
-                Implementacion exe=new Implementacion(neural_net,x);
-                double[][] output=exe.Implement();
-                System.out.println("Entrada: ");
-                double[][] xa=new double[1][];
-                xa[0]=x;
-                op.print(xa);
-                System.out.println("Salida: ");
-                op.print(output);
-                mv.addObject("salida1",output[0][0]);
-                mv.addObject("salida2",output[0][1]);
-                mv.addObject("salida3",output[0][2]);
-                mv.addObject("salida4",output[0][3]);
-                mv.addObject("salida5",output[0][4]);
-                mv.addObject("salida6",output[0][5]);
-                mv.addObject("nombre","Administrador");
-                return mv;
-            }else{
-                sql="select * from paciente where contraseña='"+
-                login.getPass()+"' and no_boleta="+login.getUsuario()+";";
-                datos=this.jdbcTemplate.queryForList(sql);
-                System.out.println(datos);
-                
-                if(datos.size()>=1){
-                    ModelAndView mv=new ModelAndView();
-                    mv.setViewName("foro");
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op=new libMatrices();
-                    double[] x={0,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                0,0};
-                    neural_net=create_nn(topology,0);
-                    Implementacion exe=new Implementacion(neural_net,x);
-                    double[][] output=exe.Implement();
-                    System.out.println("Entrada: ");
-                    double[][] xa=new double[1][];
-                    xa[0]=x;
-                    op.print(xa);
-                    System.out.println("Salida: ");
-                    op.print(output);
-                    mv.addObject("salida1",output[0][0]);
-                    mv.addObject("salida2",output[0][1]);
-                    mv.addObject("salida3",output[0][2]);
-                    mv.addObject("salida4",output[0][3]);
-                    mv.addObject("salida5",output[0][4]);
-                    mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Paciente");
-                    return mv;
-                }else{
-                   sql="select * from nutriologo where contraseña='"+
-                   login.getPass()+"' and no_empleado="+login.getUsuario()+";";
-                   datos=this.jdbcTemplate.queryForList(sql);
-                   System.out.println(datos); 
-                   
-                   if(datos.size()>=1){
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("foro");
-                        ArrayList<Capa_neuronas> neural_net;
-                        libMatrices op=new libMatrices();
-                        double[] x={0,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    0,0};
-
-                        neural_net=create_nn(topology,0);
-
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
-
-                        System.out.println("Entrada: ");
-                        double[][] xa=new double[1][];
-                        xa[0]=x;
-                        op.print(xa);
-                        System.out.println("Salida: ");
-                        op.print(output);
-                        mv.addObject("salida1",output[0][0]);
-                        mv.addObject("salida2",output[0][1]);
-                        mv.addObject("salida3",output[0][2]);
-                        mv.addObject("salida4",output[0][3]);
-                        mv.addObject("salida5",output[0][4]);
-                        mv.addObject("salida6",output[0][5]);
-                        mv.addObject("nombre","Nutriologo");
-                        return mv;    
-                   }else{
-                        sql="select * from psicologo where contraseña='"+
-                        login.getPass()+"' and no_empleado="+login.getUsuario()+";";
-                        datos=this.jdbcTemplate.queryForList(sql);
-                        System.out.println(datos);  
-                        
-                        if(datos.size()>=1){
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("foro");
-                        ArrayList<Capa_neuronas> neural_net;
-                        libMatrices op=new libMatrices();
-                        double[] x={0,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    1,1,0,1,0,1,0,1,0,1,
-                                    0,0};
-
-                        neural_net=create_nn(topology,0);
-
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
-
-                        System.out.println("Entrada: ");
-                        double[][] xa=new double[1][];
-                        xa[0]=x;
-                        op.print(xa);
-                        System.out.println("Salida: ");
-                        op.print(output);
-                        mv.addObject("salida1",output[0][0]);
-                        mv.addObject("salida2",output[0][1]);
-                        mv.addObject("salida3",output[0][2]);
-                        mv.addObject("salida4",output[0][3]);
-                        mv.addObject("salida5",output[0][4]);
-                        mv.addObject("salida6",output[0][5]);
-                        mv.addObject("nombre","Psicologo");
-                        return mv;    
-                   }else{
-                        ModelAndView mv=new ModelAndView();
-                        mv.setViewName("inicio");
-                        mv.addObject("loginO",new Login());
-                        return mv; 
-                        }
-                   }
-                }
-            }
+            System.out.println(datos);  
         }
     }
 }
