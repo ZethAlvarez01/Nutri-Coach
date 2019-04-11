@@ -13,15 +13,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
               user-scalable=no"/>
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/style.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/tyc.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/login.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/footer.css" />" />
+                
+        <!-- Scrips -->
+    
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
+        
         <title>Nutri-Coach</title>
     </head>
-    <body>
+    <body onscroll="bajar()">
         <header>
             <div class="container">
                 <div id="pleca">
@@ -50,20 +60,24 @@
         
          <div id="contenido">
             <div class="container">
-                <center>
-                    <h1>Inicio de sesión</h1>
-                </center>
-                <form:form method="POST" commandName="login">
-                    <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
-                    <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
-                    <form:button id="button" type="submit">Iniciar sesión</form:button>
-                    <hr>
+                
+                <div id="caja">
                     <center>
-                    <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
-                    <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                        <h1>Inicio de sesión</h1>
                     </center>
-                </form:form>
-
+                    <form:form method="POST" commandName="Login">
+                        <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                        <form:errors path="Usuario"/>
+                        <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                        <form:errors path="Pass"/>
+                        <form:button id="button" type="submit">Iniciar sesión</form:button>
+                        <hr>
+                        <center>
+                        <p class="hiperlogin">¿No tienes una cuenta?</p><p>  <a href="<c:url value="/preregistro.htm" />">Regístrate </a></p>
+                        <p class="hiperlogin" id="olvide">  ¿Olvidaste tu contraseña?</p><p>  <a href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
+                        </center>
+                    </form:form>
+                </div>
             </div>
             <!--Fin container-->
         </div>

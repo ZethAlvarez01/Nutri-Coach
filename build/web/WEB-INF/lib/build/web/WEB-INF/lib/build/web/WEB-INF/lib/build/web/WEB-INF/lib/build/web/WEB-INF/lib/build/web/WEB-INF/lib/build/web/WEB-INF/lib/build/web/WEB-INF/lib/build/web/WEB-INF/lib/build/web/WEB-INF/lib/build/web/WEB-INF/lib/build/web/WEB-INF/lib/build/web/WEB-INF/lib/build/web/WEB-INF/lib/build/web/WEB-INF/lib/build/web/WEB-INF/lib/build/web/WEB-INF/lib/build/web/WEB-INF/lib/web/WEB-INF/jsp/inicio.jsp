@@ -54,7 +54,7 @@
                       ¿Olvidaste tu contraseña?  <a class="hiperlogin" href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>
                 </form:form>
                 <div id="divBoton">
-                        <button id="btnResponsive" href="<c:url value="/login.htm" />">Iniciar sesión</button>
+                        <a id="btnResponsive" href="<c:url value="/login.htm" />">Iniciar sesión</a>
                 </div>      
             </div>
             <!--Fin container-->

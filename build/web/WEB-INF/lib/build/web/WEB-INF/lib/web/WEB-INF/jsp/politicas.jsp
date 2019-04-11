@@ -1,8 +1,3 @@
-<%-- 
-    Document   : tiporegistro
-    Created on : 11/11/2018, 01:10:16 AM
-    Author     : Zeth
---%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

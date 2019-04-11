@@ -31,7 +31,7 @@
         
         <title>Nutri-Coach</title>
     </head>
-    <body onscroll="bajar()">
+    <body>
         <header>
             <div class="container">
                 <div id="pleca">

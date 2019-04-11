@@ -1,6 +1,5 @@
 package controller;
 
-import static controller.InicioController.create_nn;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;

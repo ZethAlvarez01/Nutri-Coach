@@ -12,13 +12,23 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/leermas.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+                
+        <!-- Scrips -->
+    
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
+        
         <title>Nutri-Coach</title>
     </head>
-    <body>
+    <body onscroll="bajar()">
         <header>
             <div class="container">
                 <div id="pleca">

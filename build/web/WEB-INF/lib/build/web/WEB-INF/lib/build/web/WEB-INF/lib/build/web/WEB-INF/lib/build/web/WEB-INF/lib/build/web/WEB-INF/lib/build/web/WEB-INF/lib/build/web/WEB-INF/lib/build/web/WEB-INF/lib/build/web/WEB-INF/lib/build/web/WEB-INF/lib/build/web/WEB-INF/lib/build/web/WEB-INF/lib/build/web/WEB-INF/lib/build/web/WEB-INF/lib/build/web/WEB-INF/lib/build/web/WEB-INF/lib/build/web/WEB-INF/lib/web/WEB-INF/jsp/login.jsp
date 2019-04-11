@@ -48,11 +48,11 @@
                     <img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach">
                 </div>
                 
-                <form:form method="POST" commandName="loginO">
+                <!--<form:form method="POST">
                     <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
                     <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
                     <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>                  
-                </form:form>
+                </form:form>-->
 
             </div>
             <!--Fin container-->

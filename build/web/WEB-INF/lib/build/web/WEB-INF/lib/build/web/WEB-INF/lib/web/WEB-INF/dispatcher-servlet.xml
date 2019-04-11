@@ -21,7 +21,7 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="inicio.htm">InicioController</prop>    
-                <prop key="login.htm">RegistroController</prop>   
+                <prop key="login.htm">InicioController</prop>   
                 <prop key="recuperarC.htm">RecuperarController</prop>
                 <prop key="registroN.htm">RegistroController</prop>
                 <prop key="registroP.htm">RegistroController</prop>
@@ -31,7 +31,27 @@
                 <prop key="tyc.htm">VistaController</prop>
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
-                <prop key="foro.htm">VistaController</prop>
+                <prop key="foro.htm">PacienteController</prop>
+                <prop key="foroAdmin.htm">AdministradorController</prop>
+                <prop key="foroN.htm">nutriologoController</prop>
+                <prop key="foroPs.htm">PsicologoController</prop>
+                <prop key="expedientePaciente.htm">PacienteController</prop>
+                <prop key="bienvenida_admin.htm">AdministradorController</prop>
+                <prop key="bienvenida_nutriologo.htm">nutriologoController</prop>
+                <prop key="cronograma.htm">nutriologoController</prop>
+                <prop key="cronogramaPsicologo.htm">PsicologoController</prop>
+                <prop key="bienvenida_psicologo.htm">PsicologoController</prop>
+                <prop key="mensajeria.htm">PacienteController</prop>
+                <prop key="mensajeriaAdmin.htm">AdministradorController</prop>
+                <prop key="mensajeriaN.htm">nutriologoController</prop>
+                <prop key="mensajeriaPs.htm">PsicologoController</prop>
+                <prop key="verificacion_cuentas.htm">AdministradorController</prop>
+                <prop key="diario_psicologo_solo_paciente.htm">VistaController</prop>
+                <prop key="cambiarC.htm">VistaController</prop>
+                <prop key="suspendido.htm">VistaController</prop>
+                <prop key="Rechazado.htm">VistaController</prop>
+                
+                
             </props>
         </property>
     </bean>
@@ -59,5 +79,21 @@
     
     <bean name="RecuperarController"
           class="controller.RecuperarController" />
+    
+    <bean name="AdministradorController"
+          class="controller.AdministradorController" />
+    
+     <bean name="ListadoUsuariosController"
+          class="controller.ListadoUsuariosController" />
+    
+     <bean name="PsicologoController"
+          class="controller.PsicologoController" />
+     
+     <bean name="nutriologoController"
+          class="controller.nutriologoController" />
+    
+     <bean name="PacienteController"
+          class="controller.PacienteController" />
+    
 
 </beans>

@@ -86,6 +86,15 @@ select{
     #logoIPN{
         float: left;
     }  
+    
+    .regresar{
+        display: none;
+    }
+    
+    input, select, textarea{
+        width: 390px;
+    }
+    
 }
 
 @media all and (max-width: 329px){

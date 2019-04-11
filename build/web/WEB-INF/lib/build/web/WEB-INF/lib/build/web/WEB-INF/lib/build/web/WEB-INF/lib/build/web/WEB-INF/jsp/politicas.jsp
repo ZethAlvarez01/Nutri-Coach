@@ -1,8 +1,3 @@
-<%-- 
-    Document   : tiporegistro
-    Created on : 11/11/2018, 01:10:16 AM
-    Author     : Zeth
---%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,10 +6,14 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/tyc.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        
         <title>Nutri-Coach</title>
     </head>
     <body>
