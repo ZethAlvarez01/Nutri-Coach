@@ -57,7 +57,7 @@ hr{
 
 /*Estilos responsivos ára la pantalla de inicio*/
 
-@media all and (max-width: 655px){
+@media all and (max-width: 788px){
     #logoSEP{
         display: none;
     }
@@ -73,6 +73,7 @@ hr{
     
     h1{
         margin-top: 20px;
+        font-size: 2em;
     }
     
     #contenido{
@@ -84,7 +85,7 @@ hr{
     }
     
     #caja{
-        width: 300px;
+        width: 75%;
     }
     
     #contenido{
@@ -94,51 +95,32 @@ hr{
     hr{
         color: white;
     }
-    
-    input{
-        width: 225px;
-    }
-    
+
     form{
         margin-top: 30px;
     }
     
 }
 
-@media all and (max-width: 329px){
-    #logoIPN p{
-        font-size: 14px;
+@media all and (max-width: 300px){
+    #imgIPN{
+        width: 35px;
+        height: 50px;
+    }
+    #institutohiper{
+        font-size: 8px;
     }
 }
 
 @media all and (orientation:landscape){
-    
+    #caja{
+        width: 85%;
+    }
 }
 
 @media all and (orientation:landscape) and (max-width: 518px){
-
-}
-
-@media all and (width: 768px) and (height:1024px){
-    footer{
-        bottom: 0px;
-        position: absolute;
-    }
-}
-
-@media all and (width: 1024px) and (height:1366px){
-    footer{
-        bottom: 0px;
-        position: absolute;
-    }
-}
-
-
-@media all and (width: 1366px) and (height:1024px){
-    
-    footer{
-        bottom: 0px;
-        position: absolute;
-    }
+    #caja{
+            width: 85%;
+        }
 }
 
