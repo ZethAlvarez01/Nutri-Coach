@@ -41,9 +41,12 @@
                         </a>
                     </div>
                     <div id="logoIPN">
-                        <a href="https://www.ipn.mx" id="institutohiper">
-                            <p>Instituto Politécnico Nacional</p>
+                        <a href="https://www.ipn.mx">
+                            <div id="texto_ipn">
+                            Instituto Politécnico Nacional<br>
                             "La Técnica al Servicio de la Patria"
+                            </div>
+                            
                         </a>
                         <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional" id="imgIPN">
                     </div>
