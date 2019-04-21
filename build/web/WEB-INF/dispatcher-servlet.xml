@@ -50,6 +50,7 @@
                 <prop key="cambiarC.htm">VistaController</prop>
                 <prop key="suspendido.htm">VistaController</prop>
                 <prop key="Rechazado.htm">VistaController</prop>
+                <prop key="primera_cita.htm">PacienteController</prop>
                 
                 
             </props>

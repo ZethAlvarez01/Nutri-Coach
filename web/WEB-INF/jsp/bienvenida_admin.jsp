@@ -1,7 +1,13 @@
+<%-- 
+    Document   : cronograma
+    Created on : 21-mar-2019, 11:11:38
+    Author     : jms-m
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="es_MX">
     <head>
@@ -61,10 +67,9 @@
                         <form:form method="post" commandName="Administrador">
                             <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>                      
                             <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li>
-                            <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li></li>
-                            <li><input type="submit" class="texto_menu" name="crono" value="Cronograma" formaction="cronograma.htm"></li></li>
-                            <li><input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm"></li></li>
-                            <li><a class="texto_menu" href="">XXXXXX</a></li>
+                            <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li>
+                            <li><input type="submit" class="texto_menu" name="crono" value="Cronograma" formaction="cronograma.htm"></li>
+                            <li><input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>

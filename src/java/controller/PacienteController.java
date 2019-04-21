@@ -84,6 +84,21 @@ public class PacienteController {
                         
     }
      
+     
+    /////////////////////////////////////////////
+     ///pantalla de vista mensajeriaPs
+     
+    @RequestMapping(value="primera_cita.htm",method = RequestMethod.POST) 
+    
+     public ModelAndView primera_cita(){
+       
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("primera_cita");
+                return mv;       
+                
+    }
+     
+     
       @RequestMapping(params="foro",method = RequestMethod.POST)
   
      public ModelAndView cambiarForo(@ModelAttribute("Paciente") Paciente p, BindingResult result, SessionStatus status){ // al hacer clik en el boton foro se cambiara a la vista de foroPs
