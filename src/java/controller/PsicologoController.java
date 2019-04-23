@@ -6,6 +6,9 @@
 package controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Conexion;
 import models.Nutriologo;
 import models.Paciente;
@@ -37,30 +40,60 @@ public class PsicologoController {
   //pantalla de lista de pacientes de psicologo
     @RequestMapping(value="bienvenida_psicologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_psicologo y se aplicará el método GET
     
-     public ModelAndView bienvenida_psicologoController(){
-       
+      public ModelAndView bienvenida_psicologo(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
+        System.out.println("paciente"); 
+        
+            HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+         
+                
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("bienvenida_psicologo");
-                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-                return mv;       
-
-                        
-    }
+                
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                
+                return mv;
+                
+     }
+       
      
      
                /////////////////////////////////////////////////////////////// 
   //Cronograma de psicologo
     @RequestMapping(value="cronogramaPsicologo.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_psicologo y se aplicará el método GET
     
-     public ModelAndView cronograma_Psicologo(){
-       
+   public ModelAndView cronogramaPs(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+        System.out.println("detecte cronograma"); 
+        
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+         
+                
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("cronogramaPsicologo");
-                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-                return mv;       
-
-                        
-    }
+                
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                return mv;
+                
+     }
      
      
      
@@ -69,30 +102,58 @@ public class PsicologoController {
      ///pantalla de vista mensajeriaPs
       @RequestMapping(value="mensajeriaPs.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA mensajeriaPs y se aplicará el método GET
     
-     public ModelAndView mensajeriaN(){
-       
+       public ModelAndView mensajeriaPs(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+        System.out.println("mensajeria"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+         
+                
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("mensajeriaPs");
-                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-                return mv;       
-
-                        
-    }
+                
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                return mv;
+                
+     }
      
      
       /////////////////////////////////////////////
      ///pantalla de vista foro
       @RequestMapping(value="foroPs.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA foroPs y se aplicará el método GET
     
-     public ModelAndView foroN(){
-       
+      public ModelAndView foroPs(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton foro se cambiara a la vista de foroPs
+        System.out.println("foro"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+         
+                
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foroPs");
-                mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-                return mv;       
-
-                        
-    }
+                
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());
+                
+                return mv;
+                
+     }
      
      
      
@@ -101,16 +162,21 @@ public class PsicologoController {
     
     @RequestMapping(params="cronograma",method = RequestMethod.POST)
   
-     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
+     public ModelAndView cambiarCronograma(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton cronograma se cambiara a la vista de cronogramaPsicologo
         System.out.println("detecte cronograma"); 
         
-       
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
          
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("cronogramaPsicologo");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -123,16 +189,21 @@ public class PsicologoController {
     
     @RequestMapping(params="mensajeria",method = RequestMethod.POST)
   
-     public ModelAndView cambiarMensajes(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+     public ModelAndView cambiarMensajes(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
         System.out.println("mensajeria"); 
         
-       
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
          
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("mensajeriaPs");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -141,18 +212,25 @@ public class PsicologoController {
                 return mv;
                 
      }
+     
+     
        @RequestMapping(params="foro",method = RequestMethod.POST)
   
-     public ModelAndView cambiarForo(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton foro se cambiara a la vista de foroPs
+     public ModelAndView cambiarForo(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton foro se cambiara a la vista de foroPs
         System.out.println("foro"); 
         
-       
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
          
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foroPs");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -163,16 +241,21 @@ public class PsicologoController {
      }
      
      @RequestMapping(params="pacientes",method = RequestMethod.POST)
-       public ModelAndView cambiarPaciente(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
+       public ModelAndView cambiarPaciente(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
         System.out.println("paciente"); 
         
-                
+            HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Psico");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
          
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("bienvenida_psicologo");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+ps.getNo_empleado();
+                String sql="select nombre,ap_uno,ap_dos, no_empleado from psicologo where no_empleado="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -182,6 +265,35 @@ public class PsicologoController {
                 return mv;
                 
      }
+       
+       
+       
+       @RequestMapping(params="cerrar", method = RequestMethod.POST)
+    public ModelAndView logout(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+          HttpSession session =hsr.getSession(); 
+          
+          
+          
+             System.out.println("ADIOS PSICOLOGO");
+            
+            session.removeAttribute("Psico");
+            String alert2 = (String)session.getAttribute("Psico");
+            session.invalidate();
+            
+            System.out.println("ESTO OBTUVE: "+alert2);
+            
+            
+            
+            
+            return new ModelAndView("redirect:/login.htm");
+        
+       
+            
+                
+       
+       
+    }
+   
     
      
 }
