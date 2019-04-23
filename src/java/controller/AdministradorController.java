@@ -492,13 +492,20 @@ public class AdministradorController {
      
      
      
-     
+     /////////////////////////
+     ///////RECHAZAR PSICOLOGO
   
      @RequestMapping(params="rechazarPs",method = RequestMethod.POST)
   
-     public ModelAndView verificarRechazar(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){
+     public ModelAndView verificarRechazar(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
         System.out.println("Detecte rechazar"); 
-        
+       
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Admin");
+       System.out.println("ESTO DICE EL ALERT: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
        
          String sql="update psicologo set estatus=4 where no_cedula ="+ps.getNo_cedula()+";";
 
@@ -531,6 +538,14 @@ public class AdministradorController {
              mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
              mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
        
+             
+              sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+alert;
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
+                                 mav.addObject("Administrador",new Administrador());
+                         
+             
                 return mav;
         }
      
@@ -556,13 +571,23 @@ public class AdministradorController {
      
      
      
-     
+     ////////////////////////
+     //APROBAR PSICOLOGO
      
      
        @RequestMapping(params="aprobarPs",method = RequestMethod.POST)
   
-     public ModelAndView verificarAceptar(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, SessionStatus status){
+     public ModelAndView verificarAceptar(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
         System.out.println("Detecte aprobar"); 
+        
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Admin");
+       System.out.println("ESTO DICE EL ALERT: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+        
         
        System.out.println(ps.getNo_cedula());
        String sql="update psicologo set estatus=1 where no_cedula ="+ps.getNo_cedula()+";";
@@ -595,14 +620,34 @@ public class AdministradorController {
              mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
              mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
        
+             
+               sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+alert;
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
+                                 mav.addObject("Administrador",new Administrador());
+                         
+       
+             
                 return mav;
         }
     
-  
+  /////////////////////////
+     //RECHAZAR NUTRIÓLOGO
      @RequestMapping(params="rechazarN",method = RequestMethod.POST)
   
-     public ModelAndView verificarRechazarN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){
+     public ModelAndView verificarRechazarN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
         System.out.println("Detecte rechazar"); 
+        
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Admin");
+       System.out.println("ESTO DICE EL ALERT: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+        
+        
         
        
          String sql="update nutriologo set estatus=4 where no_cedula ="+n.getNo_cedula()+";";
@@ -636,13 +681,37 @@ public class AdministradorController {
              mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
              mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
        
+             
+               sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+alert;
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
+                                 mav.addObject("Administrador",new Administrador());
+                         
+             
+             
                 return mav;
         }
      
+     
+     ///////////////////
+     //APROBAR NUTRIOLOGO
+     
        @RequestMapping(params="aprobarN",method = RequestMethod.POST)
   
-     public ModelAndView verificarAceptarN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status){
+     public ModelAndView verificarAceptarN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
         System.out.println("Detecte aprobar"); 
+        
+       
+       
+   HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Admin");
+       System.out.println("ESTO DICE EL ALERT: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }
+        
+         ModelAndView mav = new ModelAndView();              // CREACIÓN DEL MODELO
         
        System.out.println(n.getNo_cedula());
        String sql="update nutriologo set estatus=1 where no_cedula ="+n.getNo_cedula()+";";
@@ -650,8 +719,8 @@ public class AdministradorController {
        this.jdbcTemplate.update(sql);
                 
                 
-                ModelAndView mav=new ModelAndView();
-                mav.setViewName("verificacion_cuentas");
+                
+             mav.setViewName("verificacion_cuentas");
              sql="select * from Nutriologo where estatus = 0;";
 
             
@@ -674,6 +743,13 @@ public class AdministradorController {
              
              mav.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
              mav.addObject("Nutriologo",new Nutriologo());       // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
+             
+             sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+alert;
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
+                                 mav.addObject("Administrador",new Administrador());
+                         
        
                 return mav;
         }
@@ -681,7 +757,8 @@ public class AdministradorController {
       
 
   
-    
+  /////////////////////////
+     //LOGOUT
      
       @RequestMapping(params="cerrar", method = RequestMethod.POST)
     public ModelAndView logout(@ModelAttribute("Administrador") Administrador admin, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
