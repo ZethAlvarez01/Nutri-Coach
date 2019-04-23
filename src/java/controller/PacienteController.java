@@ -42,6 +42,43 @@ public class PacienteController {
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
       
+      
+ ///////////////////////////////////////
+      //Pantalla de primera cita
+        @RequestMapping(value="primera_cita.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView primeraCita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("PRIMERA CITA"); 
+        
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA PRIMERA CITA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("primera_cita");
+                
+                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                
+                return mv;
+                
+         
+         
+                    
+                
+    }
+      
+      
+      
+      
 /////////////////////////////////////////////
      ///pantalla de vista foro
       @RequestMapping(value="foro.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA foro y se aplicará el método GET
@@ -60,7 +97,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foro");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos, no_boleta,no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -120,7 +157,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("expedientePaciente");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos, no_boleta, no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -226,7 +263,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("foro");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos, no_boleta,no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -279,7 +316,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("expedientePaciente");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos, no_boleta,no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -370,8 +407,42 @@ public class PacienteController {
      }
      
      
-         @RequestMapping(params="cerrar", method = RequestMethod.POST)
-    public ModelAndView logout(@ModelAttribute("Psicologo") Psicologo ps, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+        
+    
+    
+    
+    @RequestMapping(value="primera_cita.htm",method = RequestMethod.POST) 
+    
+     public ModelAndView primera_cita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("PRIMERA CITA"); 
+        
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA PRIMERA CITA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("primera_cita");
+                
+                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                
+                return mv;
+                
+         
+         
+                    
+                
+    }
+     @RequestMapping(params="cerrar", method = RequestMethod.POST)
+    public ModelAndView logout(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
            HttpSession session =hsr.getSession();
        String alert = (String)session.getAttribute("Paciente");
        System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
@@ -399,19 +470,6 @@ public class PacienteController {
        
        
     }
-    
-    
-    
-    @RequestMapping(value="primera_cita.htm",method = RequestMethod.POST) 
-    
-     public ModelAndView primera_cita(){
-       
-                ModelAndView mv=new ModelAndView();
-                mv.setViewName("primera_cita");
-                return mv;       
-                
-    }
-    
      
      
 }
