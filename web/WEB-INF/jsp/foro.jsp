@@ -61,7 +61,22 @@
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
                            <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                        <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                          <c:if test= "${item.no_cedula>0}">
+                            
+                        
+                              
+                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        
+                                                 
+                        </c:if>
+                        <c:if test= "${item.no_cedula==0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
+                             
+                                                 
+                        </c:if>
+                        
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>

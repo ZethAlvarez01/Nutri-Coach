@@ -70,7 +70,7 @@
                         <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
                        
                         
-                            <li><input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm"></li>
+                            
                             
                             <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                             

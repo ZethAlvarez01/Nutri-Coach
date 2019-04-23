@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/png" href="favicon.png " />
+         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
 
         <!--Hoja de estilo-->
         
@@ -29,41 +29,50 @@
     </head>
 
 <body onscroll="bajar()">
-    <header>
+  <header>
         <div class="container">
             <div id="pleca">
                 <div id="logoSEP">
                     <a href="https://www.gob.mx/sep">
-                        <img src="logo-sep.png" alt="SecretarÃ­a de EducaciÃ³n PÃºblica">
+                        <img src="<c:url value="/resource/imagenes/logo-sep.png" />" alt="Secretaría de Educación Pública">
                     </a>
                 </div>
                 <div id="logoIPN">
                     <a href="https://www.ipn.mx">
-                        <p>Instituto PolitÃ©cnico Nacional</p>
-                        "La TÃ©cnica al Servicio de la Patria"
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
                     </a>
-                    <img src="logo-ipn.jpg " alt="Instituto PolitÃ©cnico Nacional">
+                    <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                 </div>
             </div>
         </div>
         <!--Fin container-->
     </header>
 
-    <div id="barra">
+
+       <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
+                          
                     <ul id="menu_nutrio">
-                        <li><a class="texto_menu" href="">Mensajes</a></li>
-                        <li><a class="texto_menu" href="">Pacientes</a></li>
-                        <li><a class="texto_menu" href="">Foro</a></li>
-                        <li><a class="texto_menu" href="">Dietas</a></li>
+                        <form:form method="post" commandName="Paciente">
+                            <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                          <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                       </form:form>
                     </ul>
+                         </c:forEach> 
+                    
+                    
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -71,7 +80,7 @@
         <div class="container">
             <h1>Primera cita</h1>
             <div id="texto">
-                AquÃ­ podrÃ¡s agendar tu primera cita. Solo ingresa algunos datos para conocer tu disponibilidad y la de un especialista, de esta forma te podremos atender a la brevedad. </div>
+                Aquí podrás agendar tu primera cita. Solo ingresa algunos datos para conocer tu disponibilidad y la de un especialista, de esta forma te podremos atender a la brevedad. </div>
             <div id="calendario">
                 <div id="calendar">
                     <div id="combo_box">
@@ -109,10 +118,10 @@
                         <thead id="tabla">
                             <div class="c_dia" id="lunes">Lun.</div>
                             <div class="c_dia">Mar.</div>
-                            <div class="c_dia">MiÃ©.</div>
+                            <div class="c_dia">Mié.</div>
                             <div class="c_dia">Jue.</div>
                             <div class="c_dia">Vie.</div>
-                            <div class="c_dia">SÃ¡b.</div>
+                            <div class="c_dia">Sáb.</div>
                             <div class="c_dia">Dom.</div>
                             <script>
                                 dias();
@@ -124,21 +133,21 @@
                 <div id="programar">
 
 
-                    <p>InformaciÃ³n de la cita</p>
+                    <p>Información de la cita</p>
 
-                    <div class="texto">InstituciÃ³n</div>
+                    <div class="texto">Institución</div>
                     <select id="institucion" class="primera_cita">
                         <option value="nulo"></option>
-                        <option >Escuela Superior de CÃ³mputo (ESCOM)</option>
+                        <option >Escuela Superior de Cómputo (ESCOM)</option>
                     </select>
 
-                    <div class="texto">NutriÃ³logo</div>
+                    <div class="texto">Nutriólogo</div>
                     <select id="nutriologo" class="primera_cita">
                         <option value="nulo">  </option>
                         <option>Alvarez Hernandez Zeth</option>
                     </select>
 
-                    <div class="texto">DirecciÃ³n</div>
+                    <div class="texto">Dirección</div>
                     <p id="direccion_nutri">
                         Estado de no se donde
                     </p>
@@ -166,39 +175,41 @@
     </div>
 
     <!--Fin contenido-->
-    <footer>
-        <div class="container">
-            <p id="visita"></p>
-            <ul id="redes">
-                <li>
-                    <a href="https://www.facebook.com/escomipnmx/">
-                        <img src="facebook.png" />
-                    </a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/escomunidad">
-                        <img src="twitter.png" />
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.instagram.com/ipn_oficial/">
-                        <img src="instagram.png" />
-                    </a>
-                </li>
-            </ul>
-            <!--Fin Redes sociales-->
-            <p>Â© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
-            <br/>
-            <p>
-                <a class="hiperfooter" href="tyc.htm ">TÃ©rminos y condiciones</a>
-
-                <a class="hiperfooter" id="politicas" href="politicas.htm ">PolÃ­ticas de privacidad</a>
-            </p>
-            <br/>
-
-            <!--Fin Modal TÃ©rminos y condiciones-->
-        </div>
-    </footer>
+  <footer>
+            <div class="container">
+                <center>
+                    <p id="visita">Visita nuestras redes sociales</p>
+                </center>
+                <hr>
+                <ul id="redes">
+                    <li>
+                        <a href="https://www.facebook.com/escomipnmx/">
+                            <img src="<c:url value="/resource/imagenes/iconos/facebook.png" />" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/escomunidad">
+                            <img src="<c:url value="/resource/imagenes/iconos/twitter.png" />" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/ipn_oficial/">
+                            <img src="<c:url value="/resource/imagenes/iconos/instagram.png" />" />
+                        </a>
+                    </li>
+                </ul>
+                <!--Fin Redes sociales-->   
+                <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+                <br/>
+                <p>
+                    <a class="hiperfooter" href="<c:url value="/tyc.htm" />">Términos y condiciones</a>
+                    <a  class="hiperfooter" href="<c:url value="/politicas.htm" />">Políticas de privacidad</a>
+                </p>
+                <br/>
+                
+                <!--Fin Modal Términos y condiciones-->
+            </div>
+        </footer>
 </body>
 
 </html>

@@ -61,7 +61,23 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                               <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                             <c:if test= "${item.no_cedula>0}">
+                            
+                        
+                              
+                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        
+                                                 
+                        </c:if>
+                        <c:if test= "${item.no_cedula==0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
+                             
+                                                 
+                        </c:if>
+                            
+                             
                           <li><a class="texto_menu" href="foro.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
@@ -80,12 +96,30 @@
                 <c:forEach items="${datos}" var="dato">
                     <h1>¡Hola, <c:out value="${dato.nombre}"/>!</h1>
                 </c:forEach>
-               
-                <div class="grid-container">
+         
+           <c:forEach items="${datos}" var="dato">
+                
+                        <c:if test= "${dato.no_cedula==0}">
+                            <p><h1>No cuentas con un nutriólogo</h1></p
+                            <p><h1>Por favor ingresa a la sección de citas para</h1></p>
+                        <form:form method="post" commandName="Paciente">
+                              
+                           <input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm">
+                        
+                       </form:form>
+                            
+                        </c:if>
+                </c:forEach>
+                        <c:forEach items="${datos}" var="dato">
+                            <c:if test= "${dato.no_cedula>0}">
+                            
+                       <div class="grid-container">
                     <div class="observaciones">
                     <p class="titulo">Observaciones</p>
                     <div class="contenido-E">
                         No disponible.
+                        
+                         
                     </div>
                     </div>
                     <div class="estadisticas">
@@ -122,6 +156,10 @@
                 </div>
             </div>
             <!--Fin container-->
+                            
+                        </c:if>
+                        </c:forEach>    
+                
         </div>
         <!--Fin contenido-->            
                 
