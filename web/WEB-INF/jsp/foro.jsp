@@ -60,12 +60,9 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                            <li><input type="submit" class="texto_menu" name="expediente" value="Expediente" formaction="expedientePaciente.htm"></li>
-                                
-                         
-                       
-                        <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeria.htm"></li>
-                        <li><a class="texto_menu" href="">XXXXXXXXXX</a></li>
+                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                        <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
                     </ul>

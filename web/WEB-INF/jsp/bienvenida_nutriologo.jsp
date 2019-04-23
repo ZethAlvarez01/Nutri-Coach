@@ -64,12 +64,11 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Nutriologo">
-                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronograma.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaN.htm"></li>
+                            <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
                        
-                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroN.htm"></li></li>
-                        <li><a class="texto_menu" href="">Dietas</a></li>
+                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>

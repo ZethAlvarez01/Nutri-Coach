@@ -63,12 +63,11 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Psicologo">
-                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronogramaPsicologo.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_psicologo.htm"></li>
-                       
-                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroPs.htm"></li></li>
-                        <li><a class="texto_menu" href="">XXXXXXXX</a></li>
+                             <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                        
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>

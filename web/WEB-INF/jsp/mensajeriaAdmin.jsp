@@ -63,12 +63,10 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Administrador">
-                            <li><input type="submit" class="texto_menu" name="bienvenida" value="Administración" formaction="bienvenida_admin.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li>
-                       
-                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                            <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
