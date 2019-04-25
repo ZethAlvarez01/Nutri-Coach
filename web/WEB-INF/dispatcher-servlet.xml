@@ -51,6 +51,7 @@
                 <prop key="suspendido.htm">VistaController</prop>
                 <prop key="Rechazado.htm">VistaController</prop>
                 <prop key="primera_cita.htm">PacienteController</prop>
+                <prop key="nuevaEntrada.htm">PacienteController</prop>
                 
                 
             </props>
