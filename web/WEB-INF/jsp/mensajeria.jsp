@@ -56,19 +56,16 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                            <li><input type="submit" class="texto_menu" name="expediente" value="Expediente" formaction="expedientePaciente.htm"></li>
-                                
-                         
-                       
-                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foro.htm"></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                            <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                          <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
                     </ul>

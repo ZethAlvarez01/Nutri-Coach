@@ -58,18 +58,23 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="bienvenida_admin.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                     <c:forEach items="${ListaAdmin}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Administrador">
-                            <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>                      
-                            <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li>
-                            <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroAdmin.htm"></li>
-                            <li><input type="submit" class="texto_menu" name="crono" value="Cronograma" formaction="cronograma.htm"></li>
-                            <li><input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm"></li>
+                            <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>                       
+                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
+                        <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
+                       
+                        
+                            
+                            
+                            <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                            
+                            
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
