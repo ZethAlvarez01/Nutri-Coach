@@ -53,19 +53,18 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Nutriologo">
-                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronograma.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_nutriologo.htm"></li>
-                       
-                        <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaN.htm"></li>
-                        <li><a class="texto_menu" href="">Dietas</a></li>
+                            <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
+                        
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cronograma
-    Created on : 21-mar-2019, 11:11:38
-    Author     : jms-m
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -23,6 +17,8 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_admin.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
+        
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/burguer_menu.css" />" />
         
         <!-- Scripts -->
         
@@ -65,16 +61,10 @@
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Administrador">
-                            <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>                       
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>                       
                         <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
                         <li><a class="texto_menu" href="foroAdmin.htm">Foro</a></li>
-                       
-                        
-                            
-                            
-                            <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
-                            
-                            
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
