@@ -1,5 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
 
         <!--Scripts-->
         
-        <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"></script>
+       <!-- <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"></script>-->
         <script type="text/javascript" src="resource/scrips/script.js"></script>
         <script type="text/javascript" src="resource/scrips/barra_script.js"></script>
 
@@ -54,7 +54,7 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
@@ -109,9 +109,9 @@
                             </select>
 
                     </div>
-                    <script>
-                        actualizar();
-                    </script>
+                    <!-- <script>
+                        actualizar(); 
+                    </script>-->
 
                     <br>
                     <table class="tabla">
@@ -123,9 +123,9 @@
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
                             <div class="c_dia">Dom.</div>
-                            <script>
+                           <!-- <script>
                                 dias();
-                            </script>
+                            </script>-->
                         </thead>
                     </table>
 

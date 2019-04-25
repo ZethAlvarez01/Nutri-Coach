@@ -8,11 +8,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="es_MX">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-        
+     <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
         <!-- Hoajs de estilos -->
         
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
@@ -25,7 +25,7 @@
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
+      
         
         <title>Nutri-Coach</title>
     </head>
@@ -50,11 +50,11 @@
             <!--Fin container-->
         </header>    
                     
-          <div id="barra">
+         <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
