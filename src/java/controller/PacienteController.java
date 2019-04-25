@@ -49,7 +49,7 @@ public class PacienteController {
     
      public ModelAndView primeraCita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
        
-         System.out.println("PRIMERA CITA"); 
+         System.out.println("PRIMERA CITA GET"); 
         
        HttpSession session =hsr.getSession();
        String alert = (String)session.getAttribute("Paciente");
@@ -75,6 +75,45 @@ public class PacienteController {
                     
                 
     }
+     
+     
+     ///////////////////////////////////////
+      //Pantalla de nueva entrada en el foro
+        @RequestMapping(value="nuevaEntrada.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView nuevaEntradaForo(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("nueva entrada get"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+        
+       System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("nuevaEntrada");
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                
+                return mv;
+                
+     
+         
+                    
+                
+    }
+     
+     
+     
       
       
       
@@ -411,36 +450,68 @@ public class PacienteController {
     
     
     
-    @RequestMapping(value="primera_cita.htm",method = RequestMethod.POST) 
-    
-     public ModelAndView primera_cita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
-       
-         System.out.println("PRIMERA CITA"); 
+      @RequestMapping(params="primera_cita",method = RequestMethod.POST)
+     public ModelAndView cambiarPrimeraCita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+        System.out.println("primera cita POST"); 
         
-       HttpSession session =hsr.getSession();
+        HttpSession session =hsr.getSession();
        String alert = (String)session.getAttribute("Paciente");
-       System.out.println("ESTO DICE EL ALERT EN LA PRIMERA CITA: "+alert);
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
        if (alert == null){
            return new ModelAndView("redirect:/login.htm");
        }     
+        
+       System.out.println("no_boleta: "+alert);
          
                 
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("primera_cita");
                 
-                String sql="select nombre,ap_uno,ap_dos, no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
-                                 
+                                 System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                 
                 return mv;
                 
+     }
+     
+     
+     
+      @RequestMapping(params="nuevaEntrada",method = RequestMethod.POST)
+     public ModelAndView cambiarNuevaEntrada(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+        System.out.println("nueva entrada POST"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+        
+       System.out.println("no_boleta: "+alert);
          
-         
-                    
                 
-    }
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("nuevaEntrada");
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                
+                return mv;
+                
+     }
+     
+     
+     
+     
+     
+     
+     
      @RequestMapping(params="cerrar", method = RequestMethod.POST)
     public ModelAndView logout(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
            HttpSession session =hsr.getSession();
