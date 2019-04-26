@@ -54,13 +54,29 @@
                 <div id="imagen_barra">
                     <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-                <div id="menu">
+               <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                            <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                          <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                          <c:if test= "${item.no_cedula>0}">
+                            
+                        
+                              
+                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        
+                                                 
+                        </c:if>
+                        <c:if test= "${item.no_cedula==0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
+                             
+                                                 
+                        </c:if>
+                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                               
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
@@ -74,6 +90,85 @@
         </div>
     </div>
 
+                
+                
+          <div id="contenido">
+            <div class="container">
+                <center>
+                     <h1>Foro de Nutri-Coach</h1>
+                    <h2> <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                </c:forEach></h2>
+                </center>
+                
+                
+                 <div class="grid-container">
+                     <div class="item1">
+                          <form:form method="post" commandName="Paciente">
+                    
+                  
+                    
+                    <form:input path="no_boleta" class="titulo" placeholder="Título de tu entrada" />
+                      
+                       
+                   
+                        <hr>
+                        
+                        <form:textarea path="no_boleta" class="item1" placeholder="Redacta tu entrada" />
+                        
+                        
+                      
+                    </div>  
+                                    
+                    
+                    
+                 </div>
+                    <form:button id="button" class="cita" type="submit">Guardar</form:button>
+                    </form:form>
+                
+                
+                
+              </div>
+            </div>
+                
+                
+                
+                
+                  <footer>
+            <div class="container">
+                <center>
+                    <p id="visita">Visita nuestras redes sociales</p>
+                </center>
+                <hr>
+                <ul id="redes">
+                    <li>
+                        <a href="https://www.facebook.com/escomipnmx/">
+                            <img src="<c:url value="/resource/imagenes/iconos/facebook.png" />" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/escomunidad">
+                            <img src="<c:url value="/resource/imagenes/iconos/twitter.png" />" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/ipn_oficial/">
+                            <img src="<c:url value="/resource/imagenes/iconos/instagram.png" />" />
+                        </a>
+                    </li>
+                </ul>
+                <!--Fin Redes sociales-->   
+                <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+                <br/>
+                <p>
+                    <a class="hiperfooter" href="<c:url value="/tyc.htm" />">Términos y condiciones</a>
+                    <a  class="hiperfooter" href="<c:url value="/politicas.htm" />">Políticas de privacidad</a>
+                </p>
+                <br/>
+                
+                <!--Fin Modal Términos y condiciones-->
+            </div>
+        </footer>
                     
     </body>
 </html>
