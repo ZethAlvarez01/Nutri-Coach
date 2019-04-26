@@ -98,7 +98,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("nuevaEntrada");
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
@@ -496,7 +496,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("nuevaEntrada");
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
