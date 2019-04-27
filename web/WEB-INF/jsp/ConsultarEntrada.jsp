@@ -1,6 +1,6 @@
 <%-- 
-    Document   : nuevaEntrada
-    Created on : 25-abr-2019, 13:26:56
+    Document   : ConsultarEntrada
+    Created on : 27-abr-2019, 18:30:49
     Author     : jms-m
 --%>
 
@@ -49,7 +49,6 @@
         </header>    
                     
    <div id="barra">
-      
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
@@ -92,7 +91,7 @@
     </div>
 
                 
-               <input type="submit" class="regresar" value="Regresar" onclick="regresar()"/>  
+                <input type="submit" class="regresar" value="Regresar" onclick="regresar()"/>
           <div id="contenido">
             <div class="container">
                 <center>
@@ -105,18 +104,21 @@
                 
                  <div class="grid-container">
                      <div class="item1">
-                          <form:form method="post" commandName="entradaForo">
-                    
+                         
+                     <c:forEach items="${Entrada}" var="dato">
+                         <h1><c:out value="${dato.titulo}"/></h1> 
+                     
                   
                     
-                    <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
+                    
                       
                        
                    
                         <hr>
                         
-                        <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
                         
+                        <c:out value="${dato.contenido}"/> 
+                     </c:forEach>
                         
                       
                     </div>  
@@ -124,9 +126,7 @@
                     
                     
                  </div>
-                    <form:button id="button" class="cita" type="submit" name="guardarEntrada" value="Guardar">Guardar</form:button>
-                    </form:form>
-                
+                   
                 
                 
               </div>

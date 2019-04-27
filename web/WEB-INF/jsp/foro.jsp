@@ -56,7 +56,7 @@
                     <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
-                    <c:forEach items="${datos}" var="item"> 
+                     <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
@@ -88,8 +88,8 @@
 
         </div>
     </div>
-                    
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+                 
+        <a class="regresar" href="<c:url value="/nuevaEntrada.htm" />">Nueva entrada</a>
         
         <div id="contenido">
             <div class="container">
@@ -113,16 +113,35 @@
                             <li>Salud: <c:out value="${salida6}"/></li>
                         </ul> 
                     </div>  
+                        
+                        
+                        
                         <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                            <ul>
-                                <li>Entrada 1</li>
-                                <li>Entrada 2</li>
-                                <li>Entrada 3</li>
-                                <li>Entrada 4</li>
-                                <li>Entrada 5</li>
-                            </ul> 
+                             <button class="button">
+    Effect two
+  </button>
+                           <input type="button" class="button" name="consultarEntrada" value="hola">
+                           
+                           
+                           
+                            <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                        <li><input type="submit" class="button" name="consultarEntrada" value="${item.titulo}"></li>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="item3"><p class="titulo">Historial</p>
                             <hr>
                             <table>
