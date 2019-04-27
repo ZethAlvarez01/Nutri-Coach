@@ -104,17 +104,17 @@
                 
                  <div class="grid-container">
                      <div class="item1">
-                          <form:form method="post" commandName="Paciente">
+                          <form:form method="post" commandName="entradaForo">
                     
                   
                     
-                    <form:input path="no_boleta" class="titulo" placeholder="Título de tu entrada" />
+                    <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
                       
                        
                    
                         <hr>
                         
-                        <form:textarea path="no_boleta" class="item1" placeholder="Redacta tu entrada" />
+                        <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
                         
                         
                       
@@ -123,7 +123,7 @@
                     
                     
                  </div>
-                    <form:button id="button" class="cita" type="submit">Guardar</form:button>
+                    <form:button id="button" class="cita" type="submit" name="guardarEntrada" value="Guardar">Guardar</form:button>
                     </form:form>
                 
                 
