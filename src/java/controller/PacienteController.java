@@ -19,6 +19,7 @@ import models.NeuralNet.Tratamiento;
 import models.NeuralNet.libMatrices;
 import models.Paciente;
 import models.Psicologo;
+import models.entradaForo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -81,7 +82,7 @@ public class PacienteController {
       //Pantalla de nueva entrada en el foro
         @RequestMapping(value="nuevaEntrada.htm",method = RequestMethod.GET) 
     
-     public ModelAndView nuevaEntradaForo(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+     public ModelAndView nuevaEntradaForo(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
        
          System.out.println("nueva entrada get"); 
         
@@ -103,6 +104,7 @@ public class PacienteController {
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
                 
                 return mv;
                 
@@ -480,7 +482,7 @@ public class PacienteController {
      
      
       @RequestMapping(params="nuevaEntrada",method = RequestMethod.POST)
-     public ModelAndView cambiarNuevaEntrada(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+     public ModelAndView cambiarNuevaEntrada(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
         System.out.println("nueva entrada POST"); 
         
         HttpSession session =hsr.getSession();
@@ -501,12 +503,44 @@ public class PacienteController {
                                  System.out.println(datosL2);
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
-                
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 
                 return mv;
                 
      }
      
      
+      @RequestMapping(params="guardarEntrada", method = RequestMethod.POST)
+    public ModelAndView guardarEntrada(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+       System.out.println("GUARDAR ENTRADA DEL FORO");
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+          
+     
+        String sql="insert into entrada values("+'0'+","+alert+",'"+eF.getTitulo()+"','"+eF.getContenido()+"','');";
+                               
+       
+                this.jdbcTemplate.update(sql);
+            
+       
+       
+          System.out.println("ENTRADA GUARDADA");
+            
+            
+            
+            return new ModelAndView("redirect:/foro.htm");
+        
+       
+            
+                
+       
+       
+    }
      
      
      
