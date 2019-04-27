@@ -183,4 +183,8 @@ function expandir() {
     alert("Expandir informacion");
 }
 
+function regresar(){
+    window.history.back()
+}
+
 /* Falta codigo para cambair emogis de color al seleccionar */
