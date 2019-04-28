@@ -92,7 +92,8 @@
     </div>
 
                 
-               <input type="submit" class="regresar" value="Regresar" onclick="regresar()"/>  
+               <a class="regresar" href="<c:url value="/foro.htm" />">Regresar</a>
+               
           <div id="contenido">
             <div class="container">
                 <center>
@@ -124,7 +125,7 @@
                     
                     
                  </div>
-                    <form:button id="button" class="cita" type="submit" name="guardarEntrada" value="Guardar">Guardar</form:button>
+                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar">
                     </form:form>
                 
                 

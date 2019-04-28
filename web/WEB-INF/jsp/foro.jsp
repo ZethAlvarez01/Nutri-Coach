@@ -118,18 +118,15 @@
                         
                         <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                             <button class="button">
-    Effect two
-  </button>
-                           <input type="button" class="button" name="consultarEntrada" value="hola">
-                           
+                                                       
                            
                            
                             <c:forEach items="${listaEntradas}" var="item"> 
                           
                     <ul>
                        <form:form method="post" commandName="entradaForo">
-                        <li><input type="submit" class="button" name="consultarEntrada" value="${item.titulo}"></li>
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
                             <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
                        </form:form>
                     </ul>

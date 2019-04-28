@@ -91,7 +91,8 @@
     </div>
 
                 
-                <input type="submit" class="regresar" value="Regresar" onclick="regresar()"/>
+                   <a class="regresar" href="<c:url value="/foro.htm" />">Regresar</a>
+                   
           <div id="contenido">
             <div class="container">
                 <center>
@@ -105,30 +106,47 @@
                  <div class="grid-container">
                      <div class="item1">
                          
+                         
+                          <form:form method="post" commandName="entradaForo">
+                         
                      <c:forEach items="${Entrada}" var="dato">
-                         <h1><c:out value="${dato.titulo}"/></h1> 
+                         
                      
+                     
+                   
+                        
                   
                     
-                    
+                          <h1><form:input path="titulo" id="Entrada" placeholder="${dato.titulo}" disabled="true" /></h1> 
                       
                        
                    
                         <hr>
                         
+                        <form:textarea path="contenido" id="EntradaContenido" placeholder="${dato.contenido}" disabled="true" />
+                    
+                    
                         
-                        <c:out value="${dato.contenido}"/> 
+                       
+                   
+                        
+                        
+                         
+                         <form:input path="id_entrada"  value="${dato.id_entrada}" type="hidden"  />
                      </c:forEach>
                         
                       
                     </div>  
                                     
-                    
+                   
                     
                  </div>
-                   
-                
-                
+                     
+                     <input type="submit" class="regresar" id="GuardarEntrada" name="ModificarEntrada" value="Guardar" style="display: none"/>
+                     <input type="submit" class="button" id="EliminarEntrada" name="EliminarEntrada" value="Eliminar"/>
+                    
+                        </form:form>
+                     <input type="submit" class="regresar" id="EditarEntrada" value="Editar" onclick="Editar()"  />
               </div>
             </div>
                 
