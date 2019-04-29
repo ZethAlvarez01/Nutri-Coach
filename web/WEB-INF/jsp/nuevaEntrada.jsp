@@ -112,12 +112,12 @@
                     
                     <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
                       
-                       
+                        <p> <form:errors path="titulo"/></p>
                    
                         <hr>
                         
                         <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
-                        
+                         <p>  <form:errors path="contenido"/> </p>
                         
                       
                     </div>  

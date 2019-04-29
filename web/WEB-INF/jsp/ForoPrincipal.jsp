@@ -107,33 +107,27 @@
                      <div class="item1">
                          
                          
-                          <form:form method="post" commandName="entradaForo">
-                         
-                     <c:forEach items="${Entrada}" var="dato">
-                         
-                     
-                     
-                   
                         
-                  
-                    
-                          <h1><form:input path="titulo" id="Entrada" placeholder="${dato.titulo}" disabled="true" /></h1> 
-                          <p> <form:errors path="titulo"/></p>
-                       
                    
                         <hr>
                         
-                        <form:textarea path="contenido" id="EntradaContenido" placeholder="${dato.contenido}" disabled="true" />
-                        <p>  <form:errors path="contenido"/> </p>
-                    
+                       
+                        <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
                         
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                        
                    
                         
                         
                          
-                         <form:input path="id_entrada"  value="${dato.id_entrada}" type="hidden"  />
-                     </c:forEach>
                         
                       
                     </div>  
@@ -142,11 +136,7 @@
                     
                  </div>
                      
-                     <input type="submit" class="regresar" id="GuardarEntrada" name="ModificarEntrada" value="Guardar" style="display: none"/>
-                     <input type="submit" class="button" id="EliminarEntrada" name="EliminarEntrada" value="Eliminar"/>
-                    
-                        </form:form>
-                     <input type="submit" class="regresar" id="EditarEntrada" value="Editar" onclick="Editar()"  />
+                     
               </div>
             </div>
                 

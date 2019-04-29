@@ -169,6 +169,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <a class="regresar" href="<c:url value="/ForoPrincipal.htm" />">Ver foro</a>
                 </div>
                 
             </div>
