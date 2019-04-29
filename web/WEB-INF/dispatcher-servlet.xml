@@ -53,6 +53,7 @@
                 <prop key="primera_cita.htm">PacienteController</prop>
                 <prop key="nuevaEntrada.htm">PacienteController</prop>
                 <prop key="ConsultarEntrada.htm">PacienteController</prop>
+                <prop key="ForoPrincipal.htm">PacienteController</prop>
                 
                 
             </props>
