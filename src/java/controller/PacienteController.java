@@ -20,6 +20,7 @@ import models.NeuralNet.libMatrices;
 import models.Paciente;
 import models.Psicologo;
 import models.entradaForo;
+import models.foroValidar;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,8 +38,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class PacienteController {
      private JdbcTemplate jdbcTemplate;
      private int[] topology={42,5,6};
+     private foroValidar foroValidar;
+     
+     
       public PacienteController() {
-        
+        this.foroValidar=new foroValidar();               // Instancia de la clase foroValidar
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
@@ -92,6 +96,9 @@ public class PacienteController {
        if (alert == null){
            return new ModelAndView("redirect:/login.htm");
        }     
+       
+       
+       
         
        System.out.println("no_boleta: "+alert);
          
@@ -113,6 +120,54 @@ public class PacienteController {
                     
                 
     }
+     
+     ///////////////////////////////////////
+      //Pantalla de FORO PRINCIPAL
+        @RequestMapping(value="ForoPrincipal.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView ForoPrincipal(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("nueva entrada get"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+       
+       
+       
+        
+       System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("ForoPrincipal");
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                
+                                 
+                sql="select * from entrada order by id_entrada desc";
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("listaEntradas",datosL2);
+                                 
+                return mv;
+                    
+                
+    }
+     
+     
+     
+     
+     
+     
      
       ///////////////////////////////////////
       //Pantalla de consultar entrada en el foro
@@ -571,8 +626,28 @@ public class PacienteController {
            return new ModelAndView("redirect:/login.htm");
        }     
           
-     
-        String sql="insert into entrada values("+'0'+","+alert+",'"+eF.getTitulo()+"','"+eF.getContenido()+"','');";
+       this.foroValidar.validate(eF, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("nuevaEntrada");
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                
+                return mv;
+         }
+         else{
+             String sql="insert into entrada values("+'0'+","+alert+",'"+eF.getTitulo()+"','"+eF.getContenido()+"','');";
                                
        
                 this.jdbcTemplate.update(sql);
@@ -601,10 +676,7 @@ public class PacienteController {
                                  mv.addObject("Entrada",datosL2);
                                  
                 return mv;
-        
-       
-            
-                
+         }
        
        
     }
@@ -654,9 +726,33 @@ public class PacienteController {
        if (alert == null){
            return new ModelAndView("redirect:/login.htm");
        }     
-          
-     
-        String sql="update entrada set titulo='"+eF.getTitulo()+"',contenido='"+eF.getContenido()+"'where id_entrada="+eF.getId_entrada()+";";
+        this.foroValidar.validate(eF, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("ConsultarEntrada");
+                
+               String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 
+                sql="select * from entrada where id_entrada="+eF.getId_entrada(); 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("Entrada",datosL2);
+                                 
+                return mv;
+         }   
+         else{
+             String sql="update entrada set titulo='"+eF.getTitulo()+"',contenido='"+eF.getContenido()+"'where id_entrada="+eF.getId_entrada()+";";
                                
        
                 this.jdbcTemplate.update(sql);
@@ -686,11 +782,9 @@ public class PacienteController {
                                  mv.addObject("Entrada",datosL2);
                                  
                 return mv;
-        
-       
+         
+         }
             
-                
-       
        
     }
      
@@ -734,6 +828,47 @@ public class PacienteController {
                 return mv;
                 
      }
+     
+     
+      @RequestMapping(params="foroPrincipal",method = RequestMethod.POST)
+     public ModelAndView cambiarForoPrincipal(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+        System.out.println("FORO PRINCIPAL POST"); 
+        
+        HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+        
+       System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("ForoPrincipal");
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 
+                                 
+                                 
+                sql="select * from entrada order by id_entrada desc";
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("listaEntradas",datosL2);
+                                 
+                return mv;
+                
+     }
+     
+     
+     
+     
+     
      
      
      
