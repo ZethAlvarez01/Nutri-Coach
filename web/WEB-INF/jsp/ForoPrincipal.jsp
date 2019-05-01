@@ -110,20 +110,36 @@
                         
                    
                         <hr>
-                        
                        
-                        <c:forEach items="${listaEntradas}" var="item"> 
-                          
-                    <ul>
+                        <table>
+                                <tr>
+                                   <td><strong>Fecha</strong></td>
+                                   <td><strong>Titulo</strong></td>
+                                   <td><strong>Contenido</strong></td> 
+                                   <td><strong>COMENTARIOS</strong></td> 
+                                </tr> 
+                       
+                                <c:forEach items="${listaEntradas}" var="item" varStatus="loop"  > 
+                            
+                    
                        <form:form method="post" commandName="entradaForo">
                         
-                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
-                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
-                       </form:form>
-                    </ul>
-                         </c:forEach> 
+                                <tr>
+                                   <td>FALTAN FECHAS</td>
+                                   <td> <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button></td>
+                                   <td>${item.contenido}...</td> 
+                                   <td>${contadorComentarios[loop.index]}</td> 
+                                </tr>
+                                
                             
                        
+                        
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                               
+                         </c:forEach> 
+                            
+                       </table>
                    
                         
                         
