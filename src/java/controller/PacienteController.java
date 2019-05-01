@@ -1163,7 +1163,63 @@ public class PacienteController {
        
     }
      
-     
+
+    
+    
+          @RequestMapping(params="EliminarComentario", method = RequestMethod.POST)
+    public ModelAndView EliminarComentario(@ModelAttribute("Comentario") Comentario comen, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+       System.out.println("ELIMINAR COMENTARIO DEL FORO");
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+        
+        
+           String  sql="delete  from comentarios where id_comnt="+comen.getId_comnt(); 
+                     this.jdbcTemplate.update(sql);
+
+      
+                
+       
+       
+         System.out.println("COMENTARIO ELIMINADO");
+            
+            
+            
+          ModelAndView mv=new ModelAndView();
+                mv.setViewName("ConsultarEntrada");
+                
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 
+                sql="select * from entrada where id_entrada="+comen.getId_entrada(); 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("Entrada",datosL2);
+                                  mv.addObject("Comentario",new Comentario());
+                                  
+               sql="select * from comentarios where id_entrada="+comen.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
+                return mv;
+         
+         
+            
+       
+    }
+    
+    
+    
+    
      
      
      
