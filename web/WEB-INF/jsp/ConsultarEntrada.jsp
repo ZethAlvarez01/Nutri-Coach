@@ -93,8 +93,8 @@
                 
                    <a class="regresar" href="<c:url value="/foro.htm" />">Regresar</a>
                    
-          <div id="contenido">
-            <div class="container">
+          
+            
                 <center>
                      <h1>Foro de Nutri-Coach</h1>
                     <h2> <c:forEach items="${datos}" var="dato">
@@ -103,7 +103,16 @@
                 </center>
                 
                 
-                 <div class="grid-container">
+                 
+                      
+                       <c:forEach items="${datos}" var="item"> 
+                           <c:set var = "sesion"  value = "${item.no_boleta}"/>
+                        <c:forEach items="${Entrada}" var="entrada">   
+                             <c:set var = "usuario"  value = "${entrada.id_usuario}"/>
+                        <c:if test ="${usuario == sesion}">
+                            
+                        
+                   <div class="grid-container">
                      <div class="item1">
                          
                          
@@ -128,7 +137,7 @@
                     
                         
                        
-                   
+                       
                         
                         
                          
@@ -141,15 +150,154 @@
                    
                     
                  </div>
-                     
+                            
+                            
+                            
                      <input type="submit" class="regresar" id="GuardarEntrada" name="ModificarEntrada" value="Guardar" style="display: none"/>
                      <input type="submit" class="button" id="EliminarEntrada" name="EliminarEntrada" value="Eliminar"/>
                     
                         </form:form>
                      <input type="submit" class="regresar" id="EditarEntrada" value="Editar" onclick="Editar()"  />
-              </div>
-            </div>
-                
+               
+
+                        
+                            
+                             
+                                                 
+                        </c:if>
+                       
+                         </c:forEach>               
+             </c:forEach>   
+      
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                   <c:forEach items="${datos}" var="item"> 
+                           <c:set var = "sesion"  value = "${item.no_boleta}"/>
+                        <c:forEach items="${Entrada}" var="entrada">   
+                             <c:set var = "usuario"  value = "${entrada.id_usuario}"/>
+                        <c:if test ="${usuario != sesion}">
+                            
+                        
+                   <div class="grid-container">
+                     <div class="item1">
+                         
+                         
+                          <form:form method="post" commandName="entradaForo">
+                         
+                     <c:forEach items="${Entrada}" var="dato">
+                         
+                     
+                     
+                   
+                        
+                  
+                    
+                          <h1>${dato.titulo}</h1> 
+                         
+                       
+                   
+                        <hr>
+                        
+                        
+                        <p>  ${dato.contenido} </p>
+                    
+                        
+                       
+                       
+                        
+                        
+                         
+                         <form:input path="id_entrada"  value="${dato.id_entrada}" type="hidden"  />
+                     </c:forEach>
+                        
+                      
+                    </div>  
+                                    
+                   
+                    
+                 </div>
+                            
+                            
+                            
+                          
+                    
+                        </form:form>
+                     
+               
+                            
+                            
+                             
+                                                 
+                        </c:if>
+                       
+                         </c:forEach>               
+             </c:forEach>   
+      
+                     
+                       
+            
+            
+                     <c:forEach items="${datos}" var="item">
+                          <c:set var = "sesion"  value = "${item.no_boleta}"/>
+                     <c:forEach items="${Entrada}" var="entrada">   
+       <div class="item2"><p class="titulo">Comentarios</p>
+                            
+                            <hr>
+                            <c:forEach items="${ListaComentarios}" var="listaComentarios">
+                                <form:form method="post" commandName="Comentario">
+                                <c:set var = "usuario"  value = "${listaComentarios.titulo}"/>
+                                <p>${listaComentarios.contenido}
+                                
+                                <c:if test ="${usuario == sesion}">
+                                    
+                                   <input type="submit" class="button" id="EliminarComentario" name="EliminarComentario" value="Eliminar Comentario"/>
+                                    <form:input path="id_comnt" value="${listaComentarios.id_comnt}" type="hidden"  />
+                                   
+                                </c:if>
+                                   </p>
+                             <hr> 
+                                  <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
+                              </form:form> 
+                            </c:forEach>        
+                            
+                                                       
+                       <form:form method="post" commandName="Comentario">     
+                         <form:textarea path="contenido" id="EntradaContenido" placeholder="ingresa tus comentarios"  />
+                        <p>  <form:errors path="contenido"/> </p> 
+                        
+                        
+                        <input type="submit" class="regresar" id="AgregarComentario" name="AgregarComentario" value="Agregar Comentario"/>
+                          
+                        
+                        
+                        <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
+                        <form:input path="titulo"  value="${item.no_boleta}" type="hidden"  />
+                        
+                            
+                             </form:form>
+                    
+                         </c:forEach>  
+                         </c:forEach>
+                          
+            </div>    
+                     
+          
+                     
                 
                 
                 
