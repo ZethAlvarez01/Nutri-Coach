@@ -21,6 +21,8 @@ import models.Paciente;
 import models.Psicologo;
 import models.entradaForo;
 import models.foroValidar;
+import models.Comentario;
+import models.comentarioValidar;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -39,10 +41,11 @@ public class PacienteController {
      private JdbcTemplate jdbcTemplate;
      private int[] topology={42,5,6};
      private foroValidar foroValidar;
-     
+     private comentarioValidar comentarioValidar;
      
       public PacienteController() {
         this.foroValidar=new foroValidar();               // Instancia de la clase foroValidar
+        this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioalidar
         Conexion conn=new Conexion();
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());
     }
@@ -157,6 +160,88 @@ public class PacienteController {
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("listaEntradas",datosL2);
+                                 System.out.println("CONTADOR DE ENTRADAS: "+datosL2.size());
+                     
+                     
+                     
+                 sql="select id_entrada from entrada order by id_entrada desc";
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                
+                                 System.out.println("CONTADOR DE ENTRADAS: "+datosL2.size());                
+                 int contadorEntradas=datosL2.size();
+                 System.out.println(datosL2.get(0));
+                 System.out.println(datosL2.get(contadorEntradas-1));
+                 List contadorComentarios = null;
+                 String cadena="";
+                 String subcadena="";
+                 
+                
+                cadena=datosL2.get(0).toString();
+                subcadena=cadena.substring(1,cadena.length()-1);
+                 
+                 sql="select count(id_comnt) from comentarios where "+subcadena;
+                     
+                           
+                contadorComentarios= this.jdbcTemplate.queryForList(sql);
+                 
+                 
+                 for(int i=1;i<=contadorEntradas-1;i++){
+                     
+                cadena=datosL2.get(i).toString();
+                subcadena=cadena.substring(1,cadena.length()-1);
+                 sql="select count(id_comnt) from comentarios where "+subcadena;
+                     
+                           
+                 contadorComentarios.add(i, this.jdbcTemplate.queryForList(sql));
+                
+                 }
+                 
+                 System.out.println("Contador de comentarios "+contadorComentarios);
+                 
+                 List<String> contador = new ArrayList<String>();
+                 
+                 cadena=contadorComentarios.get(2).toString();
+                 System.out.println("contadorComentarios "+cadena);
+                 
+                 for(int i=0;i<=contadorEntradas-1;i++){
+                     
+                cadena=contadorComentarios.get(i).toString();
+               
+                 for(int j=0;j<cadena.length();j++){
+                     if(cadena.charAt(j)=='='){
+                             
+                         if(cadena.endsWith("}")){
+                   subcadena=cadena.substring(j+1,cadena.length()-1);  
+                   System.out.println("SUBCADENA: "+subcadena);
+                   
+                  
+                   
+                       contador.add(i,subcadena);
+                   
+                   
+                   j=cadena.length();
+                 }
+                     if(cadena.endsWith("]")){
+                   subcadena=cadena.substring(j+1,cadena.length()-2);  
+                   System.out.println("SUBCADENA: "+subcadena);
+                   
+                   contador.add(i,subcadena);
+                   
+                   j=cadena.length();
+                 }     
+                         
+                         
+                     }
+                 }
+                
+                 } //FINAL DE CICLO FOR
+                 
+                 System.out.println("contador = "+contador );
+                 
+                 
+                 mv.addObject("contadorComentarios",contador);
+                 
                                  
                 return mv;
                     
@@ -197,11 +282,21 @@ public class PacienteController {
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
                                  
+                                 
                  sql="select * from entrada where id_entrada="+eF.getId_entrada(); 
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("Entrada",datosL2);
-                
+                                 
+                                 mv.addObject("Comentario",new Comentario());
+                 
+                                 
+                                 
+                 sql="select * from comentarios where id_entrada="+eF.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
                 return mv;
                 
      
@@ -643,7 +738,7 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
-                
+                                 
                 return mv;
          }
          else{
@@ -667,7 +762,7 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
-                             
+                                 mv.addObject("Comentario",new Comentario());
                                  
                 sql="select * from entrada where id_usuario="+alert+" order by id_entrada desc limit 1"; 
                      datosL2 = this.jdbcTemplate.queryForList(sql);
@@ -675,6 +770,12 @@ public class PacienteController {
                                  System.out.println(datosL2);
                                  mv.addObject("Entrada",datosL2);
                                  
+                                 
+               sql="select * from comentarios where id_entrada="+eF.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
                 return mv;
          }
        
@@ -699,6 +800,11 @@ public class PacienteController {
                 this.jdbcTemplate.update(sql);
             
        
+                
+        sql="delete  from comentarios where id_entrada="+eF.getId_entrada(); 
+                     this.jdbcTemplate.update(sql);
+                                          
+                
        
          System.out.println("ENTRADA ELIMINADA");
             
@@ -743,12 +849,20 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
+                                 mv.addObject("Comentario",new Comentario());
                                  
                 sql="select * from entrada where id_entrada="+eF.getId_entrada(); 
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("Entrada",datosL2);
                                  
+                                 
+                                 
+                sql="select * from comentarios where id_entrada="+eF.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
                 return mv;
          }   
          else{
@@ -780,7 +894,15 @@ public class PacienteController {
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("Entrada",datosL2);
-                                 
+                                  mv.addObject("Comentario",new Comentario());
+                                  
+                                  
+                                  
+                sql="select * from comentarios where id_entrada="+eF.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
                 return mv;
          
          }
@@ -819,12 +941,20 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
+                                 mv.addObject("Comentario",new Comentario());
                                  
                 sql="select * from entrada where id_entrada="+eF.getId_entrada(); 
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("Entrada",datosL2);
                                  
+                                  mv.addObject("Comentario",new Comentario());
+                                  
+                 sql="select * from comentarios where id_entrada="+eF.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
                 return mv;
                 
      }
@@ -841,7 +971,7 @@ public class PacienteController {
            return new ModelAndView("redirect:/login.htm");
        }     
         
-       System.out.println("no_boleta: "+alert);
+        System.out.println("no_boleta: "+alert);
          
                 
                 ModelAndView mv=new ModelAndView();
@@ -853,19 +983,185 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
                                  mv.addObject("entradaForo",new entradaForo());
-                                 
-                                 
+                
                                  
                 sql="select * from entrada order by id_entrada desc";
                      datosL2 = this.jdbcTemplate.queryForList(sql);
                                  System.out.println(datosL2);
                                  mv.addObject("listaEntradas",datosL2);
+                                 System.out.println("CONTADOR DE ENTRADAS: "+datosL2.size());
+                     
+                     
+                     
+                 sql="select id_entrada from entrada order by id_entrada desc";
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                
+                                 System.out.println("CONTADOR DE ENTRADAS: "+datosL2.size());                
+                 int contadorEntradas=datosL2.size();
+                 System.out.println(datosL2.get(0));
+                 System.out.println(datosL2.get(contadorEntradas-1));
+                 List contadorComentarios = null;
+                 String cadena="";
+                 String subcadena="";
+                 
+                
+                cadena=datosL2.get(0).toString();
+                subcadena=cadena.substring(1,cadena.length()-1);
+                 
+                 sql="select count(id_comnt) from comentarios where "+subcadena;
+                     
+                           
+                contadorComentarios= this.jdbcTemplate.queryForList(sql);
+                 
+                 
+                 for(int i=1;i<=contadorEntradas-1;i++){
+                     
+                cadena=datosL2.get(i).toString();
+                subcadena=cadena.substring(1,cadena.length()-1);
+                 sql="select count(id_comnt) from comentarios where "+subcadena;
+                     
+                           
+                 contadorComentarios.add(i, this.jdbcTemplate.queryForList(sql));
+                
+                 }
+                 
+                 System.out.println("Contador de comentarios "+contadorComentarios);
+                 
+                 List<String> contador = new ArrayList<String>();
+                 
+                 cadena=contadorComentarios.get(2).toString();
+                 System.out.println("contadorComentarios "+cadena);
+                 
+                 for(int i=0;i<=contadorEntradas-1;i++){
+                     
+                cadena=contadorComentarios.get(i).toString();
+               
+                 for(int j=0;j<cadena.length();j++){
+                     if(cadena.charAt(j)=='='){
+                             
+                         if(cadena.endsWith("}")){
+                   subcadena=cadena.substring(j+1,cadena.length()-1);  
+                   System.out.println("SUBCADENA: "+subcadena);
+                   
+                  
+                   
+                       contador.add(i,subcadena);
+                   
+                   
+                   j=cadena.length();
+                 }
+                     if(cadena.endsWith("]")){
+                   subcadena=cadena.substring(j+1,cadena.length()-2);  
+                   System.out.println("SUBCADENA: "+subcadena);
+                   
+                   contador.add(i,subcadena);
+                   
+                   j=cadena.length();
+                 }     
+                         
+                         
+                     }
+                 }
+                
+                 } //FINAL DE CICLO FOR
+                 
+                 System.out.println("contador = "+contador );
+                 
+                 
+                 mv.addObject("contadorComentarios",contador);
+                 
                                  
                 return mv;
                 
      }
      
      
+      @RequestMapping(params="AgregarComentario", method = RequestMethod.POST)
+    public ModelAndView AgregarComentario(@ModelAttribute("Comentario") Comentario comen, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+       System.out.println("AGREGAR COMENTARIO DEL FORO");
+       HttpSession session =hsr.getSession();
+       String alert = (String)session.getAttribute("Paciente");
+       System.out.println("ESTO DICE EL ALERT EN LA BIENVENIDA: "+alert);
+       if (alert == null){
+           return new ModelAndView("redirect:/login.htm");
+       }     
+        this.comentarioValidar.validate(comen, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             System.out.println("no_boleta: "+alert);
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("ConsultarEntrada");
+                
+               String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 mv.addObject("Comentario",new Comentario());
+                                 
+                sql="select * from entrada where id_entrada="+comen.getId_entrada(); 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("Entrada",datosL2);
+                                 
+                sql="select * from comentarios where id_entrada="+comen.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
+                return mv;
+                                 
+                
+         }   
+         else{
+             String sql="insert into comentarios values("+'0'+","+comen.getId_entrada()+",'"+comen.getTitulo()+"','"+comen.getContenido()+"','');";
+                               
+       
+                this.jdbcTemplate.update(sql);
+             
+
+      
+                
+       
+       
+         System.out.println("COMENTARIO GUARDADO");
+            
+            
+            
+          ModelAndView mv=new ModelAndView();
+                mv.setViewName("ConsultarEntrada");
+                
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("datos",datosL2);          // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("entradaForo",new entradaForo());
+                                 
+                sql="select * from entrada where id_entrada="+comen.getId_entrada(); 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("Entrada",datosL2);
+                                  mv.addObject("Comentario",new Comentario());
+                                  
+               sql="select * from comentarios where id_entrada="+comen.getId_entrada()+" order by id_comnt"; 
+                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                                 System.out.println(datosL2);
+                                 mv.addObject("ListaComentarios",datosL2);   
+                    
+                return mv;
+         
+         }
+            
+       
+    }
      
      
      
