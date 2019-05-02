@@ -54,6 +54,15 @@
                 <prop key="nuevaEntrada.htm">PacienteController</prop>
                 <prop key="ConsultarEntrada.htm">PacienteController</prop>
                 <prop key="ForoPrincipal.htm">PacienteController</prop>
+                <prop key="nuevaEntradaN.htm">nutriologoController</prop>
+                <prop key="ConsultarEntradaN.htm">nutriologoController</prop>
+                <prop key="ForoPrincipalN.htm">nutriologoController</prop>
+                <prop key="nuevaEntradaPs.htm">PsicologoController</prop>
+                <prop key="ConsultarEntradaPs.htm">PsicologoController</prop>
+                <prop key="ForoPrincipalPs.htm">PsicologoController</prop>
+                 <prop key="nuevaEntradaAdmin.htm">AdministradorController</prop>
+                <prop key="ConsultarEntradaAdmin.htm">AdministradorController</prop>
+                <prop key="ForoPrincipalAdmin.htm">AdministradorController</prop>
                 
                 
             </props>
