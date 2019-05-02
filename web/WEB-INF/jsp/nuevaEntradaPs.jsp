@@ -1,8 +1,9 @@
 <%-- 
-    Document   : foro
-    Created on : 15/11/2018, 01:13:11 AM
-    Author     : Zeth
+    Document   : nuevaEntrada
+    Created on : 25-abr-2019, 13:26:56
+    Author     : jms-m
 --%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,12 +21,10 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
                 
-        <!-- Scrips -->
+         <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
-        
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -49,13 +48,14 @@
             <!--Fin container-->
         </header>    
                     
-           <div id="barra">
+   <div id="barra">
+      
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="cronogramaPsicologo.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                   <a href="cronogramaPsicologo.htm"><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-                <div id="menu">
+                 <div id="menu">
                     <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
@@ -76,92 +76,52 @@
         </div>
     </div>
 
-                    
-            <a class="regresar" href="<c:url value="/nuevaEntradaPs.htm" />">Nueva entrada</a>
-        
-        <div id="contenido">
+                
+               <a class="regresar" href="<c:url value="/foroPs.htm" />">Regresar</a>
+               
+          <div id="contenido">
             <div class="container">
                 <center>
-                   <h1>Foro de Nutri-Coach</h1>
+                     <h1>Foro de Nutri-Coach</h1>
                     <h2> <c:forEach items="${datos}" var="dato">
                     <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
                 </c:forEach></h2>
                 </center>
                 
                 
-                <div class="grid-container">
-                    <div class="item1"><p class="titulo">Recomendaciones</p>
+                 <div class="grid-container">
+                     <div class="item1">
+                          <form:form method="post" commandName="entradaForo">
+                    
+                  
+                    
+                    <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
+                      
+                        <p> <form:errors path="titulo"/></p>
+                   
                         <hr>
-                        <ul>
-                            <li>Motivacionales: <c:out value="${salida1}"/></li>
-                            <li>Preparacion alimentos: <c:out value="${salida2}"/></li>
-                            <li>Beneficios alimentos: <c:out value="${salida3}"/></li>
-                            <li>Deportes: <c:out value="${salida4}"/></li>
-                            <li>Medicamentos: <c:out value="${salida5}"/></li>
-                            <li>Salud: <c:out value="${salida6}"/></li>
-                        </ul> 
+                        
+                        <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
+                         <p>  <form:errors path="contenido"/> </p>
+                        
+                      
                     </div>  
-                        <div class="item2"><p class="titulo">Entradas recientes</p>
-                            <hr>
-                                                       
-                           
-                           
-                            <c:forEach items="${listaEntradas}" var="item"> 
-                          
-                    <ul>
-                       <form:form method="post" commandName="entradaForo">
-                        
-                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
-                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
-                       </form:form>
-                    </ul>
-                         </c:forEach> 
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        <div class="item3"><p class="titulo">Historial</p>
-                            <hr>
-                            <table>
-                                <tr>
-                                   <td><strong>Fecha</strong></td>
-                                   <td><strong>Titulo</strong></td>
-                                   <td><strong>Comentarios</strong></td> 
-                                </tr>
-                                <tr>
-                                   <td>18/03/1995</td>
-                                   <td>Comida rica</td>
-                                   <td>25</td> 
-                                </tr>
-                                <tr>
-                                   <td>02/03/1996</td>
-                                   <td>Deportes</td>
-                                   <td>35</td> 
-                                </tr>
-                                <tr>
-                                   <td>30/03/1998</td>
-                                   <td>Suplementos y mas</td>
-                                   <td>21</td> 
-                                </tr>
-                                <tr>
-                                   <td>21/06/1997</td>
-                                   <td>Comida chatarra</td>
-                                   <td>120</td> 
-                                </tr>
-                            </table>
-                        </div>
-                        <a class="regresar" href="<c:url value="/ForoPrincipalPs.htm" />">Ver foro</a>
-                </div>
+                                    
+                    
+                    
+                 </div>
+                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar">
+                    </form:form>
                 
+                
+                
+              </div>
             </div>
-            <!--Fin container-->
-        </div>
-        <!--Fin contenido-->
-        <footer>
+                
+                
+                
+                
+                  <footer>
             <div class="container">
                 <center>
                     <p id="visita">Visita nuestras redes sociales</p>
@@ -196,5 +156,6 @@
                 <!--Fin Modal Términos y condiciones-->
             </div>
         </footer>
+                    
     </body>
 </html>
