@@ -339,7 +339,7 @@
                             <hr>
                             <c:forEach items="${ListaComentarios}" var="listaComentarios">
                                 <form:form method="post" commandName="Comentario">
-                                <c:set var = "usuario"  value = "${listaComentarios.titulo}"/>
+                                <c:set var = "usuario"  value = "${listaComentarios.id_usuario}"/>
                                 <c:forEach items="${ListaPacientes}" var="listaPacientes">
                                     <c:set var = "paciente"  value = "${listaPacientes.no_boleta}"/>
                                     
@@ -406,7 +406,7 @@
                         
                         <form:input path="fecha" value="" type="hidden"   />
                         <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
-                        <form:input path="titulo"  value="${item.no_boleta}" type="hidden"  />
+                        <form:input path="id_usuario"  value="${item.no_boleta}" type="hidden"  />
                         
                             
                              </form:form>

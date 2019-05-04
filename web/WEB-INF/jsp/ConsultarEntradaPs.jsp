@@ -319,10 +319,11 @@
                      <c:forEach items="${Entrada}" var="entrada">   
        <div class="item2"><p class="titulo">Comentarios</p>
                             
-                            <hr>
+                           <hr>
                             <c:forEach items="${ListaComentarios}" var="listaComentarios">
                                 <form:form method="post" commandName="Comentario">
-                                <c:set var = "usuario"  value = "${listaComentarios.titulo}"/>
+                                <c:set var = "usuario"  value = "${listaComentarios.id_usuario}"/>
+                                
                                 <c:forEach items="${ListaPacientes}" var="listaPacientes">
                                     <c:set var = "paciente"  value = "${listaPacientes.no_boleta}"/>
                                     
@@ -361,7 +362,6 @@
                                         
                                 </c:if>
                                 </c:forEach>
-                                
                                 <p>${listaComentarios.contenido}
                                 
                                 <c:if test ="${usuario == sesion}">
@@ -375,7 +375,6 @@
                                   <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
                               </form:form> 
                             </c:forEach>        
-                            
                                                        
                        <form:form method="post" commandName="Comentario">     
                          <form:textarea path="contenido" id="EntradaContenido" placeholder="ingresa tus comentarios"  />
@@ -387,7 +386,7 @@
                         
                         <form:input path="fecha" value="" type="hidden"   />
                         <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
-                        <form:input path="titulo"  value="${item.no_empleado}" type="hidden"  />
+                        <form:input path="id_usuario"  value="${item.no_empleado}" type="hidden"  />
                         
                             
                              </form:form>
