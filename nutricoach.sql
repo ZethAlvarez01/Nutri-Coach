@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: nutricoach
 -- ------------------------------------------------------
--- Server version	5.7.24
+-- Server version	5.7.15-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,8 +28,8 @@ CREATE TABLE `administrador` (
   `ap_uno` varchar(40) NOT NULL,
   `ap_dos` varchar(40) DEFAULT NULL,
   `cargo` varchar(45) DEFAULT NULL,
-  `contraseña` varchar(20) DEFAULT NULL,
-  `telefono` varchar(15) DEFAULT NULL,
+  `contraseña` varchar(20) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
   PRIMARY KEY (`no_empleado`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +40,7 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
-INSERT INTO `administrador` VALUES (2014310030,'Zeth','Alvarez','Hernandez','Administrador',NULL,NULL),(11111111,'Juan','Martinez','Salinas','Administrador',NULL,NULL);
+INSERT INTO `administrador` VALUES (2014310030,'Zeth','Alvarez','Hernandez','Administrador','12345','5547131440'),(11111111,'Juan','Martinez','Salinas','Administrador','Admin1234','55443322');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,9 +86,10 @@ CREATE TABLE `comentarios` (
   `titulo` varchar(20) NOT NULL,
   `contenido` varchar(150) NOT NULL,
   `multimedia` longblob,
+  `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`id_comnt`),
   KEY `id_entrada` (`id_entrada`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +98,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
+INSERT INTO `comentarios` VALUES (14,21,'2014630304','Comentario4','',NULL),(2,34,'2014630304','un comentario en otra publicacion','',NULL),(13,21,'2014630304','Comentario3','',NULL),(12,21,'2014630304','Comentario2','',NULL),(11,21,'2014630304','Comentario1','',NULL),(10,1,'2014630304','Mi primer comentario','',NULL),(9,34,'2014630304','COMENTANDO OTRA VEZ','',NULL),(15,21,'2014630304','Comentario5','',NULL),(16,21,'2014630304','Comentario6','',NULL),(17,21,'2014630304','Comentario6','',NULL),(18,21,'2014630304','Comentario6','',NULL),(19,21,'2014630304','comentario 7','',NULL),(37,38,'2014630306','mas comentarios','',NULL),(33,38,'2014630306','AGREGANDO MAS COMENTARIOS+\r\n','',NULL),(56,1,'2014630306','hola','',NULL),(34,38,'2014630306','AGREGANDO MAS COMENTARIOS-\r\n','',NULL),(55,52,'2014630306','hola','',NULL),(57,38,'2014630304','comentando','','2019-05-03 17:24:46'),(58,52,'2014630304','comentando','','2019-05-03 17:31:06'),(59,55,'11111111','comentando','','2019-05-03 18:01:17'),(60,56,'5452453','comentario','','2019-05-03 18:02:09'),(61,57,'12344','nutriologo','','2019-05-03 18:04:48'),(62,54,'2014630304','comentario','','2019-05-04 21:58:36'),(63,54,'2014630304','mi  comentario','','2019-05-04 22:28:02'),(64,58,'11111111','ASD','','2019-05-04 00:39:27'),(66,57,'5452453','HOLA','','2019-05-04 00:42:56'),(67,57,'5452453','HOLA','','2019-05-04 00:42:56'),(68,59,'123456789','...','','2019-05-04 01:14:24');
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,9 +141,10 @@ CREATE TABLE `entrada` (
   `titulo` varchar(20) NOT NULL,
   `contenido` varchar(25) NOT NULL,
   `multimedia` longblob,
+  `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`id_entrada`),
   KEY `id_usuario` (`id_usuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +153,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
+INSERT INTO `entrada` VALUES (1,2014630304,'TITULO4','CONTENIDO3',NULL,NULL),(2,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(3,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(4,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(5,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(6,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(7,2014630304,'Titulo','CONTENIDO',NULL,NULL),(8,2014630304,'PRUEBA EN VISTA2','PRUEBA DE CONTENIDO2 ',NULL,NULL),(9,2014630304,'PRUEBA TITULO','PRUEBA CONTENIDO','',NULL),(33,2014630306,'Basket','Malo en basket','',NULL),(32,2014630306,'Otro deporte','Otro deporte+','',NULL),(12,2014630304,'Titulo7','CONTENIDO7','',NULL),(13,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(14,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(15,2014630304,'NUEVO TITULO8','Nuevo contenido8','',NULL),(16,2014630304,'TITULO10','CONTENIDO10','',NULL),(17,2014630304,'Titulo11','CONTENIDO11','',NULL),(18,2014630304,'Titulo11','CONTENIDO11','',NULL),(19,2014630304,'12312312','asdasdsadasda','',NULL),(20,2014630304,'12312312','asdasdsadasda','',NULL),(21,2014630304,'prueba17','17','',NULL),(22,2014630304,'prueba','prueba ','',NULL),(23,2014630304,'23','23','',NULL),(24,2014630304,'23','23','',NULL),(25,2014630304,'25','25','',NULL),(26,2014630304,'26','26','',NULL),(27,2014630304,'27','27','',NULL),(28,2014630304,'27B','27B','',NULL),(34,2014630306,'Comida','Comida saludable','',NULL),(38,2014630304,'Nueva publicacion','Nueva publicacion','',NULL),(36,2014630304,'333','333','',NULL),(52,2014630306,'123456','123456','',NULL),(46,1312213,'Entrada Nutriologo','nutriologo','',NULL),(48,5452453,'PSICOLOGO','Psicologo','',NULL),(50,11111111,'ADMINSTRADOR','ADMINISTRADOR','',NULL),(53,2014630304,'titulo','contenido','','2019-05-03 17:43:43'),(54,2014630304,'titulo2','entrada2','','2019-05-03 17:54:17'),(55,11111111,'psico','psico','','2019-05-03 17:56:56'),(56,5452453,'tituloPsico','Psicologo','','2019-05-03 18:01:54'),(57,12344,'nutriologo2','nutriologo2','','2019-05-03 18:04:33'),(58,11111111,'ADMINISTRADORE','ADMIND','','2019-05-04 00:39:19'),(59,123456789,'Entrada nutriólogo','contenido Nutriólogo','','2019-05-04 01:14:13');
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,9 +474,11 @@ CREATE TABLE `nutriologo` (
   `consultorio` varchar(100) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `no_empleado` int(11) DEFAULT NULL,
-  `contraseña` varchar(20) DEFAULT NULL,
-  `institucion` varchar(50) DEFAULT NULL,
-  `estatus` int(11) DEFAULT NULL,
+  `contraseña` varchar(20) NOT NULL,
+  `institucion` varchar(50) NOT NULL,
+  `estatus` int(1) DEFAULT NULL,
+  `horaEntrada` time DEFAULT NULL,
+  `horaSalida` time DEFAULT NULL,
   PRIMARY KEY (`no_cedula`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -483,7 +489,7 @@ CREATE TABLE `nutriologo` (
 
 LOCK TABLES `nutriologo` WRITE;
 /*!40000 ALTER TABLE `nutriologo` DISABLE KEYS */;
-INSERT INTO `nutriologo` VALUES (123123,'Juan','Mart?nez','Salinas','56500835','jjjjjjjjjj','ejemplo@ejemplo.com',1312213,NULL,NULL,NULL),(123456789,'Miguel','Aguirre','Hernandez','5533442211','OOIUUYYYUI','ejemplo@ejemplo.com',123456789,NULL,NULL,NULL),(987654321,'Zeth','Alvarez','Hernandez','55112244','JUYRRLKASHDU','ejemplo@ejemplo.com',987654321,NULL,NULL,NULL);
+INSERT INTO `nutriologo` VALUES (987654321,'Zeth','Alvarez','Hernandez','55112244','JUYRRLKASHDU','ejemplo@ejemplo.com',987654321,'Zeth1234','Escuela Superior de Cómputo (ESCOM)',1,NULL,NULL),(1234567,'Miguel','Aguirre','Hernandez','5566778899','Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX','ejemplo@ejemplo.com',765542,'Migue1234','Escuela Superior de Cómputo (ESCOM)',1,NULL,NULL),(1987654321,'Marcos Angel','Maya','Ramirez','56500835','oiioiooi','ejemplo@ejemplo.com',123456789,'Maya1234','Escuela Superior de Cómputo (ESCOM)',1,NULL,NULL),(3123124,'Juan Jesus ','Mondragón','Barrios','5532334345','Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX','ejemplo@ejemplo.com',12344,'jESUS1234','Escuela Superior de Cómputo (ESCOM)',1,'07:00:00','10:00:00');
 /*!40000 ALTER TABLE `nutriologo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -506,10 +512,12 @@ CREATE TABLE `paciente` (
   `telefono` varchar(15) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `contraseña` varchar(20) DEFAULT NULL,
+  `contraseña` varchar(20) NOT NULL,
   `estatus` int(11) DEFAULT NULL,
+  `no_cedulap` int(11) DEFAULT NULL,
   PRIMARY KEY (`no_boleta`),
-  KEY `no_cedula` (`no_cedula`)
+  KEY `no_cedula` (`no_cedula`),
+  KEY `no_cedulap` (`no_cedulap`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -519,7 +527,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (2014630304,0,'Alexis Israel','Rodrigues',' Alm?zan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com',NULL,NULL),(2014310030,0,'Zeth','Alvarez','Hernandez',24,'H','1995-03-18','5547131440','Trompillo #23 col. 20 de Noviembre Del. Venustiano Carranza Del. Venistiano Carranza','zetokaiba2000@hotmail.com','Excaliburpipper2',1);
+INSERT INTO `paciente` VALUES (2014630304,1312213,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1,NULL),(2014630305,1312213,'Juan Jesus','Mondragón','Barrios',23,'H','1995-05-20','55566565','Domicilio','ejemplo@ejemplo.com','JJesus1234',1,NULL),(2014630306,0,'Leonardo Miguel','Aguirre','Hernández',24,'H','1995-01-04','5532334345','Un barrio bien bravo','ejemplo@ejemplo.com','Migue1234',1,NULL);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,8 +546,12 @@ CREATE TABLE `psicologo` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `no_empleado` int(11) NOT NULL,
-  `contraseña` varchar(20) DEFAULT NULL,
+  `contraseña` varchar(20) NOT NULL,
   `estatus` int(11) DEFAULT NULL,
+  `consultorio` varchar(100) DEFAULT NULL,
+  `institucion` varchar(50) DEFAULT NULL,
+  `horaEntrada` time DEFAULT NULL,
+  `horaSalida` time DEFAULT NULL,
   PRIMARY KEY (`no_cedula`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -550,7 +562,7 @@ CREATE TABLE `psicologo` (
 
 LOCK TABLES `psicologo` WRITE;
 /*!40000 ALTER TABLE `psicologo` DISABLE KEYS */;
-INSERT INTO `psicologo` VALUES (234234,'Pedro','Perez','Perez','55555555','ejemplo@ejemplo.com',5452453,NULL,NULL);
+INSERT INTO `psicologo` VALUES (234234,'Pedro','Perez','Perez','55555555','ejemplo@ejemplo.com',5452453,'Pedro1234',1,NULL,NULL,NULL,NULL),(99999999,'Leonardo Miguel','Aguirre','Hernández','5566778899','ejemplo@ejemplo.com',88888888,'Leonardo1234',1,'Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX','Escuela Superior de Cómputo (ESCOM)','07:00:00','17:00:00');
 /*!40000 ALTER TABLE `psicologo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,4 +626,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-20 20:35:58
+-- Dump completed on 2019-05-04  1:39:47
