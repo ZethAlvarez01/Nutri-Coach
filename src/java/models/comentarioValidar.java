@@ -30,8 +30,8 @@ public class comentarioValidar implements Validator{
         //Se valida que cada elemento de nuestro formulario no se encuentre en blanco
         
         
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titulo","required.titulo","El título  es oligatorio");
-        System.out.println("NO ENCONTRE EL TITULO");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id_usuario","required.id_usuario","El id_usuario  es oligatorio");
+        System.out.println("NO ENCONTRE EL ID_USUARIO");
         
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contenido","required.contenido","El contenido es obligatorio");
         System.out.println("NO ENCONTRE EL CONTENIDO");
