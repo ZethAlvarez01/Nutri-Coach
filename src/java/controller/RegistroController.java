@@ -89,7 +89,7 @@ public class RegistroController {
               //El usuario ingreso bien los datos
              if(n.getContraseña().equals(n.getContraseña2())){
 
-                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"',0);";
+                String sql="insert into nutriologo values("+n.getNo_cedula()+",'"+n.getNombre()+"','"+n.getAp_uno()+"','"+n.getAp_dos()+"','"+n.getTelefono()+"','"+n.getConsultorio()+"','"+n.getCorreo()+"','"+n.getNo_empleado()+"','"+n.getContraseña()+"','"+n.getInstitucion()+"',0,'"+n.getHoraEntrada()+"','"+n.getHoraSalida()+"');";
 
                 this.jdbcTemplate.update(sql);
             
@@ -243,7 +243,7 @@ public class RegistroController {
                  //El usuario ingreso bien los datos
             if(ps.getContraseña().equals(ps.getContraseña2())){
 
-                String sql="insert into psicologo values("+ps.getNo_cedula()+",'"+ps.getNombre()+"','"+ps.getAp_uno()+"','"+ps.getAp_dos()+"','"+ps.getTelefono()+"','"+ps.getCorreo()+"',"+ps.getNo_empleado()+",'"+ps.getContraseña()+"',0);";
+                String sql="insert into psicologo values("+ps.getNo_cedula()+",'"+ps.getNombre()+"','"+ps.getAp_uno()+"','"+ps.getAp_dos()+"','"+ps.getTelefono()+"','"+ps.getCorreo()+"',"+ps.getNo_empleado()+",'"+ps.getContraseña()+"',0,'"+ps.getConsultorio()+"','"+ps.getInstitucion()+"','"+ps.getHoraEntrada()+"','"+ps.getHoraSalida()+"');";
 
                 this.jdbcTemplate.update(sql);
             
