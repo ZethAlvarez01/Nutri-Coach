@@ -4,48 +4,65 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 **Todo lo pishi responsivo**
 - [ ] Todas las vistas en responsivo :D
 
-**Vistas pendientes**
-- [ ] Seleccionar Div de cada usuario y poder visualizar información completa
-- [ ] Arreglar CSS para la opcion de visualizar todos
 
-**PANTALLA cronograma y cronograma psicologo**
+//////////////
+ADMINISTRADOR
 
-- [ ] al momento de ir a otra pagina y regresar desaparece el nombre del especialista, 
-se reacomoda página **CORREGIR**
-
-**PANTALLA cronograma**
-
-- [ ] conectar cronograma con dietas 
-
-**PANTALLA DIETA, FORO, PACIENTES**
-
-- [ ] cambiar barra de menús
-
-**PANTALLA INICIO**
-
-- [ ] se desacomoda al mostrar las validaciones **CORREGIR CSS
-
-**PANTALLA recuperarC**
-
-- [ ] envíar correo de recuperación
-
-**PANTALLA cambioC**
-
-- [ ] Cambiar de controllador de vistas a controlador de recuperación cuando el sistema pueda enviar correo
-
-**PANTALLA expediente**
-
-- [ ] añadir opción para generar primera cita
+* ACTIVAR BUSQUEDA DE USUARIOS
+* ACTIVAR BOTON DE GUARDAR CAMBIOS DE ESTADO
+* SELECCIONAR DIV DE CADA USUARIO Y PODER VISUALIZAR INFORMACIÓN COMPLETA
+* CSS PANTALLA VERIFICAR CUENTAS
+* DA MAL LA FECHA 
 
 
-**GENERAR PANTALLA DE PRIMERA CITA**
+////////////////////
+
+PSICÓLOGO
+
+*FALTA PANTALLA DE CITAS 
+*NO HAY RELACION CON EL PACIENTE
+*CALENDARIO DE BIENVENIDA DA MAL LA FECHA ACTUAL
+*CSS REGISTRO PSICOLOGO
 
 
 
+/////////////////////
+NUTRIÓLOGO
+*FALTA PANTALLA DE CITAS
+*FALTA GENERACIÓN DE DIETAS
+*CALENDARIO DE BIENVENIDA DA MAL LA FECHA ACTUAL
+*CSS REGISTRO NUTRIOLOGO
 
-**CREAR MODULO DE PRIMERA CITA**
+
+PACIENTE
+/////////////////
+*FALTA ACTIVAR CITAS
+*SEGUIMIENTO PSICOLOGICO
+*SEGUIMIENTO NUTRIÓLOGO
 
 
-**ACTIVAR PANTALLA DIETAS**
+/////////////////////
+FORO
+
+
+*MODIFICAR LA BASE DE COMENTARIOS PARA AGREGAR ID DE USUARIO QUE COMENTA
+*FALTA MULTIMEDIA // OPCIONAL
+*CREAR HISTORIAL
+*CSS
+
+//PANTALLA DE INICIO
+*CSS PARA MOSTRAR ERRORES DE INICIO
+
+
+
+
+
+
+
+
+
+
+
+
 
 
