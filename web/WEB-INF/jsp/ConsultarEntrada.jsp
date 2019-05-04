@@ -25,6 +25,7 @@
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/fecha.js"/></script>  
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -120,7 +121,46 @@
                          
                      <c:forEach items="${Entrada}" var="dato">
                          
-                     
+                     <c:set var = "autor"  value = "${dato.id_usuario}"/>
+                                <c:forEach items="${ListaPacientes}" var="listaPacientes">
+                                    <c:set var = "paciente"  value = "${listaPacientes.no_boleta}"/>
+                                    
+                                    <c:if test ="${paciente == autor}">
+                                       
+                                        <p>${dato.fecha} ${listaPacientes.nombre} ${listaPacientes.ap_uno} ${listaPacientes.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                 <c:forEach items="${ListaNutriologos}" var="listaNutriologos">
+                                    <c:set var = "nutriologo"  value = "${listaNutriologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${nutriologo == autor}">
+                                      
+                                        <p>${dato.fecha} Nutriólogo: ${listaNutriologos.nombre} ${listaNutriologos.ap_uno} ${listaNutriologos.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                         <c:forEach items="${ListaPsicologos}" var="listaPsicologos">
+                                    <c:set var = "psicologo"  value = "${listaPsicologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${psicologo == autor}">
+                                      
+                                        <p>${dato.fecha} Psicólogo: ${listaPsicologos.nombre} ${listaPsicologos.ap_uno} ${listaPsicologoss.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        <c:forEach items="${ListaAdministrador}" var="listaAdministrador">
+                                    <c:set var = "administrador"  value = "${listaAdministrador.no_empleado}"/>
+                                    
+                                    <c:if test ="${administrador == autor}">
+                                      
+                                        <p>${dato.fecha} Admnistrador</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                
                      
                    
                         
@@ -201,7 +241,46 @@
                          
                      <c:forEach items="${Entrada}" var="dato">
                          
-                     
+                      <c:set var = "autor"  value = "${dato.id_usuario}"/>
+                                <c:forEach items="${ListaPacientes}" var="listaPacientes">
+                                    <c:set var = "paciente"  value = "${listaPacientes.no_boleta}"/>
+                                    
+                                    <c:if test ="${paciente == autor}">
+                                       
+                                        <p>${dato.fecha} ${listaPacientes.nombre} ${listaPacientes.ap_uno} ${listaPacientes.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                 <c:forEach items="${ListaNutriologos}" var="listaNutriologos">
+                                    <c:set var = "nutriologo"  value = "${listaNutriologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${nutriologo == autor}">
+                                      
+                                        <p>${dato.fecha} Nutriólogo: ${listaNutriologos.nombre} ${listaNutriologos.ap_uno} ${listaNutriologos.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                         <c:forEach items="${ListaPsicologos}" var="listaPsicologos">
+                                    <c:set var = "psicologo"  value = "${listaPsicologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${psicologo == autor}">
+                                      
+                                        <p>${dato.fecha} Psicólogo: ${listaPsicologos.nombre} ${listaPsicologos.ap_uno} ${listaPsicologoss.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        <c:forEach items="${ListaAdministrador}" var="listaAdministrador">
+                                    <c:set var = "administrador"  value = "${listaAdministrador.no_empleado}"/>
+                                    
+                                    <c:if test ="${administrador == autor}">
+                                       
+                                        <p>${dato.fecha} Admnistrador</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                
                      
                    
                         
@@ -261,6 +340,46 @@
                             <c:forEach items="${ListaComentarios}" var="listaComentarios">
                                 <form:form method="post" commandName="Comentario">
                                 <c:set var = "usuario"  value = "${listaComentarios.titulo}"/>
+                                <c:forEach items="${ListaPacientes}" var="listaPacientes">
+                                    <c:set var = "paciente"  value = "${listaPacientes.no_boleta}"/>
+                                    
+                                    <c:if test ="${paciente == usuario}">
+                                      
+                                        <p>${listaComentarios.fecha} ${listaPacientes.nombre} ${listaPacientes.ap_uno} ${listaPacientes.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                 <c:forEach items="${ListaNutriologos}" var="listaNutriologos">
+                                    <c:set var = "nutriologo"  value = "${listaNutriologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${nutriologo == usuario}">
+                                      
+                                        <p>${listaComentarios.fecha} Nutriólogo: ${listaNutriologos.nombre} ${listaNutriologos.ap_uno} ${listaNutriologos.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        
+                                         <c:forEach items="${ListaPsicologos}" var="listaPsicologos">
+                                    <c:set var = "psicologo"  value = "${listaPsicologos.no_empleado}"/>
+                                    
+                                    <c:if test ="${psicologo == usuario}">
+                                      
+                                        <p>${listaComentarios.fecha} Psicólogo: ${listaPsicologos.nombre} ${listaPsicologos.ap_uno} ${listaPsicologoss.ap_dos}</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                        <c:forEach items="${ListaAdministrador}" var="listaAdministrador">
+                                    <c:set var = "administrador"  value = "${listaAdministrador.no_empleado}"/>
+                                    
+                                    <c:if test ="${administrador == usuario}">
+                                      
+                                        <p>${listaComentarios.fecha} Admnistrador</p>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                
+                                
                                 <p>${listaComentarios.contenido}
                                 
                                 <c:if test ="${usuario == sesion}">
@@ -281,10 +400,11 @@
                         <p>  <form:errors path="contenido"/> </p> 
                         
                         
-                        <input type="submit" class="regresar" id="AgregarComentario" name="AgregarComentario" value="Agregar Comentario"/>
-                          
+                        <input type="submit" class="regresar" id="AgregarComentario" name="AgregarComentario" value="Agregar Comentario" onclick="fecha2()"/>
                         
+                      
                         
+                        <form:input path="fecha" value="" type="hidden"   />
                         <form:input path="id_entrada" value="${entrada.id_entrada}" type="hidden"  />
                         <form:input path="titulo"  value="${item.no_boleta}" type="hidden"  />
                         
