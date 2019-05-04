@@ -10,24 +10,32 @@ public class Psicologo {
     private String nombre;
     private String ap_uno;
     private String ap_dos;
+    private String institucion;
     private String telefono;
+    private String consultorio;
     private String correo;
     private String contraseña;
     private String contraseña2;
+    private String horaEntrada;
+    private String horaSalida;
 
     public Psicologo() {
     }
 
-    public Psicologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String telefono, String correo, String contraseña, String contraseña2) {
+    public Psicologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String institucion, String telefono, String consultorio, String correo, String contraseña, String contraseña2, String horaEntrada, String horaSalida) {
         this.no_cedula = no_cedula;
         this.no_empleado = no_empleado;
         this.nombre = nombre;
         this.ap_uno = ap_uno;
         this.ap_dos = ap_dos;
+        this.institucion = institucion;
         this.telefono = telefono;
+        this.consultorio = consultorio;
         this.correo = correo;
         this.contraseña = contraseña;
         this.contraseña2 = contraseña2;
+        this.horaEntrada = horaEntrada;
+        this.horaSalida = horaSalida;
     }
 
     public String getNo_cedula() {
@@ -70,12 +78,28 @@ public class Psicologo {
         this.ap_dos = ap_dos;
     }
 
+    public String getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
+    }
+
     public String getTelefono() {
         return telefono;
     }
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getConsultorio() {
+        return consultorio;
+    }
+
+    public void setConsultorio(String consultorio) {
+        this.consultorio = consultorio;
     }
 
     public String getCorreo() {
@@ -90,8 +114,8 @@ public class Psicologo {
         return contraseña;
     }
 
-    public void setContraseña(String contrasena) {
-        this.contraseña = contrasena;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getContraseña2() {
@@ -102,6 +126,23 @@ public class Psicologo {
         this.contraseña2 = contraseña2;
     }
 
+    public String getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(String horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public String getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(String horaSalida) {
+        this.horaSalida = horaSalida;
+    }
+
+ 
     
     
 }

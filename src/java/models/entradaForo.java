@@ -15,16 +15,18 @@ public class entradaForo {
     private String titulo;
     private String contenido;
     private String multimedia;
+    private String fecha;
 
     public entradaForo() {
     }
 
-    public entradaForo(String id_entrada, String id_usuario, String titulo, String contenido, String multimedia) {
+    public entradaForo(String id_entrada, String id_usuario, String titulo, String contenido, String multimedia, String fecha) {
         this.id_entrada = id_entrada;
         this.id_usuario = id_usuario;
         this.titulo = titulo;
         this.contenido = contenido;
         this.multimedia = multimedia;
+        this.fecha = fecha;
     }
 
     public String getId_entrada() {
@@ -66,5 +68,15 @@ public class entradaForo {
     public void setMultimedia(String multimedia) {
         this.multimedia = multimedia;
     }
-  
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
+    
+
 }
