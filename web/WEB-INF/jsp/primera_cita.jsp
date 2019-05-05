@@ -20,10 +20,10 @@
 
 
         <!--Scripts-->
-
-        <script type="text/javascript" src="/resource/scrips/calendario_primera_cita.js"></script>
-        <script type="text/javascript" src="/resource/scrips/script.js"></script>
-        <script type="text/javascript" src="/resource/scrips/barra_script.js"></script>
+        
+        <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"/></script>
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
 
 
         <title>Nutri-Coach</title>

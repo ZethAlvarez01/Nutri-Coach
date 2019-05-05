@@ -1,36 +1,34 @@
 <%-- 
-    Document   : expedientePaciente
-    Created on : 16/11/2018, 02:15:14 AM
-    Author     : Zeth
+    Document   : nuevaEntrada
+    Created on : 25-abr-2019, 13:26:56
+    Author     : jms-m
 --%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="es_MX">
-     <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-        <!-- Hoajs de estilos -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
         
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/expediente.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        
-        <!-- Scrips -->
+                
+         <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-      
-        
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
-        <header>
+         <header>
             <div class="container">
                 <div id="pleca">
                     <div id="logoSEP">
@@ -50,18 +48,20 @@
             <!--Fin container-->
         </header>    
                     
-         <div id="barra">
+   <div id="barra">
+      
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
                     <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-                <div id="menu">
+               <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                             <c:if test= "${item.no_cedula>0}">
+                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                          <c:if test= "${item.no_cedula>0}">
                             
                         
                               
@@ -76,14 +76,14 @@
                              
                                                  
                         </c:if>
-                            
-                             
-                          <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                               
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
                     </ul>
                          </c:forEach> 
+                    
                     
                 </div>
             </div>
@@ -91,78 +91,52 @@
         </div>
     </div>
 
-        <div id="contenido">
+                
+               <a class="regresar" href="<c:url value="/foro.htm" />">Regresar</a>
+               
+          <div id="contenido">
             <div class="container">
-                <c:forEach items="${datos}" var="dato">
-                    <h1>¡Hola, <c:out value="${dato.nombre}"/>!</h1>
-                </c:forEach>
-         
-           <c:forEach items="${datos}" var="dato">
+                <center>
+                     <h1>Foro de Nutri-Coach</h1>
+                    <h2> <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                </c:forEach></h2>
+                </center>
                 
-                        <c:if test= "${dato.no_cedula==0}">
-                            <p><h1>No cuentas con un nutriólogo</h1></p
-                            <p><h1>Por favor ingresa a la sección de citas para</h1></p>
-                        <form:form method="post" commandName="Paciente">
-                              
-                       <input type="submit" class="cita"  name="primera_cita" value="Citas" >                       
-                       </form:form>
-                            
-                        </c:if>
-                </c:forEach>
-                        <c:forEach items="${datos}" var="dato">
-                            <c:if test= "${dato.no_cedula>0}">
-                            
-                       <div class="grid-container">
-                    <div class="observaciones">
-                    <p class="titulo">Observaciones</p>
-                    <div class="contenido-E">
-                        No disponible.
+                
+                 <div class="grid-container">
+                     <div class="item1">
+                          <form:form method="post" commandName="entradaForo">
+                    
+                  
+                    
+                    <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
+                      
+                        <p> <form:errors path="titulo"/></p>
+                   
+                        <hr>
                         
-                         
-                    </div>
-                    </div>
-                    <div class="estadisticas">
-                    <p class="titulo">Tu progreso</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="expediente">
-                    <p class="titulo">Expediente</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="recomendacion">
-                    <p class="titulo">Recomendación diaria</p>
-                    <p id="tipo">Tipo: <c:out value="${respuesta}"/></p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="dieta">
-                    <p class="titulo">Tu dieta de hoy</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>
-                    <div class="historial">
-                    <p>Historial</p>
-                    <div class="contenido-E">
-                        No disponible.
-                    </div>
-                    </div>     
-                </div>
+                        <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
+                         <p>  <form:errors path="contenido"/> </p>
+                        
+                      
+                    </div>  
+                                    
+                    
+                    
+                 </div>
+                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar">
+                    </form:form>
+                
+                
+                
+              </div>
             </div>
-            <!--Fin container-->
-                            
-                        </c:if>
-                        </c:forEach>    
                 
-        </div>
-        <!--Fin contenido-->            
                 
-        <footer>
+                
+                
+                  <footer>
             <div class="container">
                 <center>
                     <p id="visita">Visita nuestras redes sociales</p>
@@ -197,5 +171,6 @@
                 <!--Fin Modal Términos y condiciones-->
             </div>
         </footer>
+                    
     </body>
 </html>

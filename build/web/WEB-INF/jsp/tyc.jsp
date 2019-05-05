@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/tyc.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         
         <title>Nutri-Coach</title>
     </head>
@@ -44,11 +45,11 @@
                     
         <div id="barra">
             <div class="container">
-                <a href="<c:url value="/inicio.htm" />"><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>   
+                <img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach">  
             </div>
         </div>
                     
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+            <input type="submit" class="regresar" value="Regresar" onclick="regresar()" >
         
         <div id="contenido">
             <div class="container">
