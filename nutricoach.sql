@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `actividadp`
+--
+
+DROP TABLE IF EXISTS `actividadp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `actividadp` (
+  `id_actividad` int(11) NOT NULL AUTO_INCREMENT,
+  `no_boleta` int(11) NOT NULL,
+  `no_cedula` int(11) NOT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `contenido` varchar(1000) DEFAULT NULL,
+  `multimedia` longblob,
+  PRIMARY KEY (`id_actividad`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `actividadp`
+--
+
+LOCK TABLES `actividadp` WRITE;
+/*!40000 ALTER TABLE `actividadp` DISABLE KEYS */;
+INSERT INTO `actividadp` VALUES (1,2014630304,234234,'2019-05-05 00:00:00','Una actividad',''),(2,2014630307,234234,'2019-05-05 00:00:00','Actividad para ti',''),(3,2014630304,234234,'2019-05-05 00:00:00','activate',''),(4,2014630304,234234,'2019-05-05 00:00:00','activate',''),(5,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(6,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(7,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(8,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(9,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(10,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(11,2014630304,234234,'2019-05-05 00:00:00','ACTIVATE MAS',''),(12,2014630304,234234,'2019-05-05 00:00:00','SAL A CORRER',''),(13,2014630304,234234,'2019-05-05 00:00:00','SAL A CORRER',''),(14,2014630304,234234,'2019-05-05 00:00:00','SAL A CORRER',''),(15,2014630304,234234,'2019-05-05 00:00:00','corre',''),(16,2014630304,234234,'2019-05-05 00:00:00','ponte a hacer ejercicio',''),(17,2014630304,234234,'2019-05-05 00:00:00','ponte a hacer ejercicio',''),(18,2014630304,234234,'2019-05-05 00:00:00','lagartijas',''),(19,2014630304,234234,'2019-05-05 00:00:00','lagartijas',''),(20,2014630304,234234,'2019-05-05 00:00:00','sentadillas',''),(21,2014630304,234234,'2019-05-05 00:00:00','sentadillas',''),(22,2014630304,234234,'2019-05-05 00:00:00','actividad asignada',''),(23,2014630304,234234,'2019-05-05 00:00:00','debes correr',''),(24,2014630304,234234,'2019-05-05 00:00:00','debes correr',''),(25,2014630304,234234,'2019-05-05 00:00:00','debes correr',''),(26,2014630304,234234,'2019-05-05 00:00:00','escribe un diario',''),(27,2014630304,234234,'2019-05-05 16:10:20','escribe un diario',''),(28,2014630304,234234,'2019-05-05 16:10:20','escribe un diario',''),(29,2014630304,234234,'2019-05-05 16:23:28','mas actividades como correr',''),(30,2014630307,234234,'2019-05-05 16:24:58','Hola\r\nnecesito que realices algunas actividades\r\nPuedes escribir un diario con todo tu día\r\ny mandarmelo para leerlo\r\npor favor',''),(31,2014630304,234234,'2019-05-05 16:34:41','Manda tu diario POR FAVOR',''),(32,2014630304,234234,'2019-05-05 16:34:41','Manda tu diario',''),(33,2014630304,234234,'2019-05-05 16:34:41','Manda tu diario',''),(34,2014630307,234234,'2019-05-05 16:47:00','manda tu avance del día por favor',''),(35,2014630304,234234,'2019-05-05 16:57:00','actividad 2',''),(36,2014630304,234234,'2019-05-05 17:06:40','descripcion de la actividad otra vez','');
+/*!40000 ALTER TABLE `actividadp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `administrador`
 --
 
@@ -339,7 +367,7 @@ CREATE TABLE `expediente` (
   `otras_medidas` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id_expediente`),
   KEY `no_boleta` (`no_boleta`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,6 +376,7 @@ CREATE TABLE `expediente` (
 
 LOCK TABLES `expediente` WRITE;
 /*!40000 ALTER TABLE `expediente` DISABLE KEYS */;
+INSERT INTO `expediente` VALUES (1,2014630304,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'','');
 /*!40000 ALTER TABLE `expediente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,7 +556,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (2014630304,1312213,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1,NULL),(2014630305,1312213,'Juan Jesus','Mondragón','Barrios',23,'H','1995-05-20','55566565','Domicilio','ejemplo@ejemplo.com','JJesus1234',1,NULL),(2014630306,0,'Leonardo Miguel','Aguirre','Hernández',24,'H','1995-01-04','5532334345','Un barrio bien bravo','ejemplo@ejemplo.com','Migue1234',1,NULL);
+INSERT INTO `paciente` VALUES (2014630304,1987654321,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1,234234),(2014630305,1312213,'Juan Jesus','Mondragón','Barrios',23,'H','1995-05-20','55566565','Domicilio','ejemplo@ejemplo.com','JJesus1234',1,NULL),(2014630306,1987654321,'Leonardo Miguel','Aguirre','Hernández',24,'H','1995-01-04','5532334345','Un barrio bien bravo','ejemplo@ejemplo.com','Migue1234',1,NULL),(2014630307,0,'José Eduardo','Quintero','López',24,'H','1995-04-24','5532334345','Nueva rosita','ejemplo@ejemplo.com','Pepe1234',1,234234);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-04 14:58:21
+-- Dump completed on 2019-05-05 17:14:54
