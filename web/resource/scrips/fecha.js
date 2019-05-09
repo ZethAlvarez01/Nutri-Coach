@@ -4,7 +4,7 @@ function fecha2() {
                                     fecha.getMinutes()+":"+fecha.getSeconds();
                             console.log(cadena);
                             
-                            
+                        
                             document.getElementById("fecha").value=cadena;
                    
 }

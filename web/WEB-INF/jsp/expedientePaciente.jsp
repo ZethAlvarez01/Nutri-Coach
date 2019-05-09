@@ -79,6 +79,15 @@
                             
                              
                           <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                          <c:if test= "${item.no_cedulap>0}">
+                            
+                        
+                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
+                             
+                                                 
+                        </c:if>
+                            
+                          
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>

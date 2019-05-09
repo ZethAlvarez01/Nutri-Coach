@@ -1,6 +1,6 @@
 <%-- 
-    Document   : nuevaEntrada
-    Created on : 25-abr-2019, 13:26:56
+    Document   : ConsultarEntrada
+    Created on : 27-abr-2019, 18:30:49
     Author     : jms-m
 --%>
 
@@ -24,7 +24,7 @@
          <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script> 
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/fecha.js"/></script>  
         <title>Nutri-Coach</title>
     </head>
@@ -49,50 +49,26 @@
             <!--Fin container-->
         </header>    
                     
-   <div id="barra">
-      
+       <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="cronogramaPsicologo.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-               <div id="menu">
-                     <c:forEach items="${datos}" var="item"> 
+                <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
-                        <form:form method="post" commandName="Paciente">
-                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                          <c:if test= "${item.no_cedula>0}">
-                            
-                        
-                              
-                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
-                        
-                                                 
-                        </c:if>
-                        <c:if test= "${item.no_cedula==0}">
-                            
-                        
-                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
-                             
-                                                 
-                        </c:if>
-                        
-                         <c:if test= "${item.no_cedulap>0}">
-                            
-                        
-                               <li><a class="texto_menu" href="primera_cita.htm">Psicólogo</a></li>
-                             
-                                                 
-                        </c:if>
-                               
+                        <form:form method="post" commandName="Psicologo">
+                              <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
-                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
                          </c:forEach> 
-                    
-                    
+                   
                 </div>
             </div>
 
@@ -100,48 +76,71 @@
     </div>
 
                 
-               <a class="regresar" href="<c:url value="/foro.htm" />">Regresar</a>
+                   <a class="regresar" href="<c:url value="/bienvenida_psicologo.htm" />">Regresar</a>
+                   
+          
+            
                
-          <div id="contenido">
+                
+                      <div id="contenido">
             <div class="container">
                 <center>
-                     <h1>Foro de Nutri-Coach</h1>
+                     <h1>Actividad</h1>
                     <h2> <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Esta es la actvidad </h1></p>
                 </c:forEach></h2>
                 </center>
                 
-                
-                 <div class="grid-container">
-                     <div class="item1">
-                          <form:form method="post" commandName="entradaForo">
-                    
-                  
-                    
-                    <form:input path="titulo" class="titulo" placeholder="Título de tu entrada" />
-                      
-                        <p> <form:errors path="titulo"/></p>
-                   
+                    <form:form method="post" commandName="ActividadP">
+                <div class="grid-container">
+                    <div class="item1"><p class="titulo">Actividad para:${nombreP[0].nombre} ${nombreP[0].ap_uno} ${nombreP[0].ap_dos} </p>
                         <hr>
                         
-                        <form:textarea path="contenido" class="item1" placeholder="Redacta tu entrada" />
-                         <p>  <form:errors path="contenido"/> </p>
+                     
+                                
+                           
+                            
+                            <form:textarea path="contenido"  id="desc_actividad" cols="20" rows="8" placeholder="${activad[0].contenido}" />
+                            <p>  <form:errors path="contenido"/> </p> 
+                            
+                            
+                                <form:input path="id_actividad"  value="${actividad[0].id_actividad}"    /> 
+                           
+                            
+                           <c:forEach items="${actividad}" var="datos">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${datos.no_boleta}"/> Esta es la actvidad </h1></p>
+                           <p id="txt-bnv"><h1>Bienvenido, <c:out value="${datos.id_actividad}"/> Esta es la actvidad </h1></p>
+                    <p> hola<p>
+                </c:forEach> 
+                           
                         
-                      
+                        
+                        
+                        
+                        
                     </div>  
-                                    
+                       
+                            <input type="submit" id="insertar_a" value="Insertar Archivo"><label id="n_archivo">nombre_archivo.ext</label>
+                           
+                         <input  id="regresar" type="submit" name="EditarActividad" value="Editar Actividad" onclick="fecha2()">
+                             </form:form>
+                        
+                  
+                        
+                        
+                        
+                        
+                        
+                        
                     
-                    
-                 </div>
-                         <form:input path="fecha" value="" type="hidden"   />
-                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar" onclick="fecha2()">
-                    </form:form>
+                       
+                </div>
                 
-                
-                
-              </div>
             </div>
-                
+            <!--Fin container-->
+        </div>  
+              <!--Fin contenido-->
+                     
                 
                 
                 

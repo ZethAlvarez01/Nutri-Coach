@@ -166,7 +166,7 @@ public class RegistroController {
 
                 Period periodo = Period.between(fechaNac, ahora);
 
-                String sql="insert into paciente values("+p.getNo_boleta()+",0,'"+p.getNombre()+"','"+p.getAp_uno()+"','"+p.getAp_dos()+"',"+periodo.getYears()+",'"+p.getSexo()+"','"+p.getFecha_n()+"','"+p.getTelefono()+"','"+p.getDomicilio()+"','"+p.getCorreo()+"','"+p.getContraseña()+"',1);";
+                String sql="insert into paciente values("+p.getNo_boleta()+",0,'"+p.getNombre()+"','"+p.getAp_uno()+"','"+p.getAp_dos()+"',"+periodo.getYears()+",'"+p.getSexo()+"','"+p.getFecha_n()+"','"+p.getTelefono()+"','"+p.getDomicilio()+"','"+p.getCorreo()+"','"+p.getContraseña()+"',1,0);";
 
                 this.jdbcTemplate.update(sql);
 

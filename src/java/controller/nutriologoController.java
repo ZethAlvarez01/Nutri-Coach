@@ -311,22 +311,25 @@ public class nutriologoController {
                 System.out.println("NO_ EMPLEADO: "+alert);
                 
                 ModelAndView mv=new ModelAndView();
-                mv.setViewName("bienvenida_nutriologo");
+              mv.setViewName("bienvenida_nutriologo");
                 
                 
-                String sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio from paciente where no_cedula="+alert;
-                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
-                                 
-                                 mv.addObject("ListaP",datosL2);          // Pasa la lilsta completa
-                                 mv.addObject("Paciente",new Paciente());
-                                 System.out.println(datosL2);
-                                 mv.addObject("LongitudP",datosL2.size()); // Pasa el tamaño de la lista
-               
-                sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+alert;
-                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                               
+              String  sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+alert;
+              List    datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Nutriologo",new Nutriologo());
+                                 
+                sql="select no_boleta,no_cedula,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,"
+                        + "domicilio,correo from paciente where no_cedula= (select no_cedula from nutriologo where no_empleado="+alert+")"; //OBTENEMOS TODOS LOS PACIENTES RELACIONADOS AL PSICÓLGO
+                datosL2 = this.jdbcTemplate.queryForList(sql);                     // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 
+                                 mv.addObject("ListaPacientes",datosL2);          // Pasa la lilsta completa
+                                 
+                
+                mv.addObject("LongitudP",datosL2.size());    // SE PASA EL TOTAL DE PACIENTES
+                mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO        
                 return mv;
                 
      }
@@ -472,19 +475,24 @@ public class nutriologoController {
                 mv.setViewName("bienvenida_nutriologo");
                 
                 
-                String sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio from paciente where no_cedula="+alert;
-                                 List datosL2 = this.jdbcTemplate.queryForList(sql);
-                                 
-                                 mv.addObject("ListaP",datosL2);          // Pasa la lilsta completa
-                                 mv.addObject("Paciente",new Paciente());
-                                 System.out.println(datosL2);
-                                 mv.addObject("LongitudP",datosL2.size()); // Pasa el tamaño de la lista
-               
-                sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+alert;
-                                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                               
+              String  sql="select nombre,ap_uno,ap_dos from nutriologo where no_empleado="+alert;
+              List    datosL2 = this.jdbcTemplate.queryForList(sql);
                                  
                                  mv.addObject("datos",datosL2);          // Pasa la lilsta completa
                                  mv.addObject("Nutriologo",new Nutriologo());
+                                 
+                sql="select no_boleta,no_cedula,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,"
+                        + "domicilio,correo from paciente where no_cedulap= (select no_cedula from nutriologo where no_empleado="+alert+")"; //OBTENEMOS TODOS LOS PACIENTES RELACIONADOS AL PSICÓLGO
+                datosL2 = this.jdbcTemplate.queryForList(sql);                     // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 
+                                 mv.addObject("ListaPacientes",datosL2);          // Pasa la lilsta completa
+                                 
+                
+                mv.addObject("LongitudP",datosL2.size());    // SE PASA EL TOTAL DE PACIENTES
+                mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO                           
+                                 
+                                 
                 return mv;
                 
      }
