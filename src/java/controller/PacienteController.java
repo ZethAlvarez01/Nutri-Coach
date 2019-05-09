@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ActividadP;
 import models.Conexion;
 import models.NeuralNet.Capa_neuronas;
 import models.NeuralNet.Crear_RN;
@@ -24,6 +25,8 @@ import models.foroValidar;
 import models.Comentario;
 import models.Nutriologo;
 import models.comentarioValidar;
+import models.diario;
+import models.diarioValidar;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -43,10 +46,12 @@ public class PacienteController {
      private int[] topology={42,5,6};
      private foroValidar foroValidar;                                 //Variable para validar foro
      private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
+      private diarioValidar diarioValidar;                           //Variable para validar hoja del diario
      
       public PacienteController() {
         this.foroValidar=new foroValidar();                            // Instancia de la clase foroValidar
-        this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioalidar
+        this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioValidar
+        this.diarioValidar=new diarioValidar();                      // Instancia de la clase diarioValidar
         Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
@@ -74,7 +79,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();
                 mv.setViewName("primera_cita");
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -115,6 +120,161 @@ public class PacienteController {
                 
     }
      
+      ///////////////////////////////////////
+      //Pantalla de diario
+        @RequestMapping(value="diario_paciente.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView DiarioPaciente(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("DIARIO GET"); 
+        
+        
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("diario_paciente");
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             // PASA OBJETO PACIENTE
+                                 mv.addObject("diario",new diario());                                             // PASA OBJETO DIARIO
+      
+              
+                    
+                sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente =( select id_expediente from expediente where no_boleta="+alert+"))";   // CONSULTA PARA EXTRAER TODAS LAS HOJAS DEL DIARIO
+                               datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                mv.addObject("hojas",datosL2);                                                       // Pasa la lilsta completa                 
+                        System.out.println(datosL2);         
+                return mv;                                                                                          // RETORNAMOS EL MODELO
+                
+         
+         
+                    
+                
+    }
+     
+     
+     
+     
+     ///////////////////////////////////////
+      //Pantalla de seguimiento psicologico
+        @RequestMapping(value="SeguimientoPsicologico.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView SeguimientoPsicologico(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+         System.out.println("Seguimiento psicologico GET"); 
+        
+        
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("SeguimientoPsicologico");
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             // PASA OBJETO PACIENTE
+                
+                 sql="select nombre, ap_uno, ap_dos, no_cedula,telefono,correo,institucion, consultorio from psicologo where no_cedula=(select no_cedulap from paciente where no_boleta="+alert+" )";   // CONSULTA PARA EXTRAER EL NOMBRE DEL PSICOLOGO QUE NOS ATIENDE
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("nombrePs",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());                                             // PASA OBJETO PSICOLOGO
+                
+             
+                 sql="select * from actividadp where no_boleta="+alert+" order by fecha desc";   // CONSULTA PARA EXTRAER EL NOMBRE DEL PSICOLOGO QUE NOS ATIENDE
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("Actividades",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("ActividadP",new ActividadP());                                             // PASA OBJETO PSICOLOGO
+                
+                                 
+                
+                                 
+                                 
+                    return mv;                                                                                          // RETORNAMOS EL MODELO
+                
+         
+         
+                    
+                
+    }
+     
+       ///////////////////////////////////////
+      //Pantalla de consultar Actividad de seguimiento psicologico
+        @RequestMapping(value="ConsultarActivdad.htm",method = RequestMethod.GET) 
+    
+     public ModelAndView consultarActividadSeguimiento (@ModelAttribute("ActividadP") ActividadP ap, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
+       
+      
+        
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarActividad");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             //PASAMOS OBJETO Paciente        
+                              
+                                 
+                                 
+                 sql="select * from actividadp where id_actividad="+ap.getId_actividad();                                   // CONSULTA PARA OBTENER TODO SOBRE LA ENTRADA QUE SEA IGUAL AL Id_entrada
+                     datosL2 = this.jdbcTemplate.queryForList(sql);                                                  //ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 
+                                 mv.addObject("Actividad",datosL2);                                                   //PASAMOS OBJETO LA LISTA COMPLETA
+                                 
+                               
+                 
+                                 
+             
+         
+                                                  
+                                 
+                       return mv;                                                                                           // RETORNAMOS EL MODELO
+     
+         
+                    
+                
+    }
+     
+     
+     
+     
+     
      
      ///////////////////////////////////////
       //Pantalla de nueva entrada en el foro
@@ -140,7 +300,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();  //CREACIÓN DEL MODELO
                 mv.setViewName("nuevaEntrada");      //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -177,7 +337,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                  //CREACIÓN DEL MODELO
                 mv.setViewName("ForoPrincipal");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -298,7 +458,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -377,7 +537,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                        //CREACIÓN DEL MODELO
                 mv.setViewName("foro");                                    //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lista completa
@@ -430,7 +590,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                      //CREACIÓN DEL MODELO
                 mv.setViewName("mensajeria");                            //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -463,7 +623,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
                 mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -577,7 +737,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                        //CREACIÓN DEL MODELO
                 mv.setViewName("foro");                                    //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lista completa
@@ -631,7 +791,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                           //CREACIÓN DEL MODELO
                 mv.setViewName("mensajeria");                                 //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -664,7 +824,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                         //CREACIÓN DEL MODELO
                 mv.setViewName("expedientePaciente");                       //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -781,7 +941,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                         //CREACIÓN DEL MODELO
                 mv.setViewName("primera_cita");                             //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -812,7 +972,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();  //CREACIÓN DEL MODELO
                 mv.setViewName("nuevaEntrada");      //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -854,7 +1014,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
                 mv.setViewName("nuevaEntrada");                                  //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -878,7 +1038,7 @@ public class PacienteController {
            ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                         //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -998,7 +1158,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                          //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1060,7 +1220,7 @@ public class PacienteController {
           ModelAndView mv=new ModelAndView();                                  //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                            //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1140,7 +1300,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1210,7 +1370,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                  //CREACIÓN DEL MODELO
                 mv.setViewName("ForoPrincipal");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1329,7 +1489,7 @@ public class PacienteController {
                 ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                          //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1391,7 +1551,7 @@ public class PacienteController {
           ModelAndView mv=new ModelAndView();                               //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                         //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1474,7 +1634,7 @@ public class PacienteController {
           ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
                 mv.setViewName("ConsultarEntrada");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
-                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
@@ -1520,6 +1680,224 @@ public class PacienteController {
        
     }
     
+    
+    
+    /////////////////////////////
+    /////ACCION DEL BOTÓN ConsultarActividad
+    
+    
+          @RequestMapping(params="ConsultarActividad", method = RequestMethod.POST)
+    public ModelAndView ConsultarActividad(@ModelAttribute("ActivdadP") ActividadP ap, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+             
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarActividad");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             //PASAMOS OBJETO Paciente        
+                              
+                                 
+                                 
+                 sql="select * from actividadp where id_actividad="+ap.getId_actividad();                                   // CONSULTA PARA OBTENER TODO SOBRE LA ENTRADA QUE SEA IGUAL AL Id_entrada
+                     datosL2 = this.jdbcTemplate.queryForList(sql);                                                  //ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                               System.out.println(datosL2);  
+                                 mv.addObject("Actividad",datosL2);                                                   //PASAMOS OBJETO LA LISTA COMPLETA
+                                 
+                               
+                 sql="select nombre,ap_uno,ap_dos, no_cedula from psicologo where no_cedula=(select no_cedula from actividadp where id_actividad="+ap.getId_actividad()+")";                                   // CONSULTA PARA OBTENER TODO SOBRE LA ENTRADA QUE SEA IGUAL AL Id_entrada
+                     datosL2 = this.jdbcTemplate.queryForList(sql);                                                  //ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                               System.out.println(datosL2);  
+                                 mv.addObject("nombre",datosL2);                                                   //PASAMOS OBJETO LA LISTA COMPLETA
+                                 
+                                 
+             
+         
+                                                  
+                                 
+                       return mv;                                                                                           // RETORNAMOS EL MODELO
+     
+         
+                    
+                
+       
+    }
+    
+    
+     /////////////////////////////
+    /////ACCION DEL BOTÓN guardarHoja
+    
+    
+          @RequestMapping(params="guardarHoja", method = RequestMethod.POST)
+    public ModelAndView GuardarHoja(@ModelAttribute("diario") diario d, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+             
+             
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS  
+        this.diarioValidar.validate(d, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){                                                        // INICIO IF
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             
+         
+                
+                ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
+                mv.setViewName("diario_paciente");                          //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                            // PASAMOS EL OBJETO PACIENTE
+                                 mv.addObject("diario",new diario());                                             // PASA OBJETO DIARIO
+                          
+                     
+                       return mv;                                                                                           // RETORNAMOS EL MODELO                                                                                // RETORNAMOS EL MODELO
+                                   
+                
+         }                                                                                  // CIERRE IF
+         else{
+             
+             String sql="select id_expediente from expediente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+             
+             
+             
+            
+            String cadena=datosL2.get(0).toString();
+            String subcadena=cadena.substring(15, cadena.length()-1);
+           
+             sql="select id_diario from diario where id_expediente="+subcadena;   // CONSULTA PARA EXTRAER id_ de diario
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+             
+            
+             if(datosL2.isEmpty()){                                                                              // VERIFICAMOS SI EXISTE UN DIARIO RELACIONADO A ESE EXPEDIENTE
+                 System.out.println("NO EXISTE EL DIARIO "+datosL2);
+                  sql="insert into diario values(0"+","+subcadena+",'Diario de seguimiento','"+d.getFecha()+"')"; // CREAMOS EL DIARIO
+                               
+       
+              this.jdbcTemplate.update(sql);       // INSERTAMOS EL COMENTARIO
+               
+                  sql="select id_diario from diario where id_expediente="+subcadena;   // CONSULTA PARA EXTRAER id_ de diario
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                 
+                   cadena=datosL2.get(0).toString();                            // sacamos el id
+                 subcadena=cadena.substring(11, cadena.length()-1);           // sacamos el id
+                 
+                 
+                 sql="insert into hojas values("+'0'+","+subcadena+",'"+d.getFecha()+"','"+d.getContenido()+"','"+d.getSentimiento()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+            
+             }
+             else{
+                 cadena=datosL2.get(0).toString();                            // sacamos el id
+                 subcadena=cadena.substring(11, cadena.length()-1);           // sacamos el id
+                 
+                 
+                 sql="insert into hojas values("+'0'+","+subcadena+",'"+d.getFecha()+"','"+d.getContenido()+"','"+d.getSentimiento()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+                 
+             }
+             
+            
+            
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                               //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarDiario");                         //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             // PASAMOS EL OBJETO PACIENTE
+                                  mv.addObject("diario",new diario());                                             // PASA OBJETO DIARIO
+                                 
+                sql="select * from hojas where id_diario="+subcadena+" and fecha='"+d.getFecha()+"'";   // CONSULTA PARA EXTRAER DATOS DE HOJA DE DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNA
+                                                                             
+                                 mv.addObject("hoja",datosL2); 
+                                  
+                 return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         }                                                                                                 // CIERRE ELSE
+            
+         
+                    
+                
+       
+    }
+    
+    
+    
+    /////////////////
+    ////VISTA CONSULTAR DIARIO
+    
+      @RequestMapping(params="consultarHoja",method = RequestMethod.POST)
+     public ModelAndView cambiarConsultarDiario(@ModelAttribute("diario") diario d, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
+             HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarDiario");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             //PASAMOS OBJETO Paciente        
+                                 mv.addObject("diario",new diario());                                       //PASAMOS OBJETO entradaForo
+                                 
+                 sql="select * from hojas where id_hojas="+d.getId_hojas();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                mv.addObject("hoja",datosL2);                                                       // Pasa la lilsta completa
+                                 
+                       return mv;                                                                                           // RETORNAMOS EL MODELO
+                
+     
+     }
+  
     
     
     
