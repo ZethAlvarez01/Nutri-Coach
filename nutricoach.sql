@@ -139,12 +139,12 @@ DROP TABLE IF EXISTS `diario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `diario` (
   `id_diario` int(11) NOT NULL AUTO_INCREMENT,
-  `id_expediente` varchar(40) NOT NULL,
+  `id_expediente` int(11) DEFAULT NULL,
   `titulo` varchar(30) DEFAULT NULL,
-  `fecha_ini` date DEFAULT NULL,
+  `fecha_ini` datetime DEFAULT NULL,
   PRIMARY KEY (`id_diario`),
   KEY `id_expediente` (`id_expediente`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,6 +153,7 @@ CREATE TABLE `diario` (
 
 LOCK TABLES `diario` WRITE;
 /*!40000 ALTER TABLE `diario` DISABLE KEYS */;
+INSERT INTO `diario` VALUES (3,1,'Diario de seguimiento','2019-05-07 19:55:50');
 /*!40000 ALTER TABLE `diario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,7 @@ CREATE TABLE `entrada` (
   `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`id_entrada`),
   KEY `id_usuario` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +182,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
-INSERT INTO `entrada` VALUES (1,2014630304,'TITULO4','CONTENIDO3',NULL,NULL),(2,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(3,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(4,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(5,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(6,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(7,2014630304,'Titulo','CONTENIDO',NULL,NULL),(8,2014630304,'PRUEBA EN VISTA2','PRUEBA DE CONTENIDO2 ',NULL,NULL),(9,2014630304,'PRUEBA TITULO','PRUEBA CONTENIDO','',NULL),(33,2014630306,'Basket','Malo en basket','',NULL),(32,2014630306,'Otro deporte','Otro deporte+','',NULL),(12,2014630304,'Titulo7','CONTENIDO7','',NULL),(13,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(14,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(15,2014630304,'NUEVO TITULO8','Nuevo contenido8','',NULL),(16,2014630304,'TITULO10','CONTENIDO10','',NULL),(17,2014630304,'Titulo11','CONTENIDO11','',NULL),(18,2014630304,'Titulo11','CONTENIDO11','',NULL),(19,2014630304,'12312312','asdasdsadasda','',NULL),(20,2014630304,'12312312','asdasdsadasda','',NULL),(21,2014630304,'prueba17','17','',NULL),(22,2014630304,'prueba','prueba ','',NULL),(23,2014630304,'23','23','',NULL),(24,2014630304,'23','23','',NULL),(25,2014630304,'25','25','',NULL),(26,2014630304,'26','26','',NULL),(27,2014630304,'27','27','',NULL),(28,2014630304,'27B','27B','',NULL),(34,2014630306,'Comida','Comida saludable','',NULL),(38,2014630304,'Nueva publicacion','Nueva publicacion','',NULL),(36,2014630304,'333','333','',NULL),(52,2014630306,'123456','123456','',NULL),(46,1312213,'Entrada Nutriologo','nutriologo','',NULL),(48,5452453,'PSICOLOGO','Psicologo','',NULL),(50,11111111,'ADMINSTRADOR','ADMINISTRADOR','',NULL),(53,2014630304,'titulo','contenido','','2019-05-03 17:43:43'),(54,2014630304,'titulo2','entrada2','','2019-05-03 17:54:17'),(55,11111111,'psico','psico','','2019-05-03 17:56:56'),(56,5452453,'tituloPsico','Psicologo','','2019-05-03 18:01:54'),(57,12344,'nutriologo2','nutriologo2','','2019-05-03 18:04:33'),(58,11111111,'ADMINISTRADORE','hola','','2019-05-04 00:39:19'),(59,123456789,'Entrada nutriólogo','contenido Nutriólogo','','2019-05-04 01:14:13'),(60,2014630304,'entrada2','contenido2','','2019-05-04 14:29:16'),(61,2014630304,'hola','hola','','2019-05-04 14:32:30');
+INSERT INTO `entrada` VALUES (1,2014630304,'TITULO4','CONTENIDO3',NULL,NULL),(2,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(3,2014630304,'hola','HOLA SOY UNA PRUEBA',NULL,NULL),(4,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(5,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(6,2014630304,'hola','SOY UNA PRUEBA',NULL,NULL),(7,2014630304,'Titulo','CONTENIDO',NULL,NULL),(8,2014630304,'PRUEBA EN VISTA2','PRUEBA DE CONTENIDO2 ',NULL,NULL),(9,2014630304,'PRUEBA TITULO','PRUEBA CONTENIDO','',NULL),(33,2014630306,'Basket','Malo en basket','',NULL),(32,2014630306,'Otro deporte','Otro deporte+','',NULL),(12,2014630304,'Titulo7','CONTENIDO7','',NULL),(13,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(14,2014630304,'NUEVO TITULO','NUEVO CONTENIDO','',NULL),(15,2014630304,'NUEVO TITULO8','Nuevo contenido8','',NULL),(16,2014630304,'TITULO10','CONTENIDO10','',NULL),(17,2014630304,'Titulo11','CONTENIDO11','',NULL),(18,2014630304,'Titulo11','CONTENIDO11','',NULL),(19,2014630304,'12312312','asdasdsadasda','',NULL),(20,2014630304,'12312312','asdasdsadasda','',NULL),(21,2014630304,'prueba17','17','',NULL),(22,2014630304,'prueba','prueba ','',NULL),(23,2014630304,'23','23','',NULL),(24,2014630304,'23','23','',NULL),(25,2014630304,'25','25','',NULL),(26,2014630304,'26','26','',NULL),(27,2014630304,'27','27','',NULL),(28,2014630304,'27B','27B','',NULL),(34,2014630306,'Comida','Comida saludable','',NULL),(38,2014630304,'Nueva publicacion','Nueva publicacion','',NULL),(36,2014630304,'333','333','',NULL),(52,2014630306,'123456','123456','',NULL),(46,1312213,'Entrada Nutriologo','nutriologo','',NULL),(48,5452453,'PSICOLOGO','Psicologo','',NULL),(50,11111111,'ADMINSTRADOR','ADMINISTRADOR','',NULL),(53,2014630304,'titulo','contenido','','2019-05-03 17:43:43'),(54,2014630304,'titulo2','entrada2','','2019-05-03 17:54:17'),(55,11111111,'psico','psico','','2019-05-03 17:56:56'),(56,5452453,'tituloPsico','Psicologo','','2019-05-03 18:01:54'),(57,12344,'nutriologo2','nutriologo2','','2019-05-03 18:04:33'),(58,11111111,'ADMINISTRADORE','hola','','2019-05-04 00:39:19'),(59,123456789,'Entrada nutriólogo','contenido Nutriólogo','','2019-05-04 01:14:13'),(60,2014630304,'entrada2','contenido2','','2019-05-04 14:29:16'),(61,2014630304,'hola','hola','','2019-05-04 14:32:30'),(62,2014630304,'DIARIO','NO TENGO DIARIO','','2019-05-07 19:02:22'),(63,2014630304,'DIARIO','NO TENGO DIARIO','','2019-05-07 19:02:22'),(64,2014630304,'DIARIO','NO TENGO DIARIO','','2019-05-07 19:02:22');
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +368,7 @@ CREATE TABLE `expediente` (
   `otras_medidas` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id_expediente`),
   KEY `no_boleta` (`no_boleta`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +377,7 @@ CREATE TABLE `expediente` (
 
 LOCK TABLES `expediente` WRITE;
 /*!40000 ALTER TABLE `expediente` DISABLE KEYS */;
-INSERT INTO `expediente` VALUES (1,2014630304,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'','');
+INSERT INTO `expediente` VALUES (1,2014630304,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'',''),(2,2014630307,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'','');
 /*!40000 ALTER TABLE `expediente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,12 +391,12 @@ DROP TABLE IF EXISTS `hojas`;
 CREATE TABLE `hojas` (
   `id_hojas` int(11) NOT NULL AUTO_INCREMENT,
   `id_diario` int(11) NOT NULL,
-  `fecha` date DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
   `contenido` varchar(500) DEFAULT NULL,
-  `multimedia` longblob,
+  `sentimiento` varchar(9) DEFAULT NULL,
   PRIMARY KEY (`id_hojas`),
   KEY `id_diario` (`id_diario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,6 +405,7 @@ CREATE TABLE `hojas` (
 
 LOCK TABLES `hojas` WRITE;
 /*!40000 ALTER TABLE `hojas` DISABLE KEYS */;
+INSERT INTO `hojas` VALUES (1,3,'2019-05-07 20:44:47','Hoy fue un día muy cansado','Estresado'),(2,3,'2019-05-07 20:45:22','Ya se acerca la presentación','Ansioso'),(3,3,'2019-05-07 20:45:22','Ya se acerca la presentación','Ansioso'),(4,3,'2019-05-07 20:45:22','Ya se acerca la presentación','Ansioso'),(5,3,'2019-05-07 21:14:45','Estoy algo cansado','Estresado'),(6,3,'2019-05-07 21:19:40','ESTOY MUY CANSADO','Estresado'),(7,3,'2019-05-07 21:27:35','YA QUIERO TERMINAR EL PROYECTO','Ansioso'),(8,3,'2019-05-07 21:27:35','YA QUIERO TERMINAR EL PROYECTO','Ansioso'),(9,3,'2019-05-07 21:27:35','YA QUIERO TERMINAR EL PROYECTO','Ansioso'),(10,3,'2019-05-07 21:27:35','YA QUIERO TERMINAR EL PROYECTO','Ansioso'),(11,3,'2019-05-07 21:29:22','ya puedo escribir en mi diario','Feliz'),(12,3,'2019-05-07 21:30:39','Aun no puedo ver el historial','Triste'),(13,3,'2019-05-07 21:30:39','Aun no puedo ver el historial','Triste'),(14,3,'2019-05-07 15:28:42','NO QUEDA ','Enojado');
 /*!40000 ALTER TABLE `hojas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,4 +657,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-05 17:14:54
+-- Dump completed on 2019-05-08 23:18:13
