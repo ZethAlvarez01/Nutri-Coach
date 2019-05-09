@@ -4,48 +4,87 @@ Es la propuesta para el desarrollo de un sistema web responsivo para ayudar a es
 **Todo lo pishi responsivo**
 - [ ] Todas las vistas en responsivo :D
 
-**Vistas pendientes**
-- [ ] Seleccionar Div de cada usuario y poder visualizar información completa
-- [ ] Arreglar CSS para la opcion de visualizar todos
 
-**PANTALLA cronograma y cronograma psicologo**
+//////////////
+ADMINISTRADOR
 
-- [ ] al momento de ir a otra pagina y regresar desaparece el nombre del especialista, 
-se reacomoda página **CORREGIR**
-
-**PANTALLA cronograma**
-
-- [ ] conectar cronograma con dietas 
-
-**PANTALLA DIETA, FORO, PACIENTES**
-
-- [ ] cambiar barra de menús
-
-**PANTALLA INICIO**
-
-- [ ] se desacomoda al mostrar las validaciones **CORREGIR CSS
-
-**PANTALLA recuperarC**
-
-- [ ] envíar correo de recuperación
-
-**PANTALLA cambioC**
-
-- [ ] Cambiar de controllador de vistas a controlador de recuperación cuando el sistema pueda enviar correo
-
-**PANTALLA expediente**
-
-- [ ] añadir opción para generar primera cita
+* ACTIVAR BUSQUEDA DE USUARIOS
+* ACTIVAR BOTON DE GUARDAR CAMBIOS DE ESTADO
+* SELECCIONAR DIV DE CADA USUARIO Y PODER VISUALIZAR INFORMACIÓN COMPLETA
+* CSS PANTALLA VERIFICAR CUENTAS
+* DA MAL LA FECHA 
 
 
-**GENERAR PANTALLA DE PRIMERA CITA**
+////////////////////
+
+PSICÓLOGO
+
+*FALTA PANTALLA DE CITAS 
+*CALENDARIO DE BIENVENIDA DA MAL LA FECHA ACTUAL
+*CSS REGISTRO PSICOLOGO
+
+////////////////////////////
+SEGUIMIENTO PSICOLOGICO
+*FALTA AGREGAR MULTIMEDIA DEL LADO DEL NUTRIÓLOGO
+*FALTA AGREGAR PANTALLA DE SEGUIMIENTO DEL LADO DEL PACIENTE
+
+
+/////////////////////
+NUTRIÓLOGO
+*FALTA PANTALLA DE CITAS
+*FALTA GENERACIÓN DE DIETAS
+*CALENDARIO DE BIENVENIDA DA MAL LA FECHA ACTUAL
+*CSS REGISTRO NUTRIOLOGO
+
+
+PACIENTE
+/////////////////
+*FALTA ACTIVAR CITAS
+*SEGUIMIENTO PSICOLOGICO
+*SEGUIMIENTO NUTRIÓLOGO
+
+
+/////////////////////
+FORO
+*FALTA MULTIMEDIA // OPCIONAL
+*CSS
 
 
 
 
-**CREAR MODULO DE PRIMERA CITA**
+//////////////////////
+MENSAJERIA
+*FALTA ACTIVAR TODA LA MENSAJERIA
+
+///////////////////////
+RECUPERACIÓN DE CONTRASEÑA
+*FALTA ENVIAR CORREO
+
+////////////////////////
+SESIONES
+*Se puede regresar después de varios click a la sesión cerrada
 
 
-**ACTIVAR PANTALLA DIETAS**
+/////////////////////
+PRIMERA CITA PACIENTE
+*ACCIONES DE COMBOS CUANDO SE SELECCIONA OTRO NUTRIOLOGO
+*PASAR HORARIOS A LA VISTA DE PRIMERA CITA
+*FALTA HORARIO DE TERMINO DE CITA EN TABLA CITA
+
+
+//PANTALLA DE INICIO
+
+*CSS PARA MOSTRAR ERRORES DE INICIO
+
+
+
+
+
+
+
+
+
+
+
 
 

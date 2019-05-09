@@ -15,11 +15,13 @@ public class Nutriologo {
     private String correo;
     private String contraseña;
     private String contraseña2;
+    private String horaEntrada;
+    private String horaSalida;
 
     public Nutriologo() {
     }
 
-    public Nutriologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String institucion, String telefono, String consultorio, String correo, String contraseña, String contraseña2) {
+    public Nutriologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String institucion, String telefono, String consultorio, String correo, String contraseña, String contraseña2, String horaEntrada, String horaSalida) {
         this.no_cedula = no_cedula;
         this.no_empleado = no_empleado;
         this.nombre = nombre;
@@ -31,8 +33,27 @@ public class Nutriologo {
         this.correo = correo;
         this.contraseña = contraseña;
         this.contraseña2 = contraseña2;
+        this.horaEntrada = horaEntrada;
+        this.horaSalida = horaSalida;
     }
 
+    public String getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(String horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public String getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(String horaSalida) {
+        this.horaSalida = horaSalida;
+    }
+
+  
     public String getNo_cedula() {
         return no_cedula;
     }

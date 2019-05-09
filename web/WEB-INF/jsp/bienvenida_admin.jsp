@@ -24,7 +24,7 @@
         
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+       
         
          
         <title>Nutri-Coach</title>

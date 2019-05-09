@@ -125,7 +125,7 @@
                        <form:form method="post" commandName="entradaForo">
                         
                                 <tr>
-                                   <td>FALTAN FECHAS</td>
+                                   <td>${item.fecha}</td>
                                    <td> <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button></td>
                                    <td>${item.contenido}...</td> 
                                    <td>${contadorComentarios[loop.index]}</td> 

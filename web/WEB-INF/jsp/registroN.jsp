@@ -83,13 +83,33 @@
                         <form:errors path="ap_dos" />
                         </p>
                         <p>
-                        <form:input path="institucion" placeholder="Institucion"/>
-                        <form:errors path="institucion" />
+                        
+                      
+                        <form:select path="institucion">
+                         <form:option value="Escuela Superior de Cómputo (ESCOM)">Escuela Superior de Cómputo (ESCOM)</form:option>
+                        
+                        </form:select>
+                           <form:errors path="institucion" />
                         </p>
                         <p>
-                        <form:textarea path="consultorio" placeholder="Domicilio de consultorio"/>
-                        <form:errors path="consultorio" />
+                       
+                         <form:select path="consultorio">
+                         <form:option value="Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX">Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX)</form:option>
+                        
+                        </form:select>
+                           <form:errors path="consultorio" />
                         </p>
+                        <p>
+                            Horario de entrada: <form:input path="horaEntrada" type="time" placeholder="hora de entrada" min="07:00" max="22:00"/>
+                             <form:errors path="horaEntrada" />
+                               </p>  
+                               <p>
+                            Horario de salida:<form:input path="horaSalida" type="time" placeholder="Hora de salida" min="07:00" max="22:00"/>
+                             <form:errors path="horaSalida" />
+                        </p>
+                        
+                        
+                        
                         <p>
                         <form:input path="telefono"  placeholder="Teléfono"/>
                         <form:errors path="telefono" />
