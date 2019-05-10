@@ -55,6 +55,8 @@ body {
     margin: 0px auto;
 }
 
+.titulo { grid-area: header; }
+
 #menu_nutrio {
     list-style-type: none;
     margin: 0;
@@ -121,6 +123,27 @@ body {
     background: rgb(0, 0, 0, 0.4);
     transition: 0.5s;
 }
+
+
+.cita {
+    position: center;
+    margin-left: 45%;
+    margin-top: 50px;
+    padding: 10px 35px;
+    background: rgb(108, 29, 69);
+    /*Pantone 222 C */
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.cita:hover {
+    background: rgb(0, 0, 0, 0.4);
+    transition: 0.5s;
+}
+
+
+
 
 ::-webkit-scrollbar {
     width: 10px;

@@ -104,8 +104,7 @@
                             <p><h1>Por favor ingresa a la sección de citas para</h1></p>
                         <form:form method="post" commandName="Paciente">
                               
-                           <input type="submit" class="texto_menu" name="primera_c" value="Citas" formaction="primera_cita.htm">
-                        
+                       <input type="submit" class="cita"  name="primera_cita" value="Citas" >                       
                        </form:form>
                             
                         </c:if>

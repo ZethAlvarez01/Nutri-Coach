@@ -13,11 +13,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
               user-scalable=no"/>
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/style.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/inicio.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resource/estilos/footer.css" />" />
+        
         <title>Nutri-Coach</title>
     </head>
     <body>
@@ -43,9 +47,11 @@
         
         <div id="login">
             <div class="container">
-                <form:form method="POST" commandName="loginO">
+                <form:form method="POST" commandName="Login">
                     <form:input id="usuario" path="Usuario" placeholder="No. de boleta o empleado"/> 
+                    <form:errors path="Usuario"/>
                     <form:input id="pass" path="Pass" type="password" placeholder="Contraseña"/>
+                    <form:errors path="Pass"/>
                     <form:button id="btn" class="boton" type="submit">Iniciar sesión</form:button>
                     <p class="hiperlogin" style="color: white;">¿No tienes una cuenta?  <a class="hiperlogin" href="<c:url value="/preregistro.htm" />">Regístrate </a>
                       ¿Olvidaste tu contraseña?  <a class="hiperlogin" href="<c:url value="/recuperarC.htm" />">Recuperar contraseña</a></p>

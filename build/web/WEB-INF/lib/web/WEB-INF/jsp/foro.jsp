@@ -53,19 +53,31 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
-                    <c:forEach items="${datos}" var="item"> 
+                     <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Paciente">
-                            <li><input type="submit" class="texto_menu" name="expediente" value="Expediente" formaction="expedientePaciente.htm"></li>
-                                
-                         
-                       
-                        <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeria.htm"></li>
-                        <li><a class="texto_menu" href="">XXXXXXXXXX</a></li>
+                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
+                          <c:if test= "${item.no_cedula>0}">
+                            
+                        
+                              
+                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        
+                                                 
+                        </c:if>
+                        <c:if test= "${item.no_cedula==0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
+                             
+                                                 
+                        </c:if>
+                        
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
                     </ul>
@@ -76,8 +88,8 @@
 
         </div>
     </div>
-                    
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+                 
+        <a class="regresar" href="<c:url value="/nuevaEntrada.htm" />">Nueva entrada</a>
         
         <div id="contenido">
             <div class="container">
@@ -101,16 +113,32 @@
                             <li>Salud: <c:out value="${salida6}"/></li>
                         </ul> 
                     </div>  
+                        
+                        
+                        
                         <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                            <ul>
-                                <li>Entrada 1</li>
-                                <li>Entrada 2</li>
-                                <li>Entrada 3</li>
-                                <li>Entrada 4</li>
-                                <li>Entrada 5</li>
-                            </ul> 
+                                                       
+                           
+                           
+                            <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="item3"><p class="titulo">Historial</p>
                             <hr>
                             <table>
@@ -141,6 +169,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <a class="regresar" href="<c:url value="/ForoPrincipal.htm" />">Ver foro</a>
                 </div>
                 
             </div>

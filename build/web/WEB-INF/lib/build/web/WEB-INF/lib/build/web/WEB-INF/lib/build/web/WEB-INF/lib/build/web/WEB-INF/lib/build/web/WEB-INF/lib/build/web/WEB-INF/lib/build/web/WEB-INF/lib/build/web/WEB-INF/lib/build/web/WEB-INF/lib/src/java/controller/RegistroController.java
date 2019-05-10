@@ -74,7 +74,7 @@ public class RegistroController {
             mv.addObject("login",new Login());
             return mv;
         }else{
-            String sql="select * from paciente where contraseña='"+
+            String sql="select nombre from paciente where contraseña='"+
                 login.getPass()+"' and no_boleta="+login.getUsuario()+";";
                 List datos=this.jdbcTemplate.queryForList(sql);
                 System.out.println(datos);
@@ -84,11 +84,11 @@ public class RegistroController {
                     mv.setViewName("foro");
                     ArrayList<Capa_neuronas> neural_net;
                     libMatrices op=new libMatrices();
-                    double[] x={0,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                1,1,0,1,0,1,0,1,0,1,
-                                0,0};
+                     double[] x={0,0,1,0,1,1,1,1,0,0,
+                                 1,0,1,1,0,1,1,0,1,0,
+                                 0,1,0,0,1,0,0,1,0,0,
+                                 1,0,0,0,1,0,0,0,0,1,
+                                 0,0};
                     Crear_RN redRecomendaciones=new Crear_RN();
                     neural_net=redRecomendaciones.create_nn(topology,0);
                     
@@ -114,7 +114,7 @@ public class RegistroController {
                     mv.addObject("salida4",output[0][3]);
                     mv.addObject("salida5",output[0][4]);
                     mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Paciente");
+                    mv.addObject("nombre","Hola "+datos.get(0));
                     return mv;
             }else{
                 ModelAndView mv=new ModelAndView();

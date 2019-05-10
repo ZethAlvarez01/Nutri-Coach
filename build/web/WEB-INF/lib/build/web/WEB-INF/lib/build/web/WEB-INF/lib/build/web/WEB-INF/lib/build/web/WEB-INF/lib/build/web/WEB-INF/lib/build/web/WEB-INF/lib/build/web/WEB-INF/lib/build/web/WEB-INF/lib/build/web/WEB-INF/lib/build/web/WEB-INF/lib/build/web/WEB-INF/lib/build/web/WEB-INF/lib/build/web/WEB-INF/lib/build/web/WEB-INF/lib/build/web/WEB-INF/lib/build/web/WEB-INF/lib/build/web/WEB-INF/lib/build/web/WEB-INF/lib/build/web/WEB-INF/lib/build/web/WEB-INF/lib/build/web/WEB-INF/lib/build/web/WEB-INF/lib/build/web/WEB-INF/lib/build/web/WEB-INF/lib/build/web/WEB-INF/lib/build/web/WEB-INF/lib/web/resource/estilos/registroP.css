@@ -78,6 +78,10 @@ select{
     transition: 0.5s;
 }
 
+footer{
+    width: 100%;
+}
+
 @media all and (max-width: 655px){
     #logoSEP{
         display: none;
@@ -86,6 +90,15 @@ select{
     #logoIPN{
         float: left;
     }  
+    
+    .regresar{
+        display: none;
+    }
+    
+    #button{
+        width: 60%;
+    }
+    
 }
 
 @media all and (max-width: 329px){

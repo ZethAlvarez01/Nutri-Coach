@@ -53,20 +53,17 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="bienvenida_admin.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                     <c:forEach items="${ListaAdmin}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Administrador">
-                          <li><input type="submit" class="texto_menu" name="bienvenida" value="Administración" formaction="bienvenida_admin.htm"></li>
-                         
-                          <li><input type="submit" class="texto_menu" name="mensajes" value="Mensajes" formaction="mensajeriaAdmin.htm"></li>
-                                
-                                                
-                        <li><input type="submit" class="texto_menu" name="solicitudes" value="Solicitudes" formaction="verificacion_cuentas.htm"></li></li>
-                        <li><a class="texto_menu" href="">XXXXXX</a></li>
+                          <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
+                        <li><a class="texto_menu" href="mensajeriaAdmin.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="verificacion_cuentas.htm">Solicitudes</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
@@ -81,7 +78,7 @@
         </div>
     </div>
                     
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+        <a class="regresar" href="<c:url value="/nuevaEntradaAdmin.htm" />">Nueva entrada</a>
         
         <div id="contenido">
             <div class="container">
@@ -105,16 +102,29 @@
                             <li>Salud: <c:out value="${salida6}"/></li>
                         </ul> 
                     </div>  
-                        <div class="item2"><p class="titulo">Entradas recientes</p>
+                       <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                            <ul>
-                                <li>Entrada 1</li>
-                                <li>Entrada 2</li>
-                                <li>Entrada 3</li>
-                                <li>Entrada 4</li>
-                                <li>Entrada 5</li>
-                            </ul> 
+                                                       
+                           
+                           
+                            <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="item3"><p class="titulo">Historial</p>
                             <hr>
                             <table>
@@ -145,6 +155,7 @@
                                 </tr>
                             </table>
                         </div>
+                        <a class="regresar" href="<c:url value="/ForoPrincipalAdmin.htm" />">Ver foro</a>
                 </div>
                 
             </div>

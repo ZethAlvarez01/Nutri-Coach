@@ -2,6 +2,8 @@
     Created on : 11/11/2018, 10:12:59 PM
     Author     : Zeth
 */
+
+
 /*Estilos footer*/
 
 footer {
@@ -16,17 +18,13 @@ footer {
     font-size: 30px;
 }
 
-hr {
-    opacity: 0.4;
-}
-
 #redes {
     display: block;
     width: 217px;
     margin: 0px auto;
     list-style: none;
-    margin-bottom: 100px;
-    margin-top: 30px;
+    margin-bottom: 60px;
+    margin-top: 15px;
 }
 
 #redes li {
@@ -41,8 +39,7 @@ hr {
     -moz-transform: scale(1.1, 1.1);
 }
 
-.hiperfooter{
+.hiperfooter {
     color: white;
     padding: 0px 50px;
 }
-

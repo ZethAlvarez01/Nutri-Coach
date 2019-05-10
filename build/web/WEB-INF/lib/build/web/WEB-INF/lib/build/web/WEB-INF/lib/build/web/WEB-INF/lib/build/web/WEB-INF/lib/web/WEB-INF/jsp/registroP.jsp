@@ -4,19 +4,24 @@
     Author     : Zeth
 --%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%--<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>--%>
 <!DOCTYPE html>
 <html lang="es_MX">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/registroP.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/modal.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        
         <title>Nutri-Coach</title>
     </head>
     <body>
@@ -56,22 +61,52 @@
                     <p>Favor de introducir sus datos correspondientes para completar su registro:</p>
                 </center>
                 <div id="formulario">
-                    <form:form method="POST" commandName="registroP">
+                   <form:form method="POST" commandName="Paciente">
                         <form:input path="no_boleta" placeholder="No. de Boleta o empleado" />
-                        <form:input path="nombre" placeholder="Nombre"/>
+                         <form:errors path="no_boleta"/>
+                         <p>
+                        <form:input path="nombre" placeholder="Nombre" />
+                         <form:errors path="nombre"/>
+                         </p>
+                         <p>
                         <form:input path="ap_uno" placeholder="Primer apellido"/>
+                        <form:errors path="ap_uno" />
+                        </p>
+                        <p>
                         <form:input path="ap_dos" placeholder="Segundo apellido"/>
+                        <form:errors path="ap_dos" />
+                        </p>
+                        <p>
                         <form:radiobutton path="sexo" class="Radio" value="H"/><label class="sexo">Hombre</label><label class="sexoA">H</label>
                         <form:radiobutton path="sexo" class="Radio" value="M"/><label class="sexo">Mujer</label><label class="sexoA">M</label>
                         <form:radiobutton path="sexo" class="Radio" value="O"/><label>Otro</label>
-                        <p><label>Fecha de nacimiento</label></p>
+                        <form:errors path="sexo" />
+                        </p>
+                        <p>
                         <form:input path="fecha_n" type="date" placeholder="Fecha de nacimiento"/>
+                        <form:errors path="fecha_n" />
+                        </p>
+                        <p>
                         <form:textarea path="domicilio" placeholder="Domicilio"/>
+                        <form:errors path="domicilio" />
+                        </p>
+                        
+                         <p>
                         <form:input path="telefono"  placeholder="Teléfono"/>
+                        <form:errors path="telefono" />
+                        </p>
+                        <p>
                         <form:input path="correo" type="email" placeholder="Correo"/>
-                        <form:input path="contraseña" type="password" placeholder="Contraseña"/>
-                        <form:input path="contraseña2" type="password" placeholder="Repetir contraseña"/>
-                        <form:errors path = "contraseña"/>
+                        <form:errors path="correo" />
+                        </p>
+                        <p>
+                        <form:password path="contraseña"  placeholder="Contraseña"/>
+                        <form:errors path="contraseña" />
+                        </p>
+                        <p>
+                        <form:password path="contraseña2"  placeholder="Repetir contraseña"/>
+                        <form:errors path="contraseña2" />
+                        </p>
                         <input id="check" type="checkbox" class="check" value="first_checkbox" required>
                             <center>
                                 <p id="tyc" class="modalBtn">He leido y acepto los términos y condiciones.</p>
@@ -172,7 +207,7 @@
                         <br/>
                             6. <b>Materiales Presentados.</b> A menos que se solicite específicamente, no pedimos ni deseamos recibir ninguna información confidencial, secreta o patrimonial, ni otro material de usted a través del Sitio Web, por correo electrónico
                             o de cualquier otra manera. Cualquier información, trabajos creativos, demostración, ideas, sugerencias, conceptos, métodos, sistemas, diseños, planes, técnicas u otros materiales que nos haya mandado o presentado (incluyendo, por ejemplo
-                            y sin limitación, aquello que usted presenta o envía a nuestros grupos de chateo, tablas de mensajes y/o a nuestros ‘blogs’, o que nos manda vía correo electrónico) ("Materiales Presentados") se considerará como no confidencial o secreto
+                            y sin limitación, aquello que usted presenta o envía a nuestros grupos de chateo, tablas de mensajes y/o a nuestros ?blogs?, o que nos manda vía correo electrónico) ("Materiales Presentados") se considerará como no confidencial o secreto
                             y que puede ser usado por nosotros de cualquier manera consistente con la Política de Privacidad del Sitio Web. Al presentarnos o mandarnos Materiales Presentados, usted: (i) representa y garantiza que los Materiales Presentados son originales
                             suyos, que ninguna otra persona tiene ningún derecho sobre ellos, y que cualquier "derecho moral" sobre los Materiales Presentados ha sido renunciado, y (ii) usted nos concede, a nosotros y a nuestros afiliados, derecho y licencia libres de
                             regalías, sin restricciones, mundiales, perpetuos, irrevocables, no exclusivos y totalmente transferibles, que pueden ser cedidos y sub-licenciados, para usar, copiar, reproducir, modificar, adaptar, publicar, traducir, crear trabajos derivados

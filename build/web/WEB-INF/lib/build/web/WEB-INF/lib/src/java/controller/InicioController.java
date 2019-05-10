@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import models.Administrador;
 import models.Conexion;
@@ -71,12 +74,12 @@ public class InicioController {
        
     }
     
-    @RequestMapping(value="inicio.htm", method=RequestMethod.POST)
+    @RequestMapping(method=RequestMethod.POST)
     public ModelAndView inicio(
                         @ModelAttribute("Login") @Validated Login lo,
                         BindingResult resultado,
-                        SessionStatus status
-                        ){
+                        HttpServletRequest hsr, HttpServletResponse hsrl
+                        )throws Exception{
         this.LoginValidar.validate(lo, resultado);
        
       // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES   
@@ -85,7 +88,7 @@ public class InicioController {
             //volvemos al formulario porque los datos ingresados son incorrectos
             
             ModelAndView mv=new ModelAndView();
-            mv.setViewName("inicio");
+           // mv.setViewName("inicio");
             mv.addObject("Login",new Login());
             return mv;
         }else{
@@ -123,93 +126,20 @@ public class InicioController {
                                 }
                                 case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
                                 {
-                                   ModelAndView mv=new ModelAndView();   // Creación del modelo
-                    mv.setViewName("expedientePaciente");  //nombra al modelo
-                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                    mv.addObject("Paciente",new Paciente());
+                                   
                     
-                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
-                    List datosEv=this.jdbcTemplate.queryForList(sql);
-                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
-                    //List datas=evo.consulta();
-                    System.out.println(datosEv);
-                    mv.addObject("datas",datosEv);
-                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
-                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
-                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
-
-                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-                    for(Map<String, Object> row : rows){
-                       String edad = row.get("edad").toString();
-                       String sexo = row.get("sexo").toString();
-                       String peso = row.get("peso").toString();
-                       String altura = row.get("altura").toString();
-                       String ansiedad = row.get("ansiedad").toString();
-                       String depresion = row.get("depresion").toString();
-                       String ira = row.get("ira").toString();
-                       String estres = row.get("estres").toString();
-                       String felicidad = row.get("felicidad").toString();
-                       String dulce = row.get("dulce").toString();
-                       String amarga = row.get("amarga").toString();
-                       String salada = row.get("salada").toString();
-                       String picante = row.get("picante").toString();
-                       String acida = row.get("acida").toString();
-                       String act_f = row.get("act_f").toString();
-                       String suplementos = row.get("suplementos").toString();
-                       String motivacional = row.get("motivacional").toString();
-                       String preparacionA = row.get("preparacionA").toString();
-                       String beneficiosA = row.get("beneficiosA").toString();
-                       String deportes = row.get("deportes").toString();
-                       String medicamentos = row.get("medicamentos").toString();
-                       String salud= row.get("salud").toString();
+                    
+                        HttpSession session = hsr.getSession();
                        
-                       double pesoD=Double.parseDouble(peso);
-                       int pesoI=(int)pesoD;
-                       String pesoS=pesoI+"";
-                       
-                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
-                       
-                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
-                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
-                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
-                               deportes,medicamentos,salud);
-                       
-                        double[] x=tr.vector();
-                        ArrayList<Capa_neuronas> neural_net;
-                        libMatrices op=new libMatrices();
-
-                        Crear_RN redRecomendaciones=new Crear_RN();
-                        neural_net=redRecomendaciones.create_nn(topology,0);
-
-                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-
-                        neural_net.get(0).w=pesos.get(0);
-                        neural_net.get(0).b=pesos.get(1);
-
-                        neural_net.get(1).w=pesos.get(2);
-                        neural_net.get(1).b=pesos.get(3);
-
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
-                        System.out.println("Entrada: ");
-                        double[][] xa=new double[1][];
-                        xa[0]=x;
-                        op.print(xa);
-
-                        System.out.println("Salida: ");
-                        op.print(output);
-
-                        ArrayList<String> salida=tr.seleccion(output[0]);
-                    
-                       System.out.println(salida);
-                       mv.addObject("respuesta",salida.get(0));
-                     }
-                    
-                    
-                    
-                    //System.out.println(datas);
-                    
-                    return mv;
+                        System.out.println("ESTO OBTUVE DE LOGIN PACIENTE: "+lo.getUsuario());
+                        session.setAttribute("Paciente",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/expedientePaciente.htm");
                                 }
                                 default:
                                 {
@@ -256,40 +186,18 @@ public class InicioController {
                                 }
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
-                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
-                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                                    mv.addObject("Psicologo",new Psicologo());
-                                    return mv;
-                                    /* ArrayList<Capa_neuronas> neural_net;
-                            libMatrices op=new libMatrices();
-                            double[] x={0,0,1,0,1,1,1,1,0,0,
-                            1,0,1,1,0,1,1,0,1,0,
-                            0,1,0,0,1,0,0,1,0,0,
-                            1,0,0,0,1,0,0,0,0,1,
-                            0,0};
-                            Crear_RN redRecomendaciones=new Crear_RN();
-                            neural_net=redRecomendaciones.create_nn(topology,0);
-                            ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                            neural_net.get(0).w=pesos.get(0);
-                            neural_net.get(0).b=pesos.get(1);
-                            neural_net.get(1).w=pesos.get(2);
-                            neural_net.get(1).b=pesos.get(3);
-                            Implementacion exe=new Implementacion(neural_net,x);
-                            double[][] output=exe.Implement();
-                            System.out.println("Entrada: ");
-                            double[][] xa=new double[1][];
-                            xa[0]=x;
-                            op.print(xa);
-                            System.out.println("Salida: ");
-                            op.print(output);
-                            mv.addObject("salida1",output[0][0]);
-                            mv.addObject("salida2",output[0][1]);
-                            mv.addObject("salida3",output[0][2]);
-                            mv.addObject("salida4",output[0][3]);
-                            mv.addObject("salida5",output[0][4]);
-                            mv.addObject("salida6",output[0][5]);
-                            mv.addObject("nombre","Psicologo");*/
+                                   HttpSession session = hsr.getSession();
+                       
+                        System.out.println("ESTO OBTUVE DE LOGIN PSICOLOGO: "+lo.getUsuario());
+                        session.setAttribute("Psico",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/cronogramaPsicologo.htm");
+                                    
                                 }
                                 default:
                                 {
@@ -338,14 +246,20 @@ public class InicioController {
                                 }
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
-                                  
-                                 ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("cronograma");                                            // Nombra al modelo
-                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                                    mv.addObject("Nutriologo",new Nutriologo());
-                                   
-                                
-                                   return mv;  
+                                   HttpSession session = hsr.getSession();
+                       
+                        System.out.println("ESTO OBTUVE DE LOGIN NUTRI: "+lo.getUsuario());
+                        session.setAttribute("Nutri",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/cronograma.htm");
+                                    
+                                    
+                                 
                                 }
                                 default:
                                 {
@@ -369,71 +283,18 @@ public class InicioController {
                         System.out.println(datosL);  
 
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
-                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                         mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
-                         System.out.println("Pasando datos"); 
-       
-                         mv.addObject("ListaAdmin",datosL);
-                         mv.addObject("Administrador",new Administrador());
-                         mv.addObject("Mensaje",new Mensaje());
-                         sql=" select * from paciente where estatus <> 4 and estatus and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-              datosL=this.jdbcTemplate.queryForList(sql);
-                  
-             mv.addObject("ListaP",datosL);       // SE AGREGA EL OBJETO LISTA DE PACIENTES AL MODELO     
-            
-             System.out.println(datosL);
-              System.out.println(datosL.size());
-      
-             mv.addObject("LongitudP",datosL.size()); 
-             
-      
-       
-             mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
-          
-             
-              sql2=" select * from nutriologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-             List datosL2=this.jdbcTemplate.queryForList(sql2);
-                  
-             mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
-            
-             System.out.println(datosL2);
-             System.out.println(datosL2.size());
-      
-             mv.addObject("LongitudN",datosL2.size()); 
-             
-      
-       
-             mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
-                  
-       
-             
-             
-             String sql3=" select * from psicologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-             List datosL3=this.jdbcTemplate.queryForList(sql3);
-                  
-             mv.addObject("ListaPs",datosL3);       // SE AGREGA EL OBJETO LISTA DE PSICOLOGOS AL MODELO     
-            
-             System.out.println(datosL3);
-             
-             System.out.println(datosL3.size());
-      
-             mv.addObject("LongitudPs",datosL3.size()); 
-      
-       
-             mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-             
-             
-       
-                         return mv;
+                        
+                        HttpSession session = hsr.getSession();
+                        String text = hsr.getParameter("usuario");
+                        System.out.println("ESTO OBTUVE DE LOGIN ADMIN: "+lo.getUsuario());
+                        session.setAttribute("Admin",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/bienvenida_admin.htm");
                         
                         
                         }
@@ -467,8 +328,9 @@ public class InicioController {
     public ModelAndView formularioLogin(
                         @ModelAttribute("Login") Login lo,
                         BindingResult resultado,
-                        SessionStatus status
-                        ){
+                        HttpServletRequest hsr, HttpServletResponse hsrl
+                        )throws Exception
+                        {
         this.LoginValidar.validate(lo, resultado);
           // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES
         if(resultado.hasErrors()){
@@ -514,93 +376,19 @@ public class InicioController {
                                 }
                                 case '1':                                            // El estatus 1 significa usuario activo y se procede a ingresar a su bienvenida
                                 {
-                                   ModelAndView mv=new ModelAndView();   // Creación del modelo
-                    mv.setViewName("expedientePaciente");  //nombra al modelo
-                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                    mv.addObject("Paciente",new Paciente());
+                                  
                     
-                    sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+lo.getUsuario()+"');";
-                    List datosEv=this.jdbcTemplate.queryForList(sql);
-                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
-                    //List datas=evo.consulta();
-                    System.out.println(datosEv);
-                    mv.addObject("datas",datosEv);
-                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
-                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
-                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
-
-                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-                    for(Map<String, Object> row : rows){
-                       String edad = row.get("edad").toString();
-                       String sexo = row.get("sexo").toString();
-                       String peso = row.get("peso").toString();
-                       String altura = row.get("altura").toString();
-                       String ansiedad = row.get("ansiedad").toString();
-                       String depresion = row.get("depresion").toString();
-                       String ira = row.get("ira").toString();
-                       String estres = row.get("estres").toString();
-                       String felicidad = row.get("felicidad").toString();
-                       String dulce = row.get("dulce").toString();
-                       String amarga = row.get("amarga").toString();
-                       String salada = row.get("salada").toString();
-                       String picante = row.get("picante").toString();
-                       String acida = row.get("acida").toString();
-                       String act_f = row.get("act_f").toString();
-                       String suplementos = row.get("suplementos").toString();
-                       String motivacional = row.get("motivacional").toString();
-                       String preparacionA = row.get("preparacionA").toString();
-                       String beneficiosA = row.get("beneficiosA").toString();
-                       String deportes = row.get("deportes").toString();
-                       String medicamentos = row.get("medicamentos").toString();
-                       String salud= row.get("salud").toString();
+                    HttpSession session = hsr.getSession();
                        
-                       double pesoD=Double.parseDouble(peso);
-                       int pesoI=(int)pesoD;
-                       String pesoS=pesoI+"";
-                       
-                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
-                       
-                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
-                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
-                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
-                               deportes,medicamentos,salud);
-                       
-                        double[] x=tr.vector();
-                        ArrayList<Capa_neuronas> neural_net;
-                        libMatrices op=new libMatrices();
-
-                        Crear_RN redRecomendaciones=new Crear_RN();
-                        neural_net=redRecomendaciones.create_nn(topology,0);
-
-                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-
-                        neural_net.get(0).w=pesos.get(0);
-                        neural_net.get(0).b=pesos.get(1);
-
-                        neural_net.get(1).w=pesos.get(2);
-                        neural_net.get(1).b=pesos.get(3);
-
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
-                        System.out.println("Entrada: ");
-                        double[][] xa=new double[1][];
-                        xa[0]=x;
-                        op.print(xa);
-
-                        System.out.println("Salida: ");
-                        op.print(output);
-
-                        ArrayList<String> salida=tr.seleccion(output[0]);
-                    
-                       System.out.println(salida);
-                       mv.addObject("respuesta",salida.get(0));
-                     }
-                    
-                    
-                    
-                    //System.out.println(datas);
-                    
-                    return mv;
+                        System.out.println("ESTO OBTUVE DE LOGIN PACIENTE: "+lo.getUsuario());
+                        session.setAttribute("Paciente",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/expedientePaciente.htm");
                                 }
                                 default:
                                 {
@@ -654,40 +442,19 @@ public class InicioController {
                                 }
                                 case '1':                                               // el estatus 1 refiere a usuario activo y se ingresa a su bienvenida
                                 {
-                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("cronogramaPsicologo");                                            // Nombra al modelo
-                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                                    mv.addObject("Psicologo",new Psicologo());
-                                    return mv;
-                                    /* ArrayList<Capa_neuronas> neural_net;
-                            libMatrices op=new libMatrices();
-                            double[] x={0,0,1,0,1,1,1,1,0,0,
-                            1,0,1,1,0,1,1,0,1,0,
-                            0,1,0,0,1,0,0,1,0,0,
-                            1,0,0,0,1,0,0,0,0,1,
-                            0,0};
-                            Crear_RN redRecomendaciones=new Crear_RN();
-                            neural_net=redRecomendaciones.create_nn(topology,0);
-                            ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
-                            neural_net.get(0).w=pesos.get(0);
-                            neural_net.get(0).b=pesos.get(1);
-                            neural_net.get(1).w=pesos.get(2);
-                            neural_net.get(1).b=pesos.get(3);
-                            Implementacion exe=new Implementacion(neural_net,x);
-                            double[][] output=exe.Implement();
-                            System.out.println("Entrada: ");
-                            double[][] xa=new double[1][];
-                            xa[0]=x;
-                            op.print(xa);
-                            System.out.println("Salida: ");
-                            op.print(output);
-                            mv.addObject("salida1",output[0][0]);
-                            mv.addObject("salida2",output[0][1]);
-                            mv.addObject("salida3",output[0][2]);
-                            mv.addObject("salida4",output[0][3]);
-                            mv.addObject("salida5",output[0][4]);
-                            mv.addObject("salida6",output[0][5]);
-                            mv.addObject("nombre","Psicologo");*/
+                                   HttpSession session = hsr.getSession();
+                       
+                        System.out.println("ESTO OBTUVE DE LOGIN PSICOLOGO: "+lo.getUsuario());
+                        session.setAttribute("Psico",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/cronogramaPsicologo.htm");
+                                    
+                                    
                                 }
                                 default:
                                 {
@@ -740,11 +507,18 @@ public class InicioController {
                                 }
                                 case '1':                                                 // Si su estatus es 1 signifa cuenta activa y se procede a acceder a su bienbenida
                                 {
-                                    ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                                    mv.setViewName("cronograma");                                            // Nombra al modelo
-                                    mv.addObject("datos",datosL);         // agrega al modelo el objeto datos
-                                    mv.addObject("Nutriologo",new Nutriologo());
-                                    return mv;
+                                    HttpSession session = hsr.getSession();
+                       
+                        System.out.println("ESTO OBTUVE DE LOGIN NUTRI: "+lo.getUsuario());
+                        session.setAttribute("Nutri",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/cronograma.htm");
+                                    
                                 }
                                 default:
                                 {
@@ -769,71 +543,20 @@ public class InicioController {
                         System.out.println(datosL);  
 
                         if(datosL.size()>=1){                                               // Si se encuentra el  usuario se procede a acceder a su vista de bienvenida
-                         ModelAndView mv=new ModelAndView();                                // Creación del modelo
-                         mv.setViewName("bienvenida_admin");                                            // Nombra al modelo
-                         System.out.println("Pasando datos"); 
-       
-                         mv.addObject("ListaAdmin",datosL);
-                         mv.addObject("Administrador",new Administrador());
-                         mv.addObject("Mensaje",new Mensaje());
-                         sql=" select * from paciente where estatus <> 4 and estatus and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-              datosL=this.jdbcTemplate.queryForList(sql);
                   
-             mv.addObject("ListaP",datosL);       // SE AGREGA EL OBJETO LISTA DE PACIENTES AL MODELO     
-            
-             System.out.println(datosL);
-              System.out.println(datosL.size());
-      
-             mv.addObject("LongitudP",datosL.size()); 
-             
-      
+             HttpSession session = hsr.getSession();
+                        String text = hsr.getParameter("usuario");
+                        System.out.println("ESTO OBTUVE DE LOGIN ADMIN: "+lo.getUsuario());
+                        session.setAttribute("Admin",lo.getUsuario());
+                            
+                            
+                                         
+                         
+                        
+        
+                         return new ModelAndView("redirect:/bienvenida_admin.htm");
        
-             mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO
-          
-             
-              sql2=" select * from nutriologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-             List datosL2=this.jdbcTemplate.queryForList(sql2);
-                  
-             mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
-            
-             System.out.println(datosL2);
-             System.out.println(datosL2.size());
-      
-             mv.addObject("LongitudN",datosL2.size()); 
-             
-      
-       
-             mv.addObject("Nutriologo",new Nutriologo());     // SE AGREGA EL OBJETO NUTRIOLOGO AL MODELO
-                  
-       
-             
-             
-             String sql3=" select * from psicologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;";
-
-            
-      
-             List datosL3=this.jdbcTemplate.queryForList(sql3);
-                  
-             mv.addObject("ListaPs",datosL3);       // SE AGREGA EL OBJETO LISTA DE PSICOLOGOS AL MODELO     
-            
-             System.out.println(datosL3);
-             
-             System.out.println(datosL3.size());
-      
-             mv.addObject("LongitudPs",datosL3.size()); 
-      
-       
-             mv.addObject("Psicologo",new Psicologo());     // SE AGREGA EL OBJETO PSICOLOGO AL MODELO
-             
-             
-       
-                         return mv;
+                       
             }
                 else{                                                                    // En caso de no encontrar al usuario en la base ded datos se procede a regresar a la pagina de inicio
                     ModelAndView mv=new ModelAndView();                                     // Creación del modelo
@@ -858,5 +581,12 @@ public class InicioController {
         }
     }
     
+    
+  
+    
+    
+
+    
+    
 }
-                
+               

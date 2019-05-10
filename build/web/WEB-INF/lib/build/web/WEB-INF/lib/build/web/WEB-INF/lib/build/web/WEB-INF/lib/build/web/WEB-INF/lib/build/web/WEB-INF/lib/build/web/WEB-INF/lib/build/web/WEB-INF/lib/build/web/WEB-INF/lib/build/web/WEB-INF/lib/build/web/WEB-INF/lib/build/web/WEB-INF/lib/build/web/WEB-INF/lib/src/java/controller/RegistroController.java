@@ -10,6 +10,7 @@ import models.Conexion;
 import models.Login;
 import models.LoginValidar;
 import models.NeuralNet.Capa_neuronas;
+import models.NeuralNet.Crear_RN;
 import models.NeuralNet.Implementacion;
 import models.NeuralNet.libMatrices;
 import models.Nutriologo;
@@ -88,7 +89,17 @@ public class RegistroController {
                                 1,1,0,1,0,1,0,1,0,1,
                                 1,1,0,1,0,1,0,1,0,1,
                                 0,0};
-                    neural_net=create_nn(topology,0);
+                    Crear_RN redRecomendaciones=new Crear_RN();
+                    neural_net=redRecomendaciones.create_nn(topology,0);
+                    
+                    ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+                    
+                    neural_net.get(0).w=pesos.get(0);
+                    neural_net.get(0).b=pesos.get(1);
+
+                    neural_net.get(1).w=pesos.get(2);
+                    neural_net.get(1).b=pesos.get(3);
+                    
                     Implementacion exe=new Implementacion(neural_net,x);
                     double[][] output=exe.Implement();
                     System.out.println("Entrada: ");

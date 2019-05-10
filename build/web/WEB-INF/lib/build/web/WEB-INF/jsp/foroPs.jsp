@@ -53,20 +53,18 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="cronogramaPsicologo.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                     <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Psicologo">
-                            <li><input type="submit" class="texto_menu" name="cronograma" value="Cronograma" formaction="cronogramaPsicologo.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_psicologo.htm"></li>
-                       
-                        <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaPs.htm"></li>
+                           <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         
-                        <li><a class="texto_menu" href="">XXXXX</a></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
@@ -79,7 +77,7 @@
     </div>
 
                     
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+            <a class="regresar" href="<c:url value="/nuevaEntradaPs.htm" />">Nueva entrada</a>
         
         <div id="contenido">
             <div class="container">
@@ -105,14 +103,27 @@
                     </div>  
                         <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                            <ul>
-                                <li>Entrada 1</li>
-                                <li>Entrada 2</li>
-                                <li>Entrada 3</li>
-                                <li>Entrada 4</li>
-                                <li>Entrada 5</li>
-                            </ul> 
+                                                       
+                           
+                           
+                            <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="item3"><p class="titulo">Historial</p>
                             <hr>
                             <table>
@@ -143,13 +154,13 @@
                                 </tr>
                             </table>
                         </div>
+                        <a class="regresar" href="<c:url value="/ForoPrincipalPs.htm" />">Ver foro</a>
                 </div>
                 
             </div>
             <!--Fin container-->
         </div>
         <!--Fin contenido-->
-        
         <footer>
             <div class="container">
                 <center>

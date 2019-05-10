@@ -31,7 +31,7 @@
                     <div id="logoIPN">
                         <a href="https://www.ipn.mx">
                             <p>Instituto Politécnico Nacional</p>
-                            "La Técnica al Servicio de la Patria"
+                            <p>"La Técnica al Servicio de la Patria"</p>
                         </a>
                         <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                     </div>

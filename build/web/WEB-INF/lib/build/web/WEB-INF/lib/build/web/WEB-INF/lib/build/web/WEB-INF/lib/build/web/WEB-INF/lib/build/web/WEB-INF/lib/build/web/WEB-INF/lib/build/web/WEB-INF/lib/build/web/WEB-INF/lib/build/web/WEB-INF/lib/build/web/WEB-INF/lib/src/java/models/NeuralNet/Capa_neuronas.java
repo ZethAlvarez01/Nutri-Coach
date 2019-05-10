@@ -4,8 +4,8 @@ public class Capa_neuronas {
     int n_conn;
     int n_neuronas;
     int act_f;
-    double b[][];
-    double w[][];
+    public double b[][];
+    public double w[][];
     
     public Capa_neuronas(int n_conn,int n_neuronas,int act_f){
         this.n_conn=n_conn;

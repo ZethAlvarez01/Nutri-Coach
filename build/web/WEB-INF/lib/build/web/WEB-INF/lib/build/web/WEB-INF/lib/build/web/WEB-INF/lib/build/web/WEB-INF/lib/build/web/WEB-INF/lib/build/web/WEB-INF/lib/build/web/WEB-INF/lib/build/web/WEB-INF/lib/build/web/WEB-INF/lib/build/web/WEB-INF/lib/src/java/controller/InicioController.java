@@ -69,7 +69,6 @@ public class InicioController {
             mv.addObject("loginO",new Login());
             return mv;
         }else{
-            
             String sql="select * from administrador where contraseña='"+
             login.getPass()+"' and no_empleado="+login.getUsuario()+";";
             List datos=this.jdbcTemplate.queryForList(sql);

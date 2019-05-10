@@ -77,7 +77,7 @@
     </div>
 
                     
-        <a class="regresar" href="<c:url value="/inicio.htm" />">Regresar</a>
+            <a class="regresar" href="<c:url value="/nuevaEntradaPs.htm" />">Nueva entrada</a>
         
         <div id="contenido">
             <div class="container">
@@ -103,14 +103,27 @@
                     </div>  
                         <div class="item2"><p class="titulo">Entradas recientes</p>
                             <hr>
-                            <ul>
-                                <li>Entrada 1</li>
-                                <li>Entrada 2</li>
-                                <li>Entrada 3</li>
-                                <li>Entrada 4</li>
-                                <li>Entrada 5</li>
-                            </ul> 
+                                                       
+                           
+                           
+                            <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                            
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="item3"><p class="titulo">Historial</p>
                             <hr>
                             <table>
@@ -141,13 +154,13 @@
                                 </tr>
                             </table>
                         </div>
+                        <a class="regresar" href="<c:url value="/ForoPrincipalPs.htm" />">Ver foro</a>
                 </div>
                 
             </div>
             <!--Fin container-->
         </div>
         <!--Fin contenido-->
-        
         <footer>
             <div class="container">
                 <center>

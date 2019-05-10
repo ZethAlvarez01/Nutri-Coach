@@ -1,0 +1,64 @@
+ul,
+li {
+    list-style: none;
+}
+
+#foto {
+    margin-left: 130px;
+    margin-top: 6px;
+    width: 60px;
+    cursor: pointer;
+}
+
+.menu {
+    height: 70px;
+    width: 200px;
+    background: rgb(108, 29, 69);
+    color: white;
+    float: right;
+}
+
+label {
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.menu li .a_ref {
+    cursor: pointer;
+    background-color: rgb(108, 29, 69);
+    padding: 20px 15px;
+    ;
+    display: block;
+}
+
+.menu li .a_ref:hover {
+    background-color: #894A6A;
+}
+
+.menu li ul {
+    display: none;
+    position: absolute;
+    min-width: 200px;
+}
+
+.menu li:hover>ul {
+    display: block;
+}
+
+.menu li ul li {
+    border-bottom: solid 1px;
+    border-color: #A16E88;
+}
+
+#Cerrar {
+    border-radius: 0px 0px 5px 5px;
+}
+
+#cerrar {
+    border: none;
+}
+
+#data_usuario {
+    border-top: solid 1px;
+    border-color: #A16E88;
+}

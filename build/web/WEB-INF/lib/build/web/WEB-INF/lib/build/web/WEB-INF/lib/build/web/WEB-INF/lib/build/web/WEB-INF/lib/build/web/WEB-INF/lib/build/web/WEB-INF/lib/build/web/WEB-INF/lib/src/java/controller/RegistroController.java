@@ -1,6 +1,5 @@
 package controller;
 
-import static controller.InicioController.create_nn;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -74,7 +73,7 @@ public class RegistroController {
             mv.addObject("login",new Login());
             return mv;
         }else{
-            String sql="select * from paciente where contraseña='"+
+            String sql="select nombre from paciente where contraseña='"+
                 login.getPass()+"' and no_boleta="+login.getUsuario()+";";
                 List datos=this.jdbcTemplate.queryForList(sql);
                 System.out.println(datos);
@@ -114,7 +113,7 @@ public class RegistroController {
                     mv.addObject("salida4",output[0][3]);
                     mv.addObject("salida5",output[0][4]);
                     mv.addObject("salida6",output[0][5]);
-                    mv.addObject("nombre","Paciente");
+                    mv.addObject("nombre","Hola "+datos.get(0));
                     return mv;
             }else{
                 ModelAndView mv=new ModelAndView();

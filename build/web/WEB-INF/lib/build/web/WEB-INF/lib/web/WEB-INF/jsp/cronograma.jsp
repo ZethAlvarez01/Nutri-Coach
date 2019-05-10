@@ -60,19 +60,17 @@
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Nutriologo">
-                            <li><input type="submit" class="texto_menu" name="mensajeria" value="Mensajeria" formaction="mensajeriaN.htm"></li>
-                                
-                         <li><input type="submit" class="texto_menu" name="pacientes" value="Pacientes" formaction="bienvenida_nutriologo.htm"></li>
-                       
-                        <li><input type="submit" class="texto_menu" name="foro" value="Foro" formaction="foroN.htm"></li></li>
-                        <li><a class="texto_menu" href="">Dietas</a></li>
+                             <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
@@ -116,6 +114,10 @@
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
                             </select>
 
                     </div>
@@ -126,13 +128,13 @@
                     <br>
                     <table class="tabla">
                         <thead id="tabla">
-                            <div class="c_dia" id="lunes">Lun.</div>
+                            <div class="c_dia" id="lunes">Dom.</div>
+                            <div class="c_dia">Lun.</div>
                             <div class="c_dia">Mar.</div>
                             <div class="c_dia">Mié.</div>
                             <div class="c_dia">Jue.</div>
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
-                            <div class="c_dia">Dom.</div>
                             <script>
                                 dias();
                             </script>

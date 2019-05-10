@@ -1,4 +1,4 @@
-/* 
+ /* 
     Created on : 11/11/2018, 08:55:00 PM
     Author     : Zeth
 */
@@ -114,6 +114,9 @@ footer{
     bottom: 0px;
 }
 
+
+/*Estilos responsivos ára la pantalla de inicio*/
+
 @media all and (max-width: 655px){
     #logoSEP{
         display: none;
@@ -130,18 +133,23 @@ footer{
     .texto #bienvenido{
         text-align: center;
     }
-    
 
+    #btnResponsive:hover{
+        background: rgb(148, 69, 109);
+    }
+    
     #btnResponsive{
         display: block;
-        float: right;
-        margin-top: 10px;
-        border-radius: 5px;
-        background-color: rgb(108,29,69);
-        border: 3px solid white;
+        position: absolute;
+        margin-top: 15px; 
         padding: 10px 40px;
+        background-color: rgb(108,29,69);
         color: white;
+        border-radius: 5px;
         font-size: 20px;
+        width: 50%;
+        text-align: center;
+        margin-left: 8%;
     }   
     
     #imagen{

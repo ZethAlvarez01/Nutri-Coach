@@ -31,7 +31,7 @@
         
         <title>Nutri-Coach</title>
     </head>
-    <body onscroll="bajar()">
+    <body>
         <header>
             <div class="container">
                 <div id="pleca">
@@ -42,10 +42,13 @@
                     </div>
                     <div id="logoIPN">
                         <a href="https://www.ipn.mx">
-                            <p>Instituto Politécnico Nacional</p>
+                            <div id="texto_ipn">
+                            Instituto Politécnico Nacional<br>
                             "La Técnica al Servicio de la Patria"
+                            </div>
+                            
                         </a>
-                        <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
+                        <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional" id="imgIPN">
                     </div>
                 </div>
             </div>

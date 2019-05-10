@@ -6,10 +6,7 @@ function dias() {
     let cuerpoT = document.createElement("TBODY");
     cuerpoT.setAttribute('id', 'cuerpo');
     tabla.appendChild(cuerpoT);
-
-
     ////////////////////////////////////////////
-
     let fecha = new Date();
     var dt = new Date(fecha.getMonth() + ' ' + 1 + ', ' + fecha.getFullYear() + ' 12:00:00');
     //alert(dt.getUTCDay());
@@ -19,7 +16,6 @@ function dias() {
 
     let dias_c = 1;
     let flg = 0;
-
     ////////////////////////////////////////////
 
     for (var s = 0; s < 6; s++) {
@@ -32,27 +28,23 @@ function dias() {
             dia.setAttribute('onclick', 'myFunction(this)');
 
             let numero = 0;
-
-            if (d == dt.getUTCDay() && flg == 0) {
+            
+            if (d == dt.getUTCDay()+2 && flg == 0) {
                 dia.innerHTML = dias_c;
                 dias_c++;
                 flg = 1;
             } else if (flg == 1 && dias_c <= fecha2) {
                 dia.innerHTML = dias_c;
-
                 let dia_act = new Date();
                 if (dias_c == dia_act.getDate()) {
                     dia.style.background += "rgb(108, 29, 69)";
                     dia.style.color += "white";
                 }
-
                 dias_c++;
+                
             } else {
                 dia.innerHTML = " ";
             }
-
-
-
             fila.appendChild(dia);
         }
     }
@@ -65,8 +57,9 @@ function fechaPorDia(año, dia) {
 
 
 function numerar() {
-    for (i = 1; i < 366; i++) {
-        let fecha = fechaPorDia(2017, i);
+    let anio=new Date();
+    for (i = 1; i <= 365; i++) {
+        let fecha = fechaPorDia(anio, i);
     }
 }
 

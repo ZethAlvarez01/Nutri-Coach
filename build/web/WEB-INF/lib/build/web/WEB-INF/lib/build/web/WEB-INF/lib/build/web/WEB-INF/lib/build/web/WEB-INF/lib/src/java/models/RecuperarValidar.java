@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 
 /**
  *
- * @author zetok
+ * @author Nutri-Coach
  */
 public class RecuperarValidar implements Validator{
 

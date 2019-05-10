@@ -183,4 +183,22 @@ function expandir() {
     alert("Expandir informacion");
 }
 
+function regresar(){
+    window.history.back()
+}
+
+function Editar(){
+   
+  
+  
+  document.getElementById("Entrada").disabled=false; 
+  document.getElementById("EntradaContenido").disabled=false; 
+  document.getElementById("EditarEntrada").style.display="none"; 
+  document.getElementById("GuardarEntrada").style.display="block";
+  
+  document.getElementById("Entrada").value=document.getElementById("Entrada").placeholder.valueOf(); 
+  document.getElementById("EntradaContenido").innerHTML=document=document.getElementById("EntradaContenido").placeholder.valueOf(); 
+  
+}
+
 /* Falta codigo para cambair emogis de color al seleccionar */

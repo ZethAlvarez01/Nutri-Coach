@@ -11,10 +11,14 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/recuperar.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        
         <title>Nutri-Coach</title>
     </head>
     <body>
@@ -54,8 +58,9 @@
                     <p>Te ayudamos a recuperar tu contraseña. Para recuperar tu contraseña solo necesitamos tu correo ligado a la tu cuenta de Nutri-Coach para que recibas un correo con las instrucciones de recuperación.</p>
                     </center>
                     <div id="formulario">
-                        <form:form method="POST" commandName="recuperarC">
-                           <form:input id="correo" path="correo" placeholder="Correo"/>
+                        <form:form method="POST" commandName="Recuperar">
+                        <form:input path="correo" type="email" placeholder="Correo"/>
+                        <form:errors path="correo" />
                            <form:button id="button" class="button" type="submit">Recuperar contraseña</form:button>
                         </form:form>
                     </div>

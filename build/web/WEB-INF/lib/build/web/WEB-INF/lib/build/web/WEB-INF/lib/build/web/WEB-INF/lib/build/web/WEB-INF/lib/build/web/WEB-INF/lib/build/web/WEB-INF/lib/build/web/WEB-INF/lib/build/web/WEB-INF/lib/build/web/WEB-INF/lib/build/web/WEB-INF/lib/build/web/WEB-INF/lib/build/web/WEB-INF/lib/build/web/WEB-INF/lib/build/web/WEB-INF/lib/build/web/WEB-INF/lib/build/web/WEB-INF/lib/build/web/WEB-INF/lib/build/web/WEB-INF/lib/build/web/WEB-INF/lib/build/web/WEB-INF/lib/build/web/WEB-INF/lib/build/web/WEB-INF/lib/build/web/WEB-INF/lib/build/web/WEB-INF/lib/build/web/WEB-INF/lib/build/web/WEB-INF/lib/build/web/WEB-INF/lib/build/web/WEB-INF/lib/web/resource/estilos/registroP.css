@@ -77,3 +77,35 @@ select{
     background-color: rgb(0,0,0,0.3);
     transition: 0.5s;
 }
+
+@media all and (max-width: 655px){
+    #logoSEP{
+        display: none;
+    }
+    
+    #logoIPN{
+        float: left;
+    }  
+    
+    .regresar{
+        display: none;
+    }
+    
+    input, select, textarea{
+        width: 390px;
+    }
+    
+}
+
+@media all and (max-width: 329px){
+    #logoIPN p{
+        font-size: 14px;
+    }
+}
+
+@media all and (orientation:landscape){
+    #imagen{
+        width: 400px;
+        margin-left: 15%;
+    }     
+}

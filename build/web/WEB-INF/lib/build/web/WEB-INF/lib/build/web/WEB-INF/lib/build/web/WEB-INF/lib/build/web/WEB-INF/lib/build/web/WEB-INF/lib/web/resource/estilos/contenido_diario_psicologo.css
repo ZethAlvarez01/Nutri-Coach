@@ -1,0 +1,213 @@
+#contenido {
+    height: 950px;
+}
+
+
+/* Contenido 2 columnas */
+
+#grid {
+    display: grid;
+    background: white;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#informacion {
+    grid-column: 1/4;
+    grid-row: 1;
+    height: 600px;
+    background: white;
+}
+
+
+/* Listado de pacientes */
+
+#listado {
+    grid-column: 4;
+    grid-row: 1;
+    height: 950px;
+    border-left: solid 1px #ddd;
+}
+
+#numero_pacientes {
+    text-align: left;
+    font-size: 12px;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+
+#encabezado_lista {
+    height: 100px;
+    text-align: center;
+}
+
+#sub-titulo {
+    font-size: 18px;
+    margin: 10px;
+    font-style: bold;
+}
+
+#encabezado_lista input {
+    height: 25px;
+    width: 80%;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    padding: 5px;
+}
+
+#lista {
+    height: 840px;
+    overflow-y: scroll;
+}
+
+#lista::-webkit-scrollbar {
+    display: none;
+}
+
+.paciente {
+    background: white;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    cursor: pointer;
+}
+
+.paciente:hover {
+    background: #ddd;
+}
+
+.paciente img {
+    grid-column: 1;
+    border-radius: 50%;
+    height: 50px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.paciente p {
+    grid-column: 2;
+}
+
+#texto_paciente {
+    padding: 10px;
+}
+
+#nombre {
+    font-size: 14px;
+}
+
+#nombre-info {
+    font-size: 14px;
+    color: #888;
+    padding-top: 5px;
+}
+
+
+/* Contenido Notas del paciente */
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.historial_dias {
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    border: solid 1px #ccc;
+}
+
+#mes,
+#semana {
+    width: 200px;
+}
+
+#hoja {
+    margin: 5px 10px;
+    width: 250px;
+}
+
+#fecha {
+    font-weight: bold;
+}
+
+.dias {
+    /*border: solid 1px;*/
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.dias::-webkit-scrollbar {
+    display: none;
+}
+
+#escrito {
+    width: 95%;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+#titulo {
+    font-size: 20px;
+    font-style: italic;
+}
+
+#imagen_adjunta {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+/* Bloque de Observaciones */
+
+#boton {
+    cursor: pointer;
+    border: solid 1px rgb(108, 29, 69);
+    padding: 15px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+    background: rgb(108, 29, 69);
+    color: white;
+}
+
+#boton:hover {
+    background: #45122C;
+}
+
+h3 {
+    text-align: center;
+    font-size: 26px;
+    margin: 20px 0px;
+}
+
+#areaTxt {
+    font-size: 18px;
+    border: solid 1px #ddd;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+    width: 98%;
+}
+
+#n_archivo {
+    margin-left: 10px;
+}
+
+#insertar_a {
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 4px;
+    width: 200px;
+}

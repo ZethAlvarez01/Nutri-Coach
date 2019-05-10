@@ -39,6 +39,7 @@ input{
 
 hr{
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .hiperlogin{
@@ -51,5 +52,129 @@ hr{
 
 #caja{
     margin: 0px auto;
-    width: 600px;
 }
+
+/*Estilos responsivos ára la pantalla de inicio*/
+
+@media all and (max-width: 788px){
+    #logoSEP{
+        display: none;
+    }
+    
+    #logoIPN{
+        float: left;
+    }    
+    
+    #imagen{
+        width: 150px;
+        margin: 5px auto;
+    }
+    
+    h1{
+        margin-top: 20px;
+        font-size: 2em;
+    }
+    
+    #contenido{
+        margin-top: 0px;
+    }
+    
+    #container-contenido{
+        width: 100%;
+    }
+    
+    #caja{
+        width: 100%;
+    }
+    
+    input{
+        width: 70%;
+    }
+    
+    #contenido{
+        height: 600px;
+    }
+    
+    hr{
+        color: white;
+    }
+
+    form{
+        
+        margin: 0 auto;
+        margin-top: 30px;
+        width: 450px;
+    }
+    
+    input{
+        width: 420px;
+    }
+    
+}
+
+@media all and (max-width: 580px){
+    form{
+        margin-top: 30px;
+        width: 400px;
+    }
+    
+    input{
+        width: 370px;
+    }
+}
+
+@media all and (max-width: 525px){
+    form{
+        margin-top: 30px;
+        width: 300px;
+    }
+    
+    input{
+        width: 270px;
+    }
+}
+
+@media all and (max-width: 412px){
+    #imgIPN{
+        width: 43px;
+        height: 50px;
+    }
+
+    #texto_ipn{
+        font-size: 14px;
+    }
+    
+    form{
+        margin-top: 30px;
+        width: 250px;
+    }
+    
+    input{
+        width: 215px;
+    }
+    
+}
+
+@media all and (max-width: 320px){
+    form{
+        margin-top: 30px;
+        width: 230px;
+    }
+    
+    input{
+        width: 200px;
+    }
+}
+
+@media all and (max-width: 7){
+    form{
+        margin-top: 30px;
+        width: 230px;
+    }
+    
+    input{
+        width: 200px;
+    }
+}
+
+
