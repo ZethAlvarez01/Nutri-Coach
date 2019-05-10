@@ -36,9 +36,7 @@
     </head>
 
     <body onscroll="bajar()">
-         <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/nutricoach"
-         user = "root"  password = "walter22"/>
+        
 
     <header>
         <div class="container">
@@ -98,40 +96,20 @@
                 <div id="listado">
                     <div id="encabezado_lista">
                         <p id="sub-titulo">Listado de usuarios</p>
-                        
-                                
-                                    <input   type="text" placeholder="Buscar usuario" name="nombre" id="nombre" >                                                               
-                               
-                           
-                        
-                        
-                        
-                        
-                        
-                        
+                        <input type="text" placeholder="Buscar usuario">
                         <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
                     </div>
 
                     <div id="lista">
-                        
+                        <c:set var="no_boleta" value="${ListaPacientes[0].no_boleta}"/>
                          <c:forEach items="${ListaPacientes}" var="item"> 
-                             
-                           
-                                    
-                                    
-                                    
                         <div class="usuario"  onclick="TypeDiv('Número de boleta: ${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' Domicilio: ${item.domicilio}',' Teléfono${item.telefono}  Correo:${item.correo}','${item.no_boleta}')" name="usuario">
                                  <c:set var="no_boleta" value="${item.no_boleta}"/>
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user"> 
                                 <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                
+                                <p id="nombre-info">Mas informacion</p>
                                  <p id="nombre-info"><c:out value="${no_boleta}" /></p>
-                                 <p id="nombre-info">Mas informacion</p>
-                                  <sql:query dataSource = "${snapshot}" var = "result">
-                                    SELECT no_boleta,fecha,contenido from actividadp  where no_boleta = ?
-                                 <sql:param   value = "${no_boleta}"  />
-                              </sql:query>
                             </div>
                                 
                                 
@@ -188,14 +166,26 @@
 
                         <div class="casillas" id="historial_act">
                             <h3  style="cursor:pointer;">Historial de actividades</h3>
+                            <form id="form">
+                                  <input id="num_boleta3" name="num_boleta3" value="${ListaPacientes[0].no_boleta}" />
+                            </form>
                             
-                            
-                      
-                    
+                          
+                             <c:set var="no_boleta4" value="${param.num_boleta3}"/>
+                             
+                              
+                             
+                             <p> NUMERO DE BOLETA 4: <c:out value="${no_boleta4}" /></p>
                              
                              
-                           
+                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/nutricoach"
+         user = "root"  password = "walter22"/>
                             
+                            <sql:query dataSource = "${snapshot}" var = "result">
+                                    SELECT no_boleta,fecha,contenido from actividadp  where no_boleta = ?
+                                 <sql:param   value = "${no_boleta4}"  />
+                              </sql:query>
                             
                             
                             
