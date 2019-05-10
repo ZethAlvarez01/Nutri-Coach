@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
 <html>
    <head>
@@ -35,6 +36,10 @@
     </head>
 
     <body onscroll="bajar()">
+         <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost/nutricoach"
+         user = "root"  password = "walter22"/>
+
     <header>
         <div class="container">
             <div id="pleca">
@@ -93,19 +98,40 @@
                 <div id="listado">
                     <div id="encabezado_lista">
                         <p id="sub-titulo">Listado de usuarios</p>
-                        <input type="text" placeholder="Buscar usuario">
+                        
+                                
+                                    <input   type="text" placeholder="Buscar usuario" name="nombre" id="nombre" >                                                               
+                               
+                           
+                        
+                        
+                        
+                        
+                        
+                        
                         <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
                     </div>
 
                     <div id="lista">
-
+                        
                          <c:forEach items="${ListaPacientes}" var="item"> 
-                        <div class="usuario" onclick="TypeDiv('Número de boleta: ${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' Domicilio: ${item.domicilio}',' Teléfono${item.telefono}  Correo:${item.correo}','${item.no_boleta}')" name="usuario">
+                             
                            
+                                    
+                                    
+                                    
+                        <div class="usuario"  onclick="TypeDiv('Número de boleta: ${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' Domicilio: ${item.domicilio}',' Teléfono${item.telefono}  Correo:${item.correo}','${item.no_boleta}')" name="usuario">
+                                 <c:set var="no_boleta" value="${item.no_boleta}"/>
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user"> 
                                 <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                <p id="nombre-info">Mas informacion</p>
+                                
+                                 <p id="nombre-info"><c:out value="${no_boleta}" /></p>
+                                 <p id="nombre-info">Mas informacion</p>
+                                  <sql:query dataSource = "${snapshot}" var = "result">
+                                    SELECT no_boleta,fecha,contenido from actividadp  where no_boleta = ?
+                                 <sql:param   value = "${no_boleta}"  />
+                              </sql:query>
                             </div>
                                 
                                 
@@ -116,7 +142,7 @@
                     </div>
 
                 </div>
-                <div id="informacion">
+                         <div id="informacion" >
                     <div id="h3">
                         <h3>Informacion del paciente</h3>
                     </div>
@@ -131,11 +157,11 @@
                             </form:form>
                             <p>Fecha de inicio</p>
                              <p id="num_boleta">Número de boleta: ${ListaPacientes[0].no_boleta}</p>
-                                
+                             
                                 <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
                                 <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
                                 <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
-                        
+                        <p id="nombre-info">ESTE ES EL NUMERO DE BOLETA :<c:out value="${no_boleta}" /></p>
                         </div>
 
                         <div class="casillas" id="actividad">
@@ -152,39 +178,52 @@
                                 <form:input path="no_cedula"  value="${psicologo.no_cedula}" type="hidden"   /> 
                             </c:forEach> 
                             
-                            <form:input path="no_boleta" id="num_boleta2" value="${ListaPacientes[0].no_boleta}" type="hidden"  />  
+                             
+                            <form:input path="no_boleta" id="num_boleta2" value="${ListaPacientes[0].no_boleta}"  type="hidden" />  
+                            
                             <form:input path="fecha" value="" type="hidden"   />
                             <input  id="boton" type="submit" name="AsignarActividad" value="Asignar Actividad" onclick="fecha2()">
                              </form:form>
                         </div>
 
                         <div class="casillas" id="historial_act">
-                            <h3 onclick="expandir()" style="cursor:pointer;">Historial de actividades</h3>
+                            <h3  style="cursor:pointer;">Historial de actividades</h3>
+                            
+                            
+                      
+                    
+                             
+                             
+                           
+                            
+                            
+                            
+                            
+                            <table border = "1" width = "100%">
+         <tr>
+           
+            <th>NO_BOLETA</th>
+            
+            <th>FECHA</th>
+            <th>CONTENIDO</th>
+             
+         </tr>
+                   <c:forEach var = "row" items = "${result.rows}">
+            <tr>
+               
+               <td> <c:out value = "${row.no_boleta}"/></td>
+               
+               <td> <c:out value = "${row.fecha}"/></td>
+               <td> <c:out value = "${row.contenido}"/></td>
+               
+            </tr>
+         </c:forEach>
+      </table>         
+                            
+                            
+                            
                             <ul id="historial_actividades">
-                                <li>Post en el foto</li>
-                                <li>Actividad #1 con el psicologo</li>
-                                <li>Tacho como seguida la dieta</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>Post en el foto</li>
-                                <li>Actividad #1 con el psicologo</li>
-                                <li>Tacho como seguida la dieta</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>Post en el foto</li>
-                                <li>Actividad #1 con el psicologo</li>
-                                <li>Tacho como seguida la dieta</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>Post en el foto</li>
-                                <li>Actividad #1 con el psicologo</li>
-                                <li>Tacho como seguida la dieta</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>No consumio X alimento (Fecha)</li>
-                                <li>Post en el foto</li>
-                                <li>Actividad #1 con el psicologo</li>
-                                <li>Tacho como seguida la dieta</li>
-                                <li>No consumio X alimento (Fecha)</li>
+                              
                                 <li>No consumio X alimento (Fecha)</li>
                             </ul>
                         </div>
