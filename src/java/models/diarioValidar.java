@@ -13,31 +13,31 @@ import org.springframework.validation.Validator;
  *
  * @author Nutri-Coach
  */
-public class comentarioValidar implements Validator{
+public class diarioValidar implements Validator{
 
     @Override
     public boolean supports(Class<?> type) {
-        return Comentario.class.isAssignableFrom(type);
+        return diario.class.isAssignableFrom(type);
     }
 
     @Override
        public void validate(Object o, Errors errors) {
-        Comentario comentario=(Comentario)o;
+        diario diario=(diario)o;
         
         
         
         
         //Se valida que cada elemento de nuestro formulario no se encuentre en blanco
         
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id_usuario","required.id_usuario","El id_usuario  es oligatorio");
-        System.out.println("NO ENCONTRE EL ID_USUARIO");
+      
         
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contenido","required.contenido","El contenido es obligatorio");
-        System.out.println("NO ENCONTRE EL CONTENIDO");
+   
         
   
-
+         
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sentimiento","required.sentimiento","Es necesario que elijas como te sientes");
+       
 
 
     }

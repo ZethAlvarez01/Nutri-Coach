@@ -1,5 +1,13 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -70,8 +78,55 @@ public class NutriologoValidar implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contraseña2","required.contraseña2","Repetir tu contraseña es obligatorio");
         System.out.println("NO ENCONTRE la contraseña2");
       
-            /////////////////////////////////////////////////////////////   
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaEntrada", "required.horaEntrada","Tu Hora de entrada es obligatoria");
+       
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaSalida", "required.horaSalida","Tu Hora de salida es obligatoria");
+        
+      
+        
+       /////////////////////////////////////
+       //////////////Validación de horas de trabajo
+
+
+
+             /////////////////////////////////////////////////////////////   
         //Validación de telefono
+          if(!nutriologo.getHoraEntrada().equals("")){
+                    if(!nutriologo.getHoraSalida().equals("")){
+                       LocalTime inicio = LocalTime.parse(nutriologo.getHoraEntrada());
+                       LocalTime fin = LocalTime.parse(nutriologo.getHoraSalida());
+                       
+                       DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                Date horaIni;
+                Date horaFin;
+                        try {
+                            horaIni = dateFormat.parse(nutriologo.getHoraEntrada());
+                            horaFin = dateFormat.parse(nutriologo.getHoraSalida());
+                                                   if (horaIni.compareTo(horaFin) < 0) {//Jornada laboral:
+            
+            
+            
+                              } 
+                   else{
+            errors.rejectValue("horaSalida", "horaSalida.incorrect","No cuentas con una jornada laboral valida"); //Si ninguna condición se cumple el telefono es invalido
+        }
+                        } catch (ParseException ex) {
+                            Logger.getLogger(NutriologoValidar.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                
+                       
+    
+                       
+               }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         
         //valida telefonos con 8 y 10 digitos
         if(!nutriologo.getTelefono().equals("")){

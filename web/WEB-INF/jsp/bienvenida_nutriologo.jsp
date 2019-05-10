@@ -27,7 +27,7 @@
 
     <script type="text/javascript" src="resource/scrips/script.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+    <script type="text/javascript" src="resource/scrips/psicologo.js"/></script>
 
     <title>Nutri-Coach</title>
 </head>
@@ -83,7 +83,7 @@
     <div id="contenido">
         <div class="container">
              <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus pacientes para hoy.</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus pacientes</h1></p>
                 </c:forEach>
             <div id="grid">
                 <div id="notificaciones">
@@ -99,8 +99,8 @@
                     <div id="lista">
 
                         
-                        <c:forEach items="${ListaP}" var="item"> 
-                        <div class="usuario" onclick="TypeDivPaciente('${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' domicilio: ${item.domicilio}',' telefono:${item.telefono}  correo:${item.correo}')" name="usuario">
+                        <c:forEach items="${ListaPacientes}" var="item"> 
+                        <div class="usuario" onclick="TypeDiv('Número de boleta: ${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' Domicilio: ${item.domicilio}',' Teléfono${item.telefono}  Correo:${item.correo}')" name="usuario">
                            
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
                             <div id="texto_user"> 
@@ -119,32 +119,22 @@
 
                 </div>
 
-                <div id="informacion" style="display: none;" name="informacion">
+                <div id="informacion"  name="informacion">
                     <div id="h3">
                         <h3>Informacion del paciente</h3>
                     </div>
-                    <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto de perfil" id="foto_info">
-                               
-                                <p id="num_boleta">ID</p>
-                                <p id="nombreUser">Nombre Completo:</p> 
-                                <p id="datosGenerales">  EDAD: SEXO: FECHA DE NACIMIENTO:  </p>
-                                <p id="datosGenerales2">  DOMICILIO:  </p>
-                                <p id="datosGenerales3">   TELEFONO:  CORREO: </p>
+                    <h1><p id="nombreUser">${ListaPacientes[0].nombre} ${ListaPacientes[0].ap_uno} ${ListaPacientes[0].ap_dos}</p></h1> 
                     <br>
+                    
                     <div id="grid_info">
                         <div class="casillas" id="resumen" >
                             <h3 onclick="expandir()" style="cursor:pointer;">Expediente clínico</h3>
                             <p>Fecha de inicio</p>
-                            <p>Cosas y mas cosas</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit placeat, ad, harum assumenda est quas inventore, eius dolor tenetur nesciunt libero vitae quibusdam culpa? Quo, beatae facere. Officiis, pariatur sed.</p>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque incidunt debitis asperiores cupiditate suscipit unde, libero amet quisquam beatae? Exercitationem, animi. Voluptatum sequi facilis minus quam sint suscipit,
-                                atque quaerat.</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus iusto nam natus corporis quibusdam error obcaecati qui, voluptatem ratione, omnis adipisci aperiam numquam repudiandae. Ullam eaque delectus fugit exercitationem
-                                sapiente!
-                            </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae ab reprehenderit doloremque repellat quod officia assumenda, a impedit vel mollitia harum provident, pariatur veritatis, eveniet non temporibus sunt sint?</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore cum esse aliquam in, recusandae maiores animi ut ipsum, vel at, ullam illum reprehenderit nobis consequuntur eaque dicta quis! Dolor, id.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consectetur, sed id sapiente eum facilis pariatur nobis! Inventore omnis voluptatem blanditiis beatae, eius vel accusantium numquam iste velit cumque quibusdam?</p>
+                             <p id="num_boleta">Número de boleta: ${ListaPacientes[0].no_boleta}</p>
+                                
+                                <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
+                                <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
+                                <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
                         </div>
 
                         <div class="casillas" id="graficas">

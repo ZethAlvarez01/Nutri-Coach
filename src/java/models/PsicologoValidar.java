@@ -1,5 +1,12 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -51,7 +58,7 @@ public class PsicologoValidar implements Validator{
         
         
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ap_dos","required.ap_dos","Tu segundo apellido es obligatorio");
-        System.out.println("NO ENCONTRE EL primer apellido");
+        System.out.println("NO ENCONTRE EL SEGUNDO apellido");
     
         
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono","required.telefono","Ingresa un número de contacto");
@@ -67,6 +74,24 @@ public class PsicologoValidar implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contraseña2","required.contraseña2","Repetir tu contraseña es obligatorio");
         System.out.println("NO ENCONTRE la contraseña2");
         System.out.println(psicologo.getContraseña2());
+        
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "institucion","required.institucion","Tu institucion adscrita es obligatoria");
+        System.out.println("NO ENCONTRE EL instituto");
+        
+    
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "consultorio","required.consultorio","Tu domicilio de consultorio es obligatorio");
+        System.out.println("NO ENCONTRE EL consultorio");
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaEntrada", "required.horaEntrada","Tu Hora de entrada es obligatoria");
+       
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaSalida", "required.horaSalida","Tu Hora de salida es obligatoria");
+        
+        
+        
+        
+        
+        
   
                 /////////////////////////////////////////////////////////////   
         //Validación de telefono
@@ -80,6 +105,50 @@ public class PsicologoValidar implements Validator{
             errors.rejectValue("telefono", "telefono.incorrect","El telefono no es valido"); //Si ninguna condición se cumple el telefono es invalido
         }
         }
+        
+        
+        
+        
+         /////////////////////////////////////
+       //////////////Validación de horas de trabajo
+
+
+
+             /////////////////////////////////////////////////////////////   
+        //Validación de telefono
+          if(!psicologo.getHoraEntrada().equals("")){
+                    if(!psicologo.getHoraSalida().equals("")){
+                       LocalTime inicio = LocalTime.parse(psicologo.getHoraEntrada());
+                       LocalTime fin = LocalTime.parse(psicologo.getHoraSalida());
+                       
+                       DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                Date horaIni;
+                Date horaFin;
+                        try {
+                            horaIni = dateFormat.parse(psicologo.getHoraEntrada());
+                            horaFin = dateFormat.parse(psicologo.getHoraSalida());
+                                                   if (horaIni.compareTo(horaFin) < 0) {//Jornada laboral:
+            
+            
+            
+                              } 
+                   else{
+            errors.rejectValue("horaSalida", "horaSalida.incorrect","No cuentas con una jornada laboral valida"); //Si ninguna condición se cumple el telefono es invalido
+        }
+                        } catch (ParseException ex) {
+                            Logger.getLogger(PsicologoValidar.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                
+                       
+    
+                       
+               }
+        }
+        
+        
+        
+        
+        
         
         
          

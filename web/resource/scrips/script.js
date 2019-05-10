@@ -159,10 +159,10 @@ function TypeDivPaciente(ID,nombre,generales,generales2,generales3) {
 function fecha() {
     var date = new Date();
     var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-    document.getElementById("fecha").innerHTML = "Ciudad de México a " + date.getDay() + " de " + meses[date.getMonth()] + " de " + date.getFullYear();
+    document.getElementById("fecha").innerHTML = "Ciudad de México a " + date.getUTCDate() + " de " + meses[date.getMonth()] + " de " + date.getFullYear();
 }
 
-function fecha2() {
+function fechas() {
     var date = new Date();
     var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
     document.getElementById("fecha2").innerHTML = "Ciudad de México a " + date.getDay() + " de " + meses[date.getMonth()] + " de " + date.getFullYear();

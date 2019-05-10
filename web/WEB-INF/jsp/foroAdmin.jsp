@@ -57,7 +57,7 @@
                 </div>
                 <div id="menu">
                     <c:forEach items="${ListaAdmin}" var="item"> 
-                          
+                           ${item.fecha}
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Administrador">
                           <li><a class="texto_menu" href="bienvenida_admin.htm">Administración</a></li>
@@ -125,34 +125,44 @@
                         
                         
                         
-                        <div class="item3"><p class="titulo">Historial</p>
+                        <div class="item3"><p class="titulo">Historial de comentarios</p>
                             <hr>
                             <table>
                                 <tr>
                                    <td><strong>Fecha</strong></td>
-                                   <td><strong>Titulo</strong></td>
-                                   <td><strong>Comentarios</strong></td> 
+                                   <td><strong>Titulo de Entrada</strong></td>
+                                   
                                 </tr>
+                                <c:forEach items="${FechaComentarios}" var="comentarios">
+                                    
                                 <tr>
-                                   <td>18/03/1995</td>
-                                   <td>Comida rica</td>
-                                   <td>25</td> 
+                                   <td>${comentarios.fecha}</td>
+                                   <c:set var = "entrada"  value = "${comentarios.id_entrada}"/>
+                                <c:forEach items="${NombreEntrada}" var="nombreEntrada">
+                                    <c:set var = "titulo"  value = "${nombreEntrada.id_entrada}"/>
+                                    
+                                    <c:if test ="${entrada == titulo}">
+                                       
+                                        
+                                        
+                                        <form:form method="post" commandName="entradaForo">
+                        
+                      <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
+
+                            <form:input path="id_entrada" placeholder="${nombreEntrada.id_entrada}" value="${nombreEntrada.id_entrada}" type="hidden" />
+                       </form:form>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                   
+                                   
+                                  
                                 </tr>
-                                <tr>
-                                   <td>02/03/1996</td>
-                                   <td>Deportes</td>
-                                   <td>35</td> 
-                                </tr>
-                                <tr>
-                                   <td>30/03/1998</td>
-                                   <td>Suplementos y mas</td>
-                                   <td>21</td> 
-                                </tr>
-                                <tr>
-                                   <td>21/06/1997</td>
-                                   <td>Comida chatarra</td>
-                                   <td>120</td> 
-                                </tr>
+                                
+                                    
+                                    
+                                </c:forEach> 
+                                
                             </table>
                         </div>
                         <a class="regresar" href="<c:url value="/ForoPrincipalAdmin.htm" />">Ver foro</a>

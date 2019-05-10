@@ -12,19 +12,21 @@ package models;
 public class Comentario {
     private String id_comnt;
     private String id_entrada;
-    private String titulo;
+    private String id_usuario;
     private String contenido;
     private String multimedia;
+    private String fecha;
 
     public Comentario() {
     }
 
-    public Comentario(String id_comnt, String id_entrada, String titulo, String contenido, String multimedia) {
+    public Comentario(String id_comnt, String id_entrada, String id_usuario, String contenido, String multimedia, String fecha) {
         this.id_comnt = id_comnt;
         this.id_entrada = id_entrada;
-        this.titulo = titulo;
+        this.id_usuario = id_usuario;
         this.contenido = contenido;
         this.multimedia = multimedia;
+        this.fecha = fecha;
     }
 
     public String getId_comnt() {
@@ -43,12 +45,12 @@ public class Comentario {
         this.id_entrada = id_entrada;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getId_usuario() {
+        return id_usuario;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getContenido() {
@@ -66,5 +68,15 @@ public class Comentario {
     public void setMultimedia(String multimedia) {
         this.multimedia = multimedia;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+   
 
 }
