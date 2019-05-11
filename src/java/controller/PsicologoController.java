@@ -16,17 +16,22 @@ import models.Comentario;
 import models.Conexion;
 import models.Nutriologo;
 import models.Paciente;
+
 import models.Psicologo;
 import models.comentarioValidar;
 import models.diario;
 import models.entradaForo;
 import models.foroValidar;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +45,8 @@ public class PsicologoController {
    private foroValidar foroValidar;                                 //Variable para validar foro
    private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
    private ActividadPValidar ActividadPValidar;                     //Variable para validar activad del psicólogo
-    
+       
+
      public PsicologoController() {
        this.foroValidar=new foroValidar();                            // Instancia de la clase foroValidar
         this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioalidar
@@ -48,6 +54,15 @@ public class PsicologoController {
         Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
+     
+     
+     
+   
+     
+     
+     
+     
+     
      
      
                     /////////////////////////////////////////////////////////////// 
@@ -80,6 +95,12 @@ public class PsicologoController {
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
                                  mv.addObject("Psicologo",new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
                                  mv.addObject("diario",new diario());                                             //PASAMOS OBJETO PSICOLOGO
+                
+                                 
+           sql="select no_boleta fecha,contenido from actividadp where no_cedula=(select no_cedula from psicologo where no_empleado="+alert+") order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                   datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("ActividadP",datosL2);                                                       // Pasa la lilsta completa                  
                 return mv;
                 
      }
