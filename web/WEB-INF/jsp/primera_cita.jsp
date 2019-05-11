@@ -123,13 +123,13 @@
                     <br>
                     <table class="tabla">
                         <thead id="tabla">
-                            <div class="c_dia" id="lunes">Lun.</div>
+                            <div class="c_dia" id="lunes">Dom.</div>
+                            <div class="c_dia">Lun.</div>
                             <div class="c_dia">Mar.</div>
                             <div class="c_dia">Mié.</div>
                             <div class="c_dia">Jue.</div>
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
-                            <div class="c_dia">Dom.</div>
                            <script>
                                 dias();
                             </script>
