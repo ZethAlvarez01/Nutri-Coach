@@ -80,7 +80,7 @@
         </div>
     </div>
 
-                
+               
                    <a class="regresar" href="<c:url value="javascript:history.back(1)" />">Regresar</a>
                    
           
@@ -96,23 +96,24 @@
                 </c:forEach></h2>
                 </center>
                 
-                    <form:form method="post" commandName="ActividadP">
+                 
                 <div class="grid-container">
                     <div class="item1"><p class="titulo">Actividad para:${nombreP[0].nombre} ${nombreP[0].ap_uno} ${nombreP[0].ap_dos} </p>
                         <hr>
                         
                      
                                 
-                           
+                        <p> ${actividad[0].contenido}</p>
                             
-                            <form:textarea path="contenido"  id="desc_actividad" cols="20" rows="8" placeholder="${activad[0].contenido}" />
-                            <p>  <form:errors path="contenido"/> </p> 
+                          
                             
                             
-                                <form:input path="id_actividad"  value="${actividad[0].id_actividad}"   type="hidden" /> 
+                            
+                                
                            
                             
                           
+                           
                         
                         
                         
@@ -120,11 +121,6 @@
                         
                     </div>  
                        
-                            <input type="submit" id="insertar_a" value="Insertar Archivo"><label id="n_archivo">nombre_archivo.ext</label>
-                           
-                         <input  id="regresar" type="submit" name="EditarActividad" value="Editar Actividad" onclick="fecha2()">
-                             </form:form>
-                        
                   
                         
                         

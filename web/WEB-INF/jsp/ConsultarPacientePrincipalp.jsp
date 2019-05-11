@@ -1,6 +1,6 @@
 <%-- 
-    Document   : diario_psicologo_solo_paciente
-    Created on : 14-mar-2019, 0:09:54
+    Document   : ConsultarPacientePrincipalp
+    Created on : 11-may-2019, 13:03:04
     Author     : jms-m
 --%>
 <%
@@ -26,20 +26,24 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_diario_psicologo_solo.css" />" />
-        <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
-        
+      
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" />
+         <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
+
         <!-- Scripts -->
 
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-       <script type="text/javascript" src="resource/scrips/psicologo.js"/></script>
+        <script type="text/javascript" src="resource/scrips/psicologo.js"/></script>
         <script type="text/javascript" src="resource/scrips/fecha.js"/></script> 
+        <script type="text/javascript" src="resource/scrips/busqueda.js"/></script> 
 
         <title>Nutri-Coach</title>
     </head>
 
     <body onscroll="bajar()">
+        
+
     <header>
         <div class="container">
             <div id="pleca">
@@ -58,7 +62,8 @@
             </div>
         </div>
         <!--Fin container-->
-     <div id="barra">
+    </header>
+    <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
@@ -83,74 +88,84 @@
 
         </div>
     </div>
-                                        <a class="regresar" href="<c:url value="/bienvenida_psicologo.htm" />">Regresar</a>
-    <div id="contenido">
+                
+                
+         <div id="contenido">
         <div class="container">
+            <c:forEach items="${datos}" var="dato">
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus pacientes .</h1></p>
+                </c:forEach>
             <div id="grid">
-                <div id="informacion">
-                    <h2>
-                        Notas del paciente
-                    </h2>
-                    <p id="nombre_paciente">${nombreP[0].nombre} ${nombreP[0].ap_uno} ${nombreP[0].ap_dos}</p>
-                    <label>Mes</label>
-                    <select class="historial_dias" id="mes">
-                        <option>Enero</option>
-                        <option>Febrero</option>
-                        <option>Marzo</option>
-                        <option>Abril</option>
-                        <option>Mayo</option>
-                        <option>Junio</option>
-                        <option>Julio</option>
-                        <option>Agosto</option>
-                        <option>Septiembre</option>
-                        <option>Octubre</option>
-                        <option>Noviembre</option>
-                        <option>Diciembre</option>
-                    </select>
-                    
-                    <label>Hoja</label>
-                    <select class="historial_dias" id="hoja" onchange="diario()" name="hoja">
-                        <c:forEach items="${hojas}" var="hoja" >
-                             <option>${hoja.fecha}</option>
-                             
-                        </c:forEach> 
-                       
-                            
-                    </select>
+                <div id="notificaciones" >
+                  
+                </div>
+                <div id="listado">
+                    <div id="encabezado_lista">
+                        <p id="sub-titulo">Listado de usuarios</p>
+                       <!--Barra de busqueda-->
+                       <input type="search" class="filtro" data-table="order-table" placeholder="Buscar paciente">
 
-                    <div id="diario">
-                        <div class="dias">
-                            <p id="fecha"></p>
-                            <script>
-                                fecha();
-                            </script>
-                            <br>
-                            <p id="titulo">Hoy Lunes...</p>
-                            <br>
-                            <div id="escrito">
-                               
-                                <p id="escritoT">
-                                    ${hojas[4].contenido}
-                                </p>
-                                <br>
-                                <img id="imagen_adjunta" src="">
-                                <br>
-                            </div>
-                        </div>
+                         <!------------------------------------------>  
+                        
+                        <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
                     </div>
-                </div>
-                <div id="observaciones">
-                    <h3>Observaciones</h3>
-                    <textarea id="areaTxt" rows="10" cols="50" name="comentario" placeholder="Observaciones del especialista"></textarea>
-                    <div id="boton">
-                        Guardar
+
+                    <div id="lista">
+                        <table class="order-table table"><!--se le asigna a la tabla que se quiere filtrar-->
+                        <thead>                           
+                            <tr>
+
+                            <th></th>
+                            <th>No. Boleta</th>
+                            <th>Nombre</th>
+                            <th>Primer apellido</th>
+                            <th>Segundo apellido</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <c:forEach items="${ListaPacientes}" var="item"> 
+                            <tbody>                
+                                <tr>
+                                    <div class="usuario">             
+
+                                        <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
+                                        <td>${item.no_boleta}</td>
+                                        <td>${item.nombre}</td>
+                                        <td>${item.ap_uno}</td>
+                                        <td>${item.ap_dos}</td>
+                                        <td>${item.telefono}</td>
+                                        <td>${item.correo}</td>
+                                        <td>
+                                        <form:form method="post" commandName="Paciente">
+                                           <input type="submit"  name="expediente" value="Visualizar expediente psicológico"> 
+                                             <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                                        </form:form>
+                                        </td>
+                                    </div>
+
+                               </tr>
+
+                                </c:forEach>          
+                            </tbody> 
+                        </table>      
                     </div>
+                         
+
                 </div>
+
             </div>
+                         
+                         
+                         
+                         
+                      
+        </div>
         </div>
     </div>
     <!--Fin contenido-->
-     <footer>
+    <footer>
             <div class="container">
                 <center>
                     <p id="visita">Visita nuestras redes sociales</p>
@@ -184,6 +199,14 @@
                 
                 <!--Fin Modal Términos y condiciones-->
             </div>
-        </footer>
-</body>
+        </footer>        
+                
+                
+                
+                
+                
+                
+
+
+    </body>
 </html>

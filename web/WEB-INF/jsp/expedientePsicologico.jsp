@@ -1,6 +1,6 @@
 <%-- 
-    Document   : bienvenida_psicologo
-    Created on : 12-mar-2019, 23:32:43
+    Document   : expedientePsicologico
+    Created on : 11-may-2019, 13:38:27
     Author     : jms-m
 --%>
 <%
@@ -92,44 +92,19 @@
     <div id="contenido">
         <div class="container">
             <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estos son tus pacientes .</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el expediente .</h1></p>
                 </c:forEach>
             <div id="grid">
                 <div id="notificaciones" >
-                  
+                  <a class="regresar" href="<c:url value="/ConsultarPacientePrincipalp.htm" />">Regresar</a>
                 </div>
-                <div id="listado">
-                    <div id="encabezado_lista">
-                        <p id="sub-titulo">Listado de usuarios</p>
-                        <input type="text" placeholder="Buscar usuario">
-                        <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
-                    </div>
-
-                    <div id="lista">
-                        <c:set var="no_boleta" value="${ListaPacientes[0].no_boleta}"/>
-                         <c:forEach items="${ListaPacientes}" var="item"> 
-                        <div class="usuario"  onclick="TypeDiv('Número de boleta: ${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' Domicilio: ${item.domicilio}',' Teléfono${item.telefono}  Correo:${item.correo}','${item.no_boleta}')" name="usuario">
-                                 <c:set var="no_boleta" value="${item.no_boleta}"/>
-                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user"> 
-                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                <p id="nombre-info">Mas informacion</p>
-                                 <p id="nombre-info"><c:out value="${no_boleta}" /></p>
-                            </div>
-                                
-                                
-                           
-                             </div>
-                            </c:forEach> 
-
-                    </div>
-
-                </div>
-                         <div id="informacion" >
+               
+                
+                       <div id="informacion" >
                     <div id="h3">
                         <h3>Informacion del paciente</h3>
                     </div>
-                    <h1><p id="nombreUser">${ListaPacientes[0].nombre} ${ListaPacientes[0].ap_uno} ${ListaPacientes[0].ap_dos}</p></h1> 
+                    <h1><p id="nombreUser">${ListaPacientes[0].nombre} ${ListaPacientes[0].ap_uno} ${ListaPacientes[0].ap_dos}</p></h1>
                     <br>
                     <div id="grid_info">
                         <div class="casillas" id="resumen">
@@ -144,7 +119,8 @@
                                 <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
                                 <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
                                 <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
-                        <p id="nombre-info">ESTE ES EL NUMERO DE BOLETA :<c:out value="${no_boleta}" /></p>
+                  
+                        
                         </div>
 
                         <div class="casillas" id="actividad">
@@ -168,63 +144,101 @@
                             <input  id="boton" type="submit" name="AsignarActividad" value="Asignar Actividad" onclick="fecha2()">
                              </form:form>
                         </div>
+                                
+                                
+                                
+                                
 
                         <div class="casillas" id="historial_act">
-                            <h3  style="cursor:pointer;">Historial de actividades</h3>
-                            <form id="form">
-                                  <input id="num_boleta3" name="num_boleta3" value="${ListaPacientes[0].no_boleta}" />
-                            </form>
+                            <h3  style="cursor:pointer;">Historial</h3>
+       
+                    ACTIVIDADES QUE DEJO EL PSICOLOGO        
+                               <c:forEach items="${ListaActividades}" var="item"> 
+                          
+                    <ul>
+                       
+                      <form:form method="post" commandName="ActividadP">
+                         ${item.fecha}
+                        <form:button id="button" class="button" type="submit" name="consultarActividadPs" value="${item.contenido}">${item.contenido}</form:button>
+                            <form:input path="id_actividad" placeholder="${item.id_actividad}" value="${item.id_actividad}" type="hidden" />
+                            <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       </form:form>
+                        
+                       
+                    </ul>
+                         </c:forEach> 
+             
+                            
+       
+                            
+              ENTRADAS EN EL FORO              
+                            
+         <c:forEach items="${listaEntradas}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="entradaForo">
+                         ${item.fecha}
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
+                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach>   
                             
                           
-                             <c:set var="no_boleta4" value="${param.num_boleta3}"/>
-                             
-                              
-                             
-                             <p> NUMERO DE BOLETA 4: <c:out value="${no_boleta4}" /></p>
-                             
-                             
-                            <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/nutricoach"
-         user = "root"  password = "walter22"/>
+              COMENTARIOS EN EL FORO
+              
+              <table>
+                                <tr>
+                                   <td><strong>Fecha</strong></td>
+                                   <td><strong>Titulo de Entrada</strong></td>
+                                   
+                                </tr>
+                                <c:forEach items="${FechaComentarios}" var="comentarios">
+                                    
+                                <tr>
+                                   <td>${comentarios.fecha}</td>
+                                   <c:set var = "entrada"  value = "${comentarios.id_entrada}"/>
+                                <c:forEach items="${NombreEntrada}" var="nombreEntrada">
+                                    <c:set var = "titulo"  value = "${nombreEntrada.id_entrada}"/>
+                                    
+                                    <c:if test ="${entrada == titulo}">
+                                       
+                                        
+                                        
+                                        <form:form method="post" commandName="entradaForo">
+                        
+                      <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
+
+                            <form:input path="id_entrada" placeholder="${nombreEntrada.id_entrada}" value="${nombreEntrada.id_entrada}" type="hidden" />
+                       </form:form>
+                                        
+                                </c:if>
+                                </c:forEach>
+                                   
+                                   
+                                  
+                                </tr>
+                                
+                                    
+                                    
+                                </c:forEach> 
+                                
+                            </table>
+              
+              
+              
+              
+              
                             
-                            <sql:query dataSource = "${snapshot}" var = "result">
-                                    SELECT no_boleta,fecha,contenido from actividadp  where no_boleta = ?
-                                 <sql:param   value = "${no_boleta4}"  />
-                              </sql:query>
-                            
-                            
-                            
-                            <table border = "1" width = "100%">
-         <tr>
-           
-            <th>NO_BOLETA</th>
-            
-            <th>FECHA</th>
-            <th>CONTENIDO</th>
-             
-         </tr>
-                   <c:forEach var = "row" items = "${result.rows}">
-            <tr>
-               
-               <td> <c:out value = "${row.no_boleta}"/></td>
-               
-               <td> <c:out value = "${row.fecha}"/></td>
-               <td> <c:out value = "${row.contenido}"/></td>
-               
-            </tr>
-         </c:forEach>
-      </table>         
-                            
-                            
-                            
-                            <ul id="historial_actividades">
-                              
-                                <li>No consumio X alimento (Fecha)</li>
-                            </ul>
                         </div>
                     </div>
 
                 </div>
+                            
+                            
+                            
+                            
+                            
             </div>
         </div>
     </div>

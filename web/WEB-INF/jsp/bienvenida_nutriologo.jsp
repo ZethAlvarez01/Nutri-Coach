@@ -3,7 +3,12 @@
     Created on : 12-mar-2019, 22:58:36
     Author     : jms-m
 --%>
-
+<%
+  response.addHeader("Pragma", "no-cache");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+  response.setDateHeader("Expires", 0);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

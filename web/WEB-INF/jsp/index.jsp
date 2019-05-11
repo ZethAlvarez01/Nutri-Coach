@@ -1,3 +1,13 @@
+
+
+<%
+  response.addHeader("Pragma", "no-cache");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+  response.setDateHeader("Expires", 0);
+%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
