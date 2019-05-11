@@ -55,6 +55,63 @@ public class nutriologoController {
         
     }
      
+     
+     
+         /////////////////////////////////////////////////////////////// 
+  //pantalla de lista de pacientes del nutriologo
+    @RequestMapping(value="ConsultarPacientePrincipaln.htm",method = RequestMethod.GET)  // SE UTILIZARÁ LA VISTA bienvenida_psicologo y se aplicará el método GET
+    
+      public ModelAndView ConsultarPacientePrincipalp(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton paciente se cambiara a la vista de bienvenida_psicologo
+     
+        
+                
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+       
+         
+                
+                ModelAndView mv=new ModelAndView();                     //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarPacientePrincipaln");                     //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+         
+                
+                
+                
+                
+                 String sql="select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Nutriologo",new Nutriologo());                                             //PASAMOS OBJETO NUTRIOLOGO       
+                
+                         
+                 sql="select no_boleta,no_cedula,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,"
+                        + "domicilio,correo from paciente where no_cedula= (select no_cedula from nutriologo where no_empleado="+alert+") order by ap_uno"; //OBTENEMOS TODOS LOS PACIENTES RELACIONADOS AL NUTRIOLOGO
+                datosL2 = this.jdbcTemplate.queryForList(sql);                     // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 
+             
+                                 mv.addObject("ListaPacientes",datosL2);          // Pasa la lilsta completa
+                                 
+                
+                mv.addObject("LongitudP",datosL2.size());    // SE PASA EL TOTAL DE PACIENTES
+                mv.addObject("Paciente",new Paciente());     // SE AGREGA EL OBJETO PACIENTE AL MODELO  
+                
+                 
+                                 
+                return mv;
+                
+     }
+       
+     
+     
+     
       ///////////////////////////////////////
       //Pantalla de nueva entrada en el foro
         @RequestMapping(value="nuevaEntradaN.htm",method = RequestMethod.GET) 
@@ -1326,7 +1383,64 @@ public class nutriologoController {
     }
     
     
-     
+   @RequestMapping(params="expediente", method = RequestMethod.POST)
+    public ModelAndView ConsultarExpedientePsicologico(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+           
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+          
+                        ModelAndView mv=new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+
+        
+        
+         String sql="select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Nutriologo",new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+                          
+               
+                                 
+                    sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta="+p.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("ListaPacientes",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                   
+                                 
+                                 
+                                 
+                 sql="select * from entrada where id_usuario="+p.getNo_boleta()+" order by id_entrada desc;";                     // OBETENEMOS TODAS LAS ENTRADAS QUE HA HECHO NUESTRO PACIENTE A PARTIR DE LA MÁS RECIENTE
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 mv.addObject("listaEntradas",datosL2);                                               // PASAMOS LA LISTA COMPLETA
+                 
+                 sql = "select id_entrada,fecha from comentarios where id_usuario="+p.getNo_boleta()+" order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 mv.addObject("FechaComentarios",datosL2);          
+                   
+                                 
+                   sql = "select id_entrada,titulo from entrada";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                 mv.addObject("NombreEntrada",datosL2);                                               // PASAMOS LA LISTA COMPLETA            
+                                                
+                                 
+                                 mv.addObject("entradaForo",new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
+                                 
+                    return mv;                                                         
+       
+       
+    }  
+       
+          
      
      
      
