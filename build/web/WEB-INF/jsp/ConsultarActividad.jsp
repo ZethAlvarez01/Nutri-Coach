@@ -1,8 +1,9 @@
 <%-- 
-    Document   : foro
-    Created on : 15/11/2018, 01:13:11 AM
-    Author     : Zeth
+    Document   : ConsultarEntrada
+    Created on : 27-abr-2019, 18:30:49
+    Author     : jms-m
 --%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,12 +21,11 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/foro.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
                 
-        <!-- Scrips -->
+         <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>
-        
+        <script type="text/javascript" src="resource/scrips/fecha.js"/></script>  
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -49,7 +49,7 @@
             <!--Fin container-->
         </header>    
                     
-          <div id="barra">
+        <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
@@ -76,13 +76,8 @@
                              
                                                  
                         </c:if>
-                                <c:if test= "${item.no_cedulap>0}">
-                            
-                        
-                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
-                             
-                                                 
-                        </c:if>
+                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                               
                         
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
@@ -95,106 +90,68 @@
 
         </div>
     </div>
-                 
-        <a class="regresar" href="<c:url value="/nuevaEntrada.htm" />">Nueva entrada</a>
-        
-        <div id="contenido">
+                
+                   <a class="regresar" href="<c:url value="/SeguimientoPsicologico.htm" />">Regresar</a>
+                   
+          
+            
+               
+                
+                      <div id="contenido">
             <div class="container">
                 <center>
-                     <h1>Foro de Nutri-Coach</h1>
+                     
                     <h2> <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> esta es la actvidad </h1></p>
                 </c:forEach></h2>
                 </center>
                 
-                
+                   
                 <div class="grid-container">
-                    <div class="item1"><p class="titulo">Recomendaciones</p>
+                    <div class="item1"><p class="titulo">Actividad asignada por el psicólogo ${nombre[0].nombre} ${nombre[0].ap_uno} ${nombre[0].ap_dos} No. cédula: ${nombre[0].no_cedula} </p>
                         <hr>
-                        <ul>
-                            <li>Motivacionales: <c:out value="${salida1}"/></li>
-                            <li>Preparacion alimentos: <c:out value="${salida2}"/></li>
-                            <li>Beneficios alimentos: <c:out value="${salida3}"/></li>
-                            <li>Deportes: <c:out value="${salida4}"/></li>
-                            <li>Medicamentos: <c:out value="${salida5}"/></li>
-                            <li>Salud: <c:out value="${salida6}"/></li>
-                        </ul> 
-                    </div>  
                         
-                        
-                        
-                        <div class="item2"><p class="titulo">Entradas recientes</p>
-                            <hr>
-                                                       
+                     
+                                
                            
-                           
-                            <c:forEach items="${listaEntradas}" var="item"> 
-                          
-                    <ul>
-                       <form:form method="post" commandName="entradaForo">
-                        ${item.fecha}
-                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
-                            <form:input path="id_entrada" placeholder="${item.id_entrada}" value="${item.id_entrada}" type="hidden" />
-                       </form:form>
-                    </ul>
-                         </c:forEach> 
                             
-                        </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        <div class="item3"><p class="titulo">Historial de comentarios</p>
-                            <hr>
-                            <table>
-                                <tr>
-                                   <td><strong>Fecha</strong></td>
-                                   <td><strong>Titulo de Entrada</strong></td>
-                                   
-                                </tr>
-                                <c:forEach items="${FechaComentarios}" var="comentarios">
-                                    
-                                <tr>
-                                   <td>${comentarios.fecha}</td>
-                                   <c:set var = "entrada"  value = "${comentarios.id_entrada}"/>
-                                <c:forEach items="${NombreEntrada}" var="nombreEntrada">
-                                    <c:set var = "titulo"  value = "${nombreEntrada.id_entrada}"/>
-                                    
-                                    <c:if test ="${entrada == titulo}">
-                                       
-                                        
-                                        
-                                        <form:form method="post" commandName="entradaForo">
-                        
-                      <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
-
-                            <form:input path="id_entrada" placeholder="${nombreEntrada.id_entrada}" value="${nombreEntrada.id_entrada}" type="hidden" />
-                       </form:form>
-                                        
-                                </c:if>
-                                </c:forEach>
-                                   
-                                   
-                                  
-                                </tr>
+                           
+                            <p> ${Actividad[0].contenido}  </p> 
+                            
+                            
                                 
-                                    
-                                    
-                                </c:forEach> 
-                                
-                            </table>
-                        </div>
-                        <a class="regresar" href="<c:url value="/ForoPrincipal.htm" />">Ver foro</a>
+                           
+                            
+                           
+                           
+                        
+                        
+                        
+                        
+                        
+                    </div>  
+                       
+                         
+                  
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                       
                 </div>
                 
             </div>
             <!--Fin container-->
-        </div>
-        <!--Fin contenido-->
-        
-        <footer>
+        </div>  
+              <!--Fin contenido-->
+                     
+                
+                
+                
+                  <footer>
             <div class="container">
                 <center>
                     <p id="visita">Visita nuestras redes sociales</p>
@@ -229,5 +186,6 @@
                 <!--Fin Modal Términos y condiciones-->
             </div>
         </footer>
+                    
     </body>
 </html>

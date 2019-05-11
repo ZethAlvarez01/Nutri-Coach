@@ -76,13 +76,8 @@
                              
                                                  
                         </c:if>
-                                <c:if test= "${item.no_cedulap>0}">
-                            
-                        
-                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
-                             
-                                                 
-                        </c:if>
+                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                               
                         
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
@@ -96,48 +91,40 @@
         </div>
     </div>
                  
-        <a class="regresar" href="<c:url value="/nuevaEntrada.htm" />">Nueva entrada</a>
+       
         
         <div id="contenido">
             <div class="container">
                 <center>
-                     <h1>Foro de Nutri-Coach</h1>
+                     
                     <h2> <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> a la sección de seguimiento psicológico</h1></p>
                 </c:forEach></h2>
                 </center>
                 
                 
                 <div class="grid-container">
-                    <div class="item1"><p class="titulo">Recomendaciones</p>
+                    <div class="item1"><p class="titulo">Tu psicólogo ${nombrePs[0].nombre} ${nombrePs[0].ap_uno} ${nombrePs[0].ap_dos} recomienda las siguientes actividades</p>
                         <hr>
-                        <ul>
-                            <li>Motivacionales: <c:out value="${salida1}"/></li>
-                            <li>Preparacion alimentos: <c:out value="${salida2}"/></li>
-                            <li>Beneficios alimentos: <c:out value="${salida3}"/></li>
-                            <li>Deportes: <c:out value="${salida4}"/></li>
-                            <li>Medicamentos: <c:out value="${salida5}"/></li>
-                            <li>Salud: <c:out value="${salida6}"/></li>
-                        </ul> 
+                        <c:forEach items="${Actividades}" var="item"> 
+                          
+                    <ul>
+                       <form:form method="post" commandName="ActividadP">
+                        ${item.fecha}
+                        <form:button id="button" class="button" type="submit" name="ConsultarActividad" value="${item.contenido}">${item.contenido}</form:button>
+                            <form:input path="id_actividad" placeholder="${item.id_actividad}" value="${item.id_actividad}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
                     </div>  
                         
                         
                         
-                        <div class="item2"><p class="titulo">Entradas recientes</p>
+                        <div class="item2"><p class="titulo">Diario</p>
                             <hr>
                                                        
-                           
-                           
-                            <c:forEach items="${listaEntradas}" var="item"> 
-                          
-                    <ul>
-                       <form:form method="post" commandName="entradaForo">
-                        ${item.fecha}
-                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button>
-                            <form:input path="id_entrada" placeholder="${item.id_entrada}" value="${item.id_entrada}" type="hidden" />
-                       </form:form>
-                    </ul>
-                         </c:forEach> 
+                            <p>Expresa cómo te sientes hoy </p>
+                         <a class="regresar" href="<c:url value="/diario_paciente.htm" />">Diario</a>
                             
                         </div>
                         
@@ -146,47 +133,13 @@
                         
                         
                         
-                        <div class="item3"><p class="titulo">Historial de comentarios</p>
+                        <div class="item3"><p class="titulo">Información del Psicólogo</p>
                             <hr>
-                            <table>
-                                <tr>
-                                   <td><strong>Fecha</strong></td>
-                                   <td><strong>Titulo de Entrada</strong></td>
-                                   
-                                </tr>
-                                <c:forEach items="${FechaComentarios}" var="comentarios">
-                                    
-                                <tr>
-                                   <td>${comentarios.fecha}</td>
-                                   <c:set var = "entrada"  value = "${comentarios.id_entrada}"/>
-                                <c:forEach items="${NombreEntrada}" var="nombreEntrada">
-                                    <c:set var = "titulo"  value = "${nombreEntrada.id_entrada}"/>
-                                    
-                                    <c:if test ="${entrada == titulo}">
-                                       
-                                        
-                                        
-                                        <form:form method="post" commandName="entradaForo">
-                        
-                      <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
-
-                            <form:input path="id_entrada" placeholder="${nombreEntrada.id_entrada}" value="${nombreEntrada.id_entrada}" type="hidden" />
-                       </form:form>
-                                        
-                                </c:if>
-                                </c:forEach>
-                                   
-                                   
-                                  
-                                </tr>
-                                
-                                    
-                                    
-                                </c:forEach> 
-                                
-                            </table>
+                            <p> ${nombrePs[0].nombre} ${nombrePs[0].ap_uno} ${nombrePs[0].ap_dos}      No. cédula: ${nombrePs[0].no_cedula}</p>
+                            <p> Institución: ${nombrePs[0].institucion}      Consultorio: ${nombrePs[0].consultorio}</p>
+                            <p> Teléfono: ${nombrePs[0].telefono}     correo:${nombrePs[0].correo}</p>
                         </div>
-                        <a class="regresar" href="<c:url value="/ForoPrincipal.htm" />">Ver foro</a>
+                       
                 </div>
                 
             </div>

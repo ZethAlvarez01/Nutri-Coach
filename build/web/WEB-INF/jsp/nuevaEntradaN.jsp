@@ -25,6 +25,7 @@
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+ <script type="text/javascript" src="resource/scrips/fecha.js"/></script> 
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -111,7 +112,8 @@
                     
                     
                  </div>
-                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar">
+                     <form:input path="fecha" value="" type="hidden"   />
+                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar" onclick="fecha2()">
                     </form:form>
                 
                 

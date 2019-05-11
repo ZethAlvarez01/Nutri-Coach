@@ -1,3 +1,4 @@
+drop database SMAE;
 create database SMAE;
 use SMAE;
 create table verduras(

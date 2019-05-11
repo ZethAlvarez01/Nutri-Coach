@@ -180,7 +180,7 @@
                              
                             <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost/nutricoach"
-         user = "root"  password = "walter22"/>
+         user = "root"  password = ""/>
                             
                             <sql:query dataSource = "${snapshot}" var = "result">
                                     SELECT no_boleta,fecha,contenido from actividadp  where no_boleta = ?

@@ -46,7 +46,7 @@
                 <prop key="mensajeriaN.htm">nutriologoController</prop>
                 <prop key="mensajeriaPs.htm">PsicologoController</prop>
                 <prop key="verificacion_cuentas.htm">AdministradorController</prop>
-                <prop key="diario_psicologo_solo_paciente.htm">VistaController</prop>
+                <prop key="diario_psicologo_solo_paciente.htm">PsicologoController</prop>
                 <prop key="cambiarC.htm">VistaController</prop>
                 <prop key="suspendido.htm">VistaController</prop>
                 <prop key="Rechazado.htm">VistaController</prop>
@@ -63,6 +63,11 @@
                  <prop key="nuevaEntradaAdmin.htm">AdministradorController</prop>
                 <prop key="ConsultarEntradaAdmin.htm">AdministradorController</prop>
                 <prop key="ForoPrincipalAdmin.htm">AdministradorController</prop>
+                <prop key="ConsultarActividadp.htm">PsicologoController</prop>
+                <prop key="SeguimientoPsicologico.htm">PacienteController</prop>
+                <prop key="ConsultarActividad.htm">PacienteController</prop>
+                <prop key="diario_paciente.htm">PacienteController</prop>
+                <prop key="ConsultarDiario.htm">PacienteController</prop>
                 
                 
             </props>

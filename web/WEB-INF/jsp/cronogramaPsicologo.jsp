@@ -116,6 +116,10 @@
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
                             </select>
 
                     </div>
@@ -126,13 +130,13 @@
                     <br>
                     <table class="tabla">
                         <thead id="tabla">
-                            <div class="c_dia" id="lunes">Lun.</div>
+                            <div class="c_dia" id="lunes">Dom.</div>
+                            <div class="c_dia">Lun.</div>
                             <div class="c_dia">Mar.</div>
                             <div class="c_dia">Mié.</div>
                             <div class="c_dia">Jue.</div>
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
-                            <div class="c_dia">Dom.</div>
                             <script>
                                 dias();
                             </script>

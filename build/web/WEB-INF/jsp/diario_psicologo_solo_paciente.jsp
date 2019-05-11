@@ -6,29 +6,35 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
-    <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-    
-    <!-- Hojas de estilos -->
-    
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_diario_psicologo.css" />" />
-    
-    <!-- Scripts -->
-    
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script>  
-    
-    <title>Nutri-Coach</title>
-</head>
-    <body>
-      <header>
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+        
+        <!-- Hojas de estilos -->
+        
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/contenido_diario_psicologo_solo.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
+
+        <!-- Scripts -->
+
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+     <!--    <script type="text/javascript" src="resource/scrips/psicologo.js"/></script>-->
+        <script type="text/javascript" src="resource/scrips/fecha.js"/></script> 
+
+        <title>Nutri-Coach</title>
+    </head>
+
+    <body onscroll="bajar()">
+    <header>
         <div class="container">
             <div id="pleca">
                 <div id="logoSEP">
@@ -46,14 +52,32 @@
             </div>
         </div>
         <!--Fin container-->
-    </header>
-                
-    <div id="barra">
+     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="cronogramaPsicologo.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
+                          
+                    <ul id="menu_nutrio">
+                        <form:form method="post" commandName="Psicologo">
+                              <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
+                        <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                       </form:form>
+                    </ul>
+                         </c:forEach> 
+                   
+                </div>
+            </div>
+
         </div>
     </div>
-
+                                        <a class="regresar" href="<c:url value="/bienvenida_psicologo.htm" />">Regresar</a>
     <div id="contenido">
         <div class="container">
             <div id="grid">
@@ -61,7 +85,7 @@
                     <h2>
                         Notas del paciente
                     </h2>
-                    <p id="nombre_paciente">Nombre Primer apellido Segundo Apellido</p>
+                    <p id="nombre_paciente">${nombreP[0].nombre} ${nombreP[0].ap_uno} ${nombreP[0].ap_dos}</p>
                     <label>Mes</label>
                     <select class="historial_dias" id="mes">
                         <option>Enero</option>
@@ -77,20 +101,15 @@
                         <option>Noviembre</option>
                         <option>Diciembre</option>
                     </select>
-                    <label>Semana</label>
-                    <select class="historial_dias" id="semana">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                    </select>
-                    <br>
+                    
                     <label>Hoja</label>
-                    <select class="historial_dias" id="hoja">
-                            <option>Dia # Título</option>
-                            <option>Dia # Título</option>
-                            <option>Dia # Título</option>
-                            <option>Dia # Título</option>
+                    <select class="historial_dias" id="hoja" onchange="diario()">
+                        <c:forEach items="${hojas}" var="hoja">
+                             <option>${hoja.fecha}</option>
+                             
+                        </c:forEach> 
+                       
+                            
                     </select>
 
                     <div id="diario">
@@ -103,23 +122,9 @@
                             <p id="titulo">Hoy Lunes...</p>
                             <br>
                             <div id="escrito">
-                                <p id="escritoT">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br>                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque,
-                                    maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque
-                                    expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias
-                                    voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam
-                                    vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam
-                                    accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium
-                                    fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus
-                                    quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat
-                                    beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit
-                                    amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum
-                                    dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod
-                                    ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et delectus repellat dicta atque expedita cumque
-                                    deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus facere, ipsum quibusdam molestias voluptate
-                                    vitae. Repellat harum cumque, maiores quod ducimus similique. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat beatae fugit sint nulla laudantium fuga. Illo aliquid veritatis unde, aliquam vitae et
-                                    delectus repellat dicta atque expedita cumque deleniti dolorem. <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ea voluptatem, necessitatibus quidem cupiditate dignissimos numquam accusamus
-                                    facere, ipsum quibusdam molestias voluptate vitae. Repellat harum cumque, maiores quod ducimus similique.
+                               
+                                <p id="escritoT">
+                                    ${hojas[x].contenido}
                                 </p>
                                 <br>
                                 <img id="imagen_adjunta" src="">
@@ -131,7 +136,6 @@
                 <div id="observaciones">
                     <h3>Observaciones</h3>
                     <textarea id="areaTxt" rows="10" cols="50" name="comentario" placeholder="Observaciones del especialista"></textarea>
-                    <button id="insertar_a">Insertar archivos</button><label id="n_archivo">nombre_archivo.ext</label>
                     <div id="boton">
                         Guardar
                     </div>

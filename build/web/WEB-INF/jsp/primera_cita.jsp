@@ -20,10 +20,18 @@
 
 
         <!--Scripts-->
+<<<<<<< HEAD
         
         <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"/></script>
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
+=======
+
+        <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"/></script>
+       <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+       <script type="text/javascript" src="resource/scrips/cambioOptions.js"/></script>  
+>>>>>>> a916a99920525f0ad81bd99d61b03965eaccdbb6
 
 
         <title>Nutri-Coach</title>
@@ -102,17 +110,15 @@
                             </select>
 
                         <select name="Anio" id="anio" class="caja" onchange="mover_mes();">
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
                             </select>
 
                     </div>
-                    <!-- <script>
+                    <script>
                         actualizar(); 
-                    </script>-->
+                    </script>
 
                     <br>
                     <table class="tabla">
@@ -124,9 +130,9 @@
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
                             <div class="c_dia">Dom.</div>
-                           <!-- <script>
+                           <script>
                                 dias();
-                            </script>-->
+                            </script>
                         </thead>
                     </table>
 
@@ -135,22 +141,28 @@
 
 
                     <p>Información de la cita</p>
-
+                    <form:form method="post" commandName="Nutriologo">
                     <div class="texto">Institución</div>
-                    <select id="institucion" class="primera_cita">
-                        <option value="nulo"></option>
-                        <option >Escuela Superior de Cómputo (ESCOM)</option>
+                    <select id="institucion" class="primera_cita" onchange="Cambio()">
+                        
+                        <option value="0">Escuela Superior de Cómputo (ESCOM)</option>
+                       
+                    </select>
+                        
                     </select>
 
                     <div class="texto">Nutriólogo</div>
-                    <select id="nutriologo" class="primera_cita">
-                        <option value="nulo">  </option>
-                        <option>Alvarez Hernandez Zeth</option>
+                    
+                    <select id="nutriologoESCOM" class="primera_cita"  onchange="Cambio()">
+                       
+                        <c:forEach items="${ListaESCOM}" var="item">
+                        <option>${item.nombre} ${item.ap_uno} ${item.ap_dos}</option>
+                        </c:forEach> 
                     </select>
-
+                    
                     <div class="texto">Dirección</div>
                     <p id="direccion_nutri">
-                        Estado de no se donde
+                        Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX
                     </p>
 
                     <div class="texto">Fecha de la cita</div>
@@ -168,7 +180,7 @@
                     </section>
 
                     <div id="boton">Confirmar</div>
-
+                    </form:form>
                 </div>
             </div>
         </div>

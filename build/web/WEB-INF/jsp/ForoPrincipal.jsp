@@ -75,7 +75,14 @@
                              
                                                  
                         </c:if>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        
+                         <c:if test= "${item.no_cedulap>0}">
+                            
+                        
+                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
+                             
+                                                 
+                        </c:if>
                                
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
@@ -125,7 +132,7 @@
                        <form:form method="post" commandName="entradaForo">
                         
                                 <tr>
-                                   <td>FALTAN FECHAS</td>
+                                   <td>${item.fecha}</td>
                                    <td> <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button></td>
                                    <td>${item.contenido}...</td> 
                                    <td>${contadorComentarios[loop.index]}</td> 

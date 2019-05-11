@@ -24,7 +24,8 @@
          <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script> 
+        <script type="text/javascript" src="resource/scrips/fecha.js"/></script>  
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -76,7 +77,14 @@
                              
                                                  
                         </c:if>
-                        <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                        
+                         <c:if test= "${item.no_cedulap>0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Psicólogo</a></li>
+                             
+                                                 
+                        </c:if>
                                
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
@@ -125,7 +133,8 @@
                     
                     
                  </div>
-                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar">
+                         <form:input path="fecha" value="" type="hidden"   />
+                    <input  class="cita" type="submit" name="guardarEntrada" value="Guardar" onclick="fecha2()">
                     </form:form>
                 
                 
