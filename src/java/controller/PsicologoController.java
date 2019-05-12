@@ -20,6 +20,8 @@ import models.Paciente;
 import models.Psicologo;
 import models.comentarioValidar;
 import models.diario;
+import models.diarioValidar;
+import models.diarioValidarObservacion;
 import models.entradaForo;
 import models.foroValidar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +47,14 @@ public class PsicologoController {
    private foroValidar foroValidar;                                 //Variable para validar foro
    private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
    private ActividadPValidar ActividadPValidar;                     //Variable para validar activad del psicólogo
-       
+    private diarioValidarObservacion diarioValidarObservacion;                     //Variable para validar activad del psicólogo
+           
 
      public PsicologoController() {
        this.foroValidar=new foroValidar();                            // Instancia de la clase foroValidar
         this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioalidar
         this.ActividadPValidar=new ActividadPValidar();               // Instancia de la clase ActovodadPValidar
+        this.diarioValidarObservacion=new diarioValidarObservacion();                       // Instancia de la clase diarioPValidar
         Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
@@ -1766,30 +1770,110 @@ public class PsicologoController {
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
                                  mv.addObject("Psicologo",new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
-                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO PSICOLOGO
-               
+                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO Diario
+                                  
                                  
-                    sql="select nombre,ap_uno,ap_dos  from paciente where no_boleta="+p.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                    sql="select no_boleta,nombre,ap_uno,ap_dos  from paciente where no_boleta="+p.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
                                  datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("nombreP",datosL2);                                                       // Pasa la lilsta completa               
                  
-                     
-                    sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+"))order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190101' and '20190131' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
                                  datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  System.out.println(datosL2);
                                  
-                                 mv.addObject("hojas",datosL2);                                                       // Pasa la lilsta completa               
+                                 mv.addObject("hojasEnero",datosL2);                                                       // Pasa la lilsta completa               
                               
+                       sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190201' and '20190228' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
                                  
+                                 mv.addObject("hojasFebrero",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                       
+                        sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190301' and '20190331' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
                                  
+                                 mv.addObject("hojasMarzo",datosL2);                                                       // Pasa la lilsta completa               
+                     
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190401' and '20190430' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasAbril",datosL2);                                                       // Pasa la lilsta completa               
+                                                 
+                                 
+                    sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190501' and '20190531' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasMayo",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190601' and '20190630' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasJunio",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190701' and '20190731' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasJulio",datosL2);                                                       // Pasa la lilsta completa               
+                                          
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190801' and '20190831' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasAgosto",datosL2);                                                       // Pasa la lilsta completa               
+                      
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20190901' and '20190530' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasSeptiembre",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20191001' and '20191031' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasOctubre",datosL2);                                                       // Pasa la lilsta completa               
+                  
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20191101' and '20191130' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasNoviembre",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+p.getNo_boleta()+")) and fecha between '20191201' and '20191231' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasDiciembre",datosL2);                                                       // Pasa la lilsta completa               
+                                          
                                  
                     return mv;                                                         
        
        
     }  
        
+    
+    
+    ///////////////////////////////////
+    //////////////Vista expedientePsicologico
         @RequestMapping(params="expediente", method = RequestMethod.POST)
     public ModelAndView ConsultarExpedientePsicologico(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
        
@@ -1814,7 +1898,8 @@ public class PsicologoController {
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
                                  mv.addObject("Psicologo",new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
-                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO PSICOLOGO
+                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO DIARIO
+                               
                
                                  
                     sql="select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta="+p.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
@@ -1905,7 +1990,279 @@ public class PsicologoController {
          }                                                                                                   // CIERRE DE ELSE
        
        
-      
+  
+
+
+ ////////////////////
+     ////ACCIÓN DE BOTON guardarObservación
+     
+      @RequestMapping(params="GuardarObservacion", method = RequestMethod.POST)
+    public ModelAndView GuardarObservacion(@ModelAttribute("diario") diario d, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+           
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Psico");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+          
+       this.diarioValidarObservacion.validate(d, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){                                                            // INICIO IF
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             
+         
+               ModelAndView mv=new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("diario_psicologo_solo_paciente");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+
+        
+        
+         String sql="select nombre,ap_uno,ap_dos, no_empleado,no_cedula from psicologo where no_empleado="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
+                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO Diario
+             
+         sql="select no_boleta from expediente where id_expediente =(select id_expediente from diario where id_diario=(select id_diario from hojas where id_hojas="+d.getId_hojas()+"))";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+             String cadena=datosL2.get(0).toString();
+             String subcadena=cadena.substring(11, cadena.length()-1);
+                                 
+                    sql="select nombre,ap_uno,ap_dos  from paciente where no_boleta="+subcadena;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("nombreP",datosL2);                                                       // Pasa la lilsta completa               
+                 
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190101' and '20190131' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                            
+                                 
+                                 mv.addObject("hojasEnero",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                       sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190201' and '20190228' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                
+                                 
+                                 mv.addObject("hojasFebrero",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                       
+                        sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190301' and '20190331' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 
+                                 
+                                 mv.addObject("hojasMarzo",datosL2);                                                       // Pasa la lilsta completa               
+                     
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190401' and '20190430' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 
+                                 
+                                 mv.addObject("hojasAbril",datosL2);                                                       // Pasa la lilsta completa               
+                                                 
+                                 
+                    sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190501' and '20190531' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 
+                                 
+                                 mv.addObject("hojasMayo",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190601' and '20190630' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                
+                                 
+                                 mv.addObject("hojasJunio",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190701' and '20190731' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                               
+                                 mv.addObject("hojasJulio",datosL2);                                                       // Pasa la lilsta completa               
+                                          
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190801' and '20190831' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                             
+                                 
+                                 mv.addObject("hojasAgosto",datosL2);                                                       // Pasa la lilsta completa               
+                      
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190901' and '20190530' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                
+                                 
+                                 mv.addObject("hojasSeptiembre",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191001' and '20191031' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 
+                                 
+                                 mv.addObject("hojasOctubre",datosL2);                                                       // Pasa la lilsta completa               
+                  
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191101' and '20191130' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                
+                                 
+                                 mv.addObject("hojasNoviembre",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191201' and '20191231' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                
+                                 
+                                 mv.addObject("hojasDiciembre",datosL2);                                                       // Pasa la lilsta completa               
+                                          
+                                 
+                    return mv; 
+                                                                                                         //RETORNAMOS EL MODELO
+         }                                                                               // CIERRE DE IF
+         else{                                                                           // INICIO ELSE
+             
+          
+             String sql="update hojas set observaciones='"+d.getObservaciones()+"' where id_hojas="+d.getId_hojas(); // ACTUALIZAMOS EL CONTENIDOO  DONDE el ID DE ACTIVIDAD ES IGUAL A id_actividad
+                               
+       
+                this.jdbcTemplate.update(sql);                       //REALIZAMOS LA ACTUALIZACIÓN
+             
+             
+             
+        
+       
+       
+          ModelAndView mv=new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("diario_psicologo_solo_paciente");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+
+        
+        
+          sql="select nombre,ap_uno,ap_dos, no_empleado,no_cedula from psicologo where no_empleado="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Psicologo",new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
+                                 mv.addObject("diario",new diario());                                             //PASAMOS OBJETO Diario
+           
+         sql="select no_boleta from expediente where id_expediente =(select id_expediente from diario where id_diario=(select id_diario from hojas where id_hojas="+d.getId_hojas()+"))";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+             String cadena=datosL2.get(0).toString();
+         
+             String subcadena=cadena.substring(11, cadena.length()-1);                        
+                                
+                    sql="select nombre,ap_uno,ap_dos  from paciente where no_boleta="+subcadena;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("nombreP",datosL2);                                                       // Pasa la lilsta completa               
+                 
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190101' and '20190131' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasEnero",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                       sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190201' and '20190228' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasFebrero",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                       
+                        sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190301' and '20190331' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasMarzo",datosL2);                                                       // Pasa la lilsta completa               
+                     
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190401' and '20190430' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasAbril",datosL2);                                                       // Pasa la lilsta completa               
+                                                 
+                                 
+                    sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190501' and '20190531' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasMayo",datosL2);                                                       // Pasa la lilsta completa               
+                              
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190601' and '20190630' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasJunio",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190701' and '20190731' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasJulio",datosL2);                                                       // Pasa la lilsta completa               
+                                          
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190801' and '20190831' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasAgosto",datosL2);                                                       // Pasa la lilsta completa               
+                      
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20190901' and '20190530' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasSeptiembre",datosL2);                                                       // Pasa la lilsta completa               
+                                         
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191001' and '20191031' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasOctubre",datosL2);                                                       // Pasa la lilsta completa               
+                  
+                     sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191101' and '20191130' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasNoviembre",datosL2);                                                       // Pasa la lilsta completa               
+                                           
+                      sql="select * from hojas where id_diario=(select id_diario from diario where id_expediente = (select id_expediente from expediente where no_boleta="+subcadena+")) and fecha between '20191201' and '20191231' order by fecha desc";   // CONSULTA PARA EXTRAER LAS HOJAS DEL DIARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 System.out.println(datosL2);
+                                 
+                                 mv.addObject("hojasDiciembre",datosL2);                                                       // Pasa la lilsta completa               
+                                          
+                                 
+                    return mv; 
+                                            
+        
+         }                                                                                                   // CIERRE DE ELSE
+       
+       
+    }    
+
+
+    
        
           ////////////////////
     //ACCIÓN DEL BOTON CERRAR
