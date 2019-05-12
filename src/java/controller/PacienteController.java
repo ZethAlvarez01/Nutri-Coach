@@ -1822,7 +1822,7 @@ public class PacienteController {
                  subcadena=cadena.substring(11, cadena.length()-1);           // sacamos el id
                  
                  
-                 sql="insert into hojas values("+'0'+","+subcadena+",'"+d.getFecha()+"','"+d.getContenido()+"','"+d.getSentimiento()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                 sql="insert into hojas values("+'0'+","+subcadena+",'"+d.getFecha()+"','"+d.getContenido()+"','"+d.getSentimiento()+"','')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
                                
        
                   this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
