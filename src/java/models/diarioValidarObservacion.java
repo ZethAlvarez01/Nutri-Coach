@@ -13,7 +13,7 @@ import org.springframework.validation.Validator;
  *
  * @author Nutri-Coach
  */
-public class diarioValidar implements Validator{
+public class diarioValidarObservacion implements Validator{
 
     @Override
     public boolean supports(Class<?> type) {
@@ -30,16 +30,9 @@ public class diarioValidar implements Validator{
         //Se valida que cada elemento de nuestro formulario no se encuentre en blanco
         
       
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contenido","required.contenido","El contenido es obligatorio");
-   
-        
-  
-         
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sentimiento","required.sentimiento","Es necesario que elijas como te sientes");
        
 
-       
+         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "observaciones","required.observaciones","Es necesario que anotes tu observación");
     }
     
 }

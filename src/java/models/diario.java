@@ -17,16 +17,18 @@ public class diario {
     private String fecha;
     private String contenido;
     private String sentimiento;
+    private String observaciones;
 
     public diario() {
     }
 
-    public diario(String id_hojas, String id_diario, String fecha, String contenido, String sentimiento) {
+    public diario(String id_hojas, String id_diario, String fecha, String contenido, String sentimiento, String observaciones) {
         this.id_hojas = id_hojas;
         this.id_diario = id_diario;
         this.fecha = fecha;
         this.contenido = contenido;
         this.sentimiento = sentimiento;
+        this.observaciones = observaciones; 
     }
 
     public String getId_hojas() {
@@ -69,5 +71,13 @@ public class diario {
         this.sentimiento = sentimiento;
     }
 
+    public String getObservaciones() {
+        return observaciones;
+    }
 
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    
 }
