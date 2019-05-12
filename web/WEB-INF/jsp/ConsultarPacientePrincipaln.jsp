@@ -36,6 +36,7 @@
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/psicologo.js"/></script>
         <script type="text/javascript" src="resource/scrips/fecha.js"/></script> 
+        <script type="text/javascript" src="resource/scrips/busqueda.js"/></script>  
 
         <title>Nutri-Coach</title>
     </head>
@@ -100,51 +101,56 @@
                   
                 </div>
                 <div id="listado">
-                    <div id="encabezado_lista">
+                   <div id="encabezado_lista">
                         <p id="sub-titulo">Listado de usuarios</p>
-                        <input type="text" placeholder="Buscar usuario">
+                       <!--Barra de busqueda-->
+                       <input type="search" class="filtro" data-table="order-table" placeholder="Buscar paciente">
+
+                         <!------------------------------------------>  
+                        
                         <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
                     </div>
 
                     <div id="lista">
-                         <table>
-         <tr>
-           
-            <th></th>
-            <th>No. Boleta</th>
-            <th>Nombre</th>
-            <th>Primer apellido</th>
-            <th>Segundo apellido</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th></th>
-         </tr>
-                         <c:forEach items="${ListaPacientes}" var="item"> 
-                             
-             <tr>
-             <div class="usuario">             
-               
-               <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
-               <td>${item.no_boleta}</td>
-               <td>${item.nombre}</td>
-               <td>${item.ap_uno}</td>
-               <td>${item.ap_dos}</td>
-               <td>${item.telefono}</td>
-               <td>${item.correo}</td>
-               <td>
-                   <form:form method="post" commandName="Paciente">
-                      <input type="submit"  name="expediente" value="Visualizar expediente"> 
-                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
-                   </form:form>
-               </td>
-              </div>
-  
-            </tr>
-                        
-                        </c:forEach>          
-                        
-                                    
-                    </table>
+                        <table class="order-table table"><!--se le asigna a la tabla que se quiere filtrar-->
+                        <thead>                           
+                            <tr>
+
+                            <th></th>
+                            <th>No. Boleta</th>
+                            <th>Nombre</th>
+                            <th>Primer apellido</th>
+                            <th>Segundo apellido</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <c:forEach items="${ListaPacientes}" var="item"> 
+                            <tbody>                
+                                <tr>
+                                    <div class="usuario">             
+
+                                        <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
+                                        <td>${item.no_boleta}</td>
+                                        <td>${item.nombre}</td>
+                                        <td>${item.ap_uno}</td>
+                                        <td>${item.ap_dos}</td>
+                                        <td>${item.telefono}</td>
+                                        <td>${item.correo}</td>
+                                        <td>
+                                        <form:form method="post" commandName="Paciente">
+                                            <input type="submit"  name="expediente" value="Visualizar expediente">  
+                                             <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                                        </form:form>
+                                        </td>
+                                    </div>
+
+                               </tr>
+
+                                </c:forEach>          
+                            </tbody> 
+                        </table>      
                                 
                                 
                                 
