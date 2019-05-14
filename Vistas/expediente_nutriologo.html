@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png " />
+    <link rel="stylesheet" href="generales.css " />
+    <link rel="stylesheet" href="pleca.css" />
+    <link rel="stylesheet" href="footer.css " />
+    <link rel="stylesheet" href="estilo_expediente.css">
+    <!--Hoja de estilo-->
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="expediente_script.js"></script>
+
+    <title>Nutri-Coach</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="logo-sep.png" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="logo-ipn.jpg " alt="Instituto Politécnico Nacional">
+                </div>
+            </div>
+        </div>
+        <!--Fin container-->
+    </header>
+
+    <div id="barra">
+        <div class="container">
+            <a href="inicio.htm "><img id="imagen" src="logo-nutri.png" alt="Nutri-Coach"></a>
+        </div>
+    </div>
+
+    <div id="contenido">
+        <div class="container">
+            <h1>Cargar nuevo expediente para ${Paciente}</h1>
+
+            <div class="barra_expediente">
+                <button class="expediente_t" onclick="openExpediente('Historial')">Historial clínico</button>
+                <button class="expediente_t" onclick="openExpediente('Ginecologico')">Estado ginecológico</button>
+                <button class="expediente_t" onclick="openExpediente('Fisica')">Exploración fisica</button>
+                <button class="expediente_t" onclick="openExpediente('Indicadores')">Indicadores dietéticos</button>
+                <button class="expediente_t" onclick="openExpediente('Diagnostico')">Diagnostico clínico</button>
+            </div>
+
+
+            <div id="Historial" class="expediente_c">
+                <h2>Historial clínico</h2>
+                <ul>
+                    <li>¿Realiza algún tipo de actividad física?
+
+                        <input type="radio" name="act_f" value="1"> Si
+                        <input type="radio" name="act_f" value="0"> No<br>
+
+                    </li>
+                    <li>¿Qué tipo de actividad física? <input type="text"></li>
+                    <li>¿Con que frecuencia realiza actividad física? <input type="text"></li>
+                    <li>¿Tiene algún padecimiento o enfermedad, cuál? <input type="text"></li>
+                    <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <input type="text"></li>
+                    <li>¿Consume tabaco?
+
+                        <input type="radio" name="tabaco" value="1"> Si
+                        <input type="radio" name="tabaco" value="0"> No<br>
+
+                    </li>
+                    <li>¿Con qué frecuencia? <input type="text"></li>
+                    <li>¿Consume bebidas alcohólicas?
+
+                        <input type="radio" name="alcohol" value="1"> Si
+                        <input type="radio" name="alcohol" value="0"> No<br>
+
+                    </li>
+                    <li>¿Con qué frecuencia? <input type="text"></li>
+                </ul>
+            </div>
+            <div id="Ginecologico" class="expediente_c" style="display: none;">
+                <h2>Estado ginecológico</h2>
+                <ul>
+                    <li>¿Lleva una vida sexual activa?
+
+                        <input type="radio" name="act_s" value="1"> Si
+                        <input type="radio" name="act_s" value="0"> No<br>
+
+                    </li>
+                    <li>¿Se encuentra en estado de gestación?
+
+                        <input type="radio" name="gestacion" value="1"> Si
+                        <input type="radio" name="gestacion" value="0"> No<br>
+
+                    </li>
+                    <li>¿Cuánto tiempo lleva gestando? <input type="text"></li>
+                    <li>¿Usa algún método anticonceptivo, cuál? <input type="text"></li>
+                    <li>¿Lleva alguna terapia de reemplazo hormonal?
+
+                        <input type="radio" name="terapia_h" value="1"> Si
+                        <input type="radio" name="terapia_h" value="0"> No<br>
+
+                    </li>
+                    <li>¿Cuál? <input type="text"></li>
+                    <li>Dosis <input type="text"></li>
+                </ul>
+            </div>
+            <div id="Fisica" class="expediente_c" style="display: none;">
+                <div id="contenido_fisica">
+                    <div id="exploracion">
+                        <h2>Exploración fisica</h2>
+                        <ul>
+                            <li>Peso <input type="number"></li>
+                            <li>Talla <input type="number"></li>
+                            <li>Temperatura <input type="text"></li>
+                            <li>P/A <input type="text"></li>
+                            <li>F/C <input type="text"></li>
+                        </ul>
+                    </div>
+                    <div id="medidas">
+                        <h3>Medidas antropométricas</h3>
+                        <ul>
+                            <li>Cuello <input type="number" name="" id=""></li>
+                            <li>Tórax <input type="number" name="" id=""></li>
+                            <li>Brazo <input type="number" name="" id=""></li>
+                            <li>Antebrazo <input type="number" name="" id=""></li>
+                            <li>Abdomen <input type="number" name="" id=""></li>
+                            <li>Cadera <input type="number" name="" id=""></li>
+                            <li>Muslo <input type="number" name="" id=""></li>
+                            <li>Pierna <input type="number" name="" id=""></li>
+                            <li>Aspectos generales <textarea></textarea></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="Indicadores" class="expediente_c" style="display: none;">
+                <h2>Indicadores dietéticos</h2>
+                <ul>
+                    <li>¿Se ha sometido algún tratamiento nutricional anteriormente?
+
+                        <input type="radio" name="tratamiento_n" value="1"> Si
+                        <input type="radio" name="tratamiento_n" value="0"> No<br>
+
+                    </li>
+                    <li>¿Qué tipo de tratamiento? <input type="text"></li>
+                    <li>¿Por cuánto tiempo? <input type="text"></li>
+                    <li>¿Cuántas ingestas de comida tiene al día? <input type="number" name="" id=""></li>
+                    <li>¿Consume golosinas entre comidas?
+
+                        <input type="radio" name="golosinas" value="1"> Si
+                        <input type="radio" name="golosinas" value="0"> No<br>
+
+                    </li>
+                    <li>¿Cuáles? <input type="text"></li>
+                    <li>¿Tiene algún horario de comida?
+
+                        <input type="radio" name="horario_c" value="1"> Si
+                        <input type="radio" name="horario_c" value="0"> No<br>
+
+                    </li>
+                    <li>¿Cuáles? <input type="text"></li>
+                    <li>Tipo Alimentos de su gusto<br><br>
+
+                        <input type="checkbox" name="alimento1" value="dulce"> Dulce<br>
+                        <input type="checkbox" name="alimento2" value="amarga"> Amarga<br>
+                        <input type="checkbox" name="alimento3" value="salada"> Salada<br>
+                        <input type="checkbox" name="alimento4" value="picante"> Picante<br>
+                        <input type="checkbox" name="alimento5" value="acida"> Acida<br>
+
+                    </li>
+                    <li>¿Tiene alergias a algun alimento, cúal? <input type="text"></li>
+                </ul>
+            </div>
+            <div id="Diagnostico" class="expediente_c" style="display: none;">
+                <h2>Diagnostico clínico</h2>
+
+                <h3>Observaciones</h3>
+                <textarea id="obs" name="observaciones_dc">
+
+                    </textarea>
+
+                <h3>Recomendaciones</h3>
+                <textarea id="recom" name="recomendaciones_dc">
+                        
+                    </textarea>
+            </div>
+            <button id="boton">Guardar</button>
+        </div>
+    </div>
+
+    <!--Fin contenido-->
+    <footer>
+        <div class="container">
+            <p id="visita"></p>
+            <ul id="redes">
+                <li>
+                    <a href="https://www.facebook.com/escomipnmx/">
+                        <img src="facebook.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/escomunidad">
+                        <img src="twitter.png" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/ipn_oficial/">
+                        <img src="instagram.png" />
+                    </a>
+                </li>
+            </ul>
+            <!--Fin Redes sociales-->
+            <p>© 2018 ESCOMPROJECT - Todos Los Derechos Reservados</p>
+            <br/>
+            <p>
+                <a class="hiperfooter" href="tyc.htm ">Términos y condiciones</a>
+
+                <a class="hiperfooter" id="politicas" href="politicas.htm ">Políticas de privacidad</a>
+            </p>
+            <br/>
+
+            <!--Fin Modal Términos y condiciones-->
+        </div>
+    </footer>
+</body>
+
+</html>

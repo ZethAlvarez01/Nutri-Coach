@@ -64,11 +64,14 @@
                 <prop key="ConsultarEntradaAdmin.htm">AdministradorController</prop>
                 <prop key="ForoPrincipalAdmin.htm">AdministradorController</prop>
                 <prop key="ConsultarActividadp.htm">PsicologoController</prop>
+                <prop key="ConsultarActividadps.htm">PsicologoController</prop>
                 <prop key="SeguimientoPsicologico.htm">PacienteController</prop>
                 <prop key="ConsultarActividad.htm">PacienteController</prop>
                 <prop key="diario_paciente.htm">PacienteController</prop>
                 <prop key="ConsultarDiario.htm">PacienteController</prop>
-                
+                <prop key="ConsultarPacientePrincipalp.htm">PsicologoController</prop>
+                <prop key="expedientePsicologico.htm">PsicologoController</prop>
+                <prop key="ConsultarPacientePrincipaln.htm">nutriologoController</prop>
                 
             </props>
         </property>

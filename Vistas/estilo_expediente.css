@@ -1,0 +1,116 @@
+#contenido {
+    height: 850px;
+}
+
+.expediente_c {
+    height: 550px;
+    padding: 0px 50px;
+}
+
+h1 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.barra_expediente {
+    margin-top: 40px;
+    background: rgb(108, 29, 69);
+    height: 50px;
+}
+
+.expediente_t {
+    height: 50px;
+    border: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    outline: none;
+    font-size: 17px;
+    color: white;
+    background: rgb(108, 29, 69);
+}
+
+.expediente_t:hover {
+    background: rgb(156, 113, 134);
+}
+
+#boton {
+    cursor: pointer;
+    text-align: center;
+    width: 230px;
+    padding: 15px;
+    font-size: 17px;
+    border: solid 1px rgb(108, 29, 69);
+    border-radius: 10px;
+    background: rgb(108, 29, 69);
+    color: white;
+    outline: none;
+}
+
+#boton:hover {
+    border: solid 1px rgb(156, 113, 134);
+    background: rgb(156, 113, 134);
+}
+
+h2 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin-top: 20px;
+}
+
+h3 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 100px;
+    border-radius: 10px;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#obs {
+    margin-top: 20px;
+    border: solid 1px rgb(255, 60, 60);
+}
+
+#recom {
+    margin-top: 20px;
+    border: solid 1px rgb(59, 212, 45);
+}
+
+#contenido_fisica {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#exploracion {
+    grid-column: 1;
+}
+
+#medidas {
+    padding: 0px 20px;
+    grid-column: 2;
+}
+
+input {
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    height: 25px;
+    font-size: 15px;
+    padding: 0px 5px;
+    outline: none;
+    margin-left: 20px;
+}

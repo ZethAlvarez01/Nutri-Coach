@@ -3,7 +3,12 @@
     Created on : 27-abr-2019, 18:30:49
     Author     : jms-m
 --%>
-
+<%
+  response.addHeader("Pragma", "no-cache");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+  response.setDateHeader("Expires", 0);
+%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -62,7 +67,7 @@
                         <form:form method="post" commandName="Psicologo">
                            <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
                         <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="bienvenida_psicologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="ConsultarPacientePrincipalp.htm">Pacientes</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />

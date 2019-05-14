@@ -3,7 +3,12 @@
     Created on : 21-mar-2019, 11:11:38
     Author     : jms-m
 --%>
-
+<%
+  response.addHeader("Pragma", "no-cache");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+  response.setDateHeader("Expires", 0);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -68,7 +73,7 @@
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Nutriologo">
                              <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="bienvenida_nutriologo.htm">Pacientes</a></li>
+                        <li><a class="texto_menu" href="ConsultarPacientePrincipaln.htm">Pacientes</a></li>
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
