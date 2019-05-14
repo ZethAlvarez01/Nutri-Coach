@@ -30,18 +30,12 @@
 
 
         <!--Scripts-->
-<<<<<<< HEAD
-        
-        <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"/></script>
-        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
-=======
 
-        <script type="text/javascript" src="resource/scrips/calendario_primera_cita.js"/></script>
-       <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/calendario.js"/></script>
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-       <script type="text/javascript" src="resource/scrips/cambioOptions.js"/></script>  
->>>>>>> a916a99920525f0ad81bd99d61b03965eaccdbb6
+        <script type="text/javascript" src="resource/scrips/cambioOptions.js"/></script>  
+
 
 
         <title>Nutri-Coach</title>
@@ -123,6 +117,8 @@
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
                             </select>
 
                     </div>
