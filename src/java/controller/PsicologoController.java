@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,40 @@ public class PsicologoController {
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
      
+      ///////////////////////////////
+     //PETICION DE CRONOGRAMA 
+      
+      @RequestMapping(value="/mostrarHorarioPsicologo", method=RequestMethod.GET)
+       public @ResponseBody String getCrono(@RequestParam String fechaConsulta, @RequestParam String no_empleadoConsulta){
+        System.out.println("-----getCrono-------");
+        
+        System.out.println(fechaConsulta+" esta fue la fecha");
+          System.out.println(no_empleadoConsulta+" este es el no_empleado");
+       String sql=" select no_cedula from psicologo where no_empleado="+no_empleadoConsulta;   // CONSULTA PARA EXTRAER DATOS HORARIOS
+                               List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+           System.out.println(datosL2);
+           
+         String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+           System.out.println(cedula);
+           
+      sql="select t1.nombre, t1.ap_uno, t1.ap_dos, t1.no_boleta, t2.no_cita,t2.horario from paciente t1 inner join cita t2 on t1.no_boleta=t2.no_boleta and t1.no_cedulap=t2.no_cedula and t2.no_cedula="+cedula+" and t2.fecha='"+fechaConsulta+"' and t2.estado=3 order by t2.horario"; 
+           datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+           System.out.println(datosL2);
+           
+           String objeto;
+           if(datosL2.isEmpty()){
+                objeto = new Gson().toJson(null);
+           }
+           else{
+                objeto = new Gson().toJson(datosL2);
+           }
      
+                               
+                              
+         
+        return objeto; 
+    }
+       
      
    
      

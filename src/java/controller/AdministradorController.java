@@ -5,7 +5,14 @@
  */
 package controller;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -421,6 +428,8 @@ public class AdministradorController {
                                  mav.addObject("Administrador",new Administrador());
                          
        
+                                 
+
        return mav;
     }
      
@@ -887,7 +896,229 @@ public class AdministradorController {
                                  mav.addObject("Administrador",new Administrador());
                          
        
+                                              
+               List<String> dias = new ArrayList<String>();                  
+                                 
+    //METODO PARA ARMAR EL CALENDARIO                             
+       Calendar c = Calendar.getInstance();                  // CREACION DE UNA INSTANCIA DE CALENDARIO
+   
+    c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);            // EMPEZAR LA SEMANA EN LUNES, SE TOMA EL LUNES DE LA SEMANA EN CURSO
+    
+   
+    DateFormat df = new SimpleDateFormat("EEE yyyy/MM/dd");            // DAR FORMATO A LA FECHA  yyyy//mm/dd
+    
+    for (int i = 0; i < 30; i++) {                                  // CONTAMOS 30 DÍAS HABILES PARA ASIGNAR AL CALENDARIO DE CITAS
+     System.out.println(df.format(c.getTime()));
+     dias.add(df.format(c.getTime()).toString());                  // AGREGAMOS A NUESTRA LSITA EL DIA CORRESPONDIENTE
+     int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);                 // OBTIENE EL DÍA DE LA SEMANA
+     
+     if (dayOfWeek == Calendar.FRIDAY) {                         // SI EL DÍA CORRESPONDE A VIERNES
+      c.add(Calendar.DATE, 3);                                   // AVANZA 3 DÍAS EN EL CALENDARIO
+     }  else { 
+      c.add(Calendar.DATE, 1);                                   // SI ESTA EN CUALQUIER OTRO DÍA DE LA SEMANA HABIL AVANZA UN DÍA
+     } 
+
+    
+    }               
+    
+                                 
+          System.out.println(dias.size());
+          System.out.println(dias.get(0));
+          for(int i=0; i<dias.size();i++){
+              System.out.println(dias.get(i).substring(4,dias.get(i).length()));      // LIMPLIA EL NOMBRE DEL DIA Y LO OBTIENE EN FORMATO yyyy/mm/dd
+                      
+          } 
+          
+          
+          String horaEntrada=ps.getHoraEntrada().substring(0, ps.getHoraEntrada().length()-3);
+          String horaSalida=ps.getHoraSalida().substring(0, ps.getHoraSalida().length()-3);
+          
+          int horaEn=Integer.parseInt(horaEntrada.substring(0, 2)); // PASAR HORA A ENTERO
+          int horaS=Integer.parseInt(horaSalida.substring(0,2));     // PASAR HORA A ENTERO
+          
+          float MinEn=Float.parseFloat(horaEntrada.substring(3, 5)); // PASAR MINUTOS A FLOTANTE
+          float MinS=Float.parseFloat(horaSalida.substring(3, 5));     // PASAR MINUTOS A FLOTANTE
+          
+          float minE= MinEn/60;       // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          float minS= MinS/60;        // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          
+          float horaE=horaEn+minE;    // GENERACIÓN DE HORA DE ENTRADA
+          float horaSa=horaS+minS;    // GENERACIÓN DE HORA DE SALIDA
+        
+          List<String> rangoh = new ArrayList<String>();        
+          float horario;
+          float horario2; 
+          float creaHorario;
+          int HoraHorario;
+          List<String> rangomh = new ArrayList<String>();  
+          String cero="00";
+          String media="30";
+          String diez="10";
+          String veinte="20";
+         String cuarenta="40";
+          String cincuenta="50";
+          //GENERA RANGOS DE UNA 1 HORA
+           if(horaE<horaSa){
+              horario=horaE+1; //GENERA RANGOS DE UNA HORA
              
+               if(horario<horaSa){
+                  HoraHorario=(int)horario;
+                   if(MinEn==0.0){
+                     
+                       System.out.println(horaEntrada+"-"+HoraHorario+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                       rangoh.add(horaEntrada+"-"+HoraHorario+":"+cero);
+                       horario2=horario+1;
+                     //   System.out.println("NUEVA HORA DE TERMINO:"+ horario2);
+                        while(horario2<=horaSa){
+                           
+                           
+                           System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                           rangoh.add((int)horario+":"+cero+"-"+(int)horario2+":"+cero);
+                           horario=horario+1;
+                           horario2=horario2+1;
+                        }
+                   }
+                   else{
+                      System.out.println(horaEntrada+"-"+HoraHorario+":"+(int)MinEn); // CADENA A GUARDAR EN LA LISTA
+                      rangoh.add(horaEntrada+"-"+HoraHorario+":"+(int)MinEn);
+                      horario2=horario+1;
+                     // System.out.println("NUEVA HORA DE TERMINO "+ (int)horario2+":"+(int)MinEn);
+                       while(horario2<=horaSa){
+                           
+                           
+                           System.out.println((int)horario+":"+(int)MinEn+"-"+(int)horario2+":"+(int)MinEn); // CADENA A GUARDAR EN LA LISTA
+                           rangoh.add((int)horario+":"+(int)MinEn+"-"+(int)horario2+":"+(int)MinEn);
+                           horario=horario+1;
+                           horario2=horario2+1;
+                        }
+                      
+                   }
+                   
+                 
+            }
+           
+          }
+          
+       ////////////////////////GENERAR RANGOS DE MEDIA HORA      
+           if(horaE<horaSa){
+               System.out.println(horaE);
+               System.out.println(horaSa);
+            horario=(float) (horaE+0.5);
+           // System.out.println(horario+" ESTE ES EL NUEVO HORARIO");
+             if(horario<horaSa){
+                  HoraHorario=(int)horario;
+                   if(MinEn==0.0){
+                      
+                       System.out.println(horaEntrada+"-"+HoraHorario+":"+media); // CADENA A GUARDAR EN LA LISTA
+                       rangomh.add(horaEntrada+"-"+HoraHorario+":"+media);
+                       horario2=(float) (horario+0.5);
+                        System.out.println("NUEVA HORA DE TERMINO:"+ horario2);
+                        while(horario2<=horaSa){
+                          
+                           if((horario2-(int)horario)==1){
+                               System.out.println((int)horario+":"+media+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+media+"-"+(int)horario2+":"+cero);
+                           }
+                           else{
+                               System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+media); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cero+"-"+(int)horario2+":"+media);
+                           }
+                           horario=(float) (horario+0.5);
+                           horario2=(float) (horario2+0.5);
+                        }
+                   }
+                    else{
+                      if((int)MinEn==10){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cuarenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cuarenta);
+                           }
+                      if((int)MinEn==20){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cincuenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cincuenta);
+                           }
+                      if((int)MinEn==30){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cero);
+                           }
+                      if((int)MinEn==40){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+diez); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+diez);
+                           }
+                      if((int)MinEn==50){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+veinte); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+veinte);
+                           }
+                      
+                      horario2=(float) (horario+0.5);
+                      System.out.println("NUEVA HORA DE TERMINO "+ (int)horario2+":"+(int)MinEn);
+                       while(horario2<=horaSa){
+                          
+                           creaHorario=horario-(int)horario;
+                           
+                          System.out.println(creaHorario=horario-(int)horario);
+                           if((float)creaHorario>(float)0.6000000 && (float)creaHorario<(float)0.7000000){
+                              
+                               System.out.println((int)horario+":"+cuarenta+"-"+(int)horario2+":"+diez); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cuarenta+"-"+(int)horario2+":"+diez);
+                           }
+                           if((float)creaHorario>(float)0.8000000 && (float)creaHorario<(float)0.9000000){
+                              
+                               System.out.println((int)horario+":"+cincuenta+"-"+(int)horario2+":"+veinte); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cincuenta+"-"+(int)horario2+":"+veinte);
+                           }
+                           if((float)creaHorario==(float)0.0){
+                              
+                               System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+media); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cero+"-"+(int)horario2+":"+media);
+                           }
+                            if((float)creaHorario>(float)0.16000000 && (float)creaHorario<(float)0.17000000){
+                              
+                               System.out.println((int)horario+":"+diez+"-"+(int)horario2+":"+cuarenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+diez+"-"+(int)horario2+":"+cuarenta);
+                           }
+                           if((float)creaHorario>(float)0.30000000 && (float)creaHorario<(float)0.40000000 ){
+                              
+                               System.out.println((int)horario+":"+veinte+"-"+(int)horario2+":"+cincuenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+veinte+"-"+(int)horario2+":"+cincuenta);
+                           }
+                           if((float)creaHorario==(float)0.5){
+                              
+                               System.out.println((int)horario+":"+media+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+media+"-"+(int)horario2+":"+cero);
+                           }
+                            horario=(float) (horario+0.5);
+                           horario2=(float) (horario2+0.5);
+                           
+                           float baderaError=horario2-horaSa;
+                           if(baderaError<0.000010){
+                               horario2=(float) (horario2-0.000010);
+                           }
+                               
+                           
+                           System.out.println("HORARIO SA: "+horaSa);
+                           System.out.println("HORARIO2: "+horario2);
+                        }
+                      
+                   }
+                   
+             }
+            
+            
+            
+}
+           
+           
+           
+           
+        System.out.println(rangoh.size()+" horario de una hora");
+        for(int i=0;i<rangoh.size();i++){
+            System.out.println(rangoh.get(i).toString());
+        }
+             
+        System.out.println(rangomh.size()+ "HORARIOS DE MEDIA HORA");
+        for(int i=0;i<rangomh.size();i++){
+            System.out.println(rangomh.get(i).toString());
+        }                      
                 return mav;
         }
     
@@ -1008,7 +1239,243 @@ public class AdministradorController {
                                  
                                  mav.addObject("ListaAdmin",datosL2);          // Pasa la lilsta completa
                                  mav.addObject("Administrador",new Administrador());
-                         
+              
+            
+                                 
+               List<String> dias = new ArrayList<String>();                  
+                                 
+    //METODO PARA ARMAR EL CALENDARIO                             
+       Calendar c = Calendar.getInstance();                  // CREACION DE UNA INSTANCIA DE CALENDARIO
+   
+    c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);            // EMPEZAR LA SEMANA EN LUNES, SE TOMA EL LUNES DE LA SEMANA EN CURSO
+    
+   
+    DateFormat df = new SimpleDateFormat("EEE yyyy/MM/dd");            // DAR FORMATO A LA FECHA  yyyy//mm/dd
+    
+    for (int i = 0; i < 30; i++) {                                  // CONTAMOS 30 DÍAS HABILES PARA ASIGNAR AL CALENDARIO DE CITAS
+     System.out.println(df.format(c.getTime()));
+     dias.add(df.format(c.getTime()).toString());                  // AGREGAMOS A NUESTRA LSITA EL DIA CORRESPONDIENTE
+     int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);                 // OBTIENE EL DÍA DE LA SEMANA
+     
+     if (dayOfWeek == Calendar.FRIDAY) {                         // SI EL DÍA CORRESPONDE A VIERNES
+      c.add(Calendar.DATE, 3);                                   // AVANZA 3 DÍAS EN EL CALENDARIO
+     }  else { 
+      c.add(Calendar.DATE, 1);                                   // SI ESTA EN CUALQUIER OTRO DÍA DE LA SEMANA HABIL AVANZA UN DÍA
+     } 
+
+    
+    }               
+    
+                                 
+          System.out.println(dias.size());
+          System.out.println(dias.get(0));
+          for(int i=0; i<dias.size();i++){
+              System.out.println(dias.get(i).substring(4,dias.get(i).length()));      // LIMPLIA EL NOMBRE DEL DIA Y LO OBTIENE EN FORMATO yyyy/mm/dd
+                      
+          } 
+          
+          
+          String horaEntrada=n.getHoraEntrada().substring(0, n.getHoraEntrada().length()-3);
+          String horaSalida=n.getHoraSalida().substring(0, n.getHoraSalida().length()-3);
+          
+          System.out.println("HORA DE ENTRADA: "+horaEntrada);
+          System.out.println("HORA DE SALIDA: "+horaSalida);
+          
+          int horaEn=Integer.parseInt(horaEntrada.substring(0, 2)); // PASAR HORA A ENTERO
+          int horaS=Integer.parseInt(horaSalida.substring(0,2));     // PASAR HORA A ENTERO
+          
+          float MinEn=Float.parseFloat(horaEntrada.substring(3, 5)); // PASAR MINUTOS A FLOTANTE
+          float MinS=Float.parseFloat(horaSalida.substring(3, 5));     // PASAR MINUTOS A FLOTANTE
+          
+          float minE= MinEn/60;       // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          float minS= MinS/60;        // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          
+          float horaE=horaEn+minE;    // GENERACIÓN DE HORA DE ENTRADA
+          float horaSa=horaS+minS;    // GENERACIÓN DE HORA DE SALIDA
+        
+          List<String> rangoh = new ArrayList<String>();        
+          float horario;
+          float horario2; 
+          float creaHorario;
+          int HoraHorario;
+          List<String> rangomh = new ArrayList<String>();  
+          String cero="00";
+          String media="30";
+          String diez="10";
+          String veinte="20";
+         String cuarenta="40";
+          String cincuenta="50";
+          //GENERA RANGOS DE UNA 1 HORA
+           if(horaE<horaSa){
+              horario=horaE+1; //GENERA RANGOS DE UNA HORA
+             
+               if(horario<horaSa){
+                  HoraHorario=(int)horario;
+                   if(MinEn==0.0){
+                     
+                       System.out.println(horaEntrada+"-"+HoraHorario+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                       rangoh.add(horaEntrada+"-"+HoraHorario+":"+cero);
+                       horario2=horario+1;
+                     //   System.out.println("NUEVA HORA DE TERMINO:"+ horario2);
+                        while(horario2<=horaSa){
+                           
+                           
+                           System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                           rangoh.add((int)horario+":"+cero+"-"+(int)horario2+":"+cero);
+                           horario=horario+1;
+                           horario2=horario2+1;
+                        }
+                   }
+                   else{
+                      System.out.println(horaEntrada+"-"+HoraHorario+":"+(int)MinEn); // CADENA A GUARDAR EN LA LISTA
+                      rangoh.add(horaEntrada+"-"+HoraHorario+":"+(int)MinEn);
+                      horario2=horario+1;
+                     // System.out.println("NUEVA HORA DE TERMINO "+ (int)horario2+":"+(int)MinEn);
+                       while(horario2<=horaSa){
+                           
+                           
+                           System.out.println((int)horario+":"+(int)MinEn+"-"+(int)horario2+":"+(int)MinEn); // CADENA A GUARDAR EN LA LISTA
+                           rangoh.add((int)horario+":"+(int)MinEn+"-"+(int)horario2+":"+(int)MinEn);
+                           horario=horario+1;
+                           horario2=horario2+1;
+                        }
+                      
+                   }
+                   
+                 
+            }
+           
+          }
+          
+      ////////////////////////GENERAR RANGOS DE MEDIA HORA      
+           if(horaE<horaSa){
+               System.out.println(horaE);
+               System.out.println(horaSa);
+            horario=(float) (horaE+0.5);
+           // System.out.println(horario+" ESTE ES EL NUEVO HORARIO");
+             if(horario<horaSa){
+                  HoraHorario=(int)horario;
+                   if(MinEn==0.0){
+                      
+                       System.out.println(horaEntrada+"-"+HoraHorario+":"+media); // CADENA A GUARDAR EN LA LISTA
+                       rangomh.add(horaEntrada+"-"+HoraHorario+":"+media);
+                       horario2=(float) (horario+0.5);
+                        System.out.println("NUEVA HORA DE TERMINO:"+ horario2);
+                        while(horario2<=horaSa){
+                          
+                           if((horario2-(int)horario)==1){
+                               System.out.println((int)horario+":"+media+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+media+"-"+(int)horario2+":"+cero);
+                           }
+                           else{
+                               System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+media); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cero+"-"+(int)horario2+":"+media);
+                           }
+                           horario=(float) (horario+0.5);
+                           horario2=(float) (horario2+0.5);
+                        }
+                   }
+                    else{
+                      if((int)MinEn==10){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cuarenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cuarenta);
+                           }
+                      if((int)MinEn==20){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cincuenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cincuenta);
+                           }
+                      if((int)MinEn==30){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+cero);
+                           }
+                      if((int)MinEn==40){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+diez); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+diez);
+                           }
+                      if((int)MinEn==50){
+                               System.out.println(horaEntrada+"-"+HoraHorario+":"+veinte); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add(horaEntrada+"-"+HoraHorario+":"+veinte);
+                           }
+                      
+                      horario2=(float) (horario+0.5);
+                      System.out.println("NUEVA HORA DE TERMINO "+ (int)horario2+":"+(int)MinEn);
+                       while(horario2<=horaSa){
+                          
+                           creaHorario=horario-(int)horario;
+                           
+                          System.out.println(creaHorario=horario-(int)horario);
+                           if((float)creaHorario>(float)0.6000000 && (float)creaHorario<(float)0.7000000){
+                              
+                               System.out.println((int)horario+":"+cuarenta+"-"+(int)horario2+":"+diez); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cuarenta+"-"+(int)horario2+":"+diez);
+                           }
+                           if((float)creaHorario>(float)0.8000000 && (float)creaHorario<(float)0.9000000){
+                              
+                               System.out.println((int)horario+":"+cincuenta+"-"+(int)horario2+":"+veinte); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cincuenta+"-"+(int)horario2+":"+veinte);
+                           }
+                           if((float)creaHorario==(float)0.0){
+                              
+                               System.out.println((int)horario+":"+cero+"-"+(int)horario2+":"+media); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+cero+"-"+(int)horario2+":"+media);
+                           }
+                            if((float)creaHorario>(float)0.16000000 && (float)creaHorario<(float)0.17000000){
+                              
+                               System.out.println((int)horario+":"+diez+"-"+(int)horario2+":"+cuarenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+diez+"-"+(int)horario2+":"+cuarenta);
+                           }
+                           if((float)creaHorario>(float)0.30000000 && (float)creaHorario<(float)0.40000000 ){
+                              
+                               System.out.println((int)horario+":"+veinte+"-"+(int)horario2+":"+cincuenta); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+veinte+"-"+(int)horario2+":"+cincuenta);
+                           }
+                           if((float)creaHorario==(float)0.5){
+                              
+                               System.out.println((int)horario+":"+media+"-"+(int)horario2+":"+cero); // CADENA A GUARDAR EN LA LISTA
+                               rangomh.add((int)horario+":"+media+"-"+(int)horario2+":"+cero);
+                           }
+                            horario=(float) (horario+0.5);
+                           horario2=(float) (horario2+0.5);
+                           
+                           float baderaError=horario2-horaSa;
+                           if(baderaError<0.000010){
+                               horario2=(float) (horario2-0.000010);
+                           }
+                               
+                           
+                           System.out.println("HORARIO SA: "+horaSa);
+                           System.out.println("HORARIO2: "+horario2);
+                        }
+                      
+                   }
+                   
+             }
+            
+            
+            
+}
+           
+           
+           
+           
+        System.out.println(rangoh.size()+" horario de una hora");
+        for(int i=0;i<rangoh.size();i++){
+            System.out.println(rangoh.get(i).toString());
+        }
+             
+        System.out.println(rangomh.size()+ "HORARIOS DE MEDIA HORA");
+        for(int i=0;i<rangomh.size();i++){
+            System.out.println(rangomh.get(i).toString());
+        }                      
+                                 
+                                 
+      
+                                
+                                 
+                                 
+                                 
+                                 
+                                 
        
                 return mav;
         }

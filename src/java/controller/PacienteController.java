@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ import models.entradaForo;
 import models.foroValidar;
 import models.Comentario;
 import models.Nutriologo;
+import models.cita;
+import models.citaValidar;
 import models.comentarioValidar;
 import models.diario;
 import models.diarioValidar;
@@ -33,6 +36,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,14 +52,39 @@ public class PacienteController {
      private foroValidar foroValidar;                                 //Variable para validar foro
      private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
       private diarioValidar diarioValidar;                           //Variable para validar hoja del diario
+      private citaValidar citaValidar;                           //Variable para validar cita
      
       public PacienteController() {
         this.foroValidar=new foroValidar();                            // Instancia de la clase foroValidar
         this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioValidar
         this.diarioValidar=new diarioValidar();                      // Instancia de la clase diarioValidar
+        this.citaValidar=new citaValidar();                      // Instancia de la clase diarioValidar
         Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
+      
+     ///////////////////////////////
+     //PETICION DE PRIMERA CITA
+      
+      @RequestMapping(value="/mostrarHorario", method=RequestMethod.GET)
+       public @ResponseBody String getHORARIO(@RequestParam String fechaConsulta, @RequestParam String cedulaConsulta){
+        System.out.println("-----getHORARIO-------");
+        
+        System.out.println(fechaConsulta+" esta fue la fecha");
+          System.out.println(cedulaConsulta+" esta es la cedula");
+       String sql=" select no_cita,horario from cita where fecha='"+fechaConsulta+"' and no_cedula="+cedulaConsulta+" and estado=0";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+                               List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+           System.out.println(datosL2);
+     String objeto = new Gson().toJson(datosL2);
+                               
+                              
+         
+        return objeto; 
+    }
+       
+      
+      
+      
       
       
  ///////////////////////////////////////
@@ -85,34 +115,29 @@ public class PacienteController {
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());                                             // PASA OBJETO PACIENTE
                 
-              sql=" select * from nutriologo where estatus <> 4 and estatus <> 0 order by ap_uno asc;"; // Se buscan todos aquellos nutriologos que tengan un estatus entre 1 y 3
+          
+                                  mv.addObject("Nutriologo",new Nutriologo());                                             // PASA OBJETO NUTRIOLOGO
+             
+             
+           
+                                   mv.addObject("cita",new cita());                                             // PASA OBJETO CITA
+            
+                                 
+           
+             sql="select nombre,ap_uno,ap_dos, no_cedula from nutriologo where estatus =1;"; // Se buscan todos aquellos nutriologos que tengan un estatus entre 1 y 3 y sean del IPN
 
             
       
              datosL2=this.jdbcTemplate.queryForList(sql); // pasamos el resultado de la consulta
                   
-             mv.addObject("ListaN",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
-            
-             System.out.println(datosL2);
+             mv.addObject("ListaESCOM",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO    
              
              
              
              
              
-              sql=" select * from nutriologo where estatus <>4 and estatus <>0 and institucion='Escuela Superior de Cómputo (ESCOM)' order by ap_uno"; // Se buscan todos aquellos nutriologos que tengan un estatus entre 1 y 3 y sean del IPN
-
-            
-      
-             datosL2=this.jdbcTemplate.queryForList(sql); // pasamos el resultado de la consulta
-                  
-             mv.addObject("ListaESCOM",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO     
-            
-             System.out.println(datosL2);
              
-                                 
-             mv.addObject("Nutriologo",new Nutriologo());                                             // PASA OBJETO NUTRIOLOGO
-                                 
-                    return mv;                                                                                          // RETORNAMOS EL MODELO
+             return mv;                                                                                          // RETORNAMOS EL MODELO
                 
          
          
@@ -924,7 +949,6 @@ public class PacienteController {
      public ModelAndView cambiarPrimeraCita(@ModelAttribute("Paciente") Paciente p, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{ // al hacer clik en el boton mensajes se cambiara a la vista de MensajeriaPs
         System.out.println("primera cita POST"); 
         
-          
         HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
        String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
        
@@ -934,20 +958,42 @@ public class PacienteController {
        
        
        // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
-        
-       System.out.println("no_boleta: "+alert);
-         
                 
-                ModelAndView mv=new ModelAndView();                         //CREACIÓN DEL MODELO
-                mv.setViewName("primera_cita");                             //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("primera_cita");
                 
                  String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
-                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("Paciente",new Paciente());                                             // PASA OBJETO PACIENTE
                 
-                return mv;
+          
+                                  mv.addObject("Nutriologo",new Nutriologo());                                             // PASA OBJETO NUTRIOLOGO
+             
+             
+           
+                                   mv.addObject("cita",new cita());                                             // PASA OBJETO CITA
+            
+                                 
+           
+             sql="select nombre,ap_uno,ap_dos, no_cedula from nutriologo where estatus =1;"; // Se buscan todos aquellos nutriologos que tengan un estatus entre 1 y 3 y sean del IPN
+
+            
+      
+             datosL2=this.jdbcTemplate.queryForList(sql); // pasamos el resultado de la consulta
+                  
+             mv.addObject("ListaESCOM",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO    
+             
+             
+             
+             
+             
+             
+             return mv;                                                                                          // RETORNAMOS EL MODELO
+                
+         
+         
                 
      }
      
@@ -1901,6 +1947,369 @@ public class PacienteController {
     
     
     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     /////////////////////////////
+    /////ACCION DEL BOTÓN guardarHoja
+    
+    
+          @RequestMapping(params="guardarCita", method = RequestMethod.POST)
+    public ModelAndView GuardarCita(@ModelAttribute("cita") cita c, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+             
+             
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS  
+        this.citaValidar.validate(c, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){                                                        // INICIO IF
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             
+         
+                
+                ModelAndView mv=new ModelAndView();
+                mv.setViewName("primera_cita");
+                
+                 String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                             // PASA OBJETO PACIENTE
+                
+          
+                                  mv.addObject("Nutriologo",new Nutriologo());                                             // PASA OBJETO NUTRIOLOGO
+             
+             
+           
+                                   mv.addObject("cita",new cita());                                             // PASA OBJETO CITA
+            
+                                 
+           
+             sql="select nombre,ap_uno,ap_dos, no_cedula from nutriologo where estatus =1;"; // Se buscan todos aquellos nutriologos que tengan un estatus entre 1 y 3 y sean del IPN
+
+            
+      
+             datosL2=this.jdbcTemplate.queryForList(sql); // pasamos el resultado de la consulta
+                  
+             mv.addObject("ListaESCOM",datosL2);       // SE AGREGA EL OBJETO LISTA DE NUTRIOLOGOS AL MODELO    
+             
+             
+             
+             
+             
+             
+             return mv;                                                                                          // RETORNAMOS EL MODELO
+                
+         }                                                                                  // CIERRE IF
+         else{
+             
+           
+             
+             
+             String sql="update cita set estado=3, no_boleta="+alert+" where no_cita="+c.getNo_cita(); // ACTIVAMOS LA CITA
+                               
+       
+              this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
+              
+             
+              
+            sql="select horario from cita where no_cita="+c.getNo_cita();   // CONSULTA PARA EXTRAER DATOS DE CITA
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+            String horarioBase=datosL2.get(0).toString().substring(9,datosL2.get(0).toString().length()-1);
+            
+            
+             sql="select no_cedula from cita where no_cita="+c.getNo_cita();   // CONSULTA PARA EXTRAER DATOS DE CITA
+                           datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+            String cedula=datosL2.get(0).toString().substring(11,datosL2.get(0).toString().length()-1);
+         
+            sql="select fecha from cita where no_cita="+c.getNo_cita();   // CONSULTA PARA EXTRAER DATOS DE CITA
+                           datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+            String fecha=datosL2.get(0).toString().substring(7,datosL2.get(0).toString().length()-1);
+              
+           sql="select horario from cita where no_cedula="+cedula+" and fecha='"+fecha+"' and estado=1";   // CONSULTA PARA EXTRAER  HORARIOS DE CITA
+                           datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+         
+            
+            String horario1="";       //VARIABLE PARA HORARIO QUE COMPARAREMOS
+            String subHorario="";      // VARIABLE EN LA QUE SE DIVIDEN LAS HORAS DEL HORARIO QUE SE COMPARARÁ
+            String subMinutoHorario1="";   // VARIABLE PARA CALCULO DE MINUTOS DEL HORARIO A COMPARAR
+            String subMinutoBase="";     // VARIABLE PARA CALCULOS DE MINUTOS DEL HORARIO BASE
+             String subHorarioBase=""; // VARIABLE PARA EN LA QUE SE DIVIDEN LAS HORAS DEL HORARIO BASE
+            
+            for(int x=0; x<datosL2.size();x++){                                                         // INICIO DE CICLO FOR 1 DE X= 0 HASTA EL TAMAÑO DE LA LISTA DE HORARIOS
+                horario1=datosL2.get(x).toString().substring(9,datosL2.get(x).toString().length()-1);    // CREACION DEL HORARIO A COMPARAR
+               
+               //PARA COMPARAR PRIMERA HORA POR LA IZQUIERDA
+                for(int i=0;i<horario1.length();i++){                                                  // INICIO CICLO FOR 2
+                                   
+                    if(horario1.charAt(i)==':'){                                                    // INICIO IF 1 EN EL QUE SE COMPARA EL CARACTER DEL HORARIO EN EL INDICE I CON EL SIMBOLO :
+                       subHorario=horario1.substring(0,i);                                          // SEPARACION DEL HORARIO
+                       subMinutoHorario1=horario1.substring(i+1,i+3);                              // CALCULO DE MINUTOS DEL HORARIO
+                       i=horario1.length();                                                       // FINALIZACIÓN DEL IF AL ASIGNAR A I EL VALOR DE LA LONGITUD DEL HORARIO
+                    }                                                                            // CIERRE IF 1
+                   
+                }                                                                               // CIERRE FOR 2
+                 for(int i=0;i<horarioBase.length();i++){                                      // INICIO CICLO FOR 3
+                     if(horarioBase.charAt(i)==':'){                                            // INICIO IF 2 EN EL QUE SE COMÁRA EL CARACTER DEL HORARIO BASE EN EL INDICE I CON EL SIMBOLO :
+                        subHorarioBase=horarioBase.substring(0,i);                            // SEPARACION DEL HORARIO BASE
+                        subMinutoBase=horarioBase.substring(i+1,i+3);                      // CALCULO DE MINUTOS DEL HORARIO BASE
+                        i=horarioBase.length();                                           // FINALIZACION DEL IF AL ASIFNAR A I EL VALRO DE LA LONGITUD DEL HORARIO BASE
+                    }                                                                 // CIERRE IF 2
+                                        
+                    
+                }                                                                         // CIERRE FOR 3
+                
+                
+                
+                
+                int horaInicio=Integer.parseInt(subHorarioBase); // PASAR HORA A ENTERO
+                
+              
+                int horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTERO
+                
+              
+                
+                
+                 float MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
+                 float MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
+                
+              
+                
+                float minI= MinInicio/60;       // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          float minS= MinFin/60;        // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          
+          float horaE=horaInicio+minI;    // GENERACIÓN DE HORA DE ENTRADA
+          float horaSa=horaInicioCompara+minS;    // GENERACIÓN DE HORA A COMPARAR
+        
+               
+                
+                if(horaE==horaSa){                         // COMPARACION DE HORA BASE CON HORA DE COMPARACION
+              
+                 sql="update cita set estado=4 where fecha='"+fecha+"' and horario='"+horario1+"' and no_cedula="+cedula; // BLOQUEAMOS HORARIOS QUE INTERFIERAN CON LA CITA
+                               
+       
+                 this.jdbcTemplate.update(sql);       // INSERTAMOS LOS BLOQUEOS
+                }
+                
+                
+                
+                //PARA COMPARAR SEGUNDA HORA POR LA DERECHA
+                
+                int j=0;              // VARIABLE BANDERA PARA CALCULO DE HORARIOS POR LA DERECHA
+        int k=0;                      // VARIABLE BANDERA PARA CALCULO DE HORARIO POR LA DERECHA
+                for(int i=0;i<horario1.length();i++){                 // INICIO FOR 1 POR LA DERECHA
+                                   
+                    if(horario1.charAt(i)=='-'){                     // INICIO IF 1 POR LA DERECHA
+                       j=1;                                         // ASIGNACIÓN DE VALOR A NUESTRA BANDERA J
+                       k=i;                                        // ASIGNACION DE VALOR A NUESTRA BANDERA K
+                    }                                              // FIN IF 1 POR LA DERECHA
+                    if(j==1 && horario1.charAt(i)==':'){               // INICIO IF 2 POR LA DERECHA
+                       subHorario=horario1.substring(k+1,i);          // DIVISION DEL SUBHORARIO POR LA DERECHA
+                       subMinutoHorario1=horario1.substring(i+1,i+3);   // DIVISION DE LOS MINUTOS POR LA DERECHA
+                       i=horario1.length();                            // FINALIZACIÓN DEL IF AL ASIGNAR EL VALOR DE i IGUAL A LA LONGITUDE DEL HORARIO
+                       j=0;                                        // RESTABLECIMIENTO DE BANDERA J
+                       k=0;                                      // RESTABLECIMIENTO DE BANDERA K
+                    }                                            // CIERRE IF 2 POR LA DERECHA
+                   
+                }                                              // CIERRE FOR 1 POR LA DERECHA
+                 for(int i=0;i<horarioBase.length();i++){        // INICIO FOR 2 POR LA DERECHA
+                    if(horarioBase.charAt(i)=='-'){              // INICIO IF 2 POR LA DERECHA EN EL QUE SE COMPARA EL CARACTER DEL HORARIO BASE EN EL INDICE i CON EL CARACTER -
+                       j=1;                                      // ASIGNACION DE VALOR A LA BANDERA J
+                       k=i;                                      // ASIGNACION DE VALOR A LA BANDERA K
+                    }                                               // CIERRE IF 2 POR LA DERECHA
+                     
+                     if(j==1 && horarioBase.charAt(i)==':'){           // INICIO IF 3 POR LA DERECHA
+                        subHorarioBase=horarioBase.substring(k+1,i);     // DIVICION DEL HORARIO BASE 
+                        subMinutoBase=horarioBase.substring(i+1,i+3);     // DIVISION DE MINUTOS DEL HORARIO BASE
+                        i=horarioBase.length();                             // FINALIZACIÓN DE IF 3 POR LA DERECHA AL ASIGNAR A i EL VALOR DE LA LONGITU DEL HORARIO BASE
+                        j=0;                                       // RESTABLECIMIENTO DE ANDERA J
+                        k=0;                                            // RESTABLECIMIENTO DE BANDERA K
+                    }                                                 // CIERRE IF 3 POR LA DERECHA
+                                        
+                    
+                }                                                   // CIERRE FOR 2 POR LA DERECHA
+                 
+              
+                 
+                  horaInicio=Integer.parseInt(subHorarioBase); // PASAR HORA A ENTERO
+                
+                
+                
+                 horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTERO
+                
+               
+                
+                
+                
+                 MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
+                 MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
+                
+               
+                minI= MinInicio/60;       // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+           minS= MinFin/60;        // OBTENER EL EQUIVALENTE A 1 DE LA CANTIDAD DE MINUTOS 
+          
+           horaE=horaInicio+minI;    // GENERACIÓN DE HORA DE ENTRADA
+           horaSa=horaInicioCompara+minS;    // GENERACIÓN DE HORA DE SALIDA
+        
+                
+                if(horaE==horaSa){
+               
+                
+                
+                 sql="update cita set estado=4 where fecha='"+fecha+"' and horario='"+horario1+"' and no_cedula="+cedula; // ACTIVAMOS LA CITA
+                               
+       
+                 this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
+                
+                }
+                 
+                
+                
+                
+                
+                
+            }
+            
+             sql="update paciente set no_cedula="+cedula+" where no_boleta="+alert; // ACTIVAMOS LA CITA
+                               
+       
+              this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
+              
+            
+            
+             
+                      ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
+                mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 
+                                 
+                                 sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+alert+"');";
+                    List datosEv=this.jdbcTemplate.queryForList(sql);
+                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
+                    //List datas=evo.consulta();
+                    System.out.println(datosEv);
+                    mv.addObject("datas",datosEv);
+                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
+
+                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                    for(Map<String, Object> row : rows){
+                       String edad = row.get("edad").toString();
+                       String sexo = row.get("sexo").toString();
+                       String peso = row.get("peso").toString();
+                       String altura = row.get("altura").toString();
+                       String ansiedad = row.get("ansiedad").toString();
+                       String depresion = row.get("depresion").toString();
+                       String ira = row.get("ira").toString();
+                       String estres = row.get("estres").toString();
+                       String felicidad = row.get("felicidad").toString();
+                       String dulce = row.get("dulce").toString();
+                       String amarga = row.get("amarga").toString();
+                       String salada = row.get("salada").toString();
+                       String picante = row.get("picante").toString();
+                       String acida = row.get("acida").toString();
+                       String act_f = row.get("act_f").toString();
+                       String suplementos = row.get("suplementos").toString();
+                       String motivacional = row.get("motivacional").toString();
+                       String preparacionA = row.get("preparacionA").toString();
+                       String beneficiosA = row.get("beneficiosA").toString();
+                       String deportes = row.get("deportes").toString();
+                       String medicamentos = row.get("medicamentos").toString();
+                       String salud= row.get("salud").toString();
+                       
+                       double pesoD=Double.parseDouble(peso);
+                       int pesoI=(int)pesoD;
+                       String pesoS=pesoI+"";
+                       
+                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
+                       
+                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
+                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
+                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
+                               deportes,medicamentos,salud);
+                       
+                        double[] x=tr.vector();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
+
+                        Crear_RN redRecomendaciones=new Crear_RN();
+                        neural_net=redRecomendaciones.create_nn(topology,0);
+
+                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+
+                        neural_net.get(0).w=pesos.get(0);
+                        neural_net.get(0).b=pesos.get(1);
+
+                        neural_net.get(1).w=pesos.get(2);
+                        neural_net.get(1).b=pesos.get(3);
+
+                        Implementacion exe=new Implementacion(neural_net,x);
+                        double[][] output=exe.Implement();
+                        System.out.println("Entrada: ");
+                        double[][] xa=new double[1][];
+                        xa[0]=x;
+                        op.print(xa);
+
+                        System.out.println("Salida: ");
+                        op.print(output);
+
+                        ArrayList<String> salida=tr.seleccion(output[0]);
+                    
+                       System.out.println(salida);
+                       mv.addObject("respuesta",salida.get(0));
+                
+               
+                
+     }
+           
+            
+             
+             
+             
+             
+             return mv;                                  
+         }                                                                                                 // CIERRE ELSE
+            
+         
+                    
+                
+       
+    }
+    
+     
+     
+     
+     
+     
+     
+     
+     
      
      ////////////////////
     //ACCIÓN DEL BOTON CERRAR
