@@ -63,13 +63,13 @@ public class nutriologoController {
       
       @RequestMapping(value="/mostrarHorarioNutriologo", method=RequestMethod.GET)
        public @ResponseBody String getCrono(@RequestParam String fechaConsulta, @RequestParam String no_empleadoConsulta){
-        System.out.println("-----getCrono-------");
+        System.out.println("-----getCrononUTRI-------");
         
         System.out.println(fechaConsulta+" esta fue la fecha");
           System.out.println(no_empleadoConsulta+" este es el no_empleado");
-       String sql=" select no_cedula from psicologo where no_empleado="+no_empleadoConsulta;   // CONSULTA PARA EXTRAER DATOS HORARIOS
+       String sql=" select no_cedula from nutriologo where no_empleado="+no_empleadoConsulta;   // CONSULTA PARA EXTRAER DATOS HORARIOS
                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-           System.out.println(datosL2);
+           System.out.println("ESTE ES EL NUMERO DE CEDULA: "+datosL2);
            
          String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
            System.out.println(cedula);
