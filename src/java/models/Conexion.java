@@ -12,7 +12,7 @@ public class Conexion {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost/nutricoach");
         dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setPassword("walter22");
         return dataSource;
     }
 }
