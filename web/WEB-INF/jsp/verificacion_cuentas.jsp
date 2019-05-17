@@ -112,6 +112,8 @@
                             </div>
                              <form:form method="POST" commandName="Nutriologo">
                                 <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                                <form:input path="horaEntrada" placeholder="${item.no_cedula}" value="${item.horaEntrada}" type="hidden" />
+                                <form:input path="horaSalida" placeholder="${item.no_cedula}" value="${item.horaSalida}" type="hidden" />
                             <form:button id="aprobar" type="submit" name="aprobarN" value="Aprobar">aprobar</form:button>
                             <form:button id="rechazar" type="submit" name="rechazarN" value="Rechazar" >Rechazar</form:button>
                         </form:form>
@@ -136,6 +138,8 @@
                             </div>
                              <form:form method="POST" commandName="Psicologo">
                                 <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                                <form:input path="horaEntrada" placeholder="${item.no_cedula}" value="${item.horaEntrada}" type="hidden" />
+                                <form:input path="horaSalida" placeholder="${item.no_cedula}" value="${item.horaSalida}" type="hidden" />
                             <form:button id="aprobar" type="submit" name="aprobarPs" value="Aprobar">aprobar</form:button>
                             <form:button id="rechazar" type="submit" name="rechazarPs" value="Rechazar" >Rechazar</form:button>
                         </form:form>
@@ -164,6 +168,8 @@
                             
                              <form:form method="POST" commandName="Nutriologo">
                                 <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                                <form:input path="horaEntrada" placeholder="${item.no_cedula}" value="${item.horaEntrada}" type="hidden" />
+                                <form:input path="horaSalida" placeholder="${item.no_cedula}" value="${item.horaSalida}" type="hidden" />
                             <form:button id="aprobar" type="submit" name="aprobarN" value="Aprobar">aprobar</form:button>
                             <form:button id="rechazar" type="submit" name="rechazarN" value="Rechazar" >Rechazar</form:button>
                         </form:form>
@@ -194,6 +200,8 @@
                             </div>
                              <form:form method="POST" commandName="Psicologo">
                                 <form:input path="no_cedula" placeholder="${item.no_cedula}" value="${item.no_cedula}" type="hidden" />
+                                <form:input path="horaEntrada" placeholder="${item.no_cedula}" value="${item.horaEntrada}" type="hidden" />
+                                <form:input path="horaSalida" placeholder="${item.no_cedula}" value="${item.horaSalida}" type="hidden" />
                             <form:button id="aprobar" type="submit" name="aprobarPs" value="Aprobar">aprobar</form:button>
                             <form:button id="rechazar" type="submit" name="rechazarPs" value="Rechazar" >Rechazar</form:button>
                         </form:form>

@@ -109,7 +109,7 @@
                     <br>
                     <div id="grid_info">
                         <div class="casillas" id="resumen">
-                            <h3 onclick="expandir()" style="cursor:pointer;">Expediente Clínico</h3>
+                            
                             
                             <p>Fecha de inicio</p>
                              <p id="num_boleta">Número de boleta: ${ListaPacientes[0].no_boleta}</p>
@@ -117,7 +117,19 @@
                                 <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
                                 <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
                                 <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
-                  
+                                 
+                                <c:if test ="${expediente== 0}">
+                                       
+                                        
+                                        
+                                        <form:form method="post" commandName="entradaForo">
+                        
+                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${expediente}">Crear Expediente</form:button> 
+
+                            <form:input path="id_entrada" placeholder="${expediente}" value="${expediente}"  />
+                       </form:form>
+                                        
+                                </c:if>
                         
                         </div>
 
