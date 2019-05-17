@@ -1,9 +1,16 @@
 package models;
+
+
 /**
  *
  * @author Zeth
  */
+
+
+
+
 public class Paciente {
+   
     private String no_boleta;
     private String nombre;
     private String ap_uno;
