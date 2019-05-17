@@ -342,7 +342,7 @@ function myFunction(obj) {
      if(valorA>=fechaHoy.getFullYear() && getMes>=(fechaHoy.getMonth()+1) && obj.innerHTML>=fechaHoy.getUTCDate() ){
         
               $.ajax({
-        url : 'mostrarHorarioPsicologo.htm',
+        url : 'mostrarHorarioNutriologo.htm',
                         data:{fechaConsulta:fechaSeleccionada, no_empleadoConsulta:empleado},
                         dataType: "json",
                         content:"application/json;  charset=utf-8",
