@@ -74,7 +74,7 @@ public class nutriologoController {
          String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
            System.out.println(cedula);
            
-      sql="select t1.nombre, t1.ap_uno, t1.ap_dos, t1.no_boleta, t2.no_cita,t2.horario from paciente t1 inner join cita t2 on t1.no_boleta=t2.no_boleta and t1.no_cedulap=t2.no_cedula and t2.no_cedula="+cedula+" and t2.fecha='"+fechaConsulta+"' and t2.estado=3 order by t2.horario"; 
+      sql="select t1.nombre, t1.ap_uno, t1.ap_dos, t1.no_boleta, t2.no_cita,t2.horario from paciente t1 inner join cita t2 on t1.no_boleta=t2.no_boleta and t1.no_cedula=t2.no_cedula and t2.no_cedula="+cedula+" and t2.fecha='"+fechaConsulta+"' and t2.estado=3 order by t2.horario"; 
            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
            System.out.println(datosL2);
            
