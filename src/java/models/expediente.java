@@ -68,11 +68,19 @@ public class expediente {
     private String pierna;
     private String aspect_grls;
     private String otras_medidas;
+    private String T_Gestacion;
+    private String TipoTerapia;
+    private String CantidadIngesta;
+    private String HorarioComida;
+    private String HorariosComida;
+    private String recomendaciones;
+    private String observaciones;
+    private String tratamiento_n;
 
     public expediente() {
     }
 
-    public expediente(String id_expediente, String no_boleta, String diagnostico, String pronostico, String fecha_ini, String motivacional, String prepacionA, String beneficiosA, String deportes, String medicamentos, String salud, String antec_hf, String act_f, String tipo_act, String frecuencia, String padecimiento, String tabaco, String frec_tabaco, String alcohol, String frec_alcohol, String tratamient, String tiempo, String motivo, String hora, String alergias, String postre, String ansiedad, String depresion, String ira, String estres, String felicidad, String dulce, String amarga, String salada, String picante, String acida, String act_sex, String edo_gestacion, String m_anticonceptivo, String terapia_rh, String dosis, String peso, String talla, String temperatura, String tension_art, String fec_cardiaca, String frec_respiratoria, String cabeza, String cuello, String brazo, String cadera, String torax, String antebrazo, String abdomen, String mulso, String pierna, String aspect_grls, String otras_medidas) {
+    public expediente(String id_expediente, String no_boleta, String diagnostico, String pronostico, String fecha_ini, String motivacional, String prepacionA, String beneficiosA, String deportes, String medicamentos, String salud, String antec_hf, String act_f, String tipo_act, String frecuencia, String padecimiento, String tabaco, String frec_tabaco, String alcohol, String frec_alcohol, String tratamient, String tiempo, String motivo, String hora, String alergias, String postre, String ansiedad, String depresion, String ira, String estres, String felicidad, String dulce, String amarga, String salada, String picante, String acida, String act_sex, String edo_gestacion, String m_anticonceptivo, String terapia_rh, String dosis, String peso, String talla, String temperatura, String tension_art, String fec_cardiaca, String frec_respiratoria, String cabeza, String cuello, String brazo, String cadera, String torax, String antebrazo, String abdomen, String mulso, String pierna, String aspect_grls, String otras_medidas, String T_Gestacion, String TipoTerapia, String CantidadIngesta, String HorarioComida, String HorariosComida, String recomendaciones, String observaciones, String tratamiento_n) {
         this.id_expediente = id_expediente;
         this.no_boleta = no_boleta;
         this.diagnostico = diagnostico;
@@ -131,6 +139,14 @@ public class expediente {
         this.pierna = pierna;
         this.aspect_grls = aspect_grls;
         this.otras_medidas = otras_medidas;
+        this.T_Gestacion = T_Gestacion;
+        this.TipoTerapia = TipoTerapia;
+        this.CantidadIngesta = CantidadIngesta;
+        this.HorarioComida = HorarioComida;
+        this.HorariosComida = HorariosComida;
+        this.recomendaciones = recomendaciones;
+        this.observaciones = observaciones;
+        this.tratamiento_n = tratamiento_n;
     }
 
     public String getId_expediente() {
@@ -596,7 +612,71 @@ public class expediente {
     public void setOtras_medidas(String otras_medidas) {
         this.otras_medidas = otras_medidas;
     }
-    
+
+    public String getT_Gestacion() {
+        return T_Gestacion;
+    }
+
+    public void setT_Gestacion(String T_Gestacion) {
+        this.T_Gestacion = T_Gestacion;
+    }
+
+    public String getTipoTerapia() {
+        return TipoTerapia;
+    }
+
+    public void setTipoTerapia(String TipoTerapia) {
+        this.TipoTerapia = TipoTerapia;
+    }
+
+    public String getCantidadIngesta() {
+        return CantidadIngesta;
+    }
+
+    public void setCantidadIngesta(String CantidadIngesta) {
+        this.CantidadIngesta = CantidadIngesta;
+    }
+
+    public String getHorarioComida() {
+        return HorarioComida;
+    }
+
+    public void setHorarioComida(String HorarioComida) {
+        this.HorarioComida = HorarioComida;
+    }
+
+    public String getHorariosComida() {
+        return HorariosComida;
+    }
+
+    public void setHorariosComida(String HorariosComida) {
+        this.HorariosComida = HorariosComida;
+    }
+
+    public String getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = recomendaciones;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public String getTratamiento_n() {
+        return tratamiento_n;
+    }
+
+    public void setTratamiento_n(String tratamiento_n) {
+        this.tratamiento_n = tratamiento_n;
+    }
+
     
   
 }
