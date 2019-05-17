@@ -97,34 +97,34 @@
                     <input type="button" class="expediente_t" onclick="openExpediente('Diagnostico')" value="Diagnostico clínico"/>
             </div>
 
-
+             <form:form method="post" commandName="expediente">
             <div id="Historial" class="expediente_c">
                 <h2>Historial clínico</h2>
                 <ul>
                     <li>¿Realiza algún tipo de actividad física?
 
-                        <input type="radio" name="act_f" value="1"> Si
-                        <input type="radio" name="act_f" value="0"> No<br>
+                        <input path="act_f" type="radio" name="act_f" value="1"> Si
+                        <input path="act_f" type="radio" name="act_f" value="0"> No<br>
 
                     </li>
-                    <li>¿Qué tipo de actividad física? <input type="text"></li>
-                    <li>¿Con que frecuencia realiza actividad física? <input type="text"></li>
-                    <li>¿Tiene algún padecimiento o enfermedad, cuál? <input type="text"></li>
-                    <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <input type="text"></li>
+                    <li>¿Qué tipo de actividad física? <input path="tipo_act" type="text"></li>
+                    <li>¿Con que frecuencia realiza actividad física? <input path="frecuencia" type="text"></li>
+                    <li>¿Tiene algún padecimiento o enfermedad, cuál? <input path="padecimiento" type="text"></li>
+                    <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <input path="antec_hf" type="text"></li>
                     <li>¿Consume tabaco?
 
-                        <input type="radio" name="tabaco" value="1"> Si
-                        <input type="radio" name="tabaco" value="0"> No<br>
+                        <input path="tabaco" type="radio" name="tabaco" value="1"> Si
+                        <input path="tabaco" type="radio" name="tabaco" value="0"> No<br>
 
                     </li>
-                    <li>¿Con qué frecuencia? <input type="text"></li>
+                    <li>¿Con qué frecuencia? <input path="frec_tabaco" type="text"></li>
                     <li>¿Consume bebidas alcohólicas?
 
-                        <input type="radio" name="alcohol" value="1"> Si
-                        <input type="radio" name="alcohol" value="0"> No<br>
+                        <input path="alcohol" type="radio" name="alcohol" value="1"> Si
+                        <input path="alcohol" type="radio" name="alcohol" value="0"> No<br>
 
                     </li>
-                    <li>¿Con qué frecuencia? <input type="text"></li>
+                    <li>¿Con qué frecuencia? <input path="fec_alcohol" type="text"></li>
                 </ul>
             </div>
             <div id="Ginecologico" class="expediente_c" style="display: none;">
@@ -132,26 +132,26 @@
                 <ul>
                     <li>¿Lleva una vida sexual activa?
 
-                        <input type="radio" name="act_s" value="1"> Si
-                        <input type="radio" name="act_s" value="0"> No<br>
+                        <input path="act_sex" type="radio" name="act_s" value="1"> Si
+                        <input path="act_sex" type="radio" name="act_s" value="0"> No<br>
 
                     </li>
                     <li>¿Se encuentra en estado de gestación?
 
-                        <input type="radio" name="gestacion" value="1"> Si
-                        <input type="radio" name="gestacion" value="0"> No<br>
+                        <input path="edo_gestacion" type="radio" name="gestacion" value="1"> Si
+                        <input path="edo_gestacion" type="radio" name="gestacion" value="0"> No<br>
 
                     </li>
-                    <li>¿Cuánto tiempo lleva gestando? <input type="text"></li>
-                    <li>¿Usa algún método anticonceptivo, cuál? <input type="text"></li>
+                    <li>¿Cuánto tiempo lleva gestando? <input path="T_Gestacion" type="text"></li>
+                    <li>¿Usa algún método anticonceptivo, cuál? <input path="m_acticonceptivo" type="text"></li>
                     <li>¿Lleva alguna terapia de reemplazo hormonal?
 
-                        <input type="radio" name="terapia_h" value="1"> Si
-                        <input type="radio" name="terapia_h" value="0"> No<br>
+                        <input path="terapia_rh" type="radio" name="terapia_h" value="1"> Si
+                        <input path="terapia_rh" type="radio" name="terapia_h" value="0"> No<br>
 
                     </li>
-                    <li>¿Cuál? <input type="text"></li>
-                    <li>Dosis <input type="text"></li>
+                    <li>¿Cuál? <input  path="TipoTerapia" type="text"></li>
+                    <li>Dosis <input path ="dosis" type="text"></li>
                 </ul>
             </div>
             <div id="Fisica" class="expediente_c" style="display: none;">
@@ -159,25 +159,25 @@
                     <div id="exploracion">
                         <h2>Exploración fisica</h2>
                         <ul>
-                            <li>Peso <input type="number"></li>
-                            <li>Talla <input type="number"></li>
-                            <li>Temperatura <input type="text"></li>
-                            <li>P/A <input type="text"></li>
-                            <li>F/C <input type="text"></li>
+                            <li>Peso <input path="peso" type="number"></li>
+                            <li>Estatura <input path="talla" type="number"></li>
+                            <li>Temperatura <input path="temperatura" type="text"></li>
+                            <li>P/A <input path="tension_art" type="text"></li>
+                            <li>F/C <input path="frec_cardiaca" type="text"></li>
                         </ul>
                     </div>
                     <div id="medidas">
                         <h3>Medidas antropométricas</h3>
                         <ul>
-                            <li>Cuello <input type="number" name="" id=""></li>
-                            <li>Tórax <input type="number" name="" id=""></li>
-                            <li>Brazo <input type="number" name="" id=""></li>
-                            <li>Antebrazo <input type="number" name="" id=""></li>
-                            <li>Abdomen <input type="number" name="" id=""></li>
-                            <li>Cadera <input type="number" name="" id=""></li>
-                            <li>Muslo <input type="number" name="" id=""></li>
-                            <li>Pierna <input type="number" name="" id=""></li>
-                            <li>Aspectos generales <textarea></textarea></li>
+                            <li>Cuello <input path="cuello" type="number" name="" id=""></li>
+                            <li>Tórax <input path="torax" type="number" name="" id=""></li>
+                            <li>Brazo <input path="brazo"type="number" name="" id=""></li>
+                            <li>Antebrazo <input path="antebrazo"type="number" name="" id=""></li>
+                            <li>Abdomen <input path="abdomen" type="number" name="" id=""></li>
+                            <li>Cadera <input path="cadera" type="number" name="" id=""></li>
+                            <li>Muslo <input path="mulso" type="number" name="" id=""></li>
+                            <li>Pierna <input path="pierna" type="number" name="" id=""></li>
+                            <li>Aspectos generales <textarea path="aspect_grles"></textarea></li>
                         </ul>
                     </div>
                 </div>
@@ -187,53 +187,54 @@
                 <ul>
                     <li>¿Se ha sometido algún tratamiento nutricional anteriormente?
 
-                        <input type="radio" name="tratamiento_n" value="1"> Si
-                        <input type="radio" name="tratamiento_n" value="0"> No<br>
+                        <input path="tratamiento_n" type="radio" name="tratamiento_n" value="1"> Si
+                        <input  path="tratamiento_n" type="radio" name="tratamiento_n" value="0"> No<br>
 
                     </li>
-                    <li>¿Qué tipo de tratamiento? <input type="text"></li>
-                    <li>¿Por cuánto tiempo? <input type="text"></li>
-                    <li>¿Cuántas ingestas de comida tiene al día? <input type="number" name="" id=""></li>
+                    <li>¿Qué tipo de tratamiento? <input path="tratamiento" type="text"></li>
+                    <li>¿Por cuánto tiempo? <input path="tiempo" type="text"></li>
+                    <li>¿Cuántas ingestas de comida tiene al día? <input path="CantidadIngesta" type="number" name="" id=""></li>
                     <li>¿Consume golosinas entre comidas?
 
-                        <input type="radio" name="golosinas" value="1"> Si
-                        <input type="radio" name="golosinas" value="0"> No<br>
+                        <input path="postre" type="radio" name="golosinas" value="1"> Si
+                        <input path="postre" type="radio" name="golosinas" value="0"> No<br>
 
                     </li>
                     <li>¿Cuáles? <input type="text"></li>
                     <li>¿Tiene algún horario de comida?
 
-                        <input type="radio" name="horario_c" value="1"> Si
-                        <input type="radio" name="horario_c" value="0"> No<br>
+                        <input path="HorarioComida" type="radio" name="horario_c" value="1"> Si
+                        <input path="HorarioComida" type="radio" name="horario_c" value="0"> No<br>
 
                     </li>
                     <li>¿Cuáles? <input type="text"></li>
                     <li>Tipo Alimentos de su gusto<br><br>
 
-                        <input type="checkbox" name="alimento1" value="dulce"> Dulce<br>
-                        <input type="checkbox" name="alimento2" value="amarga"> Amarga<br>
-                        <input type="checkbox" name="alimento3" value="salada"> Salada<br>
-                        <input type="checkbox" name="alimento4" value="picante"> Picante<br>
-                        <input type="checkbox" name="alimento5" value="acida"> Acida<br>
+                        <input path="dulce" type="checkbox" name="alimento1" value="dulce"> Dulce<br>
+                        <input path="amarga" type="checkbox" name="alimento2" value="amarga"> Amarga<br>
+                        <input path="salada" type="checkbox" name="alimento3" value="salada"> Salada<br>
+                        <input path ="picante" type="checkbox" name="alimento4" value="picante"> Picante<br>
+                        <input path="acida" type="checkbox" name="alimento5" value="acida"> Acida<br>
 
                     </li>
-                    <li>¿Tiene alergias a algun alimento, cúal? <input type="text"></li>
+                    <li>¿Tiene alergias a algun alimento, cúal? <input path="alergias" type="text"></li>
                 </ul>
             </div>
             <div id="Diagnostico" class="expediente_c" style="display: none;">
                 <h2>Diagnostico clínico</h2>
 
                 <h3>Observaciones</h3>
-                <textarea id="obs" name="observaciones_dc">
+                <textarea path="observaciones" id="obs" name="observaciones_dc">
 
                     </textarea>
 
                 <h3>Recomendaciones</h3>
-                <textarea id="recom" name="recomendaciones_dc">
+                <textarea  path="recomendaciones" id="recom" name="recomendaciones_dc">
                         
                     </textarea>
             </div>
             <input type="button" value="Guardar"/>
+            </form:form>
         </div>
     </div>
 

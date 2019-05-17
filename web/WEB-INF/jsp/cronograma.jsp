@@ -31,7 +31,7 @@
     
     <!-- Scripts -->
     
-    <script type="text/javascript" src="resource/scrips/calendarioEspecialistas.js"/></script>  
+    <script type="text/javascript" src="resource/scrips/calendarioNutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
 
