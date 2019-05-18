@@ -124,7 +124,7 @@
                             
                         
                                 
-                                 <p><b>Fecha de inicio: </b> ${fechaExpediente[0]}</p>
+                                 <p><b>Fecha de inicio: </b> ${fechaExpediente[0].fecha_ini}</p>
                              
                                                  
                         </c:if>
@@ -138,8 +138,12 @@
                                   <c:if test= "${empty datosCita}">
                             
                         
-                                 <p>NO HAY CITAS PROGRAMADAS/p>
-                             
+                                 <p>NO HAY CITAS PROGRAMADAS</p>
+                              <form:form method="post" commandName="cita">
+                          <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
+                       
+                       </form:form>
                                                  
                         </c:if>
                                        <c:if test= "${not empty datosCita}">
@@ -147,7 +151,7 @@
                         
                                        <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
                               
-                                  
+                                       <c:if test= "${fechaCita==1}">
                                            
                                            
                                            <form:form method="post" commandName="cita">
@@ -157,9 +161,24 @@
                        </form:form>
                                            
                                            
-                                     
+                                       </c:if>
                                                 
                         </c:if>
+                       
+                       
+                         <c:if test= "${expedienteActivo==1}">
+                                           
+                                           
+                                           <form:form method="post" commandName="expediente">
+                          
+                       <input type="submit" class="texto_menu" name="HistorialExpediente" value="Expediente general">
+                        <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                       </c:if>
+                       
+                       
                         
                         </div>
 
