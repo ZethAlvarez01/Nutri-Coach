@@ -6,7 +6,10 @@
 package controller;
 
 import com.google.gson.Gson;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1469,6 +1472,7 @@ public class nutriologoController {
                                  datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
                                  mv.addObject("listaEntradas",datosL2);                                               // PASAMOS LA LISTA COMPLETA
                  
+                               //  System.out.println("LISTA ENTRADAS: "+datosL2);
                  sql = "select id_entrada,fecha from comentarios where id_usuario="+p.getNo_boleta()+" order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
                                  datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
                                  mv.addObject("FechaComentarios",datosL2);          
@@ -1481,7 +1485,36 @@ public class nutriologoController {
                                  
                                  mv.addObject("entradaForo",new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
                                  
-                    return mv;                                                         
+                    sql = "select no_cedula from nutriologo where no_empleado="+alert;                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql); 
+                                 
+                     String cedula=   datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);     
+                                 
+                    sql = "select no_cita,fecha,horario from cita where no_boleta="+p.getNo_boleta()+" and no_cedula="+cedula+" and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                                                                      // PASAMOS LA LISTA COMPLETA            
+                                                
+                     //  String cita=datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1); 
+                       
+                    //   System.out.println("numero de cita: "+cita);
+                    
+                    mv.addObject("datosCita",datosL2);
+                                    
+                     Date date = new Date();        
+                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                      System.out.println("Fecha: "+dateFormat.format(date)); 
+                      
+                     sql = "select fecha from cita where no_boleta="+p.getNo_boleta()+" and no_cedula="+cedula+" and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+                      System.out.println("FECHA DE CITA: "+datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1));    
+                      String fechaAct =datosL2.get(0).toString().substring(7,11)+"/"+datosL2.get(0).toString().substring(12,14)+"/"+datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
+                      System.out.println("FECHA ACTUAL: "+fechaAct);
+                      int fechaCita=0;
+                      if(fechaAct.equals(dateFormat.format(date))){
+                          fechaCita=1;
+                      }
+                      mv.addObject("fechaCita",fechaCita);
+                     return mv;                                                         
        
        
     }  
