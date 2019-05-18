@@ -21,8 +21,10 @@ import models.Login;
 import models.Nutriologo;
 import models.Paciente;
 import models.Psicologo;
+import models.cita;
 import models.comentarioValidar;
 import models.entradaForo;
+import models.expediente;
 import models.foroValidar;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -1430,7 +1432,7 @@ public class nutriologoController {
      
      
       ///////////////////////////////////
-    //////////////Vista expedientePsicologico
+    //////////////Vista expedienteNutriologo
         @RequestMapping(params="expediente", method = RequestMethod.POST)
     public ModelAndView ConsultarExpedientePsicologico(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
        
@@ -1499,6 +1501,7 @@ public class nutriologoController {
                     //   System.out.println("numero de cita: "+cita);
                     
                     mv.addObject("datosCita",datosL2);
+                       mv.addObject("cita",new cita());
                                     
                      Date date = new Date();        
                      DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -1514,12 +1517,194 @@ public class nutriologoController {
                           fechaCita=1;
                       }
                       mv.addObject("fechaCita",fechaCita);
+                      
+                      sql="select fecha_ini from expediente where no_boleta="+p.getNo_boleta();
+                      datosL2 = this.jdbcTemplate.queryForList(sql);
+                      mv.addObject("fechaExpediente",datosL2);
+                      
                      return mv;                                                         
        
        
     }  
        
      
+     /////////////////////////////
+    /////ACCION DEL BOTÓN AtenderCita
+    
+    
+          @RequestMapping(params="AtenderCita", method = RequestMethod.POST)
+    public ModelAndView AtenderCita(@ModelAttribute("cita") cita c, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+        
+     
+       
+       
+
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
+                mv.setViewName("expediente_nutriologo");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                String sql="select no_boleta from cita where no_cita="+c.getNo_cita();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                String boleta=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+                sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+boleta;             
+                                datosL2 = this.jdbcTemplate.queryForList(sql);
+                                mv.addObject("datosPaciente",datosL2);
+                                 mv.addObject("datosCita",c.getNo_cita());                                                       // Pasa la lilsta completa
+                                 mv.addObject("expediente",new expediente());
+                                 mv.addObject("cita",new cita());
+                                 
+                       return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         
+            
+       
+    }
+    
+    /////////////////////////////
+    /////ACCION DEL BOTÓN GuardarExpediente
+    
+    
+          @RequestMapping(params="GuardarExpediente", method = RequestMethod.POST)
+    public ModelAndView GuardarExpediente(@ModelAttribute("expediente") expediente ex, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        int Dulce=1;
+        int Amarga=1;
+         int Salada=1;
+         int Picante=1;
+         int Acida=1;
+         int Act_f=0;
+         int Tabaco=0;
+         int Alcohol=0;
+         int Act_sex=0;
+         int Edo_gestacion=0;
+         int Terapia_rh=0;
+         int Tratamiento_n=0;
+         int Cantidad_ingesta=0;
+         int Postre=0;
+         int Horario_Comida=0;
+         
+         
+          if(ex.getHorarioComida()==null){
+          Horario_Comida=0;
+          
+      }
+         
+          if(ex.getPostre()==null){
+          Postre=0;
+          
+      }
+         
+          if(ex.getCantidadIngesta()==null){
+          Cantidad_ingesta=0;
+          
+      }
+       if(ex.getDulce()==null){
+           Dulce=0;
+          
+       }
+      if(ex.getAmarga()==null){
+          Amarga=0;
+ 
+      }
+      if(ex.getSalada()==null){
+          Salada=0;
+          
+      }
+       if(ex.getPicante()==null){
+           Picante=0;
+          
+       }
+      if(ex.getAcida()==null){
+          Acida=0;
+          
+      }
+        
+      
+       if(ex.getAct_f()==null){
+          Act_f=0;
+          
+      }
+        if(ex.getTabaco()==null){
+          Tabaco=0;
+          
+      }
+        if(ex.getAlcohol()==null){
+          Alcohol=0;
+          
+      }
+       if(ex.getAct_sex()==null){
+          Act_sex=0;
+          
+      }
+        if(ex.getEdo_gestacion()==null){
+          Edo_gestacion=0;
+          
+      }
+         if(ex.getTerapia_rh()==null){
+          Terapia_rh=0;
+          
+      }
+        if(ex.getTratamiento_n()==null){
+          Tratamiento_n=0;
+          
+      }  
+      String  sql="select id_expediente from expediente where no_boleta="+ex.getNo_boleta();
+      List datosL2 = this.jdbcTemplate.queryForList(sql);
+                               
+      if(datosL2.isEmpty()){
+           sql="insert into expediente values(0,"+ex.getNo_boleta()+",'','','"+ex.getFecha_ini()+"',0,0,0,0,0,0,'"+ex.getAntec_hf()+"','"+Act_f+"','"+ex.getTipo_act()+"','"+ex.getFrecuencia()+"','"+ex.getPadecimiento()+"','"+Tabaco+"','"+ex.getFrec_tabaco()+"','"+Alcohol+"','"+ex.getFrec_alcohol()+"','"+ex.getTratamient()+"','"+ex.getTiempo()+"','','','"+ex.getAlergias()+"','"+Postre+"',0,0,0,0,0,'"+Dulce+"','"+Amarga+"','"+Salada+"','"+Picante+"','"+Acida+"','"+Act_sex+"','"+Edo_gestacion+"','"+ex.getM_anticonceptivo()+"','"+Terapia_rh+"','"+ex.getDosis()+"','"+ex.getPeso()+"','"+ex.getTalla()+"','"+ex.getTemperatura()+"','"+ex.getTension_art()+"','"+ex.getFrecuencia()+"','',0.0,'"+ex.getCuello()+"','"+ex.getBrazo()+"','"+ex.getCadera()+"','"+ex.getTorax()+"','"+ex.getAntebrazo()+"','"+ex.getAbdomen()+"','"+ex.getMulso()+"','"+ex.getPierna()+"','"+ex.getAspect_grls()+"','','"+ex.getT_Gestacion()+"','"+ex.getTipoTerapia()+"','"+Cantidad_ingesta+"','"+Horario_Comida+"','"+ex.getHorariosComida()+"','"+ex.getRecomendaciones()+"','"+ex.getObservaciones()+"','"+Tratamiento_n+"','"+ex.getGolosinas()+"');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+                               
+       
+                this.jdbcTemplate.update(sql);          
+      }
+      
+ 
+                                                                           // REALIZAMOS LA INSERCIÓN
+            
+
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
+                mv.setViewName("cronograma");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                
+                                 
+                       return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         
+            
+       
+    }
+    
+    
      
      
        ////////////////////
