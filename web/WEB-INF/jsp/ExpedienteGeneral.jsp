@@ -117,10 +117,11 @@
                 
                  <div class="grid-container">
                      <div class="item1">
-                         
-                         <p><b>Primer expediente: </b>   ${ExpedienteBase[0].fecha_ini}</p>
-                        
-                           
+                         <form:form method="post" commandName="expediente">
+                         <p><b>Primer expediente: </b>   
+                        <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${ExpedienteBase[0].id_hojaExpediente}">${ExpedienteBase[0].fecha_ini}</form:button>
+                           </p>
+                           </form:form>
                         <hr>
                        
                        
@@ -136,7 +137,9 @@
                             <div id="texto_user"> 
                                   <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -159,7 +162,9 @@
                             <div id="texto_user">
                               <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                                 
@@ -178,7 +183,9 @@
                             <div id="texto_user">
                                <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -201,7 +208,9 @@
                             <div id="texto_user">
                               <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -221,9 +230,11 @@
                            
                                 
                             <div id="texto_user">
-                                <form:form method="post" commandName="expediente">
+                               <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -242,9 +253,11 @@
                            
                                
                             <div id="texto_user">
-                              <form:form method="post" commandName="expediente">
+                             <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -266,7 +279,9 @@
                             <div id="texto_user">
                                <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -288,7 +303,9 @@
                             <div id="texto_user">
                                 <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -307,9 +324,11 @@
                            
                                
                             <div id="texto_user">
-                               <form:form method="post" commandName="expediente">
+                              <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -331,9 +350,11 @@
                            
                                
                             <div id="texto_user">
-                                <form:form method="post" commandName="expediente">
+                               <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -355,7 +376,9 @@
                             <div id="texto_user">
                                 <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -373,9 +396,11 @@
                            
                                
                             <div id="texto_user">
-                               <form:form method="post" commandName="expediente">
+                              <form:form method="post" commandName="expediente">
                           
-                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                          <p> <b>Fecha: </b> 
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpediente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         </p
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
                        </form:form>
                             </div>
