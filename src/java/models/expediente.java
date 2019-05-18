@@ -76,11 +76,13 @@ public class expediente {
     private String recomendaciones;
     private String observaciones;
     private String tratamiento_n;
+    private String golosinas;
+    
 
     public expediente() {
     }
 
-    public expediente(String id_expediente, String no_boleta, String diagnostico, String pronostico, String fecha_ini, String motivacional, String prepacionA, String beneficiosA, String deportes, String medicamentos, String salud, String antec_hf, String act_f, String tipo_act, String frecuencia, String padecimiento, String tabaco, String frec_tabaco, String alcohol, String frec_alcohol, String tratamient, String tiempo, String motivo, String hora, String alergias, String postre, String ansiedad, String depresion, String ira, String estres, String felicidad, String dulce, String amarga, String salada, String picante, String acida, String act_sex, String edo_gestacion, String m_anticonceptivo, String terapia_rh, String dosis, String peso, String talla, String temperatura, String tension_art, String fec_cardiaca, String frec_respiratoria, String cabeza, String cuello, String brazo, String cadera, String torax, String antebrazo, String abdomen, String mulso, String pierna, String aspect_grls, String otras_medidas, String T_Gestacion, String TipoTerapia, String CantidadIngesta, String HorarioComida, String HorariosComida, String recomendaciones, String observaciones, String tratamiento_n) {
+    public expediente(String id_expediente, String no_boleta, String diagnostico, String pronostico, String fecha_ini, String motivacional, String prepacionA, String beneficiosA, String deportes, String medicamentos, String salud, String antec_hf, String act_f, String tipo_act, String frecuencia, String padecimiento, String tabaco, String frec_tabaco, String alcohol, String frec_alcohol, String tratamient, String tiempo, String motivo, String hora, String alergias, String postre, String ansiedad, String depresion, String ira, String estres, String felicidad, String dulce, String amarga, String salada, String picante, String acida, String act_sex, String edo_gestacion, String m_anticonceptivo, String terapia_rh, String dosis, String peso, String talla, String temperatura, String tension_art, String fec_cardiaca, String frec_respiratoria, String cabeza, String cuello, String brazo, String cadera, String torax, String antebrazo, String abdomen, String mulso, String pierna, String aspect_grls, String otras_medidas, String T_Gestacion, String TipoTerapia, String CantidadIngesta, String HorarioComida, String HorariosComida, String recomendaciones, String observaciones, String tratamiento_n, String golosinas) {
         this.id_expediente = id_expediente;
         this.no_boleta = no_boleta;
         this.diagnostico = diagnostico;
@@ -147,6 +149,8 @@ public class expediente {
         this.recomendaciones = recomendaciones;
         this.observaciones = observaciones;
         this.tratamiento_n = tratamiento_n;
+        this.golosinas = golosinas;
+        
     }
 
     public String getId_expediente() {
@@ -677,6 +681,15 @@ public class expediente {
         this.tratamiento_n = tratamiento_n;
     }
 
+    public String getGolosinas() {
+        return golosinas;
+    }
+
+    public void setGolosinas(String golosinas) {
+        this.golosinas = golosinas;
+    }
+
     
+   
   
 }
