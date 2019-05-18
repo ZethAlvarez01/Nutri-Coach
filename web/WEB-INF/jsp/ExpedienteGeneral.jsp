@@ -29,7 +29,8 @@
          <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
+        <script type="text/javascript" src="resource/scrips/expediente.js"/></script> 
         <title>Nutri-Coach</title>
     </head>
     <body onscroll="bajar()">
@@ -60,40 +61,20 @@
                     <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                <div id="menu">
-                     <c:forEach items="${datos}" var="item"> 
+                    <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
-                        <form:form method="post" commandName="Paciente">
-                           <li><a class="texto_menu" href="expedientePaciente.htm">Expediente</a></li>
-                          <c:if test= "${item.no_cedula>0}">
-                            
-                        
-                              
-                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
-                        
-                                                 
-                        </c:if>
-                        <c:if test= "${item.no_cedula==0}">
-                            
-                        
-                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
-                             
-                                                 
-                        </c:if>
-                        
-                         <c:if test= "${item.no_cedulap>0}">
-                            
-                        
-                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
-                             
-                                                 
-                        </c:if>
-                               
+                        <form:form method="post" commandName="Nutriologo">
+                            <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+                       
+                        <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
-                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
                        </form:form>
                     </ul>
                          </c:forEach> 
+                   
                     
                     
                 </div>
@@ -113,45 +94,304 @@
                     <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el foro</h1></p>
                 </c:forEach></h2>
                 </center>
-                
+                <div id="encabezado_lista" >
+                        <p id="sub-titulo">Expedientes del paciente: ${dato.nombre} </p>
+                        <select id="listaUsuarios" onchange="TypeDiario()" name="listaUsuarios" >
+                            <option  value="Enero"  >Enero</option>
+                            <option  value="Febrero" >Febrero</option>
+                            <option  value="Marzo">Marzo</option>
+                            <option  value="Abril"  >Abril</option>
+                            <option  value="Mayo" >Mayo</option>
+                            <option  value="Junio">Junio</option>
+                            <option  value="Julio"  >Julio</option>
+                            <option  value="Agosto" >Agosto</option>
+                            <option  value="Septiembre">Septiembre</option>
+                            <option  value="Octubre"  >Octubre</option>
+                            <option  value="Noviembre" >Noviembre</option>
+                            <option  value="Diciembre">Diciembre</option>
+                            
+                        </select>
+                        
+                        
+                    </div>
                 
                  <div class="grid-container">
                      <div class="item1">
                          
-                         
+                         <p><b>Primer expediente: </b>   ${ExpedienteBase[0].fecha_ini}</p>
                         
-                   
+                           
                         <hr>
                        
-                        <table>
-                                <tr>
-                                   <td><strong>Fecha</strong></td>
-                                   <td><strong>Titulo</strong></td>
-                                   <td><strong>Contenido</strong></td> 
-                                   <td><strong>COMENTARIOS</strong></td> 
-                                </tr> 
                        
-                                <c:forEach items="${listaEntradas}" var="item" varStatus="loop"  > 
-                            
-                    
-                       <form:form method="post" commandName="entradaForo">
+                          <div id="lista">
                         
-                                <tr>
-                                   <td>${item.fecha}</td>
-                                   <td> <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${item.titulo}">${item.titulo}</form:button></td>
-                                   <td>${item.contenido}...</td> 
-                                   <td>${contadorComentarios[loop.index]}</td> 
-                                </tr>
-                                
-                            
-                       
                         
-                            <form:input path="id_entrada" placeholder="${item.entrada}" value="${item.id_entrada}" type="hidden" />
-                       </form:form>
+                        <div id="Enero" class="listaUsuarios" style="display: block;">
+                           
+                         <c:forEach items="${expedienteEnero}" var="item"> 
+                        <div class="usuario"  name="usuario">
+                           
                                
-                         </c:forEach> 
+                            <div id="texto_user"> 
+                                  <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                           
+                             </div>
+                            </c:forEach> 
                             
-                       </table>
+                          
+                        
+                    </div>
+                            
+                    <div id="Febrero" class="listaUsuarios"  style="display: none;">
+                      
+                         <c:forEach items="${expedienteFebrero}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                              <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                                
+                            </div>
+                             
+                            </c:forEach> 
+                       
+                     </div>
+                            
+                       <div id="Marzo" class="listaUsuarios" style="display: none">   
+                            
+                         <c:forEach items="${expedienteMarzo}" var="item" > 
+                            <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                               <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                      
+                        
+
+                    </div>
+
+                         
+                        <div id="Abril" class="listaUsuarios" style="display: none;">
+                          
+                         <c:forEach items="${expedienteAbril}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                              <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                            
+                          
+                        
+                    </div>
+                            
+                    <div id="Mayo" class="listaUsuarios"  style="display: none;">
+                         
+                         <c:forEach items="${expedienteMayo}" var="item"> 
+                        <div class="usuario">
+                           
+                                
+                            <div id="texto_user">
+                                <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                             
+                            </c:forEach> 
+                       
+                     </div>
+                            
+                       <div id="Junio" class="listaUsuarios" style="display: none">   
+                           
+                         <c:forEach items="${expedienteJunio}" var="item" > 
+                            <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                              <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                      
+                        
+
+                    </div>
+ 
+                       <div id="Julio" class="listaUsuarios" style="display: none;">
+                         
+                         <c:forEach items="${expedienteJulio}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                               <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                            
+                          
+                        
+                    </div>
+                            
+                    <div id="Agosto" class="listaUsuarios"  style="display: none;">
+                          
+                         <c:forEach items="${expedienteAgosto}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                                <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                             
+                            </c:forEach> 
+                       
+                     </div>
+                            
+                       <div id="Septiembre" class="listaUsuarios" style="display: none">   
+                           
+                         <c:forEach items="${expedienteSeptiembre}" var="item" > 
+                            <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                               <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                      
+                        
+
+                    </div>
+  
+                         
+                         
+                         <div id="Octubre" class="listaUsuarios" style="display: none;">
+                         
+                         <c:forEach items="${expedienteOctubre}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                                <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                            
+                          
+                        
+                    </div>
+                            
+                    <div id="Noviembre" class="listaUsuarios"  style="display: none;">
+                        
+                         <c:forEach items="${expedienteNoviembre}" var="item"> 
+                        <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                                <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                       
+                     </div>
+                            
+                       <div id="Diciembre" class="listaUsuarios" style="display: none">   
+                           
+                         <c:forEach items="${expedienteDiciembre}" var="item" > 
+                            <div class="usuario"   name="usuario">
+                           
+                               
+                            <div id="texto_user">
+                               <form:form method="post" commandName="expediente">
+                          
+                          <p> <b>Fecha: </b> ${item.fecha_ini}</p
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaexppediente}" value="${item.id_hojaexppediente}" type="hidden" />
+                       </form:form>
+                            </div>
+                                
+                                
+                            </div>
+                            </c:forEach> 
+                      
+                        
+
+                    </div>
+
+                        
+                        
+
+                    </div>
                    
                         
                         
