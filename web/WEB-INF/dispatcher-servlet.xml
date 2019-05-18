@@ -76,6 +76,7 @@
                 <prop key="mostrarHorarioNutriologo.htm">nutriologoController</prop>
                 <prop key="expediente_nutriologo.htm">nutriologoController</prop>
                 <prop key="mostrarHorarioPsicologo.htm">PsicologoController</prop>
+                <prop key="expedienteGeneral.htm">nutriologoController</prop>
             </props>
         </property>
     </bean>
