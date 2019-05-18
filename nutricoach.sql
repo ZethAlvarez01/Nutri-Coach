@@ -353,7 +353,7 @@ CREATE TABLE `expediente` (
   `peso` float DEFAULT NULL,
   `talla` float DEFAULT NULL,
   `temperatura` float DEFAULT NULL,
-  `tension_art` int(11) DEFAULT NULL,
+  `tension_art` varchar(20) DEFAULT NULL,
   `frec_cardiaca` varchar(10) DEFAULT NULL,
   `frec_respiratoria` varchar(20) DEFAULT NULL,
   `cabeza` float DEFAULT NULL,
@@ -375,9 +375,10 @@ CREATE TABLE `expediente` (
   `recomendaciones` varchar(500) DEFAULT NULL,
   `observaciones` varchar(500) DEFAULT NULL,
   `tratamiento_n` int(1) DEFAULT NULL,
+  `golosinas` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_expediente`),
   KEY `no_boleta` (`no_boleta`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,8 +387,97 @@ CREATE TABLE `expediente` (
 
 LOCK TABLES `expediente` WRITE;
 /*!40000 ALTER TABLE `expediente` DISABLE KEYS */;
-INSERT INTO `expediente` VALUES (1,2014630304,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2014630307,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,0,'','',0,0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `expediente` VALUES (1,2014630304,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,'0','','',0,0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2014630307,'','','2019-05-05',0,0,0,0,0,0,'',0,'',0,'',0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0,0,0,0,'','','','',0,0,0,'0','','',0,0,0,0,0,0,0,0,0,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,2014630310,'','','2019-05-18',0,0,0,0,0,0,'ninguno',0,'basketball',5,'ninguno',0,0,0,1,'','','','','no','0',0,0,0,0,0,1,0,1,0,1,0,'0','','0','',75.3,175,36.5,'90/60','5','',0,20,20,40,40,20,70,40,40,'No tiene lesiones en el cuerpo','','0','',0,0,'de 3 a 3:30','Establecer horarios de comida','No tiene horarios fijos de comida',0,'gomitas');
 /*!40000 ALTER TABLE `expediente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hojaexpediente`
+--
+
+DROP TABLE IF EXISTS `hojaexpediente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hojaexpediente` (
+  `id_hojaExpediente` int(11) NOT NULL AUTO_INCREMENT,
+  `id_expediente` int(11) NOT NULL,
+  `no_boleta` int(11) NOT NULL,
+  `diagnostico` varchar(200) DEFAULT NULL,
+  `pronostico` varchar(200) DEFAULT NULL,
+  `fecha_ini` date DEFAULT NULL,
+  `motivacional` tinyint(1) DEFAULT NULL,
+  `preparacionA` tinyint(1) DEFAULT NULL,
+  `beneficiosA` tinyint(1) DEFAULT NULL,
+  `deportes` tinyint(1) DEFAULT NULL,
+  `medicamentos` tinyint(1) DEFAULT NULL,
+  `salud` tinyint(1) DEFAULT NULL,
+  `antec_hf` varchar(200) DEFAULT NULL,
+  `act_f` tinyint(1) DEFAULT NULL,
+  `tipo_act` varchar(40) DEFAULT NULL,
+  `frecuencia` int(11) DEFAULT NULL,
+  `padecimiento` varchar(100) DEFAULT NULL,
+  `tabaco` tinyint(1) DEFAULT NULL,
+  `frec_tabaco` int(11) DEFAULT NULL,
+  `alcohol` tinyint(1) DEFAULT NULL,
+  `frec_alcohol` int(11) DEFAULT NULL,
+  `tratamiento` varchar(200) DEFAULT NULL,
+  `tiempo` varchar(50) DEFAULT NULL,
+  `motivo` varchar(150) DEFAULT NULL,
+  `hora` varchar(40) DEFAULT NULL,
+  `alergias` varchar(200) DEFAULT NULL,
+  `postre` varchar(150) DEFAULT NULL,
+  `ansiedad` tinyint(1) DEFAULT NULL,
+  `depresion` tinyint(1) DEFAULT NULL,
+  `ira` tinyint(1) DEFAULT NULL,
+  `estres` tinyint(1) DEFAULT NULL,
+  `felicidad` tinyint(1) DEFAULT NULL,
+  `dulce` tinyint(1) DEFAULT NULL,
+  `amarga` tinyint(1) DEFAULT NULL,
+  `salada` tinyint(1) DEFAULT NULL,
+  `picante` tinyint(1) DEFAULT NULL,
+  `acida` tinyint(1) DEFAULT NULL,
+  `act_sex` tinyint(1) DEFAULT NULL,
+  `edo_gestacion` varchar(30) DEFAULT NULL,
+  `m_anticonceptivo` varchar(20) DEFAULT NULL,
+  `terapia_rh` varchar(50) DEFAULT NULL,
+  `dosis` varchar(20) DEFAULT NULL,
+  `peso` float DEFAULT NULL,
+  `talla` float DEFAULT NULL,
+  `temperatura` float DEFAULT NULL,
+  `tension_art` varchar(20) DEFAULT NULL,
+  `frec_cardiaca` varchar(10) DEFAULT NULL,
+  `frec_respiratoria` varchar(20) DEFAULT NULL,
+  `cabeza` float DEFAULT NULL,
+  `cuello` float DEFAULT NULL,
+  `brazo` float DEFAULT NULL,
+  `cadera` float DEFAULT NULL,
+  `torax` float DEFAULT NULL,
+  `antebrazo` float DEFAULT NULL,
+  `abdomen` float DEFAULT NULL,
+  `muslo` float DEFAULT NULL,
+  `pierna` float DEFAULT NULL,
+  `aspect_grles` varchar(100) DEFAULT NULL,
+  `otras_medidas` varchar(150) DEFAULT NULL,
+  `T_Gestacion` varchar(200) DEFAULT NULL,
+  `TipoTerapia` varchar(200) DEFAULT NULL,
+  `CantidadIngesta` int(2) DEFAULT NULL,
+  `HorarioComida` int(1) DEFAULT NULL,
+  `HorariosComida` varchar(300) DEFAULT NULL,
+  `recomendaciones` varchar(500) DEFAULT NULL,
+  `observaciones` varchar(500) DEFAULT NULL,
+  `tratamiento_n` int(1) DEFAULT NULL,
+  `golosinas` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id_hojaExpediente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hojaexpediente`
+--
+
+LOCK TABLES `hojaexpediente` WRITE;
+/*!40000 ALTER TABLE `hojaexpediente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hojaexpediente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -568,7 +658,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (2014630304,1987654321,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1,234234),(2014630305,1312213,'Juan Jesus','Mondragón','Barrios',23,'H','1995-05-20','55566565','Domicilio','ejemplo@ejemplo.com','JJesus1234',1,NULL),(2014630306,1987654321,'Leonardo Miguel','Aguirre','Hernández',24,'H','1995-01-04','5532334345','Un barrio bien bravo','ejemplo@ejemplo.com','Migue1234',1,NULL),(2014630307,3123124,'José Eduardo','Quintero','López',24,'H','1995-04-24','5532334345','Nueva rosita','ejemplo@ejemplo.com','Pepe1234',1,234234),(2014630308,0,'Victor','Diaz','Ortix',26,'H','1993-03-15','5555555555','xxxxx','ejemplo@ejemplo.com','Vic12345',1,0),(2014630310,1123456732,'Erick Alan','Manzano','Nava',25,'H','1993-10-13','5532334345','....algun lugar ','ejemplo@ejemplo.com','Erick1234',1,0),(2014630311,1123456732,'José Rodolfo','Zapata','Jasso',24,'H','1995-02-25','5532334345','algun lugar','ejemplo@ejemplo.com','Zapata12345',1,0);
+INSERT INTO `paciente` VALUES (2014630304,1987654321,'Alexis Israel','Rodrigues',' Almázan',23,'H','1995-03-22','5532397936','iiuuytrykiu','ejemplo@ejemplo.com','Alex1234',1,234234),(2014630305,1312213,'Juan Jesus','Mondragón','Barrios',23,'H','1995-05-20','55566565','Domicilio','ejemplo@ejemplo.com','JJesus1234',1,NULL),(2014630306,1987654321,'Leonardo Miguel','Aguirre','Hernández',24,'H','1995-01-04','5532334345','Un barrio bien bravo','ejemplo@ejemplo.com','Migue1234',1,NULL),(2014630307,3123124,'José Eduardo','Quintero','López',24,'H','1995-04-24','5532334345','Nueva rosita','ejemplo@ejemplo.com','Pepe1234',1,234234),(2014630308,0,'Victor','Diaz','Ortix',26,'H','1993-03-15','5555555555','xxxxx','ejemplo@ejemplo.com','Vic12345',1,0),(2014630310,1123456732,'Erick Alan','Manzano','Nava',25,'H','1993-10-13','5532334345','....algun lugar ','ejemplo@ejemplo.com','Erick1234',1,0),(2014630311,1123456732,'José Rodolfo','Zapata','Jasso',24,'H','1995-02-25','5532334345','algun lugar','ejemplo@ejemplo.com','Zapata12345',1,0),(987654321,0,'Miguel','Quintero','Jasso',23,'H','1995-12-31','5566778899','x','ejemplo@ejemplo.com','Aa12345678',1,0);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -667,4 +757,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-17 22:05:30
+-- Dump completed on 2019-05-18  2:57:46
