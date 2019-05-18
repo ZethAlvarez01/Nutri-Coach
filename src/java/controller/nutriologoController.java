@@ -1736,7 +1736,113 @@ public class nutriologoController {
        
     }
     
+ /////////////////////////////
+    /////ACCION DEL BOTÓN AtenderCita
     
+    
+          @RequestMapping(params="HistorialExpediente", method = RequestMethod.POST)
+    public ModelAndView AtenderCita(@ModelAttribute("expediente") expediente ex, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+        
+     
+       
+       
+
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
+                mv.setViewName("expedienteGeneral");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                String sql="select * from expediente where no_boleta="+ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                       
+                
+                
+                                mv.addObject("ExpedienteBase",datosL2);
+                                                                                                              // Pasa la lilsta completa
+                                 mv.addObject("expediente",new expediente());
+                               
+                sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteEnero",datosL2);
+                       
+                                  
+                                  
+                  sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteFebrero",datosL2);                
+                                  
+                                  
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fechaini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteMarzo",datosL2);                
+                                                 
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteAbril",datosL2);                
+                                                                
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteMayo",datosL2);                
+                                                            
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteJunio",datosL2);                
+                                                               
+                        
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteJulio",datosL2);                
+                                                                              
+                                  
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteAgosto",datosL2);                
+                                                                              
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteSeptiembre",datosL2);                
+                                                                                
+                                  
+                  sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteOctubre",datosL2);                
+                                                                                 
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteNoviembre",datosL2);                
+                   
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+ex.getNo_boleta()+" and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteDiciembre",datosL2);                
+                                                                                
+                                  return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         
+            
+       
+    }   
      
      
        ////////////////////
