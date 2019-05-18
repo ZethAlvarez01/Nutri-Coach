@@ -1434,7 +1434,7 @@ public class nutriologoController {
       ///////////////////////////////////
     //////////////Vista expedienteNutriologo
         @RequestMapping(params="expediente", method = RequestMethod.POST)
-    public ModelAndView ConsultarExpedientePsicologico(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+    public ModelAndView ConsultarExpedienteNutriologico(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
        
            
         HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
@@ -1509,19 +1509,37 @@ public class nutriologoController {
                       
                      sql = "select fecha from cita where no_boleta="+p.getNo_boleta()+" and no_cedula="+cedula+" and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
                                  datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
-                      System.out.println("FECHA DE CITA: "+datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1));    
+                      int fechaCita=0;
+                      if(datosL2.isEmpty()){
+                         fechaCita=0; 
+                      }
+                      else{
+                          System.out.println("FECHA DE CITA: "+datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1));    
                       String fechaAct =datosL2.get(0).toString().substring(7,11)+"/"+datosL2.get(0).toString().substring(12,14)+"/"+datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
                       System.out.println("FECHA ACTUAL: "+fechaAct);
-                      int fechaCita=0;
+                     
                       if(fechaAct.equals(dateFormat.format(date))){
                           fechaCita=1;
                       }
+                      }
+                      
                       mv.addObject("fechaCita",fechaCita);
                       
                       sql="select fecha_ini from expediente where no_boleta="+p.getNo_boleta();
                       datosL2 = this.jdbcTemplate.queryForList(sql);
                       mv.addObject("fechaExpediente",datosL2);
                       
+                      sql="select id_expediente from expediente where no_boleta="+p.getNo_boleta();
+                      datosL2 = this.jdbcTemplate.queryForList(sql);
+                      int expedienteActivo=0;
+                      if(datosL2.isEmpty()){
+                          expedienteActivo=0;
+                      }
+                      else{
+                          expedienteActivo=1;
+                      }
+                      mv.addObject("expedienteActivo",expedienteActivo);
+                       mv.addObject("expediente",new expediente());
                      return mv;                                                         
        
        
@@ -1561,9 +1579,16 @@ public class nutriologoController {
                 String sql="select no_boleta from cita where no_cita="+c.getNo_cita();   // CONSULTA PARA EXTRAER DATOS DE SESION
                                 List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
-                String boleta=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+                if(datosL2.isEmpty()){
+                    sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+c.getNo_boleta();             
+                                datosL2 = this.jdbcTemplate.queryForList(sql); 
+                }        
+                else{
+                 String boleta=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
                 sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+boleta;             
-                                datosL2 = this.jdbcTemplate.queryForList(sql);
+                                datosL2 = this.jdbcTemplate.queryForList(sql); 
+                }
+                
                                 mv.addObject("datosPaciente",datosL2);
                                  mv.addObject("datosCita",c.getNo_cita());                                                       // Pasa la lilsta completa
                                  mv.addObject("expediente",new expediente());
@@ -1683,6 +1708,13 @@ public class nutriologoController {
                                
        
                 this.jdbcTemplate.update(sql);          
+      }
+      else{
+          String expediente=datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length()-1);
+          sql="insert into hojaexpediente values(0,"+expediente+","+ex.getNo_boleta()+",'','','"+ex.getFecha_ini()+"',0,0,0,0,0,0,'"+ex.getAntec_hf()+"','"+Act_f+"','"+ex.getTipo_act()+"','"+ex.getFrecuencia()+"','"+ex.getPadecimiento()+"','"+Tabaco+"','"+ex.getFrec_tabaco()+"','"+Alcohol+"','"+ex.getFrec_alcohol()+"','"+ex.getTratamient()+"','"+ex.getTiempo()+"','','','"+ex.getAlergias()+"','"+Postre+"',0,0,0,0,0,'"+Dulce+"','"+Amarga+"','"+Salada+"','"+Picante+"','"+Acida+"','"+Act_sex+"','"+Edo_gestacion+"','"+ex.getM_anticonceptivo()+"','"+Terapia_rh+"','"+ex.getDosis()+"','"+ex.getPeso()+"','"+ex.getTalla()+"','"+ex.getTemperatura()+"','"+ex.getTension_art()+"','"+ex.getFrecuencia()+"','',0.0,'"+ex.getCuello()+"','"+ex.getBrazo()+"','"+ex.getCadera()+"','"+ex.getTorax()+"','"+ex.getAntebrazo()+"','"+ex.getAbdomen()+"','"+ex.getMulso()+"','"+ex.getPierna()+"','"+ex.getAspect_grls()+"','','"+ex.getT_Gestacion()+"','"+ex.getTipoTerapia()+"','"+Cantidad_ingesta+"','"+Horario_Comida+"','"+ex.getHorariosComida()+"','"+ex.getRecomendaciones()+"','"+ex.getObservaciones()+"','"+Tratamiento_n+"','"+ex.getGolosinas()+"');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+                               
+       
+                this.jdbcTemplate.update(sql);  
       }
       
  
