@@ -112,24 +112,29 @@
                             
                             
                             <p>Fecha de inicio</p>
-                             <p id="num_boleta">Número de boleta: ${ListaPacientes[0].no_boleta}</p>
+                             <p id="num_boleta"><b>Número de boleta:</b> ${ListaPacientes[0].no_boleta}</p>
                              
-                                <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
-                                <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
-                                <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
+                                <p id="datosGenerales"> <b> Edad:</b>${ListaPacientes[0].edad} Sexo:</b>${ListaPacientes[0].sexo} <b>Fecha de nacimiento:</b> ${ListaPacientes[0].fecha_n} </p>
+                                <p id="datosGenerales2">  <b>Domicilio:</b>${ListaPacientes[0].domicilio} </p>
+                                <p id="datosGenerales3">   <b>Teléfono:</b>${ListaPacientes[0].telefono}  <b>Correo:</b>${ListaPacientes[0].correo} </p>
                                  
-                                <c:if test ="${expediente== 0}">
-                                       
-                                        
-                                        
-                                        <form:form method="post" commandName="entradaForo">
+                                  <c:if test= "${empty datosCita}">
+                            
                         
-                        <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${expediente}">Crear Expediente</form:button> 
-
-                            <form:input path="id_entrada" placeholder="${expediente}" value="${expediente}"  />
-                       </form:form>
-                                        
-                                </c:if>
+                                 <p>NO HAY CITAS PROGRAMADAS/p>
+                             
+                                                 
+                        </c:if>
+                                       <c:if test= "${not empty datosCita}">
+                            
+                        
+                                       <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
+                              
+                                       <c:if test= "${fechaCita==1}">
+                                           AQUI VA EL BOTON DE 
+                                       </c:if>
+                                                
+                        </c:if>
                         
                         </div>
 
@@ -150,9 +155,20 @@
                             <h3  style="cursor:pointer;">Historial de actividades</h3>
                             
                             
-                             ENTRADAS EN EL FORO              
+                             <b>ENTRADAS EN EL FORO</b>              
+                             <c:if test= "${empty listaEntradas}">
                             
-         <c:forEach items="${listaEntradas}" var="item"> 
+                        
+                                 <p>NO HAY ENTRADAS</p>
+                             
+                                                 
+                        </c:if>
+                                 
+                                 
+                                 <c:if test= "${not empty listaEntradas}">
+                            
+                        
+                                   <c:forEach items="${listaEntradas}" var="item"> 
                           
                     <ul>
                        <form:form method="post" commandName="entradaForo">
@@ -163,10 +179,23 @@
                     </ul>
                          </c:forEach>   
                             
+                                                 
+                        </c:if>
+      
                           
-              COMENTARIOS EN EL FORO
-              
-              <table>
+             <b> COMENTARIOS EN EL FORO</b>
+               <c:if test= "${empty FechaComentarios}">
+                            
+                        
+                                 <p>NO HAY COMENTARIOS</p>
+                             
+                                                 
+                        </c:if>
+                                 
+                                 <c:if test= "${not empty FechaComentarios}">
+                            
+                        
+                                  <table>
                                 <tr>
                                    <td><strong>Fecha</strong></td>
                                    <td><strong>Titulo de Entrada</strong></td>
@@ -182,8 +211,8 @@
                                     
                                     <c:if test ="${entrada == titulo}">
                                        
-                                        
-                                        
+                                  
+                                
                                         <form:form method="post" commandName="entradaForo">
                         
                       <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
@@ -204,6 +233,10 @@
                                 
                             </table>
                             
+                                                 
+                        </c:if>
+                   
+                                     
                             
                             
                             
