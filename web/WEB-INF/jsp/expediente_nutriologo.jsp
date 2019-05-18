@@ -34,6 +34,7 @@
      <script type="text/javascript" src="resource/scrips/script.js"/></script>  
      <script type="text/javascript" src="resource/scrips/expediente_script.js"/></script>  
 <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+  <script type="text/javascript" src="resource/scrips/fecha.js"/></script>
    
 
     <title>Nutri-Coach</title>
@@ -87,7 +88,7 @@
 
     <div id="contenido">
         <div class="container">
-            <h1>Cargar nuevo expediente para ${Paciente}</h1>
+            <h1>Cargar nuevo expediente para ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno} ${datosPaciente[0].ap_dos}</h1>
 
             <div class="barra_expediente">
                 <input type="button" class="expediente_t" onclick="openExpediente('Historial')" value="Historial clínico"/>
@@ -103,55 +104,60 @@
                 <ul>
                     <li>¿Realiza algún tipo de actividad física?
 
-                        <input path="act_f" type="radio" name="act_f" value="1"> Si
-                        <input path="act_f" type="radio" name="act_f" value="0"> No<br>
+                        <input path="act_f" type="radio" name="act_f" value="1" > Si
+                        <input path="act_f" type="radio" name="act_f" value="0" > No<br>
 
                     </li>
-                    <li>¿Qué tipo de actividad física? <input path="tipo_act" type="text"></li>
-                    <li>¿Con que frecuencia realiza actividad física? <input path="frecuencia" type="text"></li>
-                    <li>¿Tiene algún padecimiento o enfermedad, cuál? <input path="padecimiento" type="text"></li>
-                    <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <input path="antec_hf" type="text"></li>
+                    <li>¿Qué tipo de actividad física? <form:input path="tipo_act" type="text" /></li>
+                    <li>¿Con que frecuencia realiza actividad física? <form:input path="frecuencia" type="number" min="0" max="7" value="0" /></li>
+                  
+              
+                    <li>¿Tiene algún padecimiento o enfermedad, cuál? <form:input  path="padecimiento" type="text" /></li>
+                    <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <form:input  path="antec_hf" type="text" /></li>
                     <li>¿Consume tabaco?
 
                         <input path="tabaco" type="radio" name="tabaco" value="1"> Si
-                        <input path="tabaco" type="radio" name="tabaco" value="0"> No<br>
+                        <input path="tabaco" type="radio" name="tabaco" value="0" > No<br>
 
                     </li>
-                    <li>¿Con qué frecuencia? <input path="frec_tabaco" type="text"></li>
+                    <li>¿Con qué frecuencia?  <form:input  path="frec_tabaco" type="number" min="0" value="0" /></li>
                     <li>¿Consume bebidas alcohólicas?
 
-                        <input path="alcohol" type="radio" name="alcohol" value="1"> Si
-                        <input path="alcohol" type="radio" name="alcohol" value="0"> No<br>
+                        <input path="alcohol" type="radio" name="alcohol" value="1" > Si
+                        <input path="alcohol" type="radio" name="alcohol" value="0" > No<br>
 
                     </li>
-                    <li>¿Con qué frecuencia? <input path="fec_alcohol" type="text"></li>
+                    <li>¿Con qué frecuencia? <form:input  path="frec_alcohol" type="number" min="0" value="0" /></li>
                 </ul>
+                
+                
+                
             </div>
             <div id="Ginecologico" class="expediente_c" style="display: none;">
                 <h2>Estado ginecológico</h2>
                 <ul>
                     <li>¿Lleva una vida sexual activa?
 
-                        <input path="act_sex" type="radio" name="act_s" value="1"> Si
-                        <input path="act_sex" type="radio" name="act_s" value="0"> No<br>
+                        <form:radiobutton path="act_sex"  name="act_s" value="1" /> Si
+                        <form:radiobutton path="act_sex"  name="act_s" value="0" /> No<br>
 
                     </li>
                     <li>¿Se encuentra en estado de gestación?
 
-                        <input path="edo_gestacion" type="radio" name="gestacion" value="1"> Si
-                        <input path="edo_gestacion" type="radio" name="gestacion" value="0"> No<br>
+                        <form:radiobutton path="edo_gestacion"  name="gestacion" value="1" /> Si
+                        <form:radiobutton path="edo_gestacion"  name="gestacion" value="0" /> No<br>
 
                     </li>
-                    <li>¿Cuánto tiempo lleva gestando? <input path="T_Gestacion" type="text"></li>
-                    <li>¿Usa algún método anticonceptivo, cuál? <input path="m_acticonceptivo" type="text"></li>
+                    <li>¿Cuánto tiempo lleva gestando? <form:input  path="T_Gestacion" type="number" min="0" value="0" /></li>
+                    <li>¿Usa algún método anticonceptivo, cuál? <form:input  path="m_anticonceptivo" type="text" /></li>
                     <li>¿Lleva alguna terapia de reemplazo hormonal?
 
-                        <input path="terapia_rh" type="radio" name="terapia_h" value="1"> Si
-                        <input path="terapia_rh" type="radio" name="terapia_h" value="0"> No<br>
+                        <form:radiobutton path="terapia_rh"  name="terapia_h" value="1" /> Si
+                        <form:radiobutton path="terapia_rh"  name="terapia_h" value="0" /> No<br>
 
                     </li>
-                    <li>¿Cuál? <input  path="TipoTerapia" type="text"></li>
-                    <li>Dosis <input path ="dosis" type="text"></li>
+                    <li>¿Cuál? <form:input  path="TipoTerapia" type="text" /></li>
+                    <li>Dosis <form:input  path ="dosis" type="text" /></li>
                 </ul>
             </div>
             <div id="Fisica" class="expediente_c" style="display: none;">
@@ -159,25 +165,25 @@
                     <div id="exploracion">
                         <h2>Exploración fisica</h2>
                         <ul>
-                            <li>Peso <input path="peso" type="number"></li>
-                            <li>Estatura <input path="talla" type="number"></li>
-                            <li>Temperatura <input path="temperatura" type="text"></li>
-                            <li>P/A <input path="tension_art" type="text"></li>
-                            <li>F/C <input path="frec_cardiaca" type="text"></li>
+                            <li>Peso <form:input  path="peso" type="number" min="0" value="0"  step=".01" required="required"/></li>
+                            <li>Estatura <form:input  path="talla" type="number" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Temperatura <form:input  path="temperatura" type="number" min="0" value="0" step=".01" required="required"/></li>
+                            <li>P/A <form:input  path="tension_art" type="text" required="required"/></li>
+                            <li>F/C <form:input  path="fec_cardiaca" type="text" required="required"/></li>
                         </ul>
                     </div>
                     <div id="medidas">
                         <h3>Medidas antropométricas</h3>
                         <ul>
-                            <li>Cuello <input path="cuello" type="number" name="" id=""></li>
-                            <li>Tórax <input path="torax" type="number" name="" id=""></li>
-                            <li>Brazo <input path="brazo"type="number" name="" id=""></li>
-                            <li>Antebrazo <input path="antebrazo"type="number" name="" id=""></li>
-                            <li>Abdomen <input path="abdomen" type="number" name="" id=""></li>
-                            <li>Cadera <input path="cadera" type="number" name="" id=""></li>
-                            <li>Muslo <input path="mulso" type="number" name="" id=""></li>
-                            <li>Pierna <input path="pierna" type="number" name="" id=""></li>
-                            <li>Aspectos generales <textarea path="aspect_grles"></textarea></li>
+                            <li>Cuello <form:input  path="cuello" type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Tórax <form:input  path="torax" type="number" name="" id=""min="0" value="0" step=".01" required="required"/></li>
+                            <li>Brazo <form:input  path="brazo"type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Antebrazo <form:input  path="antebrazo"type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Abdomen <form:input  path="abdomen" type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Cadera <form:input  path="cadera" type="number" name="" id="" min="0" value="0" step=".01"  required="required"/></li>
+                            <li>Muslo <form:input  path="mulso" type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Pierna <form:input  path="pierna" type="number" name="" id="" min="0" value="0" step=".01" required="required"/></li>
+                            <li>Aspectos generales <form:textarea  path="aspect_grls" min="0" value="0" required="required"/></li>
                         </ul>
                     </div>
                 </div>
@@ -187,54 +193,63 @@
                 <ul>
                     <li>¿Se ha sometido algún tratamiento nutricional anteriormente?
 
-                        <input path="tratamiento_n" type="radio" name="tratamiento_n" value="1"> Si
-                        <input  path="tratamiento_n" type="radio" name="tratamiento_n" value="0"> No<br>
+                        <input path="tratamiento_n" type="radio" name="tratamiento_n" value="1" > Si
+                        <input  path="tratamiento_n" type="radio" name="tratamiento_n" value="0" > No<br>
 
                     </li>
-                    <li>¿Qué tipo de tratamiento? <input path="tratamiento" type="text"></li>
-                    <li>¿Por cuánto tiempo? <input path="tiempo" type="text"></li>
-                    <li>¿Cuántas ingestas de comida tiene al día? <input path="CantidadIngesta" type="number" name="" id=""></li>
+                    <li>¿Qué tipo de tratamiento? <form:input path="tratamient" type="text" /></li>
+                    <li>¿Por cuánto tiempo? <form:input  path="tiempo" type="text" /></li>
+                    <li>¿Cuántas ingestas de comida tiene al día? <form:input  path="CantidadIngesta" type="number" name="" id="" min="0" value="0" /></li>
                     <li>¿Consume golosinas entre comidas?
 
-                        <input path="postre" type="radio" name="golosinas" value="1"> Si
-                        <input path="postre" type="radio" name="golosinas" value="0"> No<br>
+                        <form:radiobutton path="postre"  name="golosina" value="1" /> Si
+                        <form:radiobutton path="postre"  name="golosina" value="0" /> No<br>
+                       
 
                     </li>
-                    <li>¿Cuáles? <input type="text"></li>
+                    <li>¿Cuáles? <form:input path="golosinas" type="text" /></li>
                     <li>¿Tiene algún horario de comida?
 
-                        <input path="HorarioComida" type="radio" name="horario_c" value="1"> Si
-                        <input path="HorarioComida" type="radio" name="horario_c" value="0"> No<br>
+                        <form:radiobutton path="HorarioComida"  name="horario_c" value="1" /> Si
+                        <form:radiobutton path="HorarioComida"  name="horario_c" value="0" /> No<br>
 
                     </li>
-                    <li>¿Cuáles? <input type="text"></li>
+                    <li>¿Cuáles? <form:input  path="HorariosComida" type="text" /></li>
                     <li>Tipo Alimentos de su gusto<br><br>
 
-                        <input path="dulce" type="checkbox" name="alimento1" value="dulce"> Dulce<br>
-                        <input path="amarga" type="checkbox" name="alimento2" value="amarga"> Amarga<br>
-                        <input path="salada" type="checkbox" name="alimento3" value="salada"> Salada<br>
-                        <input path ="picante" type="checkbox" name="alimento4" value="picante"> Picante<br>
-                        <input path="acida" type="checkbox" name="alimento5" value="acida"> Acida<br>
+                        <form:checkbox path="dulce"  name="alimento1" value="dulce" /> Dulce<br>
+                        <form:checkbox path="amarga"  name="alimento2" value="amarga"/> Amarga<br>
+                        <form:checkbox path="salada"  name="alimento3" value="salada"/> Salada<br>
+                        <form:checkbox path ="picante"  name="alimento4" value="picante"/> Picante<br>
+                        <form:checkbox path="acida"  name="alimento5" value="acida"/> Acida<br>
 
                     </li>
-                    <li>¿Tiene alergias a algun alimento, cúal? <input path="alergias" type="text"></li>
+                    <li>¿Tiene alergias a algun alimento, cúal? <form:input  path="alergias" type="text" /></li>
                 </ul>
             </div>
             <div id="Diagnostico" class="expediente_c" style="display: none;">
                 <h2>Diagnostico clínico</h2>
 
                 <h3>Observaciones</h3>
-                <textarea path="observaciones" id="obs" name="observaciones_dc">
+                <form:textarea  path="observaciones" id="obs" name="observaciones_dc" />
 
-                    </textarea>
+                    
 
                 <h3>Recomendaciones</h3>
-                <textarea  path="recomendaciones" id="recom" name="recomendaciones_dc">
+                <form:textarea   path="recomendaciones" id="recom" name="recomendaciones_dc" />
                         
-                    </textarea>
+                   
             </div>
-            <input type="button" value="Guardar"/>
-            </form:form>
+             
+            
+            
+               <form:input path="no_boleta" placeholder="${datosPaciente[0].no_boleta}" value="${datosPaciente[0].no_boleta}" type="hidden" />
+              <form:input path="fecha_ini" id="fecha" value="" type="hidden" />
+           <input  class="cita" type="submit" name="GuardarExpediente" value="Guardar" onclick="fecha2()">
+             </form:form>
+            
+            
+            
         </div>
     </div>
 

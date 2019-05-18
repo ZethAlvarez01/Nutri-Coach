@@ -27,8 +27,9 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
            <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_nutriologo.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" /
+    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" 
          <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
+      <script type="text/javascript" src="resource/scrips/fecha.js"/></script>
 
         <!-- Scripts -->
 
@@ -110,8 +111,24 @@
                     <div id="grid_info">
                         <div class="casillas" id="resumen">
                             
+                            <c:if test= "${empty fechaExpediente}">
                             
-                            <p>Fecha de inicio</p>
+                        
+                                
+                                 <p><b>Fecha de inicio: </b> No existe expediente</p>
+                             
+                                                 
+                        </c:if>
+                                 
+                                 <c:if test= "${not empty fechaExpediente}">
+                            
+                        
+                                
+                                 <p><b>Fecha de inicio: </b> ${fechaExpediente[0]}</p>
+                             
+                                                 
+                        </c:if>
+                            
                              <p id="num_boleta"><b>Número de boleta:</b> ${ListaPacientes[0].no_boleta}</p>
                              
                                 <p id="datosGenerales"> <b> Edad:</b>${ListaPacientes[0].edad} Sexo:</b>${ListaPacientes[0].sexo} <b>Fecha de nacimiento:</b> ${ListaPacientes[0].fecha_n} </p>
@@ -130,9 +147,17 @@
                         
                                        <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
                               
-                                       <c:if test= "${fechaCita==1}">
-                                           AQUI VA EL BOTON DE 
-                                       </c:if>
+                                  
+                                           
+                                           
+                                           <form:form method="post" commandName="cita">
+                          
+                       <input type="submit" class="texto_menu" name="AtenderCita" value="Atender cita">
+                        <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                     
                                                 
                         </c:if>
                         

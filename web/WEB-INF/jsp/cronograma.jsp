@@ -31,7 +31,7 @@
     
     <!-- Scripts -->
     
-    <script type="text/javascript" src="resource/scrips/calendarioNutri.js"/></script>  
+    <script type="text/javascript" src="resource/scrips/calendarioEspecialistasNutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
 
@@ -159,14 +159,11 @@
                     
                     <div id="citas">
                        
-                             <form:form method="post" commandName="cita">
-                           
-                          
-                        <input path="cita" id="numeroCita">
+                         
                      <!--   <script>
                             generarCitas();
                         </script>-->
-                          </form:form>
+                        
                     </div>
         
                       
