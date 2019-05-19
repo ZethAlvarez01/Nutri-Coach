@@ -61,15 +61,39 @@
                     <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                <div id="menu">
-                    <c:forEach items="${datos}" var="item"> 
+                           <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
-                      <form:form method="post" commandName="Psicologo">
-                              <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
-                        <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
+                        <form:form method="post" commandName="Paciente">
+                             <c:if test= "${item.no_cedula>0}">
+                            
+                        
+                              
+                             <li><a class="texto_menu" href="mensajeria.htm">Mensajes</a></li>
+                        
+                                                 
+                        </c:if>
+                        <c:if test= "${item.no_cedula==0}">
+                            
+                        
+                               <li><a class="texto_menu" href="primera_cita.htm">Citas</a></li>
+                             
+                                                 
+                        </c:if>
+                            
+                             
+                          <li><a class="texto_menu" href="foro.htm">Foro</a></li>
+                          <c:if test= "${item.no_cedulap>0}">
+                            
+                        
+                               <li><a class="texto_menu" href="SeguimientoPsicologico.htm">Psicólogo</a></li>
+                             
+                                                 
+                        </c:if>
+                            
+                          
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
-                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                        <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
                        </form:form>
                     </ul>
                          </c:forEach> 
@@ -90,11 +114,11 @@
                 <center>
                  
                     <h2> <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/>  este es el expediente general</h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> este es tu expediente general</h1></p>
                 </c:forEach></h2>
                 </center>
                 <div id="encabezado_lista" >
-                        <p id="sub-titulo">Expedientes del paciente: ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno}  ${datosPaciente[0].ap_dos}  </p>
+                        <p id="sub-titulo"></p>
                         <select id="listaUsuarios" onchange="TypeExpediente()" name="listaUsuarios" >
                             <option  value="Enero"  >Enero</option>
                             <option  value="Febrero" >Febrero</option>
@@ -119,9 +143,9 @@
                          <form:form method="post" commandName="expediente">
                          <p><b>Primer expediente: </b>   
                              
-                        <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${ExpedienteBase[0].fecha}">${ExpedienteBase[0].fecha}</form:button>
+                        <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${ExpedienteBase[0].fecha_ini}">${ExpedienteBase[0].fecha_ini}</form:button>
                            </p>
-                            <form:input path="id_hojaExpediente"  value="${ExpedienteBase[0].id_hojaExpediente}" type="hidden" />
+                            <form:input path="id_hojaexpediente"  value="${ExpedienteBase[0].id_hojaExpediente}" type="hidden" />
                             <form:input path="id_expediente"  value="${ExpedienteBase[0].id_expediente}" type="hidden" />
                            </form:form>
                         <hr>
@@ -140,9 +164,9 @@
                                   <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
                          </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -165,9 +189,9 @@
                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
                          </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                                 
                             </div>
@@ -186,9 +210,9 @@
                                <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -208,12 +232,12 @@
                            
                                
                             <div id="texto_user">
-                               <form:form method="post" commandName="expediente">
+                              <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                      <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -232,12 +256,12 @@
                            
                                 
                             <div id="texto_user">
-                                <form:form method="post" commandName="expediente">
+                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -255,12 +279,12 @@
                            
                                
                             <div id="texto_user">
-                              <form:form method="post" commandName="expediente">
+                             <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -279,12 +303,12 @@
                            
                                
                             <div id="texto_user">
-                              <form:form method="post" commandName="expediente">
+                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -303,12 +327,12 @@
                            
                                
                             <div id="texto_user">
-                                 <form:form method="post" commandName="expediente">
+                                <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                      <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -329,9 +353,9 @@
                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -352,12 +376,12 @@
                            
                                
                             <div id="texto_user">
-                                <form:form method="post" commandName="expediente">
+                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -376,12 +400,12 @@
                            
                                
                             <div id="texto_user">
-                                 <form:form method="post" commandName="expediente">
+                                <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
                          </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicolo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
@@ -401,9 +425,9 @@
                               <form:form method="post" commandName="expediente">
                           
                           <p> <b>Fecha: </b> 
-                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePsico" value="${item.fecha}">${item.fecha}</form:button>
-                         </p>
-                        <form:input path="id_hojaPsicologo" placeholder="${item.id_hojaPsicologo}" value="${item.id_hojaPsicologo}" type="hidden" />
+                                <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          </p>
+                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
                                 
