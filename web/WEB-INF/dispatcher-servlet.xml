@@ -72,11 +72,20 @@
                 <prop key="ConsultarPacientePrincipalp.htm">PsicologoController</prop>
                 <prop key="expedientePsicologico.htm">PsicologoController</prop>
                 <prop key="ConsultarPacientePrincipaln.htm">nutriologoController</prop>
-               <prop key="mostrarHorario.htm">PacienteController</prop>
+                <prop key="mostrarHorario.htm">PacienteController</prop>
                 <prop key="mostrarHorarioNutriologo.htm">nutriologoController</prop>
                 <prop key="expediente_nutriologo.htm">nutriologoController</prop>
                 <prop key="mostrarHorarioPsicologo.htm">PsicologoController</prop>
-                <prop key="expedienteGeneral.htm">nutriologoController</prop>
+                <prop key="ExpedienteGeneral.htm">nutriologoController</prop>
+                <prop key="ConsultarExpedienteNutriologo.htm">nutriologoController</prop>
+                <prop key="CanalizarPsicologia.htm">nutriologoController</prop>
+                <prop key="canalizar.htm">nutriologoController</prop>
+                <prop key="ExpedienteGeneralPsico.htm">PsicologoController</prop>
+                <prop key="ConsultarExpedientePsicologico.htm">nutriologoController</prop>
+                <prop key="citaNutriologo.htm">nutriologoController</prop>
+                <prop key="siguienteNutriologo.htm">nutriologoController</prop>
+                <prop key="citaPsicologo.htm">PsicologoController</prop>
+                <prop key="siguientePsicologo.htm">PsicologoController</prop>
             </props>
         </property>
     </bean>
