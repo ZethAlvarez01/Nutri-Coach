@@ -1118,7 +1118,22 @@ public class AdministradorController {
         System.out.println(rangomh.size()+ "HORARIOS DE MEDIA HORA");
         for(int i=0;i<rangomh.size();i++){
             System.out.println(rangomh.get(i).toString());
-        }                      
+        } 
+        
+        for(int i=0;i<dias.size();i++){
+            for(int j=0;j<rangoh.size();j++){
+                   sql="insert into cita values(0,0,"+ps.getNo_cedula()+",'"+dias.get(i).substring(4,dias.get(i).length())+"','0','"+rangoh.get(j).toString()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+            }
+             for(int k=0;k<rangomh.size();k++){
+                   sql="insert into cita values(0,0,"+ps.getNo_cedula()+",'"+dias.get(i).substring(4,dias.get(i).length())+"','1','"+rangomh.get(k).toString()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+            }
+        }
                 return mav;
         }
     
@@ -1470,7 +1485,20 @@ public class AdministradorController {
                                  
                                  
       
-                                
+           for(int i=0;i<dias.size();i++){
+            for(int j=0;j<rangoh.size();j++){
+                   sql="insert into cita values(0,0,"+n.getNo_cedula()+",'"+dias.get(i).substring(4,dias.get(i).length())+"','0','"+rangoh.get(j).toString()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+            }
+             for(int k=0;k<rangomh.size();k++){
+                   sql="insert into cita values(0,0,"+n.getNo_cedula()+",'"+dias.get(i).substring(4,dias.get(i).length())+"','1','"+rangomh.get(k).toString()+"')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                               
+       
+                  this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
+            }
+        }                         
                                  
                                  
                                  

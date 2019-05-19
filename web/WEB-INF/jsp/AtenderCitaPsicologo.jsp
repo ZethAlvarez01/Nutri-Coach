@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ConsultarEntrada
-    Created on : 27-abr-2019, 18:30:49
+    Document   : nuevaEntrada
+    Created on : 25-abr-2019, 13:26:56
     Author     : jms-m
 --%>
 <%
@@ -29,7 +29,7 @@
          <!-- Scrips -->
     
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script> 
         <script type="text/javascript" src="resource/scrips/fecha.js"/></script>  
         <title>Nutri-Coach</title>
     </head>
@@ -54,17 +54,18 @@
             <!--Fin container-->
         </header>    
                     
-       <div id="barra">
+   <div id="barra">
+      
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
                     <a href="cronogramaPsicologo.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
-                <div id="menu">
-                    <c:forEach items="${datos}" var="item"> 
+               <div id="menu">
+                     <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
-                        <form:form method="post" commandName="Psicologo">
+                         <form:form method="post" commandName="Psicologo">
                               <li><a class="texto_menu" href="cronogramaPsicologo.htm">Cronograma</a></li>
                         <li><a class="texto_menu" href="mensajeriaPs.htm">Mensajes</a></li>
                         <li><a class="texto_menu" href="foroPs.htm">Foro</a></li>
@@ -73,7 +74,8 @@
                        </form:form>
                     </ul>
                          </c:forEach> 
-                   
+                    
+                    
                 </div>
             </div>
 
@@ -81,66 +83,47 @@
     </div>
 
                 
-                   <a class="regresar" href="<c:url value="javascript:history.back(1)" />">Regresar</a>
-                   
-          
-            
+            <a class="regresar" href="<c:url value="javascript:history.back(1)" />">Regresar</a>
                
-                
-                      <div id="contenido">
+          <div id="contenido">
             <div class="container">
                 <center>
-                     <h1>Actividad</h1>
+                     
                     <h2> <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Esta es la actvidad </h1></p>
+                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Este es el expediente de observaciones</h1></p>
                 </c:forEach></h2>
                 </center>
                 
-                    <form:form method="post" commandName="ActividadP">
-                <div class="grid-container">
-                    <div class="item1"><p class="titulo">Actividad para:${nombreP[0].nombre} ${nombreP[0].ap_uno} ${nombreP[0].ap_dos} </p>
+                
+                 <div class="grid-container">
+                     <div class="item1">
+                          <form:form method="post" commandName="expedientePsicologico">
+                    
+                  
+                              <b>Paciente:</b>    ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno} ${datosPaciente[0].ap_dos}
+                   
                         <hr>
                         
-                     
-                                
-                           
-                            
-                            <form:textarea path="contenido"  id="desc_actividad" cols="20" rows="8" placeholder="${activad[0].contenido}" />
-                            <p>  <form:errors path="contenido"/> </p> 
-                            
-                            
-                                <form:input path="id_actividad"  value="${actividad[0].id_actividad}"   type="hidden" /> 
-                           
-                            
-                          
+                        <form:textarea path="contenido" class="item1" placeholder="Redacta tus observaciones" required="required"/>
+                         <p>  <form:errors path="contenido"/> </p>
                         
-                        
-                        
-                        
-                        
+                      
                     </div>  
-                       
-                           
-                           
-                         <input  id="regresar" type="submit" name="EditarActividad" value="Editar Actividad" onclick="fecha2()">
-                             </form:form>
-                        
-                  
-                        
-                        
-                        
-                        
-                        
-                        
+                                    
                     
-                       
-                </div>
+                    
+                 </div>
+                         <form:input path="fecha" value="" type="hidden"  />  
+                         <form:input path="no_boleta" value="${datosPaciente[0].no_boleta}" type="hidden"   />
+                         <form:input path="no_cedula" value="${datos[0].no_cedula}" type="hidden"   />
+                    <input  class="cita" type="submit" name="guardarExpedientePsicologico" value="Guardar" onclick="fecha2()">
+                    </form:form>
                 
+                
+                
+              </div>
             </div>
-            <!--Fin container-->
-        </div>  
-              <!--Fin contenido-->
-                     
+                
                 
                 
                 
