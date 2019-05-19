@@ -2751,7 +2751,7 @@ public class PsicologoController {
             
             
           ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
-                mv.setViewName("CitaNutriologo");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                mv.setViewName("CitaPsicologo");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
                 
                 
