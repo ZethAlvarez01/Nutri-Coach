@@ -167,7 +167,7 @@
                         
                     </select>
 
-                    <div class="texto">Nutriólogo</div>
+                    <div class="texto">Psicólogo</div>
                     
                     <select id="nutriologoESCOM" class="primera_cita"  >
                        
