@@ -1,18 +1,4 @@
 
-function CambioHorario(){
-   
-    
-    
-     var seleccion = document.getElementById("horas_disponibles");
-    
-    var textoSeleccion = seleccion.options[seleccion.selectedIndex].text;
-  
-  //  alert($("#horas_disponibles").val());
-    
-    document.getElementById("valorCita").value=$("#horas_disponibles").val();
-    
-}
-
 
 
 
@@ -253,26 +239,24 @@ function myFunction(obj) {
 
     if (obj.innerHTML != " ") {
         obj.style.background = "red";
-        fecha_cita.innerHTML = obj.innerHTML + " " + valorM + " de " + valorA;
+        fecha_dia.innerHTML = obj.innerHTML;
+        mes_anio.innerHTML=valorM + " " + valorA;
     }
+    
 
     let getMes = numero_mes(valorM)+1;
+    
+   
+    
 
-    var combo = document.getElementById("nutriologoESCOM");
-    var selected = combo.options[combo.selectedIndex].text;
 
-    var arrayCadena = selected.split(" ");
-    //console.log(arrayCadena);
+   
 
-    var cedula = arrayCadena[arrayCadena.length - 1];
-    console.log(cedula);
-
-    let consultaChida = "select horario from cita where fecha='" + valorA + "-" + getMes + "-" + obj.innerHTML + "' and no_cedula=" + cedula + " and estado=0";
-
+   
     
 
     var fechaSeleccionada = valorA + "-" + getMes + "-" + obj.innerHTML;
-   // alert(fechaSeleccionada);
+    alert(fechaSeleccionada);
     let elemento = document.getElementById("valor");
    // elemento.innerHTML = consultaChida;
 
@@ -281,7 +265,10 @@ function myFunction(obj) {
      let cadenaHoy=fechaHoy.getFullYear()+"-"+(fechaHoy.getMonth()+1)+"-"+fechaHoy.getUTCDate();
                                     
                            // console.log("ESTA ES LA FECHA DE HOY: "+cadenaHoy);
-                            
+         
+    var empleado=document.getElementById("no_empleado").value;
+   // alert(empleado);
+    
      if(valorA<fechaHoy.getFullYear()){
          // console.log("AÑO MENOR: "+cadenaHoy);
          $("#horas_disponibles").empty();
@@ -297,60 +284,87 @@ function myFunction(obj) {
      
      if(valorA>= fechaHoy.getFullYear() && getMes<(fechaHoy.getMonth()+1) && obj.innerHTML<fechaHoy.getUTCDate() ){
           console.log("Dia Y MES MENOR: ");
-         $("#horas_disponibles").empty();
+              $("#citas").empty();
+    $("#citas").append("<h1>No hay citas</h1>");
          
      }
      
      if(valorA>= fechaHoy.getFullYear() && getMes<(fechaHoy.getMonth()+1) && obj.innerHTML>=fechaHoy.getUTCDate()  ){
          console.log("Dia MES: ");
-         $("#horas_disponibles").empty();
+             $("#citas").empty();
+        $("#citas").append("<h1>No hay citas</h1>");
      }
      
       if(valorA>= fechaHoy.getFullYear() && getMes==(fechaHoy.getMonth()+1) && obj.innerHTML<fechaHoy.getUTCDate()  ){
           console.log("Dia MENOR: ");
-         $("#horas_disponibles").empty();
+              $("#citas").empty();
+          $("#citas").append("<h1>No hay citas</h1>");
+       
      }
       if(valorA>=fechaHoy.getFullYear() && getMes>(fechaHoy.getMonth()+1) && obj.innerHTML<fechaHoy.getUTCDate()  ){
-          $.ajax({
-        url : 'mostrarHorario.htm',
-                        data:{fechaConsulta:fechaSeleccionada, cedulaConsulta:cedula},
+           $.ajax({
+        url : 'mostrarHorarioNutriologo.htm',
+                        data:{fechaConsulta:fechaSeleccionada, no_empleadoConsulta:empleado},
                         dataType: "json",
                         content:"application/json;  charset=utf-8",
                         
                         success : function (data){
 
                                
-                                $("#horas_disponibles").empty();
+                               if (data=== null) {
+                               $("#citas").empty();
+                              $("#citas").append("<h1>No hay citas</h1>");
+                          }
+                          else{
+                           $("#citas").empty();
                                         $.each(data, function(i, option) {
-                                        $("#horas_disponibles").append('<option name="' + option.no_cita + '">' + option.horario + '</option>');
-                                        });
+                                        $("#citas").append( option.nombre, " "+ option.ap_uno,+" "+option.ap_dos +" Horario: "+  option.horario 
+                                                + " <input type='submit'> Atender cita </input> <input value='"+option.no_cita+"' />");
+                                        });   
+                          }
+                               
                                         //alert(data);
                                 },
                                 error:function(x) {
                                 Console.log(x); }
                        
     });
+    
+    
+ 
+    
+    
+    
+    
      }
      
      
      if(valorA>=fechaHoy.getFullYear() && getMes>=(fechaHoy.getMonth()+1) && obj.innerHTML>=fechaHoy.getUTCDate() ){
         
               $.ajax({
-        url : 'mostrarHorario.htm',
-                        data:{fechaConsulta:fechaSeleccionada, cedulaConsulta:cedula},
+        url : 'mostrarHorarioNutriologo.htm',
+                        data:{fechaConsulta:fechaSeleccionada, no_empleadoConsulta:empleado},
                         dataType: "json",
                         content:"application/json;  charset=utf-8",
                         
                         success : function (data){
 
-                               
-                                $("#horas_disponibles").empty();
+                          if (data=== null) {
+                               $("#citas").empty(); 
+                              $("#citas").append("<h1>No hay citas</h1>");
+                          }
+                          else{
+                           $("#citas").empty();
                                         $.each(data, function(i, option) {
-                                        $("#horas_disponibles").append('<option value="' + option.no_cita + '">' + option.horario + '</option>');
                                         
-                                        });
+                                        
+                                        $("#citas").append( option.nombre, " "+ option.ap_uno+" "+option.ap_dos +" Horario: "+  option.horario +"<br>");
+                                        
+                                                
+                                        });   
+                          }
+                               
                                         //alert(data);
-                                        document.getElementById("valorCita").value=data[0].no_cita;
                                 },
                                 error:function(x) {
                                 Console.log(x); }

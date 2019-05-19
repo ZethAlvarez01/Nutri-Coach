@@ -716,8 +716,9 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion ejecucion=new Implementacion(neural_net);
+                        
+                        double[][] output=ejecucion.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -917,8 +918,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -2269,8 +2270,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;

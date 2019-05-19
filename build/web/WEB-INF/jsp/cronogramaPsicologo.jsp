@@ -28,13 +28,15 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/estilos_cronograma.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_calendario_nutriologo.css" />" />
-    
+     
     <!-- Scripts -->
     
-    <script type="text/javascript" src="resource/scrips/calendario.js"/></script>  
+    <script type="text/javascript" src="resource/scrips/calendarioEspecialistasPsico.js"/></script>  
     <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+
+<script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 
+    
    
     
         <title>Nutri-Coach</title>
@@ -159,9 +161,9 @@
                     </div>
                     <div id="citas">
 
-                        <script>
+                     <!--   <script>
                             generarCitas();
-                        </script>
+                        </script>-->
 
                     </div>
 

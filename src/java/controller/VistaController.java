@@ -47,6 +47,13 @@ public class VistaController {
         return mv;
     }
     
+    @RequestMapping("Generar_dietas_nutriologo.htm")
+    public ModelAndView generar_dieta_n(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("Generar_dietas_nutriologo");
+        return mv;
+    }
+    
     @RequestMapping("preregistro.htm")
     public ModelAndView preregistro(){
         ModelAndView mv=new ModelAndView();

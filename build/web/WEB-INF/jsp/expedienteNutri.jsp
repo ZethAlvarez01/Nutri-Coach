@@ -27,8 +27,9 @@
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
            <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_nutriologo.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" /
+    <link rel="stylesheet" href="<c:url value="/resource/estilos/vista_usuarios.css" />" 
          <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
+      <script type="text/javascript" src="resource/scrips/fecha.js"/></script>
 
         <!-- Scripts -->
 
@@ -109,15 +110,75 @@
                     <br>
                     <div id="grid_info">
                         <div class="casillas" id="resumen">
-                            <h3 onclick="expandir()" style="cursor:pointer;">Expediente Clínico</h3>
                             
-                            <p>Fecha de inicio</p>
-                             <p id="num_boleta">Número de boleta: ${ListaPacientes[0].no_boleta}</p>
+                            <c:if test= "${empty fechaExpediente}">
+                            
+                        
+                                
+                                 <p><b>Fecha de inicio: </b> No existe expediente</p>
                              
-                                <p id="datosGenerales">  Edad:${ListaPacientes[0].edad} Sexo:${ListaPacientes[0].sexo} Fecha de nacimiento: ${ListaPacientes[0].fecha_n} </p>
-                                <p id="datosGenerales2">  Domicilio:${ListaPacientes[0].domicilio} </p>
-                                <p id="datosGenerales3">   Teléfono:${ListaPacientes[0].telefono}  Correo:${ListaPacientes[0].correo} </p>
-                  
+                                                 
+                        </c:if>
+                                 
+                                 <c:if test= "${not empty fechaExpediente}">
+                            
+                        
+                                
+                                 <p><b>Fecha de inicio: </b> ${fechaExpediente[0].fecha_ini}</p>
+                             
+                                                 
+                        </c:if>
+                            
+                             <p id="num_boleta"><b>Número de boleta:</b> ${ListaPacientes[0].no_boleta}</p>
+                             
+                                <p id="datosGenerales"> <b> Edad:</b>${ListaPacientes[0].edad} Sexo:</b>${ListaPacientes[0].sexo} <b>Fecha de nacimiento:</b> ${ListaPacientes[0].fecha_n} </p>
+                                <p id="datosGenerales2">  <b>Domicilio:</b>${ListaPacientes[0].domicilio} </p>
+                                <p id="datosGenerales3">   <b>Teléfono:</b>${ListaPacientes[0].telefono}  <b>Correo:</b>${ListaPacientes[0].correo} </p>
+                                 
+                                  <c:if test= "${empty datosCita}">
+                            
+                        
+                                 <p>NO HAY CITAS PROGRAMADAS</p>
+                              <form:form method="post" commandName="cita">
+                          <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
+                       
+                       </form:form>
+                                                 
+                        </c:if>
+                                       <c:if test= "${not empty datosCita}">
+                            
+                        
+                                       <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
+                              
+                                       <c:if test= "${fechaCita==1}">
+                                           
+                                           
+                                           <form:form method="post" commandName="cita">
+                          
+                       <input type="submit" class="texto_menu" name="AtenderCita" value="Atender cita">
+                        <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                       </c:if>
+                                                
+                        </c:if>
+                       
+                       
+                         <c:if test= "${expedienteActivo==1}">
+                                           
+                                           
+                                           <form:form method="post" commandName="expediente">
+                          
+                       <input type="submit" class="texto_menu" name="HistorialExpediente" value="Expediente general">
+                        <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                       </c:if>
+                       
+                       
                         
                         </div>
 
@@ -138,9 +199,20 @@
                             <h3  style="cursor:pointer;">Historial de actividades</h3>
                             
                             
-                             ENTRADAS EN EL FORO              
+                             <b>ENTRADAS EN EL FORO</b>              
+                             <c:if test= "${empty listaEntradas}">
                             
-         <c:forEach items="${listaEntradas}" var="item"> 
+                        
+                                 <p>NO HAY ENTRADAS</p>
+                             
+                                                 
+                        </c:if>
+                                 
+                                 
+                                 <c:if test= "${not empty listaEntradas}">
+                            
+                        
+                                   <c:forEach items="${listaEntradas}" var="item"> 
                           
                     <ul>
                        <form:form method="post" commandName="entradaForo">
@@ -151,10 +223,23 @@
                     </ul>
                          </c:forEach>   
                             
+                                                 
+                        </c:if>
+      
                           
-              COMENTARIOS EN EL FORO
-              
-              <table>
+             <b> COMENTARIOS EN EL FORO</b>
+               <c:if test= "${empty FechaComentarios}">
+                            
+                        
+                                 <p>NO HAY COMENTARIOS</p>
+                             
+                                                 
+                        </c:if>
+                                 
+                                 <c:if test= "${not empty FechaComentarios}">
+                            
+                        
+                                  <table>
                                 <tr>
                                    <td><strong>Fecha</strong></td>
                                    <td><strong>Titulo de Entrada</strong></td>
@@ -170,8 +255,8 @@
                                     
                                     <c:if test ="${entrada == titulo}">
                                        
-                                        
-                                        
+                                  
+                                
                                         <form:form method="post" commandName="entradaForo">
                         
                       <td>  <form:button id="button" class="button" type="submit" name="consultarEntrada" value="${nombreEntrada.titulo}">${nombreEntrada.titulo}</form:button> </td>
@@ -192,6 +277,10 @@
                                 
                             </table>
                             
+                                                 
+                        </c:if>
+                   
+                                     
                             
                             
                             

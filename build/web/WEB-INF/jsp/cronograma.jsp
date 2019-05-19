@@ -31,10 +31,11 @@
     
     <!-- Scripts -->
     
-    <script type="text/javascript" src="resource/scrips/calendario.js"/></script>  
+    <script type="text/javascript" src="resource/scrips/calendarioEspecialistasNutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-    <script type="text/javascript" href="<c:url value="/resource/scrips/script.js" />"/></script> 
+
+  <script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 
    
     
         <title>Nutri-Coach</title>
@@ -76,7 +77,7 @@
                         <li><a class="texto_menu" href="ConsultarPacientePrincipaln.htm">Pacientes</a></li>
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
-                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                        <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}"  id="no_empleado"  type="hidden"/>
                        </form:form>
                     </ul>
                          </c:forEach> 
@@ -114,8 +115,7 @@
                             </select>
 
                         <select name="Anio" id="anio" class="caja" onchange="mover_mes();">
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
+                               
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
@@ -151,18 +151,22 @@
                     <div id="dia">
                         <p id="fecha_dia"></p>
                         <p id="mes_anio"></p>
+                        
                         <script>
                             fecha();
                         </script>
                     </div>
+                    
                     <div id="citas">
-
-                        <script>
+                       
+                         
+                     <!--   <script>
                             generarCitas();
-                        </script>
-
+                        </script>-->
+                        
                     </div>
-
+        
+                      
 
                 </div>
 

@@ -5,10 +5,10 @@ package models.NeuralNet;
  */
 public class libMatrices {
     
-    //Suma de matrices
-    public double[][] sum(double[][] a,double[][] b){
+    //Sum of matrices DOUBLE + DOUBLE
+    public double[][] add(double[][] a,double[][] b){
         if((a.length != b.length) || (a[0].length != b[0].length)){
-            System.out.println("SUMA Error: Matrices con un orden diferente");
+            System.out.println("Error: Matrices with different order");
             return null;
         }else{
             double[][] res =new double[a.length][a[0].length];
@@ -21,10 +21,10 @@ public class libMatrices {
         }
     }
     
-    //Resta de matrices
-    public double[][] res(double[][] a,double[][] b){
+    //Subtraction of matrices DOUBLE - DOUBLE
+    public double[][] sub(double[][] a,double[][] b){
         if((a.length != b.length) || (a[0].length != b[0].length)){
-            System.out.println("RESTA Error: Matrices con un orden diferente");
+            System.out.println("SUB Error: Matrices with different order");
             return null;
         }else{
             double[][] res =new double[a.length][a[0].length];
@@ -37,8 +37,8 @@ public class libMatrices {
         }
     }
     
-    //Producto escalar
-    public double[][] escalar(double[][] a,double s){
+    //Scalar product of a matrix DOUBLE * DOUBLE
+    public double[][] scalar(double[][] a,double s){
         double[][] res =new double[a.length][a[0].length];
         for(int i=0;i<a.length;i++){
             for(int j=0;j<a[i].length;j++){
@@ -48,11 +48,11 @@ public class libMatrices {
         return res;
    }
    
-   //Producto de la matriz DOUBLE * DOUBLE
+   //Product matrix DOUBLE * DOUBLE
    public double[][] dot(double[][] a, double[][] b){
        if(a[0].length != b.length){
-           System.out.println("Error: Columna de la matriz A ("+a[0].length+") es diferente a "
-                            + "la fila de la matriz B ("+b.length+")");
+           System.out.println("Error: Column of matrix A "+a[0].length+" is different from row "
+                            + "of matrix B "+b.length);
            return null;
        }else{
         double[][] res=new double[a.length][b[0].length];
@@ -71,8 +71,8 @@ public class libMatrices {
        }
    }
    
-   //Transpuesta de la matriz
-   public double[][] trans(double[][] a){
+   //Transposed DOUBLE
+   public double[][] transpose(double[][] a){
        double[][] res=new double[a[0].length][a.length];
        
        for(int i=0;i<res.length;i++){
@@ -92,7 +92,7 @@ public class libMatrices {
            }
            System.out.println();
        }
-       System.out.println();
+       //System.out.println();
    }
    
 }

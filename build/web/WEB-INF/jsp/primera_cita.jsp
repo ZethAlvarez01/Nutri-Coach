@@ -9,6 +9,7 @@
 
 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -20,7 +21,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
 
-        <!--Hoja de estilo-->
+        <!--Hoja de estilo--> 
         
         <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
         <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
@@ -30,11 +31,19 @@
 
 
         <!--Scripts-->
+        <script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 
+       
+        
+      
+     
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
+
 
         <script type="text/javascript" src="resource/scrips/calendario.js"/></script>
-        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+       <script type="text/javascript" src="resource/scrips/script.js"/></script>  
         <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/cambioOptions.js"/></script>  
+ 
 
 
 
@@ -117,15 +126,13 @@
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
                             </select>
 
                     </div>
                     <script>
                         actualizar(); 
                     </script>
-
+                    
                     <br>
                     <table class="tabla">
                         <thead id="tabla">
@@ -141,15 +148,18 @@
                             </script>
                         </thead>
                     </table>
+                    <p id="valor"></p> 
+                 
+                  
 
                 </div>
                 <div id="programar">
 
 
                     <p>Información de la cita</p>
-                    <form:form method="post" commandName="Nutriologo">
+                    <form:form method="post" commandName="cita">
                     <div class="texto">Institución</div>
-                    <select id="institucion" class="primera_cita" onchange="Cambio()">
+                    <select id="institucion" class="primera_cita" >
                         
                         <option value="0">Escuela Superior de Cómputo (ESCOM)</option>
                        
@@ -159,10 +169,14 @@
 
                     <div class="texto">Nutriólogo</div>
                     
-                    <select id="nutriologoESCOM" class="primera_cita"  onchange="Cambio()">
+                    <select id="nutriologoESCOM" class="primera_cita"  >
                        
-                        <c:forEach items="${ListaESCOM}" var="item">
-                        <option>${item.nombre} ${item.ap_uno} ${item.ap_dos}</option>
+                        <c:forEach items="${ListaESCOM}" var="item" varStatus="loop">
+                          
+                        <option>${item.nombre} ${item.ap_uno} ${item.ap_dos} ${item.no_cedula}</option>
+                        
+                        
+                         
                         </c:forEach> 
                     </select>
                     
@@ -174,18 +188,19 @@
                     <div class="texto">Fecha de la cita</div>
 
                     <p id="fecha_cita">No seleccionada...</p>
-
+                    
+                    
                     <div class="texto">Horarios disponibles:</div>
 
-                    <select id="horas_disponibles" class="primera_cita">
-                        <option></option>
-                    </select>
-
-                    <section>
-                        Captcha
-                    </section>
-
-                    <div id="boton">Confirmar</div>
+                    <form:select path="horario" id="horas_disponibles" class="primera_cita" onchange="CambioHorario()" name="horas_disponibles">
+                        <form:option value=""></form:option>
+                    </form:select>
+                   
+                    <p>  <form:errors path="no_cita"/> </p>
+                    <form:input id="valorCita" path="no_cita" type="hidden"/>
+                    
+                     <form:button id="boton" type="submit" name="guardarCita">Confirmar</form:button>
+                    
                     </form:form>
                 </div>
             </div>

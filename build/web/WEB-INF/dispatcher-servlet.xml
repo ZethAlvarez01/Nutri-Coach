@@ -29,6 +29,9 @@
                 <prop key="registroA.htm">RegistroController</prop>
                 <prop key="politicas.htm">VistaController</prop>
                 <prop key="tyc.htm">VistaController</prop>
+                        
+                <prop key="Generar_dietas_nutriologo.htm">VistaController</prop>
+                
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">PacienteController</prop>
@@ -72,7 +75,11 @@
                 <prop key="ConsultarPacientePrincipalp.htm">PsicologoController</prop>
                 <prop key="expedientePsicologico.htm">PsicologoController</prop>
                 <prop key="ConsultarPacientePrincipaln.htm">nutriologoController</prop>
-                
+               <prop key="mostrarHorario.htm">PacienteController</prop>
+                <prop key="mostrarHorarioNutriologo.htm">nutriologoController</prop>
+                <prop key="expediente_nutriologo.htm">nutriologoController</prop>
+                <prop key="mostrarHorarioPsicologo.htm">PsicologoController</prop>
+                <prop key="expedienteGeneral.htm">nutriologoController</prop>
             </props>
         </property>
     </bean>

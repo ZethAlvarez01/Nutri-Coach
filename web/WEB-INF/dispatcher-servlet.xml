@@ -29,6 +29,9 @@
                 <prop key="registroA.htm">RegistroController</prop>
                 <prop key="politicas.htm">VistaController</prop>
                 <prop key="tyc.htm">VistaController</prop>
+                        
+                <prop key="Generar_dietas_nutriologo.htm">VistaController</prop>
+                
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">PacienteController</prop>

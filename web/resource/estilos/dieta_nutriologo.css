@@ -1,0 +1,211 @@
+#contenido {
+    height: 900px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#datos {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 1;
+}
+
+#datos ul li {
+    list-style: none;
+    margin: 10px;
+}
+
+#datos ul li input {
+    height: 25px;
+    border-radius: 5px;
+    border: solid 1px #ddd;
+    ;
+    padding: 3px;
+    font-size: 18px;
+    outline: none;
+}
+
+#datos_p {
+    grid-column: 1;
+}
+
+#datos_c {
+    grid-column: 2;
+}
+
+#dieta {
+    grid-column: 1;
+    grid-row: 2;
+    display: grid;
+    grid-template-areas: 'titulo titulo_op1 titulo_op2 titulo_op3' 'desayuno desayuno_op1 desayuno_op2 desayuno_op3' 'colacionm colacionm_op1 colacionm_op2 colacionm_op3' 'comida comida_op1 comida_op2 comida_op3' 'colacionv colacionv_op1 colacionv_op2 colacionv_op3' 'cena cena_op1 cena_op2 cena_op3';
+    border-radius: 20px;
+    border: solid 1px #ddd;
+    height: 500px;
+}
+
+#dieta div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#titulo_t {
+    width: 200px;
+    grid-area: titulo;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#titulo_op1 {
+    width: 250px;
+    grid-area: titulo_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#titulo_op2 {
+    width: 250px;
+    grid-area: titulo_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#titulo_op3 {
+    width: 250px;
+    grid-area: titulo_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#desayuno_t {
+    width: 200px;
+    grid-area: desayuno;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#desayuno_op1 {
+    grid-area: desayuno_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#desayuno_op2 {
+    grid-area: desayuno_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#desayuno_op3 {
+    grid-area: desayuno_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#colacionm_t {
+    width: 200px;
+    grid-area: colacionm;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#colacionm_op1 {
+    grid-area: colacionm_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#colacionm_op2 {
+    grid-area: colacionm_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#comida_t {
+    width: 200px;
+    grid-area: comida;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#comida_op1 {
+    grid-area: comida_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#comida_op2 {
+    grid-area: comida_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#comida_op3 {
+    grid-area: comida_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#colacionv_t {
+    width: 200px;
+    grid-area: colacionv;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#colacionv_op1 {
+    grid-area: colacionv_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#colacionv_op2 {
+    grid-area: colacionv_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#cena_t {
+    width: 200px;
+    grid-area: cena;
+    border-right: solid 1px #ddd;
+}
+
+#cena_op1 {
+    grid-area: cena_op1;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#cena_op2 {
+    grid-area: cena_op2;
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+#cena_op3 {
+    grid-area: cena_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#colacionm_op3 {
+    grid-area: colacionm_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#colacionv_op3 {
+    grid-area: colacionv_op3;
+    border-bottom: solid 1px #ddd;
+}
+
+#tabla_contenido {
+    margin: 0 130px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 160px 500px;
+}
