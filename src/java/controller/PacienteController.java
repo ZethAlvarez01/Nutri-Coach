@@ -30,6 +30,7 @@ import models.citaValidar;
 import models.comentarioValidar;
 import models.diario;
 import models.diarioValidar;
+import models.expediente;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -716,9 +717,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion ejecucion=new Implementacion(neural_net);
-                        
-                        double[][] output=ejecucion.prediction(x);
+                        Implementacion exe=new Implementacion(neural_net,x);
+                        double[][] output=exe.Implement();
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -735,6 +735,53 @@ public class PacienteController {
                
                 
      }
+                    
+          sql="select id_expediente from expediente where no_boleta="+alert;          
+                     datosL2=this.jdbcTemplate.queryForList(sql);
+                      int expedienteActivo=0;
+               if(datosL2.isEmpty()){
+                          expedienteActivo=0;
+                      }
+                      else{
+                          expedienteActivo=1;
+                      }
+                      mv.addObject("expedienteActivo",expedienteActivo);
+                       mv.addObject("expediente",new expediente());
+                       
+                       
+                       
+          sql="select no_cedula from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+          String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+
+          mv.addObject("citaNutriologo",datosL2);
+          
+          mv.addObject("citaPsicologo",datosL2);
+          sql="select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula="+cedula;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          mv.addObject("nombreN",datosL2);
+          
+          
+                       
+          sql="select no_cedulap from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+           cedula=datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+
+          
      //System.out.println(datas);
       return mv;
      }
@@ -918,8 +965,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net);
-                        double[][] output=exe.prediction(x);
+                        Implementacion exe=new Implementacion(neural_net,x);
+                        double[][] output=exe.Implement();
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -2270,8 +2317,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net);
-                        double[][] output=exe.prediction(x);
+                        Implementacion exe=new Implementacion(neural_net,x);
+                        double[][] output=exe.Implement();
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -2307,7 +2354,123 @@ public class PacienteController {
      
      
      
+     /////////////////////////////
+    /////ACCION DEL BOTÓN Historial EXPEDIENTE
+    
+    
+          @RequestMapping(params="HistorialExpedientePaciente", method = RequestMethod.POST)
+    public ModelAndView AtenderCita(@ModelAttribute("expediente") expediente ex, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+        
      
+       
+       
+
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
+                mv.setViewName("ExpedienteGeneralPaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                
+                
+                   String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                            // PASAMOS EL OBJETO PACIENTE
+                                 
+              
+                
+                 sql="select * from expediente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                       
+                
+                
+                                mv.addObject("ExpedienteBase",datosL2);
+                                                                                                              // Pasa la lilsta completa
+                                 mv.addObject("expediente",new expediente());
+                               
+                sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteEnero",datosL2);
+                       
+                                  
+                                  
+                  sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteFebrero",datosL2);                
+                                  
+                                  
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteMarzo",datosL2);                
+                                                 
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteAbril",datosL2);                
+                                                                
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteMayo",datosL2);                
+                                                            
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteJunio",datosL2);                
+                                                               
+                        
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteJulio",datosL2);                
+                                                                              
+                                  
+                                  
+                     sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteAgosto",datosL2);                
+                                                                              
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteSeptiembre",datosL2);                
+                                                                                
+                                  
+                  sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteOctubre",datosL2);                
+                                                                                 
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteNoviembre",datosL2);                
+                   
+                                  
+                   sql="select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta="+alert+" and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("expedienteDiciembre",datosL2);                
+                                                                                
+                                  return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         
+            
+       
+    }   
      
      
      
@@ -2351,5 +2514,83 @@ public class PacienteController {
        
     }
      
+    /////////////////////////////
+    /////ACCION DEL BOTÓN consultar entrada expediente
+    
+    
+          @RequestMapping(params="consultarEntradaExpedientePaciente", method = RequestMethod.POST)
+    public ModelAndView consultarEntradaExpediente(@ModelAttribute("expediente") expediente ex, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+      
+            
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        
+        
      
+       
+       
+
+            
+            
+            
+          ModelAndView mv=new ModelAndView();                              //CREACIÓN DEL MODELO
+                mv.setViewName("ConsultarExpedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                
+                   String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());                                            // PASAMOS EL OBJETO PACIENTE
+                                 
+                                 
+                                 
+                     if(ex.getId_expediente()==null){
+                         sql="select * from hojaexpediente where id_hojaExpediente="+ex.getId_hojaexpediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("datosExpediente",datosL2);
+                                  System.out.println(datosL2);
+                  
+                                             
+                sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("datosPaciente",datosL2);  
+                                  
+                                  
+                                  
+                     }  
+                     else{
+                         sql="select * from expediente where id_expediente="+ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("datosExpediente",datosL2);
+                                
+                       
+                sql="select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                  mv.addObject("datosPaciente",datosL2);
+                
+                          
+                          
+                     }
+                                 
+                                 
+              
+               
+                               
+               
+                                  return mv;                                                                                           // RETORNAMOS EL MODELO
+         
+         
+            
+       
+    }   
+      
 }
