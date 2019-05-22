@@ -1,47 +1,57 @@
-<%-- 
-    Document   : cronograma
-    Created on : 21-mar-2019, 11:11:38
-    Author     : jms-m
---%>
+
 <%
   response.addHeader("Pragma", "no-cache");
   response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   response.addHeader("Cache-Control", "pre-check=0, post-check=0");
   response.setDateHeader("Expires", 0);
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
-     
-     <!-- Hojas de estilos -->
-     
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/estilos_cronograma.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resource/estilos/bienvenida_calendario_nutriologo.css" />" />
-    
-    <!-- Scripts -->
-    
-    <script type="text/javascript" src="resource/scrips/calendarioEspecialistasNutri.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
 
-  <script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 
-   
-    
+<!DOCTYPE html>
+<html lang="es_MX">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="shortcut icon" type="image/png" href="<c:url value="/resource/imagenes/iconos/favicon.png" />" />
+
+        <!--Hoja de estilo--> 
+        
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/generales.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/estilos_primera_cita.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resource/estilos/estilos_cronograma.css" />" />
+
+
+        <!--Scripts-->
+        <script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 
+       
+        
+      
+     
+        <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
+
+
+        <script type="text/javascript" src="resource/scrips/citaNutriologo.js"/></script>
+       <script type="text/javascript" src="resource/scrips/script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+ 
+
+
+
         <title>Nutri-Coach</title>
     </head>
-    <body onscroll="bajar()">
-    <header>
+
+<body onscroll="bajar()">
+  <header>
         <div class="container">
             <div id="pleca">
                 <div id="logoSEP">
@@ -60,28 +70,30 @@
         </div>
         <!--Fin container-->
     </header>
-                
-                
-    <div id="barra">
+
+
+       <div id="barra">
         <div class="container">
             <div id="cont_barra">
                 <div id="imagen_barra">
-                    <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                    <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
                     <ul id="menu_nutrio">
                         <form:form method="post" commandName="Nutriologo">
-                             <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+                        <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                        <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
                         <li><a class="texto_menu" href="ConsultarPacientePrincipaln.htm">Pacientes</a></li>
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
-                        <li><a class="texto_menu" href="generar_dieta_nutriologo.htm">Generar dieta</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}"  id="no_empleado"  type="hidden"/>
                        </form:form>
                     </ul>
                          </c:forEach> 
+                    
+                    
                 </div>
             </div>
 
@@ -90,12 +102,9 @@
 
     <div id="contenido">
         <div class="container">
-           
-            
-            <c:forEach items="${datos}" var="dato">
-                    <p id="txt-bnv"><h1>Bienvenido, <c:out value="${dato.nombre}"/> Estas son tus citas programadas para hoy.</h1></p>
-                </c:forEach>
-
+            <h1>Primera cita</h1>
+            <div id="texto">
+                Aquí podrás agendar tu primera cita. Solo ingresa algunos datos para conocer tu disponibilidad y la de un especialista, de esta forma te podremos atender a la brevedad. </div>
             <div id="calendario">
                 <div id="calendar">
                     <div id="combo_box">
@@ -116,21 +125,16 @@
                             </select>
 
                         <select name="Anio" id="anio" class="caja" onchange="mover_mes();">
-                               
                                 <option value="2019">2019</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
                             </select>
 
                     </div>
                     <script>
-                        actualizar();
+                        actualizar(); 
                     </script>
-
+                    
                     <br>
                     <table class="tabla">
                         <thead id="tabla">
@@ -141,43 +145,74 @@
                             <div class="c_dia">Jue.</div>
                             <div class="c_dia">Vie.</div>
                             <div class="c_dia">Sáb.</div>
-                            <script>
+                           <script>
                                 dias();
                             </script>
                         </thead>
                     </table>
+                    <p id="valor"></p> 
+                 
+                  
 
                 </div>
-                <div id="agenda">
-                    <div id="dia">
-                        <p id="fecha_dia"></p>
-                        <p id="mes_anio"></p>
+                <div id="programar">
+
+
+                    <p>Información de la cita</p>
+                    <form:form method="post" commandName="cita">
+                    <div class="texto">Institución</div>
+                    <select id="institucion" class="primera_cita" >
                         
-                        <script>
-                            fecha();
-                        </script>
-                    </div>
-                    
-                    <div id="citas">
+                        <option value="0">Escuela Superior de Cómputo (ESCOM)</option>
                        
-                         
-                     <!--   <script>
-                            generarCitas();
-                        </script>-->
+                    </select>
                         
-                    </div>
-        
-                      
+                    </select>
 
+                    <div class="texto">Nutriólogo</div>
+                    
+                    <select id="nutriologoESCOM" class="primera_cita"  >
+                       
+                        <c:forEach items="${ListaESCOM}" var="item" varStatus="loop">
+                          
+                        <option>${item.nombre} ${item.ap_uno} ${item.ap_dos} ${item.no_cedula}</option>
+                        
+                        
+                         
+                        </c:forEach> 
+                    </select>
+                    
+                    <div class="texto">Dirección</div>
+                    <p id="direccion_nutri">
+                        Av. Juan de Dios Bátiz S/N, Nueva Industrial Vallejo, 07738 Ciudad de México, CDMX
+                    </p>
+
+                    <div class="texto">Fecha de la cita</div>
+
+                    <p id="fecha_cita">No seleccionada...</p>
+                    
+                    
+                    <div class="texto">Horarios disponibles:</div>
+
+                    <form:select path="horario" id="horas_disponibles" class="primera_cita" onchange="CambioHorario()" name="horas_disponibles">
+                        <form:option value=""></form:option>
+                    </form:select>
+                   
+                    <p>  <form:errors path="no_cita"/> </p>
+                    <form:input id="valorCita" path="no_cita" type="hidden"/>
+                    <form:input  path="no_boleta" value="${datosPaciente[0].no_boleta}" type="hidden"/>
+                    <form:input  path="no_cedula" value="${datos[0].no_cedula}" type="hidden"/>
+                     <form:button id="boton" type="submit" name="SiguienteCita">Confirmar</form:button>
+                    
+                    </form:form>
                 </div>
-
             </div>
-
         </div>
-    </div>
-    <!--Fin contenido-->
 
-     <footer>
+    </div>
+
+    <!--Fin contenido-->
+  <footer>
             <div class="container">
                 <center>
                     <p id="visita">Visita nuestras redes sociales</p>
@@ -213,4 +248,5 @@
             </div>
         </footer>
 </body>
+
 </html>

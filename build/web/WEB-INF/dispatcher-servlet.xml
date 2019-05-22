@@ -28,10 +28,10 @@
                 <prop key="registroPs.htm">RegistroController</prop>
                 <prop key="registroA.htm">RegistroController</prop>
                 <prop key="politicas.htm">VistaController</prop>
-                <prop key="tyc.htm">VistaController</prop>
-                        
-                <prop key="Generar_dietas_nutriologo.htm">VistaController</prop>
-                
+                <prop key="tyc.htm">VistaController</prop>    
+                                   
+                <prop key="generar_dieta_nutriologo.htm">DietaController</prop>     
+                      
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">PacienteController</prop>
@@ -75,11 +75,20 @@
                 <prop key="ConsultarPacientePrincipalp.htm">PsicologoController</prop>
                 <prop key="expedientePsicologico.htm">PsicologoController</prop>
                 <prop key="ConsultarPacientePrincipaln.htm">nutriologoController</prop>
-               <prop key="mostrarHorario.htm">PacienteController</prop>
+                <prop key="mostrarHorario.htm">PacienteController</prop>
                 <prop key="mostrarHorarioNutriologo.htm">nutriologoController</prop>
                 <prop key="expediente_nutriologo.htm">nutriologoController</prop>
                 <prop key="mostrarHorarioPsicologo.htm">PsicologoController</prop>
-                <prop key="expedienteGeneral.htm">nutriologoController</prop>
+                <prop key="ExpedienteGeneral.htm">nutriologoController</prop>
+                <prop key="ConsultarExpedienteNutriologo.htm">nutriologoController</prop>
+                <prop key="CanalizarPsicologia.htm">nutriologoController</prop>
+                <prop key="canalizar.htm">nutriologoController</prop>
+                <prop key="ExpedienteGeneralPsico.htm">PsicologoController</prop>
+                <prop key="ConsultarExpedientePsicologico.htm">nutriologoController</prop>
+                <prop key="citaNutriologo.htm">nutriologoController</prop>
+                <prop key="siguienteNutriologo.htm">nutriologoController</prop>
+                <prop key="citaPsicologo.htm">PsicologoController</prop>
+                <prop key="siguientePsicologo.htm">PsicologoController</prop>
             </props>
         </property>
     </bean>
@@ -122,6 +131,9 @@
     
      <bean name="PacienteController"
           class="controller.PacienteController" />
+     
+     <bean name="DietaController"
+          class="controller.DietaController" />
     
 
 </beans>

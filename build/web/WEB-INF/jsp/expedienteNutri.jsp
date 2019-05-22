@@ -139,6 +139,11 @@
                             
                         
                                  <p>NO HAY CITAS PROGRAMADAS</p>
+                                 <form:form method="post" commandName="cita">
+                          <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       <input type="submit" class="texto_menu" name="AgendarCitaPsico" value="Agendar Cita">
+                       
+                       </form:form>
                               <form:form method="post" commandName="cita">
                           <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
                        <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
@@ -162,6 +167,13 @@
                                            
                                            
                                        </c:if>
+                       <c:if test= "${fechaCita==0}">
+                                      <form:form method="post" commandName="cita">
+                          <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       <input type="submit" class="texto_menu" name="AtenderCitaPsicologo" value="Atender Emergencia">
+                       
+                       </form:form>
+                                 </c:if>
                                                 
                         </c:if>
                        
@@ -178,7 +190,17 @@
                                            
                                        </c:if>
                        
-                       
+                         <c:if test= "${pacientePsicologo[0].no_cedulap == 0}">
+                                           
+                                           
+                                           <form:form method="post" commandName="paciente">
+                          
+                       <input type="submit" class="texto_menu" name="CanalizarPsicologia" value="Canalizar a Psicología">
+                        <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                       </c:if>
                         
                         </div>
 

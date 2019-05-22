@@ -76,6 +76,7 @@
                              <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
                         <li><a class="texto_menu" href="ConsultarPacientePrincipaln.htm">Pacientes</a></li>
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                        <li><a class="texto_menu" href="generar_dieta_nutriologo.htm">Generar dieta</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}"  id="no_empleado"  type="hidden"/>
                        </form:form>

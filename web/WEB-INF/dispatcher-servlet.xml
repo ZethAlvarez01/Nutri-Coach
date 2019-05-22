@@ -28,10 +28,10 @@
                 <prop key="registroPs.htm">RegistroController</prop>
                 <prop key="registroA.htm">RegistroController</prop>
                 <prop key="politicas.htm">VistaController</prop>
-                <prop key="tyc.htm">VistaController</prop>
-                        
-                <prop key="Generar_dietas_nutriologo.htm">VistaController</prop>
-                
+                <prop key="tyc.htm">VistaController</prop>    
+                                   
+                <prop key="generar_dieta_nutriologo.htm">DietaController</prop>     
+                      
                 <prop key="preregistro.htm">VistaController</prop>
                 <prop key="leermas.htm">VistaController</prop>
                 <prop key="foro.htm">PacienteController</prop>
@@ -131,6 +131,9 @@
     
      <bean name="PacienteController"
           class="controller.PacienteController" />
+     
+     <bean name="DietaController"
+          class="controller.DietaController" />
     
 
 </beans>

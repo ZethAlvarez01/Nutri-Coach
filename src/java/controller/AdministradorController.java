@@ -55,41 +55,26 @@ public class AdministradorController {
     
      ///////////////////////////////////////
       //Pantalla de nueva entrada en el foro
-        @RequestMapping(value="nuevaEntradaAdmin.htm",method = RequestMethod.GET) 
-    
-     public ModelAndView nuevaEntradaForo(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
-       
-         
-        
+    @RequestMapping(value="nuevaEntradaAdmin.htm",method = RequestMethod.GET) 
+    public ModelAndView nuevaEntradaForo(@ModelAttribute("entradaForo") entradaForo eF, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl)throws Exception{
         HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
-       String alert = (String)session.getAttribute("Admin");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE NUTRIOLOGOS
-       
-       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
-           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
-       }     
-       
-       
+        String alert = (String)session.getAttribute("Admin");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE NUTRIOLOGOS
+                if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+                    return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+                }     
+
        // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
-        
-      
-         
-                
+
                 ModelAndView mv=new ModelAndView();  //CREACIÓN DEL MODELO
                 mv.setViewName("nuevaEntradaAdmin");      //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
                 
                 String sql="select nombre,ap_uno,ap_dos, no_empleado from administrador where no_empleado="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
-                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
                                 
-                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
-                                 mv.addObject("Administrador",new Administrador());                                    //PASAMOS OBJETO ADMINISTRADOR
-                                 mv.addObject("entradaForo",new entradaForo());                                       // PASAMOS OBJETO entradaForo
-                
+                mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                mv.addObject("Administrador",new Administrador());                                    //PASAMOS OBJETO ADMINISTRADOR
+                mv.addObject("entradaForo",new entradaForo());                                       // PASAMOS OBJETO entradaForo
                 return mv;                                                                                           //Retornarmos el modelo
-                
-     
-         
-                    
-                
     }
      
      

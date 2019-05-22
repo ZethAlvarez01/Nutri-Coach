@@ -1,5 +1,5 @@
 #contenido {
-    height: 900px;
+    height: 1000px;
 }
 
 h1 {
@@ -15,6 +15,10 @@ h1 {
     grid-template-rows: 1;
 }
 
+#tipo_c1,#tipo_c2,#tipo_c,#tipo_ce{
+    cursor: pointer;
+}
+
 #datos ul li {
     list-style: none;
     margin: 10px;
@@ -24,7 +28,6 @@ h1 {
     height: 25px;
     border-radius: 5px;
     border: solid 1px #ddd;
-    ;
     padding: 3px;
     font-size: 18px;
     outline: none;
@@ -39,13 +42,15 @@ h1 {
 }
 
 #dieta {
+    margin: 0 auto;
     grid-column: 1;
     grid-row: 2;
     display: grid;
-    grid-template-areas: 'titulo titulo_op1 titulo_op2 titulo_op3' 'desayuno desayuno_op1 desayuno_op2 desayuno_op3' 'colacionm colacionm_op1 colacionm_op2 colacionm_op3' 'comida comida_op1 comida_op2 comida_op3' 'colacionv colacionv_op1 colacionv_op2 colacionv_op3' 'cena cena_op1 cena_op2 cena_op3';
+    width: 1050px;
+    grid-template-areas: 'titulo titulo_op1 titulo_op2 titulo_op3' 'desayuno desayuno_op1 desayuno_op2 desayuno_op3' 'colacionm colacionm_op1 colacionm_op2 colacionm_op3' 'comida comida_op1 comida_op2 comida_op3' 'colacionv colacionv_op1 colacionv_op2 colacionv_op3' 'cena cena_op1 cena_op2 cena_op3' 'botones_1 botones_1 botones_2 botones_2';
     border-radius: 20px;
-    border: solid 1px #ddd;
-    height: 500px;
+    height: 700px;
+    margin-top: 50px;
 }
 
 #dieta div {
@@ -57,155 +62,228 @@ h1 {
 }
 
 #titulo_t {
-    width: 200px;
+    height: 80px;
+    width: 180px;
     grid-area: titulo;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
+    border: solid 1px #ddd;
+    border-top-left-radius: 20px;
+    font-size: 20px;
+    cursor: default;
 }
 
 #titulo_op1 {
-    width: 250px;
+    height: 80px;
+    width: 300px;
     grid-area: titulo_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
+    border-top: solid 1px #ddd;
+    font-size: 20px;
+    cursor: default;
 }
 
 #titulo_op2 {
-    width: 250px;
+    height: 80px;
+    width: 300px;
     grid-area: titulo_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
+    border-top: solid 1px #ddd;
+    font-size: 20px;
+    cursor: default;
 }
 
 #titulo_op3 {
-    width: 250px;
+    height: 80px;
+    width: 300px;
     grid-area: titulo_op3;
-    border-bottom: solid 1px #ddd;
+    border-top: solid 1px #ddd;
+    border-top-right-radius: 20px;
+    font-size: 20px;
+    cursor: default;
 }
 
 #desayuno_t {
-    width: 200px;
+    width: 180px;
+    height: 106px;
     grid-area: desayuno;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
+}
+
+#tipo {
+    width: 100%;
+    height: 106px;
+    cursor: pointer;
 }
 
 #desayuno_op1 {
+    height: 106px;
     grid-area: desayuno_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #desayuno_op2 {
+    height: 106px;
     grid-area: desayuno_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #desayuno_op3 {
+    height: 106px;
     grid-area: desayuno_op3;
-    border-bottom: solid 1px #ddd;
 }
 
 #colacionm_t {
-    width: 200px;
+    width: 180px;
+    height: 106px;
     grid-area: colacionm;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #colacionm_op1 {
+    height: 106px;
     grid-area: colacionm_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #colacionm_op2 {
+    height: 106px;
     grid-area: colacionm_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #comida_t {
-    width: 200px;
+    width: 180px;
+    height: 106px;
     grid-area: comida;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #comida_op1 {
+    height: 106px;
     grid-area: comida_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #comida_op2 {
+    height: 106px;
     grid-area: comida_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #comida_op3 {
+    height: 106px;
     grid-area: comida_op3;
-    border-bottom: solid 1px #ddd;
 }
 
 #colacionv_t {
-    width: 200px;
+    height: 106px;
+    width: 180px;
     grid-area: colacionv;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #colacionv_op1 {
+    height: 106px;
     grid-area: colacionv_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #colacionv_op2 {
+    height: 106px;
     grid-area: colacionv_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #cena_t {
-    width: 200px;
+    width: 180px;
+    height: 106px;
     grid-area: cena;
-    border-right: solid 1px #ddd;
+    border-bottom-left-radius: 20px;
 }
 
 #cena_op1 {
+    height: 106px;
     grid-area: cena_op1;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #cena_op2 {
+    height: 106px;
     grid-area: cena_op2;
-    border-bottom: solid 1px #ddd;
-    border-right: solid 1px #ddd;
 }
 
 #cena_op3 {
+    height: 106px;
     grid-area: cena_op3;
-    border-bottom: solid 1px #ddd;
+    border-bottom-right-radius: 20px;
 }
 
 #colacionm_op3 {
+    height: 106px;
     grid-area: colacionm_op3;
-    border-bottom: solid 1px #ddd;
 }
 
 #colacionv_op3 {
+    height: 106px;
     grid-area: colacionv_op3;
-    border-bottom: solid 1px #ddd;
+}
+
+#botones_1 {
+    height: 106px;
+    grid-area: botones_1;
+}
+
+#botones_2 {
+    height: 106px;
+    grid-area: botones_2;
 }
 
 #tabla_contenido {
-    margin: 0 130px;
     margin-top: 30px;
     display: grid;
     grid-template-columns: 1;
     grid-template-rows: 160px 500px;
+}
+
+.bordes {
+    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+}
+
+.bordes_c {
+    border-bottom: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+}
+
+.guardar {
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    background: rgb(108, 29, 69);
+    color: white;
+    font-size: 18px;
+    width: 300px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.cargar {
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    background: rgb(108, 29, 69);
+    color: white;
+    font-size: 16px;
+    width: 200px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.guardar:hover,
+.cargar:hover {
+    background: rgb(108, 29, 69, 0.8);
+}
+
+.boton_aux {
+    position: absolute;
+    margin-top: 40px;
+    cursor: pointer;
+    color: rgb(108, 29, 69, 0.8);
+    font-weight: bold;
+}
+
+.text_area_alimentos {
+    width: 100%;
+    height: 60%;
+    border: none;
+    font-size: 18px;
+    margin: -30px 5px 0px;
+    outline-color: rgb(108, 29, 69);
 }

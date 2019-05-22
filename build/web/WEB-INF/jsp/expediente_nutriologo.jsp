@@ -73,7 +73,7 @@
                         <form:form method="post" commandName="Nutriologo">
                               <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
                              <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
-                        <li><a class="texto_menu" href="ConsultarPacientePrincipaln.htm">Pacientes</a></li>
+                        
                         <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
                         <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
                         <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}"  id="no_empleado"  type="hidden"/>
@@ -104,8 +104,9 @@
                 <ul>
                     <li>¿Realiza algún tipo de actividad física?
 
-                        <input path="act_f" type="radio" name="act_f" value="1" > Si
-                        <input path="act_f" type="radio" name="act_f" value="0" > No<br>
+                       
+                        <form:radiobutton path="act_f"  name="act_f" value="1" /> Si
+                        <form:radiobutton  path="act_f" name="act_f" value="0" /> No<br>
 
                     </li>
                     <li>¿Qué tipo de actividad física? <form:input path="tipo_act" type="text" /></li>
@@ -116,16 +117,18 @@
                     <li>¿Tiene antecedentes familiares con padecimientos o enfermedades crónicas o hereditarias, cuál? <form:input  path="antec_hf" type="text" /></li>
                     <li>¿Consume tabaco?
 
-                        <input path="tabaco" type="radio" name="tabaco" value="1"> Si
-                        <input path="tabaco" type="radio" name="tabaco" value="0" > No<br>
+                        <form:radiobutton path="tabaco"  name="tabaco" value="1"/>  Si
+                        <form:radiobutton  path="tabaco"  name="tabaco" value="0" /> No<br>
+                    
 
                     </li>
                     <li>¿Con qué frecuencia?  <form:input  path="frec_tabaco" type="number" min="0" value="0" /></li>
                     <li>¿Consume bebidas alcohólicas?
 
-                        <input path="alcohol" type="radio" name="alcohol" value="1" > Si
-                        <input path="alcohol" type="radio" name="alcohol" value="0" > No<br>
-
+                        
+                         <form:radiobutton path="alcohol"  name="alcohol" value="1"/>  Si
+                        <form:radiobutton  path="alcohol"  name="alcohol" value="0" /> No<br>
+                        
                     </li>
                     <li>¿Con qué frecuencia? <form:input  path="frec_alcohol" type="number" min="0" value="0" /></li>
                 </ul>
@@ -193,8 +196,10 @@
                 <ul>
                     <li>¿Se ha sometido algún tratamiento nutricional anteriormente?
 
-                        <input path="tratamiento_n" type="radio" name="tratamiento_n" value="1" > Si
-                        <input  path="tratamiento_n" type="radio" name="tratamiento_n" value="0" > No<br>
+                           
+                         <form:radiobutton path="tratamiento_n"  name="tratamiento_n" value="1"/>  Si
+                        <form:radiobutton  path="tratamiento_n"  name="tratamiento_n" value="0" /> No<br>
+                 
 
                     </li>
                     <li>¿Qué tipo de tratamiento? <form:input path="tratamient" type="text" /></li>
@@ -217,7 +222,7 @@
                     <li>¿Cuáles? <form:input  path="HorariosComida" type="text" /></li>
                     <li>Tipo Alimentos de su gusto<br><br>
 
-                        <form:checkbox path="dulce"  name="alimento1" value="dulce" /> Dulce<br>
+                        <form:checkbox path="dulce"  name="alimento1" value="dulce"  /> Dulce<br>
                         <form:checkbox path="amarga"  name="alimento2" value="amarga"/> Amarga<br>
                         <form:checkbox path="salada"  name="alimento3" value="salada"/> Salada<br>
                         <form:checkbox path ="picante"  name="alimento4" value="picante"/> Picante<br>

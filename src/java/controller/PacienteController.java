@@ -717,8 +717,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -965,8 +965,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -2123,23 +2123,12 @@ public class PacienteController {
                         subMinutoBase=horarioBase.substring(i+1,i+3);                      // CALCULO DE MINUTOS DEL HORARIO BASE
                         i=horarioBase.length();                                           // FINALIZACION DEL IF AL ASIFNAR A I EL VALRO DE LA LONGITUD DEL HORARIO BASE
                     }                                                                 // CIERRE IF 2
-                                        
-                    
                 }                                                                         // CIERRE FOR 3
-                
-                
-                
-                
+
                 int horaInicio=Integer.parseInt(subHorarioBase); // PASAR HORA A ENTERO
-                
-              
-                int horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTERO
-                
-              
-                
-                
-                 float MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
-                 float MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
+                int horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTER
+                float MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
+                float MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
                 
               
                 
@@ -2317,8 +2306,8 @@ public class PacienteController {
                         neural_net.get(1).w=pesos.get(2);
                         neural_net.get(1).b=pesos.get(3);
 
-                        Implementacion exe=new Implementacion(neural_net,x);
-                        double[][] output=exe.Implement();
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
                         System.out.println("Entrada: ");
                         double[][] xa=new double[1][];
                         xa[0]=x;
@@ -2334,13 +2323,7 @@ public class PacienteController {
                 
                
                 
-     }
-           
-            
-             
-             
-             
-             
+                        }
              return mv;                                  
          }                                                                                                 // CIERRE ELSE
             

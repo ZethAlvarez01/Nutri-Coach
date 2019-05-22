@@ -15,4 +15,13 @@ public class Conexion {
         dataSource.setPassword("");
         return dataSource;
     }
+    
+    public DriverManagerDataSource conectar(String base){
+        DriverManagerDataSource dataSource=new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost/"+base);
+        dataSource.setUsername("root");
+        dataSource.setPassword("");
+        return dataSource;
+    }
 }

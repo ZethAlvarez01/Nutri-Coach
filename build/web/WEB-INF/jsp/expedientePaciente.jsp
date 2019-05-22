@@ -129,10 +129,23 @@
                             
                        <div class="grid-container">
                     <div class="observaciones">
-                    <p class="titulo">Observaciones</p>
+                    <p class="titulo">Próximas citas</p>
                     <div class="contenido-E">
-                        No disponible.
                         
+                        <c:if test= "${empty citaNutriologo}">
+                            <p>No hay citas programadas con el Nutriólogo<p>   
+                        </c:if>
+                        <c:if test= "${not empty citaNutriologo}">
+                        <p><b>Cita con Nutriólogo</b><p> 
+                         <p><b>Fecha:</b> ${citaNutriologo[0].fecha} <b>Horario:</b> ${citaNutriologo[0].horario}<p>    
+                        </c:if>
+                        <c:if test= "${empty citaPsicologo}">
+                            <p>No hay citas programadas con el Psicólogo<p>   
+                        </c:if>
+                        <c:if test= "${not empty citaPsicologo}">
+                        <p><b>Cita con Psicólogo</b><p> 
+                         <p><b>Fecha:</b> ${citaPsicologo[0].fecha} <b>Horario:</b> ${citaPsicologo[0].horario}<p>    
+                        </c:if>                           
                          
                     </div>
                     </div>
@@ -145,7 +158,23 @@
                     <div class="expediente">
                     <p class="titulo">Expediente</p>
                     <div class="contenido-E">
+                         <c:if test= "${expedienteActivo==1}">
+                                           
+                                           
+                                           <form:form method="post" commandName="expediente">
+                          
+                       <input type="submit" class="texto_menu" name="HistorialExpedientePaciente" value="Expediente general">
+                        <form:input path="no_boleta" placeholder="${datos[0].no_boleta}" value="${datos[0].no_boleta}" type="hidden" />
+                       </form:form>
+                                           
+                                           
+                                       </c:if>
+                        
+                       <c:if test= "${expedienteActivo==0}">
+                                                       
                         No disponible.
+                       </c:if> 
+                      
                     </div>
                     </div>
                     <div class="recomendacion">
@@ -161,12 +190,21 @@
                         No disponible.
                     </div>
                     </div>
+                 
+                    
+                    
                     <div class="historial">
-                    <p>Historial</p>
+                    <p>Información del Nutriólogo</p>
                     <div class="contenido-E">
-                        No disponible.
+                       
+                          
+                        <p> ${nombreN[0].nombre} ${nombreN[0].ap_uno} ${nombreN[0].ap_dos}     <b> No. cédula:</b> ${nombreN[0].no_cedula}</p>
+                        <p> <b>Institución:</b> ${nombreN[0].institucion}   </p>   
+                            <p> <b>Consultorio:</b> ${nombreN[0].consultorio}</p>
+                            <p> <b>Teléfono:</b> ${nombreN[0].telefono}     <b>correo:</b>${nombreN[0].correo}</p>
                     </div>
-                    </div>     
+                    </div>   
+                    
                 </div>
             </div>
             <!--Fin container-->
