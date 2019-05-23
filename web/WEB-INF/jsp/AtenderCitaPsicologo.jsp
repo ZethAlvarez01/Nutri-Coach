@@ -97,7 +97,7 @@
                 
                  <div class="grid-container">
                      <div class="item1">
-                          <form:form method="post" commandName="expedientePsicologico">
+                          <form:form method="post" commandName="expediente">
                     
                   
                               <b>Paciente:</b>    ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno} ${datosPaciente[0].ap_dos}

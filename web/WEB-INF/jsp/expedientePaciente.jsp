@@ -62,6 +62,8 @@
                 <div id="imagen_barra">
                     <a href="expedientePaciente.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
                 </div>
+                    <c:if test= "${empty datosPreferencia}"></c:if>
+                    <c:if test= "${not empty datosPreferencia}">
                 <div id="menu">
                      <c:forEach items="${datos}" var="item"> 
                           
@@ -101,6 +103,10 @@
                          </c:forEach> 
                     
                 </div>
+                </c:if>
+                
+                
+                
             </div>
 
         </div>
@@ -112,9 +118,29 @@
                     <h1>¡Hola, <c:out value="${dato.nombre}"/>!</h1>
                 </c:forEach>
          
-           <c:forEach items="${datos}" var="dato">
-                
-                        <c:if test= "${dato.no_cedula==0}">
+           
+                 <c:if test= "${empty datosPreferencia}">
+                      <p><h1>Espera un momento!</h1></p
+                            <p><h1>Para vivir la experiencia completa de Nutri-Coach debes proporcionar la siguiente información </h1></p>
+                            <form:form method="post" commandName="preferencias">
+                            <p>¿Cuál de los siguientes temas te resulta de intéres?</p>
+                             <form:checkbox path="suplementos"   value="1"  /> Suplementos Alimenticios
+                             <form:checkbox path="motivacional"   value="1"  /> Motivación
+                             <form:checkbox path="preparacionA"   value="1"  /> Preparación de Alimentos
+                             <form:checkbox path="beneficiosA"   value="1"  /> Beneficios de los Alimentos
+                             <form:checkbox path="deportes"   value="1"  /> Deportes
+                             <form:checkbox path="medicamentos"   value="1"  /> Medicamentos
+                             <form:checkbox path="salud"   value="1"  /> Salud
+                             <br><form:errors path="suplementos" />
+                             <input  class="cita" type="submit" name="GuardarPreferencias" value="Guardar" >       
+                            </form:form>
+                     
+                 </c:if>
+
+                 <c:if test= "${not empty datosPreferencia}">
+                 <c:forEach items="${datos}" var="dato"> 
+                 <c:if test= "${dato.no_cedula==0}">
+                           
                             <p><h1>No cuentas con un nutriólogo</h1></p
                             <p><h1>Por favor ingresa a la sección de citas para</h1></p>
                         <form:form method="post" commandName="Paciente">
@@ -210,8 +236,9 @@
             <!--Fin container-->
                             
                         </c:if>
+           
                         </c:forEach>    
-                
+                </c:if> 
         </div>
         <!--Fin contenido-->            
                 
