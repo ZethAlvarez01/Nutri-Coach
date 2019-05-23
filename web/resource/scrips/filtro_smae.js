@@ -27,11 +27,10 @@ function abrir_menu(boton){
     } 
 }
 
-function obtener(alimento,lista,dia){
+function obtener(alimento,cantidad){
     if(confirm("¿Deseas agregar este alimento a la dieta?")){
-        console.log(alimento+" "+lista)
-        alert(dia);
+        console.log(alimento+" "+cantidad)
         let editar=document.getElementById(dia);
-        editar.innerHTML=lista;
+        editar.innerHTML+=cantidad+" "+alimento;
     }
 }

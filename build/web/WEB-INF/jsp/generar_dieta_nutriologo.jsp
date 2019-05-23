@@ -140,7 +140,7 @@
                             </tr>
 
                             <c:forEach items="${datoT1}" var="item">
-                                <tr onclick="obtener('${item.alimento}','${item}',dia)">
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}')">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
