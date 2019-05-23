@@ -287,3 +287,22 @@ h1 {
     margin: -30px 5px 0px;
     outline-color: rgb(108, 29, 69);
 }
+
+.categoria{
+    cursor: pointer;
+    background: red;
+}
+
+table tbody td{
+    cursor: pointer;
+}
+
+table tbody tr:hover{
+    background: rgb(108, 29, 69, 0.8);
+}
+
+#smae{
+    height: 500px;
+    background: blue;
+    overflow-y: auto;
+}
