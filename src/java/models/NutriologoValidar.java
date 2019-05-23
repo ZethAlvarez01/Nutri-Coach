@@ -260,6 +260,12 @@ public NutriologoValidar() {
              System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length()-1));
         }    
         
+                               
+  /////////////////VALIDACIÓN DE DATOS DE CEDULA
+  
+                               
+                               
+                               
         
        /////////////////////////////////////
        //////////////Validación de horas de trabajo
