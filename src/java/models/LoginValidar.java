@@ -29,6 +29,61 @@ public class LoginValidar implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Pass","required.Pass","La contraseña es obligatoria");
         System.out.println("NO ENCONTRE LA CONTRASEÑA");
         
+        
+        ///////////////////////VALIDACIÓN DOMICILIO
+        if (!login.getUsuario().equals("")) {
+            int invalido = 0;
+            for (int i = 0; i < login.getUsuario().length(); i++) {
+                if (login.getUsuario().charAt(i) == '\'') {
+                    System.out.println("Se encontro una comilla");
+                    invalido = 1;
+                }
+                if (login.getUsuario().charAt(i) == '\"') {
+                    System.out.println("Se encontro una comilla doble");
+                    invalido = 1;
+                }
+                if (login.getUsuario().charAt(i) == '|') {
+                    System.out.println("Se encontro un pipe");
+                    invalido = 1;
+                }
+            }
+
+            if (invalido == 1) {
+                errors.rejectValue("Usuario", "Usuario.incorrect", "El usuario es inválido"); //Si ninguna condición se cumple el telefono es invalido
+
+            }
+        }
+        
+        ///////////////////////VALIDACIÓN DOMICILIO
+        if (!login.getPass().equals("")) {
+            int invalido = 0;
+            for (int i = 0; i < login.getPass().length(); i++) {
+                if (login.getPass().charAt(i) == '\'') {
+                    System.out.println("Se encontro una comilla");
+                    invalido = 1;
+                }
+                if (login.getPass().charAt(i) == '\"') {
+                    System.out.println("Se encontro una comilla doble");
+                    invalido = 1;
+                }
+                if (login.getPass().charAt(i) == '|') {
+                    System.out.println("Se encontro un pipe");
+                    invalido = 1;
+                }
+            }
+
+            if (invalido == 1) {
+                errors.rejectValue("Pass", "Pass.incorrect", "El password es inválido"); //Si ninguna condición se cumple el telefono es invalido
+
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
     }
     
 }

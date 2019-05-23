@@ -144,6 +144,7 @@
                        <input type="submit" class="texto_menu" name="AgendarCitaPsico" value="Agendar Cita">
                        
                        </form:form>
+                       
                               <form:form method="post" commandName="cita">
                           <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
                        <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">

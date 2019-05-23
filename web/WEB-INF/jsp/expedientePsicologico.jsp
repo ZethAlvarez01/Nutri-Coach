@@ -151,7 +151,7 @@
                                      
                                       <form:form method="post" commandName="cita">
                           <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
-                       <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
+                       <input type="submit" class="texto_menu" name="AtenderCitaPsicologo" value="Atender Emergencia">
                        
                        </form:form>
                                  </c:if>
