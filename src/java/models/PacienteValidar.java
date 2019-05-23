@@ -185,7 +185,7 @@ public class PacienteValidar implements Validator {
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(8, datosL2.get(i).toString().length() - 1).equals(paciente.getCorreo())) {
-                errors.rejectValue("correo", "correo.incorrect", "El número correo ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("correo", "correo.incorrect", "El correo ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(8, datosL2.get(i).toString().length() - 1));
