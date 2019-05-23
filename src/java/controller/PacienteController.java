@@ -24,13 +24,16 @@ import models.Psicologo;
 import models.entradaForo;
 import models.foroValidar;
 import models.Comentario;
+import models.ConsultaEvolucion;
 import models.Nutriologo;
+import models.Preferencias;
 import models.cita;
 import models.citaValidar;
 import models.comentarioValidar;
 import models.diario;
 import models.diarioValidar;
 import models.expediente;
+import models.preferenciasValidar;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -54,12 +57,14 @@ public class PacienteController {
      private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
       private diarioValidar diarioValidar;                           //Variable para validar hoja del diario
       private citaValidar citaValidar;                           //Variable para validar cita
+       private preferenciasValidar preferenciasValidar;                           //Variable para validar cita
      
       public PacienteController() {
         this.foroValidar=new foroValidar();                            // Instancia de la clase foroValidar
         this.comentarioValidar=new comentarioValidar();               // Instancia de la clase comentarioValidar
         this.diarioValidar=new diarioValidar();                      // Instancia de la clase diarioValidar
-        this.citaValidar=new citaValidar();                      // Instancia de la clase diarioValidar
+        this.citaValidar=new citaValidar();                      // Instancia de la clase citaValidar
+         this.preferenciasValidar=new preferenciasValidar();   // Instancia de la clase preferenciasValidar
         Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate=new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
     }
@@ -654,42 +659,174 @@ public class PacienteController {
                                 
                                  mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
                                  mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("preferencias", new Preferencias());
                                  
-                                 
-                                 sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+alert+"');";
-                    List datosEv=this.jdbcTemplate.queryForList(sql);
-                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
-                    //List datas=evo.consulta();
-                    System.out.println(datosEv);
-                    mv.addObject("datas",datosEv);
+                 sql="select * from preferencias where no_boleta="+alert;                
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datosPreferencia",datosL2); 
+                  sql="select id_expediente from expediente where no_boleta="+alert;
+                   datosL2 = this.jdbcTemplate.queryForList(sql);
+                   
+                   if(datosL2.isEmpty()){
+                       
+                   }
+                   else{
+                    
+                    String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length()-1);
+                       
+                       
+             
                     //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
                       //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
                        //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
 
-                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-                    for(Map<String, Object> row : rows){
-                       String edad = row.get("edad").toString();
-                       String sexo = row.get("sexo").toString();
-                       String peso = row.get("peso").toString();
-                       String altura = row.get("altura").toString();
-                       String ansiedad = row.get("ansiedad").toString();
-                       String depresion = row.get("depresion").toString();
-                       String ira = row.get("ira").toString();
-                       String estres = row.get("estres").toString();
-                       String felicidad = row.get("felicidad").toString();
-                       String dulce = row.get("dulce").toString();
-                       String amarga = row.get("amarga").toString();
-                       String salada = row.get("salada").toString();
-                       String picante = row.get("picante").toString();
-                       String acida = row.get("acida").toString();
-                       String act_f = row.get("act_f").toString();
-                       String suplementos = row.get("suplementos").toString();
-                       String motivacional = row.get("motivacional").toString();
-                       String preparacionA = row.get("preparacionA").toString();
-                       String beneficiosA = row.get("beneficiosA").toString();
-                       String deportes = row.get("deportes").toString();
-                       String medicamentos = row.get("medicamentos").toString();
-                       String salud= row.get("salud").toString();
+               sql="select edad from paciente where no_boleta="+alert; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);   
+                          
+                       String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);                  //DATO DE PACIENTE
+                    
+                       sql="select sexo from paciente where no_boleta="+alert; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                        String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);                 // DATO DE PACIENTE 
+                       
+                      
+                        
+                        sql="select id_hojaExpediente from hojaexpediente where id_expediente="+expediente+" order by id_hojaExpediente desc limit 1";
+                             datosL2 = this.jdbcTemplate.queryForList(sql);
+                     String   hojaexpediente=datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length()-1);
+                        
+                        sql="select peso from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                     String peso =datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);                     // DATO DEL EXPEDIENTE
+                         
+                     sql="select talla from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                     
+                       String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length()-1);               // DATO DEL EXPEDIENTE
+                       
+                       sql="select dulce from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);               // DATO DEL EXPEDIENTE
+                     
+                       sql="select amarga from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       
+                       String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length()-1);             // DATO DEL EXPEDIENTE
+                      
+                       sql="select salada from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length()-1);             // DATO DEL EXPEDIENTE
+                      
+                       sql="select picante from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       
+                       
+                       String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1);          // DATO DEL EXPEDIENTE
+                      
+                       
+                       sql="select acida from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       
+                       
+                       String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);             // DATO DEL EXPEDIENTE
+                      
+                       sql="select act_f from hojaexpediente where id_hojaExpediente="+hojaexpediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       
+                       String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);             // DATO DEL EXPEDIENT
+                       
+                       
+                       
+                       sql="select id_diario from diario where id_expediente="+expediente; 
+                          datosL2 = this.jdbcTemplate.queryForList(sql);  
+                       
+                       String diario=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+                       
+                       sql="select id_hojas from hojas where id_diario="+diario+" order by id_hojas desc limit 1 ";
+                        datosL2 = this.jdbcTemplate.queryForList(sql);  
+                        diario=datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length()-1);
+                        System.out.println("ID HOJAS "+diario);
+                        
+                         sql="select sentimiento from hojas where id_hojas="+diario;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);  
+                        String sentimiento=datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length()-1);
+                        
+                        
+                        String ansiedad="0";
+                        String depresion="0";
+                        String ira="0";
+                        String estres="0";
+                        String felicidad="0";
+                        
+                        if (sentimiento.equals("Ansioso")){
+                            ansiedad="1";
+                        }
+                        if (sentimiento.equals("Estresado")){
+                            estres="1";
+                        }
+                        if (sentimiento.equals("Enojado")){
+                            ira="1";
+                        }
+                        if (sentimiento.equals("Triste")){
+                            depresion="1";
+                        }
+                        if (sentimiento.equals("Feliz")){
+                            felicidad="1";
+                        }
+                       
+                       
+                       sql="select suplementos from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);  
+                        
+                       String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length()-1);          //DATO DE PREFERENCIAS
+                    
+                       sql="select motivacional from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql); 
+                       
+                       
+                       String motivacional =datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length()-1);        // DATO DE PREFERENCIAS
+                      
+                       sql="select preparacionA from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);
+                       
+                       
+                       String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length()-1);       // DATO DE PREFERENCIAS
+                      
+                       sql="select beneficiosA from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);
+                       
+                       
+                       
+                       String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length()-1);         // DATO DE PREFERENCIAS  
+                       
+                       
+                       sql="select deportes from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);
+                       
+                       
+                       
+                       String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length()-1);              // DATO DE PREFERENCIAS
+                     
+                       sql="select medicamentos from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);
+                       
+                       
+                       
+                       String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length()-1);        // DATO DE PREFERENCIAS
+                       
+                       sql="select salud from preferencias where no_boleta="+alert;
+                        datosL2 = this.jdbcTemplate.queryForList(sql);
+                       
+                       
+                       String salud= datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);                      // DATO DE PREFERENCAS
                        
                        double pesoD=Double.parseDouble(peso);
                        int pesoI=(int)pesoD;
@@ -729,13 +866,16 @@ public class PacienteController {
 
                         ArrayList<String> salida=tr.seleccion(output[0]);
                     
-                       System.out.println(salida);
+                       System.out.println(salida +" salida de la red neuronal");
                        mv.addObject("respuesta",salida.get(0));
                 
                
                 
-     }
+
                     
+                   }
+                                 
+                                
           sql="select id_expediente from expediente where no_boleta="+alert;          
                      datosL2=this.jdbcTemplate.queryForList(sql);
                       int expedienteActivo=0;
@@ -763,7 +903,7 @@ public class PacienteController {
 
           mv.addObject("citaNutriologo",datosL2);
           
-          mv.addObject("citaPsicologo",datosL2);
+         
           sql="select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula="+cedula;
           datosL2=this.jdbcTemplate.queryForList(sql);
           mv.addObject("nombreN",datosL2);
@@ -780,7 +920,7 @@ public class PacienteController {
           
           sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
            datosL2=this.jdbcTemplate.queryForList(sql);
-
+          mv.addObject("citaPsicologo",datosL2);
           
      //System.out.println(datas);
       return mv;
@@ -2123,12 +2263,23 @@ public class PacienteController {
                         subMinutoBase=horarioBase.substring(i+1,i+3);                      // CALCULO DE MINUTOS DEL HORARIO BASE
                         i=horarioBase.length();                                           // FINALIZACION DEL IF AL ASIFNAR A I EL VALRO DE LA LONGITUD DEL HORARIO BASE
                     }                                                                 // CIERRE IF 2
+                                        
+                    
                 }                                                                         // CIERRE FOR 3
-
+                
+                
+                
+                
                 int horaInicio=Integer.parseInt(subHorarioBase); // PASAR HORA A ENTERO
-                int horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTER
-                float MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
-                float MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
+                
+              
+                int horaInicioCompara=Integer.parseInt(subHorario); // PASAR HORA A ENTERO
+                
+              
+                
+                
+                 float MinInicio=Float.parseFloat(subMinutoBase); // PASAR MINUTOS A FLOTANTE
+                 float MinFin=Float.parseFloat(subMinutoHorario1);     // PASAR MINUTOS A FLOTANTE
                 
               
                 
@@ -2323,7 +2474,13 @@ public class PacienteController {
                 
                
                 
-                        }
+     }
+           
+            
+             
+             
+             
+             
              return mv;                                  
          }                                                                                                 // CIERRE ELSE
             
@@ -2453,50 +2610,9 @@ public class PacienteController {
          
             
        
-    }   
-     
-     
-     
-     
-     ////////////////////
-    //ACCIÓN DEL BOTON CERRAR
-     
-     
-     
-     @RequestMapping(params="cerrar", method = RequestMethod.POST)
-    public ModelAndView logout(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
-                
-        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
-       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
-       
-       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
-           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
-       }     
-       
-       
-       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
-          
-          
-       
-            
-            session.removeAttribute("Paciente");                                 // REMOVEMOS EL ATRIBUTO DE SESION RELACIONADO AL PACIENTE
-                  
-            session.invalidate();                                                 // INVALIDAMOS LA SESION
-            
-           
-            
-            
-            
-            
-            return new ModelAndView("redirect:/login.htm");                      // REDIRECCIONAMOS A LOGIN
-        
-       
-            
-                
-       
-       
-    }
-     
+    } 
+    
+         
     /////////////////////////////
     /////ACCION DEL BOTÓN consultar entrada expediente
     
@@ -2574,6 +2690,421 @@ public class PacienteController {
          
             
        
+    }  
+     
+  ///////////////////
+     ////ACCIÓN DE BOTON GuardarPreferencias
+     
+      @RequestMapping(params="GuardarPreferencias", method = RequestMethod.POST)
+    public ModelAndView GuardarPreferencias(@ModelAttribute("preferencias") Preferencias pf, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+       
+           
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+          
+       this.preferenciasValidar.validate(pf, result);
+          // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+         if(result.hasErrors()){                                                            // INICIO IF
+             
+             //volvemos al formulario porque los datos ingresados son incorrectos
+             
+         
+                
+                ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
+                mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                String sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("preferencias", new Preferencias());
+                                 
+                 sql="select * from preferencias where no_boleta="+alert;                
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datosPreferencia",datosL2); 
+                                 
+                                 
+                                 sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+alert+"');";
+                    List datosEv=this.jdbcTemplate.queryForList(sql);
+                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
+                    //List datas=evo.consulta();
+                    System.out.println(datosEv);
+                    mv.addObject("datas",datosEv);
+                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
+
+                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                    for(Map<String, Object> row : rows){                   
+                       String edad = row.get("edad").toString();                  //DATO DE PACIENTE
+                       String sexo = row.get("sexo").toString();                  // DATO DE PACIENTE 
+                       String peso = row.get("peso").toString();                  // DATO DEL EXPEDIENTE
+                       String altura = row.get("altura").toString();             // DATO DEL EXPEDIENTE
+                       
+                       String dulce = row.get("dulce").toString();             // DATO DEL EXPEDIENTE
+                       String amarga = row.get("amarga").toString();           // DATO DEL EXPEDIENTE
+                       String salada = row.get("salada").toString();           // DATO DEL EXPEDIENTE
+                       String picante = row.get("picante").toString();         // DATO DEL EXPEDIENTE
+                       String acida = row.get("acida").toString();            // DATO DEL EXPEDIENTE
+                       String act_f = row.get("act_f").toString();           // DATO DEL EXPEDIENT
+                       
+                       
+                       
+                       
+                       
+                       String ansiedad = row.get("ansiedad").toString();           // DATO DEL DIARIO
+                       String depresion = row.get("depresion").toString();        // DATO DEL DIARIO
+                       String ira = row.get("ira").toString();                      // DATO DEL DIARIO
+                       String estres = row.get("estres").toString();              // DATO DEL DIARIO
+                       String felicidad = row.get("felicidad").toString();         // DATO DEL DIARIO
+                   
+                       String suplementos = row.get("suplementos").toString();          //DATO DE PREFERENCIAS
+                       String motivacional = row.get("motivacional").toString();        // DATO DE PREFERENCIAS
+                       String preparacionA = row.get("preparacionA").toString();        // DATO DE PREFERENCIAS
+                       String beneficiosA = row.get("beneficiosA").toString();         // DATO DE PREFERENCIAS  
+                       String deportes = row.get("deportes").toString();              // DATO DE PREFERENCIAS
+                       String medicamentos = row.get("medicamentos").toString();         // DATO DE PREFERENCIAS
+                       String salud= row.get("salud").toString();                       // DATO DE PREFERENCAS
+                       
+                       double pesoD=Double.parseDouble(peso);
+                       int pesoI=(int)pesoD;
+                       String pesoS=pesoI+"";
+                       
+                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
+                       
+                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
+                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
+                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
+                               deportes,medicamentos,salud);
+                       
+                        double[] x=tr.vector();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
+
+                        Crear_RN redRecomendaciones=new Crear_RN();
+                        neural_net=redRecomendaciones.create_nn(topology,0);
+
+                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+
+                        neural_net.get(0).w=pesos.get(0);
+                        neural_net.get(0).b=pesos.get(1);
+
+                        neural_net.get(1).w=pesos.get(2);
+                        neural_net.get(1).b=pesos.get(3);
+
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
+                        System.out.println("Entrada: ");
+                        double[][] xa=new double[1][];
+                        xa[0]=x;
+                        op.print(xa);
+
+                        System.out.println("Salida: ");
+                        op.print(output);
+
+                        ArrayList<String> salida=tr.seleccion(output[0]);
+                    
+                       System.out.println(salida);
+                       mv.addObject("respuesta",salida.get(0));
+                
+               
+                
+     }
+                    
+          sql="select id_expediente from expediente where no_boleta="+alert;          
+                     datosL2=this.jdbcTemplate.queryForList(sql);
+                      int expedienteActivo=0;
+               if(datosL2.isEmpty()){
+                          expedienteActivo=0;
+                      }
+                      else{
+                          expedienteActivo=1;
+                      }
+                      mv.addObject("expedienteActivo",expedienteActivo);
+                       mv.addObject("expediente",new expediente());
+                       
+                       
+                       
+          sql="select no_cedula from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+          String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+
+          mv.addObject("citaNutriologo",datosL2);
+          
+          mv.addObject("citaPsicologo",datosL2);
+          sql="select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula="+cedula;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          mv.addObject("nombreN",datosL2);
+          
+          
+                       
+          sql="select no_cedulap from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+           cedula=datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+
+          
+     //System.out.println(datas);
+      return mv;                                                            //RETORNAMOS EL MODELO
+         }                                                                               // CIERRE DE IF
+         else{                                                                           // INICIO ELSE
+            int suplementosA=0;
+            int motivacionA=0;
+            int preparacionAL=0;
+            int beneficiosAL=0;
+            int deportesA=0;
+            int medicamentosA=0;
+            int saludA=0;
+               if(pf.getSuplementos()!=null){
+                   suplementosA=Integer.parseInt(pf.getSuplementos());
+               } 
+             if(pf.getMotivacional()!=null){
+                   motivacionA=Integer.parseInt(pf.getMotivacional());
+               } 
+             if(pf.getPreparacionA()!=null){
+                   preparacionAL=Integer.parseInt(pf.getPreparacionA());
+               } 
+             if(pf.getBeneficiosA()!=null){
+                   beneficiosAL=Integer.parseInt(pf.getBeneficiosA());
+               } 
+             if(pf.getDeportes()!=null){
+                   deportesA=Integer.parseInt(pf.getDeportes());
+               } 
+             if(pf.getMedicamentos()!=null){
+                   medicamentosA=Integer.parseInt(pf.getMedicamentos());
+               } 
+             if(pf.getSalud()!=null){
+                   saludA=Integer.parseInt(pf.getSalud());
+               } 
+             
+             String sql="insert into preferencias values("+'0'+","+alert+","+suplementosA+","+motivacionA+","+preparacionAL+","+beneficiosAL+","+deportesA+","+medicamentosA+","+saludA+");";   // INSERTAMOS EN LA TABLA PREFERENCIAS LOS DATOS RECABADOS ANTERIORMENTE
+                               
+       
+                this.jdbcTemplate.update(sql);                                                                              // REALIZAMOS LA INSERCIÓN
+            
+       
+       
+        
+            
+            
+           
+                ModelAndView mv=new ModelAndView();                          //CREACIÓN DEL MODELO
+                mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+                
+                 sql="select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta="+alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+                                List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datos",datosL2);                                                       // Pasa la lilsta completa
+                                 mv.addObject("Paciente",new Paciente());
+                                 mv.addObject("preferencias", new Preferencias());
+                                 
+                 sql="select * from preferencias where no_boleta="+alert;                
+                                 datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+                                
+                                 mv.addObject("datosPreferencia",datosL2); 
+                                 
+                                 
+                                 sql="select*from evolucion where id_exp=(select id_expediente from expediente where no_boleta='"+alert+"');";
+                    List datosEv=this.jdbcTemplate.queryForList(sql);
+                    //ConsultaEvolucion evo=new ConsultaEvolucion(login.getUsuario());
+                    //List datas=evo.consulta();
+                    System.out.println(datosEv);
+                    mv.addObject("datas",datosEv);
+                    //sql="select edad,sexo,peso,altura,ansiedad,depresion,ira,estres,"
+                      //      + "felicidad,dulce,amarga,salada,picante,acida,act_f,suplementos,"
+                       //     + "motivacional,preparacionA,beneficiosA,deportes,medicamentos,salud from paciente,expediente where paciente.no_boleta='"+lo.getUsuario()+"';";
+
+                   List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                    for(Map<String, Object> row : rows){                   
+                       String edad = row.get("edad").toString();                  //DATO DE PACIENTE
+                       String sexo = row.get("sexo").toString();                  // DATO DE PACIENTE 
+                       String peso = row.get("peso").toString();                  // DATO DEL EXPEDIENTE
+                       String altura = row.get("altura").toString();             // DATO DEL EXPEDIENTE
+                       
+                       String dulce = row.get("dulce").toString();             // DATO DEL EXPEDIENTE
+                       String amarga = row.get("amarga").toString();           // DATO DEL EXPEDIENTE
+                       String salada = row.get("salada").toString();           // DATO DEL EXPEDIENTE
+                       String picante = row.get("picante").toString();         // DATO DEL EXPEDIENTE
+                       String acida = row.get("acida").toString();            // DATO DEL EXPEDIENTE
+                       String act_f = row.get("act_f").toString();           // DATO DEL EXPEDIENT
+                       
+                       
+                       
+                       
+                       
+                       String ansiedad = row.get("ansiedad").toString();           // DATO DEL DIARIO
+                       String depresion = row.get("depresion").toString();        // DATO DEL DIARIO
+                       String ira = row.get("ira").toString();                      // DATO DEL DIARIO
+                       String estres = row.get("estres").toString();              // DATO DEL DIARIO
+                       String felicidad = row.get("felicidad").toString();         // DATO DEL DIARIO
+                   
+                       String suplementos = row.get("suplementos").toString();          //DATO DE PREFERENCIAS
+                       String motivacional = row.get("motivacional").toString();        // DATO DE PREFERENCIAS
+                       String preparacionA = row.get("preparacionA").toString();        // DATO DE PREFERENCIAS
+                       String beneficiosA = row.get("beneficiosA").toString();         // DATO DE PREFERENCIAS  
+                       String deportes = row.get("deportes").toString();              // DATO DE PREFERENCIAS
+                       String medicamentos = row.get("medicamentos").toString();         // DATO DE PREFERENCIAS
+                       String salud= row.get("salud").toString();                       // DATO DE PREFERENCAS
+                       
+                       double pesoD=Double.parseDouble(peso);
+                       int pesoI=(int)pesoD;
+                       String pesoS=pesoI+"";
+                       
+                       System.out.println(edad + " " + pesoS + " "+ sexo + " " + dulce + " " +medicamentos+" "+act_f);
+                       
+                       Tratamiento tr=new Tratamiento(edad,sexo,pesoS,altura,ansiedad,
+                               depresion,ira,estres,felicidad,dulce,amarga,salada,picante,
+                               acida,act_f,suplementos,motivacional, preparacionA,beneficiosA,
+                               deportes,medicamentos,salud);
+                       
+                        double[] x=tr.vector();
+                        ArrayList<Capa_neuronas> neural_net;
+                        libMatrices op=new libMatrices();
+
+                        Crear_RN redRecomendaciones=new Crear_RN();
+                        neural_net=redRecomendaciones.create_nn(topology,0);
+
+                        ArrayList<double[][]> pesos=redRecomendaciones.asignarPesos();
+
+                        neural_net.get(0).w=pesos.get(0);
+                        neural_net.get(0).b=pesos.get(1);
+
+                        neural_net.get(1).w=pesos.get(2);
+                        neural_net.get(1).b=pesos.get(3);
+
+                        Implementacion exe=new Implementacion(neural_net);
+                        double[][] output=exe.prediction(x);
+                        System.out.println("Entrada: ");
+                        double[][] xa=new double[1][];
+                        xa[0]=x;
+                        op.print(xa);
+
+                        System.out.println("Salida: ");
+                        op.print(output);
+
+                        ArrayList<String> salida=tr.seleccion(output[0]);
+                    
+                       System.out.println(salida);
+                       mv.addObject("respuesta",salida.get(0));
+                
+               
+                
+     }
+                    
+          sql="select id_expediente from expediente where no_boleta="+alert;          
+                     datosL2=this.jdbcTemplate.queryForList(sql);
+                      int expedienteActivo=0;
+               if(datosL2.isEmpty()){
+                          expedienteActivo=0;
+                      }
+                      else{
+                          expedienteActivo=1;
+                      }
+                      mv.addObject("expedienteActivo",expedienteActivo);
+                       mv.addObject("expediente",new expediente());
+                       
+                       
+                       
+          sql="select no_cedula from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+          String cedula=datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+
+          mv.addObject("citaNutriologo",datosL2);
+          
+          mv.addObject("citaPsicologo",datosL2);
+          sql="select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula="+cedula;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          mv.addObject("nombreN",datosL2);
+          
+          
+                       
+          sql="select no_cedulap from paciente where no_boleta="+alert;
+          datosL2=this.jdbcTemplate.queryForList(sql);
+          
+              
+          
+           cedula=datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length()-1);
+          
+          
+          sql="select fecha,horario from cita where no_boleta="+alert+" and no_cedula="+cedula+" and estado=3";
+           datosL2=this.jdbcTemplate.queryForList(sql);
+            mv.addObject("citaPsicologo",datosL2);
+          
+     //System.out.println(datas);
+      return mv;                                                            //RETORNAMOS EL MODELO
+         }                                                                                                   // CIERRE DE ELSE
+       
+       
     }   
+     
+     
+     ////////////////////
+    //ACCIÓN DEL BOTON CERRAR
+     
+     
+     
+     @RequestMapping(params="cerrar", method = RequestMethod.POST)
+    public ModelAndView logout(@ModelAttribute("Paciente") Paciente p, BindingResult result,HttpServletRequest hsr, HttpServletResponse hsrl) {
+                
+        HttpSession session =hsr.getSession();                              //OBETENEMOS LA SESIÓN
+       String alert = (String)session.getAttribute("Paciente");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+       
+       if (alert == null){                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+           return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+       }     
+       
+       
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+          
+          
+       
+            
+            session.removeAttribute("Paciente");                                 // REMOVEMOS EL ATRIBUTO DE SESION RELACIONADO AL PACIENTE
+                  
+            session.invalidate();                                                 // INVALIDAMOS LA SESION
+            
+           
+            
+            
+            
+            
+            return new ModelAndView("redirect:/login.htm");                      // REDIRECCIONAMOS A LOGIN
+        
+       
+            
+                
+       
+       
+    }
+ 
       
 }
