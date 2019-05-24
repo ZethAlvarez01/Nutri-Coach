@@ -152,7 +152,7 @@ public class PacienteController {
         mv.addObject("Paciente", new Paciente());                                             // PASA OBJETO PACIENTE
         mv.addObject("diario", new diario());                                             // PASA OBJETO DIARIO
 
-        sql = "select * from hojas where id_diario=(select id_diario from diario where id_expediente =( select id_expediente from expediente where no_boleta=" + alert + "))";   // CONSULTA PARA EXTRAER TODAS LAS HOJAS DEL DIARIO
+        sql = "select * from hojas where id_diario=(select id_diario from diario where id_expediente =( select id_expediente from expediente where no_boleta=" + alert + "))order by fecha desc";   // CONSULTA PARA EXTRAER TODAS LAS HOJAS DEL DIARIO
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("hojas", datosL2);                                                       // Pasa la lilsta completa                 
         System.out.println(datosL2);
@@ -1462,7 +1462,39 @@ public class PacienteController {
             return mv;                                                                                            //RETORNAMOS EL MODELO
         } // CIERRE DE IF
         else {                                                                           // INICIO ELSE
-            String sql = "insert into entrada values(" + '0' + "," + alert + ",'" + eF.getTitulo() + "','" + eF.getContenido() + "','','" + eF.getFecha() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+
+            String contenido = eF.getContenido();
+            String titulo = eF.getTitulo();
+
+            String subTitulo = "";
+            String subContenido = "";
+            for (int i = 0; i < eF.getContenido().length(); i++) {
+                if (contenido.charAt(i) == '\'') {
+                    subContenido = subContenido + "\\'";
+                } else {
+                    if (contenido.charAt(i) == '\\') {
+                        subContenido = subContenido + "\\\\";
+                    } else {
+                        subContenido = subContenido + contenido.charAt(i);
+                    }
+
+                }
+            }
+
+            for (int i = 0; i < eF.getTitulo().length(); i++) {
+                if (titulo.charAt(i) == '\'') {
+                    subTitulo = subTitulo + "\\'";
+                } else {
+                    if (titulo.charAt(i) == '\\') {
+                        subTitulo = subTitulo + "\\\\";
+                    } else {
+                        subTitulo = subTitulo + titulo.charAt(i);
+                    }
+
+                }
+            }
+
+            String sql = "insert into entrada values(" + '0' + "," + alert + ",'" + subTitulo + "','" + subContenido + "','','" + eF.getFecha() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
 
             this.jdbcTemplate.update(sql);                                                                              // REALIZAMOS LA INSERCIÓN
 
@@ -1602,7 +1634,39 @@ public class PacienteController {
             return mv;                                                                                           // RETORNAMOS EL MODELO
         } // CIERRE DE IF  
         else {                                                                                                    // INICIO DE ELSE
-            String sql = "update entrada set titulo='" + eF.getTitulo() + "',contenido='" + eF.getContenido() + "'where id_entrada=" + eF.getId_entrada() + ";"; // ACTUALIZAMOS LA ENTRADA EN TITULO Y CONTENIDO DONDE el ID DE ENTRADA SE IGUAL A id_entrada
+
+            String contenido = eF.getContenido();
+            String titulo = eF.getTitulo();
+
+            String subTitulo = "";
+            String subContenido = "";
+            for (int i = 0; i < eF.getContenido().length(); i++) {
+                if (contenido.charAt(i) == '\'') {
+                    subContenido = subContenido + "\\'";
+                } else {
+                    if (contenido.charAt(i) == '\\') {
+                        subContenido = subContenido + "\\\\";
+                    } else {
+                        subContenido = subContenido + contenido.charAt(i);
+                    }
+
+                }
+            }
+
+            for (int i = 0; i < eF.getTitulo().length(); i++) {
+                if (titulo.charAt(i) == '\'') {
+                    subTitulo = subTitulo + "\\'";
+                } else {
+                    if (titulo.charAt(i) == '\\') {
+                        subTitulo = subTitulo + "\\\\";
+                    } else {
+                        subTitulo = subTitulo + titulo.charAt(i);
+                    }
+
+                }
+            }
+
+            String sql = "update entrada set titulo='" + subTitulo + "',contenido='" + subContenido + "'where id_entrada=" + eF.getId_entrada() + ";"; // ACTUALIZAMOS LA ENTRADA EN TITULO Y CONTENIDO DONDE el ID DE ENTRADA SE IGUAL A id_entrada
 
             this.jdbcTemplate.update(sql);                       //REALIZAMOS LA ACTUALIZACIÓN
 
@@ -1863,7 +1927,24 @@ public class PacienteController {
 
         } // CIERRE IF
         else {
-            String sql = "insert into comentarios values(" + '0' + "," + comen.getId_entrada() + ",'" + comen.getId_usuario() + "','" + comen.getContenido() + "','','" + comen.getFecha() + "');"; // INSERTAMOS EL COMENTARIO EN LA ENTRADA CON EL ID id_entrada EL TITULO Y EL CONTENIDO
+
+            String contenido = comen.getContenido();
+
+            String subContenido = "";
+            for (int i = 0; i < comen.getContenido().length(); i++) {
+                if (contenido.charAt(i) == '\'') {
+                    subContenido = subContenido + "\\'";
+                } else {
+                    if (contenido.charAt(i) == '\\') {
+                        subContenido = subContenido + "\\\\";
+                    } else {
+                        subContenido = subContenido + contenido.charAt(i);
+                    }
+
+                }
+            }
+
+            String sql = "insert into comentarios values(" + '0' + "," + comen.getId_entrada() + ",'" + comen.getId_usuario() + "','" + subContenido + "','','" + comen.getFecha() + "');"; // INSERTAMOS EL COMENTARIO EN LA ENTRADA CON EL ID id_entrada EL TITULO Y EL CONTENIDO
 
             this.jdbcTemplate.update(sql);       // INSERTAMOS EL COMENTARIO
 
@@ -2065,7 +2146,23 @@ public class PacienteController {
                 cadena = datosL2.get(0).toString();                            // sacamos el id
                 subcadena = cadena.substring(11, cadena.length() - 1);           // sacamos el id
 
-                sql = "insert into hojas values(" + '0' + "," + subcadena + ",'" + d.getFecha() + "','" + d.getContenido() + "','" + d.getSentimiento() + "','')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                String contenido = d.getContenido();
+
+                String subContenido = "";
+                for (int i = 0; i < d.getContenido().length(); i++) {
+                    if (contenido.charAt(i) == '\'') {
+                        subContenido = subContenido + "\\'";
+                    } else {
+                        if (contenido.charAt(i) == '\\') {
+                            subContenido = subContenido + "\\\\";
+                        } else {
+                            subContenido = subContenido + contenido.charAt(i);
+                        }
+
+                    }
+                }
+
+                sql = "insert into hojas values(" + '0' + "," + subcadena + ",'" + d.getFecha() + "','" + subContenido + "','" + d.getSentimiento() + "','')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
 
                 this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
 
@@ -2073,7 +2170,23 @@ public class PacienteController {
                 cadena = datosL2.get(0).toString();                            // sacamos el id 
                 subcadena = cadena.substring(11, cadena.length() - 1);           // sacamos el id
 
-                sql = "insert into hojas values(" + '0' + "," + subcadena + ",'" + d.getFecha() + "','" + d.getContenido() + "','" + d.getSentimiento() + "','')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
+                String contenido = d.getContenido();
+
+                String subContenido = "";
+                for (int i = 0; i < d.getContenido().length(); i++) {
+                    if (contenido.charAt(i) == '\'') {
+                        subContenido = subContenido + "\\'";
+                    } else {
+                        if (contenido.charAt(i) == '\\') {
+                            subContenido = subContenido + "\\\\";
+                        } else {
+                            subContenido = subContenido + contenido.charAt(i);
+                        }
+
+                    }
+                }
+
+                sql = "insert into hojas values(" + '0' + "," + subcadena + ",'" + d.getFecha() + "','" + subContenido + "','" + d.getSentimiento() + "','')"; // INSERTAMOS LA ENTRADA EN EL DIARIO
 
                 this.jdbcTemplate.update(sql);       // INSERTAMOS LA HOJA EN EL DIARIO
 
