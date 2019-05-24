@@ -10,8 +10,9 @@ package models;
  * @author jms-m
  */
 public class Preferencias {
+
     private String id_preferencias;
-    private String no_boleta; 
+    private String no_boleta;
     private String suplementos;
     private String motivacional;
     private String preparacionA;
@@ -106,6 +107,5 @@ public class Preferencias {
     public void setSalud(String salud) {
         this.salud = salud;
     }
-    
-    
+
 }

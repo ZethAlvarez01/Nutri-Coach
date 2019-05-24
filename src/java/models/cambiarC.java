@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
  * @author Nutri-Coach
  */
 public class cambiarC {
+
     private String contraseña;
     private String contraseña2;
 
@@ -26,13 +27,12 @@ public class cambiarC {
         this.contraseña = contraseña;
     }
 
-     public String getContraseña2() {
+    public String getContraseña2() {
         return contraseña2;
     }
 
     public void setContraseña2(String contraseña2) {
         this.contraseña2 = contraseña2;
     }
-    
-    
+
 }

@@ -13,7 +13,7 @@ import org.springframework.validation.Validator;
  *
  * @author Nutri-Coach
  */
-public class preferenciasValidar implements Validator{
+public class preferenciasValidar implements Validator {
 
     @Override
     public boolean supports(Class<?> type) {
@@ -21,23 +21,14 @@ public class preferenciasValidar implements Validator{
     }
 
     @Override
-       public void validate(Object o, Errors errors) {
-        Preferencias preferencias=(Preferencias)o;
-        
-        
-        
-        
+    public void validate(Object o, Errors errors) {
+        Preferencias preferencias = (Preferencias) o;
+
         //Se valida que cada elemento de nuestro formulario no se encuentre en blanco
-        
-        
-       if(preferencias.getSuplementos()==null && preferencias.getMotivacional()==null && preferencias.getPreparacionA()==null && preferencias.getBeneficiosA()==null && preferencias.getDeportes()==null && preferencias.getMedicamentos()==null && preferencias.getSalud()==null ){
-          errors.rejectValue("suplementos", "suplementos","Debes seleccionar al menos una opción");  
-       }
-        
-  
-
-
+        if (preferencias.getSuplementos() == null && preferencias.getMotivacional() == null && preferencias.getPreparacionA() == null && preferencias.getBeneficiosA() == null && preferencias.getDeportes() == null && preferencias.getMedicamentos() == null && preferencias.getSalud() == null) {
+            errors.rejectValue("suplementos", "suplementos", "Debes seleccionar al menos una opción");
+        }
 
     }
-    
+
 }

@@ -10,6 +10,7 @@ package models;
  * @author jms-m
  */
 public class expedientePsicologico {
+
     private String id_hojaPsicologo;
     private String id_expediente;
     private String fecha;
@@ -77,7 +78,4 @@ public class expedientePsicologico {
         this.contenido = contenido;
     }
 
-   
-
-   
 }

@@ -13,18 +13,18 @@ import org.springframework.validation.Validator;
  *
  * @author Nutri-Coach
  */
-public class RecuperarValidar implements Validator{
+public class RecuperarValidar implements Validator {
 
     @Override
     public boolean supports(Class<?> type) {
-       return Recuperar.class.isAssignableFrom(type); 
+        return Recuperar.class.isAssignableFrom(type);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        Recuperar recuperar=(Recuperar)o;
+        Recuperar recuperar = (Recuperar) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "correo", "required.correo",
-                                          "Tu correo es obligatorio");
+                "Tu correo es obligatorio");
     }
-    
+
 }
