@@ -10,6 +10,7 @@ package models;
  * @author jms-m
  */
 public class entradaForo {
+
     private String id_entrada;
     private String id_usuario;
     private String titulo;
@@ -76,7 +77,5 @@ public class entradaForo {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
-    
 
 }

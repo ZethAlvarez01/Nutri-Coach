@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
  * @author Zeth
  */
 public class Recuperar {
+
     private String correo;
 
     public Recuperar() {
@@ -23,6 +24,5 @@ public class Recuperar {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
-    
+
 }

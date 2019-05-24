@@ -13,7 +13,7 @@ import org.springframework.validation.Validator;
  *
  * @author Nutri-Coach
  */
-public class foroValidar implements Validator{
+public class foroValidar implements Validator {
 
     @Override
     public boolean supports(Class<?> type) {
@@ -21,25 +21,16 @@ public class foroValidar implements Validator{
     }
 
     @Override
-       public void validate(Object o, Errors errors) {
-        entradaForo foro=(entradaForo)o;
-        
-        
-        
-        
+    public void validate(Object o, Errors errors) {
+        entradaForo foro = (entradaForo) o;
+
         //Se valida que cada elemento de nuestro formulario no se encuentre en blanco
-        
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titulo","required.titulo","El título  es oligatorio");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titulo", "required.titulo", "El título  es oligatorio");
         System.out.println("NO ENCONTRE EL TITULO");
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contenido","required.contenido","El contenido es obligatorio");
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contenido", "required.contenido", "El contenido es obligatorio");
         System.out.println("NO ENCONTRE EL CONTENIDO");
-        
-  
-
-
 
     }
-    
+
 }

@@ -1,9 +1,11 @@
 package models;
+
 /**
  *
  * @author Zeth
  */
 public class Foro {
+
     private double salida1;
     private double salida2;
     private double salida3;
@@ -15,14 +17,14 @@ public class Foro {
     public Foro() {
     }
 
-    public Foro(double salida1, double salida2, double salida3, double salida4, double salida5, double salida6,String nombre) {
+    public Foro(double salida1, double salida2, double salida3, double salida4, double salida5, double salida6, String nombre) {
         this.salida1 = salida1;
         this.salida2 = salida2;
         this.salida3 = salida3;
         this.salida4 = salida4;
         this.salida5 = salida5;
         this.salida6 = salida6;
-        this.nombre=nombre;
+        this.nombre = nombre;
     }
 
     public double getSalida1() {
@@ -80,7 +82,5 @@ public class Foro {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
-    
+
 }
