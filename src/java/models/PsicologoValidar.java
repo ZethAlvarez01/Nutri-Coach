@@ -101,7 +101,7 @@ public class PsicologoValidar implements Validator {
         }
 
         ////////////////VALIDACION DE ID
-        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -112,7 +112,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -122,7 +122,7 @@ public class PsicologoValidar implements Validator {
             }
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
-        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -133,19 +133,19 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1).equals(psicologo.getNo_empleado())) {
-                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de empleado ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1));
         }
 
         ////////////////////// Validar correo                     
-        sql = " select correo from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select correo from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -167,7 +167,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(8, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";
+        sql = " select correo from paciente";
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -186,10 +186,10 @@ public class PsicologoValidar implements Validator {
                 int postArroba = 0;
                 int comillaSimple = 0;
                 for (int i = 0; i < psicologo.getCorreo().length(); i++) {
-                    if (psicologo.getCorreo().charAt(1) == '@') {
+                    if (psicologo.getCorreo().charAt(i) == '@') {
                         arroba = 1;
                     }
-                    if (psicologo.getCorreo().charAt(1) == '.' && arroba == 1) {
+                    if (psicologo.getCorreo().charAt(i) == '.' && arroba == 1) {
                         postArroba = 1;
                     }
 
@@ -232,7 +232,7 @@ public class PsicologoValidar implements Validator {
         }
 
         ////////////////VALIDAR TELEFONO YA REGISTRADO    
-        sql = " select telefono from aministrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from administrador";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -243,7 +243,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select telefono from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -254,7 +254,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select telefono from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from psicologo";   // CONSULTA PARA EXTRAER DATOS
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -265,7 +265,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from paciente";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -277,7 +277,7 @@ public class PsicologoValidar implements Validator {
         }
 
         ////////////////VALIDACION CEDULA
-        sql = " select no_cedula from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_cedula from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -288,7 +288,7 @@ public class PsicologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_cedula from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_cedula from psicologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -306,7 +306,7 @@ public class PsicologoValidar implements Validator {
             if (psicologo.getNo_empleado().matches("\\d{10}")) { // valida que se ingresen solo números
                 System.out.println("SOLO TIENE NUMEROS");
             } else {
-                errors.rejectValue("no_empleadp", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
 
             }
 
@@ -318,7 +318,7 @@ public class PsicologoValidar implements Validator {
             if (psicologo.getNo_cedula().matches("\\d{10}") || psicologo.getNo_cedula().matches("\\d{7}") || psicologo.getNo_cedula().matches("\\d{8}") || psicologo.getNo_cedula().matches("\\d{9}")) { // valida que se ingresen solo números
                 System.out.println("SOLO TIENE NUMEROS");
             } else {
-                errors.rejectValue("no_empleadp", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_cedula", "no_cedula.incorrect", "El número de cedula no es  valido"); //Si ninguna condición se cumple el telefono es invalido
 
             }
 
@@ -339,12 +339,12 @@ public class PsicologoValidar implements Validator {
                 try {
                     horaIni = dateFormat.parse(psicologo.getHoraEntrada());
                     horaFin = dateFormat.parse(psicologo.getHoraSalida());
-                    if (horaIni.compareTo(horaFin) < 0) {//Jornada laboral:
+                    if (inicio.compareTo(fin) < 0) {//Jornada laboral:
 
-                        if (horaIni.toString().charAt(5) != '0') {
-                            errors.rejectValue("horaSalida", "horaSalida.incorrect", "Horario invalido");
+                        if (inicio.toString().charAt(4) != '0') {
+                            errors.rejectValue("horaEntrada", "horaEntrada.incorrect", "Horario invalido");
                         }
-                        if (horaFin.toString().charAt(5) != '0') {
+                        if (fin.toString().charAt(4) != '0') {
                             errors.rejectValue("horaSalida", "horaSalida.incorrect", "Horario invalido");
                         }
                     } else {

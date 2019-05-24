@@ -1,9 +1,11 @@
 package models;
+
 /**
  *
  * @author zetok
  */
 public class Nutriologo {
+
     private String no_cedula;
     private String no_empleado;
     private String nombre;
@@ -53,7 +55,6 @@ public class Nutriologo {
         this.horaSalida = horaSalida;
     }
 
-  
     public String getNo_cedula() {
         return no_cedula;
     }
@@ -142,6 +143,4 @@ public class Nutriologo {
         this.contraseña2 = contraseña2;
     }
 
-    
-    
 }

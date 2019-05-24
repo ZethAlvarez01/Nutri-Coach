@@ -91,7 +91,7 @@ public class NutriologoValidar implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaSalida", "required.horaSalida", "Tu Hora de salida es obligatoria");
 
         ////////////////VALIDACION DE ID
-        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -102,7 +102,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -113,18 +113,18 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1).equals(nutriologo.getNo_empleado())) {
-                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de empleado ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -136,7 +136,7 @@ public class NutriologoValidar implements Validator {
         }
 
         ////////////////////// Validar correo                     
-        sql = " select correo from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select correo from nutriologo";   // 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -147,7 +147,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(8, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select correo from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select correo from psicologo";   // 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -158,7 +158,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(8, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select correo from paciente";   // 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -177,10 +177,10 @@ public class NutriologoValidar implements Validator {
                 int postArroba = 0;
                 int comillaSimple = 0;
                 for (int i = 0; i < nutriologo.getCorreo().length(); i++) {
-                    if (nutriologo.getCorreo().charAt(1) == '@') {
+                    if (nutriologo.getCorreo().charAt(i) == '@') {
                         arroba = 1;
                     }
-                    if (nutriologo.getCorreo().charAt(1) == '.' && arroba == 1) {
+                    if (nutriologo.getCorreo().charAt(i) == '.' && arroba == 1) {
                         postArroba = 1;
                     }
 
@@ -221,36 +221,35 @@ public class NutriologoValidar implements Validator {
 
             }
         }
-        
-        
-        
-         ////////////////////////////
+
+        ////////////////////////////
         //VALIDACIÓN NÚMERO DE EMPLEADO
         if (!nutriologo.getNo_empleado().equals("")) {
 
             if (nutriologo.getNo_empleado().matches("\\d{10}")) { // valida que se ingresen solo números
-                System.out.println("SOLO TIENE NUMEROS");
+                System.out.println("SOLO TIENE NUMEROS EL NUMERO DE EMPLEADO");
+                System.out.println(nutriologo.getNo_empleado().length());
             } else {
-                errors.rejectValue("no_empleadp", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_empleado", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
 
             }
 
-        } 
-         ////////////////////////////
+        }
+        ////////////////////////////
         //VALIDACIÓN NÚMERO DE CEDULA
         if (!nutriologo.getNo_cedula().equals("")) {
 
-            if (nutriologo.getNo_cedula().matches("\\d{10}") ||nutriologo.getNo_cedula().matches("\\d{7}") || nutriologo.getNo_cedula().matches("\\d{8}")  || nutriologo.getNo_cedula().matches("\\d{9}") ) { // valida que se ingresen solo números
+            if (nutriologo.getNo_cedula().matches("\\d{10}") || nutriologo.getNo_cedula().matches("\\d{7}") || nutriologo.getNo_cedula().matches("\\d{8}") || nutriologo.getNo_cedula().matches("\\d{9}")) { // valida que se ingresen solo números
                 System.out.println("SOLO TIENE NUMEROS");
             } else {
-                errors.rejectValue("no_empleadp", "no_empleado.incorrect", "El número de empleado no es  valido"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_cedula", "no_cedula.incorrect", "El número de cedula no es  valido"); //Si ninguna condición se cumple el telefono es invalido
 
             }
 
-        }  
+        }
 
         ////////////////VALIDAR TELEFONO YA REGISTRADO    
-        sql = " select telefono from administrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from administrador";   // CONSULTA 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -261,7 +260,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select telefono from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from nutriologo";   // CONSULTA 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -272,7 +271,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select telefono from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from psicologo";   // CONSULTA
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -283,7 +282,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from paciente";   // CONSULTA 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -295,7 +294,7 @@ public class NutriologoValidar implements Validator {
         }
 
         ////////////////VALIDACION CEDULA
-        sql = " select no_cedula from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_cedula from nutriologo";   // CONSULTA 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -306,7 +305,7 @@ public class NutriologoValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_cedula from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_cedula from psicologo";   // CONSULTA 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -327,17 +326,22 @@ public class NutriologoValidar implements Validator {
                 LocalTime inicio = LocalTime.parse(nutriologo.getHoraEntrada());
                 LocalTime fin = LocalTime.parse(nutriologo.getHoraSalida());
 
+                System.out.println("otra hora inicio " + inicio);
+                System.out.println("otra hora fin " + fin);
                 DateFormat dateFormat = new SimpleDateFormat("HH:mm");
                 Date horaIni;
                 Date horaFin;
                 try {
-                    horaIni = dateFormat.parse(nutriologo.getHoraEntrada());
-                    horaFin = dateFormat.parse(nutriologo.getHoraSalida());
-                    if (horaIni.compareTo(horaFin) < 0) {//Jornada laboral:
-                        if (horaIni.toString().charAt(5) != '0') {
-                            errors.rejectValue("horaSalida", "horaSalida.incorrect", "Horario invalido");
+                    horaIni = dateFormat.parse(inicio.toString());
+                    System.out.println("HORA DE INICIO " + horaIni);
+
+                    horaFin = dateFormat.parse(fin.toString());
+                    System.out.println("HORA DE FIN " + horaFin);
+                    if (inicio.compareTo(fin) < 0) {//Jornada laboral:
+                        if (inicio.toString().charAt(4) != '0') {
+                            errors.rejectValue("horaEntrada", "horaEntrada.incorrect", "Horario invalido");
                         }
-                        if (horaFin.toString().charAt(5) != '0') {
+                        if (fin.toString().charAt(4) != '0') {
                             errors.rejectValue("horaSalida", "horaSalida.incorrect", "Horario invalido");
                         }
 
@@ -396,7 +400,6 @@ public class NutriologoValidar implements Validator {
             }
         }
 
-       
         // Validación de contraseñas 
         //SE VALIDA QUE LAS CONTRASEÑAS NO LLEGUEN VACIAS
         if (!nutriologo.getContraseña().equals("")) {

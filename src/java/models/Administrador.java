@@ -10,8 +10,8 @@ package models;
  * @author jms-m
  */
 public class Administrador {
-       // CAMPOS QUE COMPONEN EL FORMULARIO DE ADMINISTRADOR
-    
+    // CAMPOS QUE COMPONEN EL FORMULARIO DE ADMINISTRADOR
+
     private String no_empleado;
     private String nombre;
     private String ap_uno;

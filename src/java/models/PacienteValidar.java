@@ -79,68 +79,68 @@ public class PacienteValidar implements Validator {
         System.out.println("NO ENCONTRE contraseña2");
 
 ///////////////////////VALIDACIÓN DOMICILIO
-        if (!paciente.getDomicilio().equals("")) {
-            int invalido = 0;
-            for (int i = 0; i < paciente.getDomicilio().length(); i++) {
-                if (paciente.getDomicilio().charAt(i) == '\'') {
+        if (!paciente.getDomicilio().equals("")) { // IF 1 DOMICILIO ENTRAMOS SOLO SI EL DOMICILIO NO SE ENCUENTRA VACIO
+            int invalido = 0;                         // BANDERA DE CONDICION DE INVALIDEZ
+            for (int i = 0; i < paciente.getDomicilio().length(); i++) {      // INICIO FOR 1 
+                if (paciente.getDomicilio().charAt(i) == '\'') {            //COMPARAMOS SI EL DOMICILIO CONTIENE EL CARACTER ' IF 2
                     System.out.println("Se encontro una comilla");
-                    invalido = 1;
-                }
-                if (paciente.getDomicilio().charAt(i) == '\"') {
+                    invalido = 1;                                           // CAMBIAMOS EL VALOR DE NUESTRA BANDERA DE INVALIDEZ
+                }                                                           // CERAMMOS IF 2
+                if (paciente.getDomicilio().charAt(i) == '\"') {               // COMPARAMOS SI EL DOMICILIO CONTIENE EL CARACTER "" IF 3
                     System.out.println("Se encontro una comilla doble");
-                    invalido = 1;
-                }
-                if (paciente.getDomicilio().charAt(i) == '|') {
+                    invalido = 1;                                           // CAMBIAMOS EL VALOR DE LA BANDERA DE INVALIDEZ   
+                }                                                              // CERRAMOS IF 3
+                if (paciente.getDomicilio().charAt(i) == '|') {               // COMPARAMOS SI EL DOMICILIO CONTIENE EL CARACTER |     IF 4
                     System.out.println("Se encontro un pipe");
-                    invalido = 1;
-                }
+                    invalido = 1;                                           // CAMBIAMOS EL VALOR DE NUESTRA BANDERA DE INVALIDEZ
+                }                                                           // CERRAMOS IF 4
             }
 
-            if (invalido == 1) {
-                errors.rejectValue("domicilio", "domicilio.incorrect", "El domicilio es inválido"); //Si ninguna condición se cumple el telefono es invalido
+            if (invalido == 1) {                                          // COMPARAMOS SI NUESTRA BANDERA DE VALIDEZ AUMENTO SU VALOR A 1
+                errors.rejectValue("domicilio", "domicilio.incorrect", "El domicilio es inválido"); //Si ninguna condición se cumple el DOMICILIO es invalido
 
             }
         }
 
 ////////////////VALIDACIÓN DE ID YA REGISTRADO
-        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        String sql = " select no_empleado from nutriologo";   // CONSULTA PARA EXTRAER NO_EMPLEADO
         List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1).equals(paciente.getNo_boleta())) {
-                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el NO_BOLETA es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from psicologo";   // CONSULTA PARA EXTRAER DATOS NO_EMPLEADO
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1).equals(paciente.getNo_boleta())) {
-                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el NO_BOLETA es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
-        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_empleado from administrador";   // CONSULTA PARA EXTRAER DATOS NO_EMPLEADO
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1).equals(paciente.getNo_boleta())) {
-                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el NO_BOLETA es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(13, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
             if (datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1).equals(paciente.getNo_boleta())) {
-                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el telefono es invalido
+                errors.rejectValue("no_boleta", "no_boleta.incorrect", "El número de boleta ya esta registrado"); //Si ninguna condición se cumple el NO_BOLETA es invalido
 
             }
             System.out.println(datosL2.get(i).toString().substring(11, datosL2.get(i).toString().length() - 1));
@@ -199,20 +199,21 @@ public class PacienteValidar implements Validator {
                 int postArroba = 0;
                 int comillaSimple = 0;
                 for (int i = 0; i < paciente.getCorreo().length(); i++) {
-                    if (paciente.getCorreo().charAt(1) == '@') {
+                    if (paciente.getCorreo().charAt(i) == '@') {
                         arroba = 1;
+                        System.out.println();
                     }
-                    if (paciente.getCorreo().charAt(1) == '.' && arroba == 1) {
+                    if (paciente.getCorreo().charAt(i) == '.' && arroba == 1) {
                         postArroba = 1;
                     }
 
                 }
                 if (postArroba == 0) {
 
-                    errors.rejectValue("correo", "correo.incorrect", "El correo no es valido");
+                    errors.rejectValue("correo", "correo.incorrect", "El correo no es valido porque no tiene bien ubicado el punto");
                 } else {
                     if (paciente.getCorreo().matches("['*$#%&/!?¡¿{}+*~|^\\']")) {
-                        errors.rejectValue("correo", "correo.incorrect", "El correo no es valido");
+                        errors.rejectValue("correo", "correo.incorrect", "El correo no es valido por un mal caracter");
                     } else {
                         ////////////////////VALIDAR DATOS DEL CORREO
                         if (!paciente.getCorreo().equals("")) {
@@ -245,7 +246,7 @@ public class PacienteValidar implements Validator {
         }
 
         ////////////////VALIDAR TELEFONO YA REGISTRADO              
-        sql = " select telefono from administrador";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from administrador";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -255,7 +256,7 @@ public class PacienteValidar implements Validator {
             }
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
-        sql = " select telefono from nutriologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from nutriologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -266,7 +267,7 @@ public class PacienteValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select telefono from psicologo";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select telefono from psicologo";   // CONSULTA PARA EXTRAER DATOS 
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -277,7 +278,7 @@ public class PacienteValidar implements Validator {
             System.out.println(datosL2.get(i).toString().substring(10, datosL2.get(i).toString().length() - 1));
         }
 
-        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS HORARIOS
+        sql = " select no_boleta from paciente";   // CONSULTA PARA EXTRAER DATOS
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         for (int i = 0; i < datosL2.size(); i++) {
@@ -469,4 +470,3 @@ public class PacienteValidar implements Validator {
 
     }
 }
- 

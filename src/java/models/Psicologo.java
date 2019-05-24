@@ -5,6 +5,7 @@ package models;
  * @author Zeth
  */
 public class Psicologo {
+
     private String no_cedula;
     private String no_empleado;
     private String nombre;
@@ -142,7 +143,4 @@ public class Psicologo {
         this.horaSalida = horaSalida;
     }
 
- 
-    
-    
 }

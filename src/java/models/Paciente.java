@@ -1,16 +1,11 @@
 package models;
 
-
 /**
  *
  * @author Zeth
  */
-
-
-
-
 public class Paciente {
-   
+
     private String no_boleta;
     private String nombre;
     private String ap_uno;
@@ -22,11 +17,11 @@ public class Paciente {
     private String correo;
     private String contraseña;
     private String contraseña2;
-    
+
     public Paciente() {
     }
 
-    public Paciente(String no_boleta, String nombre, String ap_uno, String ap_dos, String sexo, String fecha_n, String telefono, String domicilio, String correo, String contraseña,String contraseña2) {
+    public Paciente(String no_boleta, String nombre, String ap_uno, String ap_dos, String sexo, String fecha_n, String telefono, String domicilio, String correo, String contraseña, String contraseña2) {
         this.no_boleta = no_boleta;
         this.nombre = nombre;
         this.ap_uno = ap_uno;
@@ -120,12 +115,12 @@ public class Paciente {
         this.contraseña = contraseña;
     }
 
-     public String getContraseña2() {
+    public String getContraseña2() {
         return contraseña2;
     }
 
     public void setContraseña2(String contraseña2) {
         this.contraseña2 = contraseña2;
     }
-    
+
 }

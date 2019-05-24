@@ -10,6 +10,7 @@ package models;
  * @author zetok
  */
 public class Login {
+
     private String Usuario;
     private String Pass;
 
@@ -21,7 +22,6 @@ public class Login {
         this.Usuario = Usuario;
         this.Pass = Pass;
     }
-    
 
     public String getUsuario() {
         return Usuario;
@@ -38,5 +38,5 @@ public class Login {
     public void setPass(String Pass) {
         this.Pass = Pass;
     }
-    
+
 }
