@@ -140,7 +140,7 @@
                             </tr>
 
                             <c:forEach items="${datoT1}" var="item">
-                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}')">
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -187,7 +187,7 @@
                             </tr>
 
                             <c:forEach items="${datoT2}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -229,7 +229,7 @@
                             </tr>
 
                             <c:forEach items="${datoT3}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -272,7 +272,7 @@
                             </tr>
 
                             <c:forEach items="${datoT4}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -320,7 +320,7 @@
                             </tr>
 
                             <c:forEach items="${datoT5}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}'),1">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -368,7 +368,7 @@
                             </tr>
 
                             <c:forEach items="${datoT6}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -416,7 +416,7 @@
                             </tr>
 
                             <c:forEach items="${datoT7}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -462,7 +462,7 @@
                             </tr>
 
                             <c:forEach items="${datoT8}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -506,7 +506,7 @@
                             </tr>
 
                             <c:forEach items="${datoT9}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -545,7 +545,7 @@
                             </tr>
 
                             <c:forEach items="${datoT10}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -582,7 +582,7 @@
                             </tr>
 
                             <c:forEach items="${datoT11}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -625,7 +625,7 @@
                             </tr>
 
                             <c:forEach items="${datoT12}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}'),' ',' ',0">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -674,7 +674,7 @@
                             </tr>
 
                             <c:forEach items="${datoT13}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -726,7 +726,7 @@
                             </tr>
 
                             <c:forEach items="${datoT14}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -775,7 +775,7 @@
                             </tr>
 
                             <c:forEach items="${datoT15}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -825,7 +825,7 @@
                             </tr>
 
                             <c:forEach items="${datoT16}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -873,7 +873,7 @@
                             </tr>
 
                             <c:forEach items="${datoT17}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -918,7 +918,7 @@
                             </tr>
 
                             <c:forEach items="${datoT18}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -964,7 +964,7 @@
                             </tr>
 
                             <c:forEach items="${datoT19}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1010,7 +1010,7 @@
                             </tr>
 
                             <c:forEach items="${datoT20}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1055,7 +1055,7 @@
                             </tr>
 
                             <c:forEach items="${datoT21}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1100,7 +1100,7 @@
                             </tr>
 
                             <c:forEach items="${datoT22}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1150,7 +1150,7 @@
                             </tr>
 
                             <c:forEach items="${datoT23}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1201,7 +1201,7 @@
                             </tr>
 
                             <c:forEach items="${datoT24}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -1247,7 +1247,7 @@
                             </tr>
 
                             <c:forEach items="${datoT25}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -1293,7 +1293,7 @@
                             </tr>
 
                             <c:forEach items="${datoT26}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -1339,7 +1339,7 @@
                             </tr>
 
                             <c:forEach items="${datoT27}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -1398,7 +1398,7 @@
                             </tr>
 
                             <c:forEach items="${datoT28}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1469,7 +1469,7 @@
                             </tr>
 
                             <c:forEach items="${datoT29}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1525,7 +1525,7 @@
                             </tr>
 
                             <c:forEach items="${datoT30}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1582,7 +1582,7 @@
                             </tr>
 
                             <c:forEach items="${datoT31}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1654,7 +1654,7 @@
                             </tr>
 
                             <c:forEach items="${datoT32}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1726,7 +1726,7 @@
                             </tr>
 
                             <c:forEach items="${datoT33}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1798,7 +1798,7 @@
                             </tr>
 
                             <c:forEach items="${datoT34}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidas}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1855,7 +1855,7 @@
                             </tr>
 
                             <c:forEach items="${datoT35}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1897,7 +1897,7 @@
                             </tr>
 
                             <c:forEach items="${datoT36}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -1942,7 +1942,7 @@
                             </tr>
 
                             <c:forEach items="${datoT37}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -1986,7 +1986,7 @@
                             </tr>
 
                             <c:forEach items="${datoT38}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidad}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidad}"/></td>
@@ -2029,7 +2029,7 @@
                             </tr>
 
                             <c:forEach items="${datoT39}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -2075,7 +2075,7 @@
                             </tr>
 
                             <c:forEach items="${datoT40}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -2121,7 +2121,7 @@
                             </tr>
 
                             <c:forEach items="${datoT41}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -2170,7 +2170,7 @@
                             </tr>
 
                             <c:forEach items="${datoT42}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}','${item.cantidadSugerida}','${item.unidad}',1)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.cantidadSugerida}"/></td>
@@ -2220,7 +2220,7 @@
                             </tr>
 
                             <c:forEach items="${datoT43}" var="item">
-                                <tr>
+                                <tr onclick="obtener('${item.alimento}',' ',' ',0)">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -2362,8 +2362,9 @@
                     </div>
 
                     <div id="botones_1">
-                        <input type="button" value="Guardar" class="guardar" onclick="convertirJSON()">
+                        <input type="button" value="Guardar" class="guardar">
                     </div>
+
 
                     <div id="botones_2">
                         <input type="button" value="Guardar y enviar" class="guardar">

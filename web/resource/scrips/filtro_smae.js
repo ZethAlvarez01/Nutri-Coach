@@ -27,10 +27,18 @@ function abrir_menu(boton){
     } 
 }
 
-function obtener(alimento,cantidad){
-    if(confirm("¿Deseas agregar este alimento a la dieta?")){
-        console.log(alimento+" "+cantidad)
-        let editar=document.getElementById(dia);
-        editar.innerHTML+=cantidad+" "+alimento;
+function obtener(alimento,cantidad,unidad,flg){
+    if(flg==1){
+        if(confirm("¿Deseas agregar este alimento a la dieta?")){
+            let editar=document.getElementById(dia);
+            editar.innerHTML+=cantidad+" "+unidad+" de "+alimento+"\n";
+        }
+    }else{
+        if(confirm("¿Deseas agregar este alimento a la dieta?")){
+            let editar=document.getElementById(dia);
+            editar.innerHTML+=alimento+"\n";
+        }
     }
+    
 }
+

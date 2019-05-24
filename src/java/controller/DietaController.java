@@ -1,10 +1,21 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import models.Conexion;
+import models.Dieta;
+import models.NeuralNet.Capa_neuronas;
+import models.NeuralNet.Crear_RN;
+import models.NeuralNet.Implementacion;
+import models.Psicologo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -160,4 +171,38 @@ public class DietaController {
 
         return mv;
     }
+    
+    @RequestMapping(value="generar_dieta_nutriologo",method = RequestMethod.POST)
+  
+     public ModelAndView insertar_datos(@ModelAttribute("generar_dieta_nutriologo") Dieta dieta){
+         System.out.println("Boton guardar");
+         System.out.println(dieta.getHora_des());
+         
+     return null;
+     }
+     
+     
+     @RequestMapping(value="generar_dieta_nutriologo",method = RequestMethod.POST)
+  
+     public ModelAndView calificar_dieta(@ModelAttribute(" ") Dieta dieta){
+         
+         double[] input = null;
+         double[] target = null;
+         
+         
+          ArrayList<Capa_neuronas> neural_net=new ArrayList<>();  
+          
+          int[] topology={20,10,5,2};
+          
+          Crear_RN redRecomendaciones = new Crear_RN();
+          neural_net = redRecomendaciones.create_nn(topology, 0);
+          
+          Implementacion exe = new Implementacion(neural_net);
+          double[][] resultado=exe.train(input, target);
+          
+          System.out.println(resultado);
+         
+     return null;
+     }
+    
 }
