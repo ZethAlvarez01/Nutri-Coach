@@ -32,7 +32,7 @@
     <!-- Scripts -->
     
     <script type="text/javascript" src="resource/scrips/calendarioEspecialistasPsico.js"/></script>  
-    <script type="text/javascript" src="resource/scrips/bienvenida_nutri.js"/></script>  
+    <script type="text/javascript" src="resource/scrips/bienvenida_psico.js"/></script>  
     <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
 
 <script type="text/javascript" src="resource/scrips/jquery-3.4.1.min.js"/></script> 

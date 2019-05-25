@@ -172,7 +172,13 @@
                         <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
                        </form:form>
                                            
-                                           
+                              <form:form method="post" commandName="cita">
+
+                                        <input type="submit" class="texto_menu" name=FinalizarCitaPsico" value="Finalizar cita">
+                                        <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                                        <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                    </form:form>
+
                                        </c:if>
                          <c:if test= "${fechaCita==0}">
                                       <form:form method="post" commandName="cita">
