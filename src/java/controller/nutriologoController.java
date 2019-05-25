@@ -1368,6 +1368,116 @@ public class nutriologoController {
         return mv;                                                                                           // RETORNAMOS EL MODELO
 
     }
+/////////////////////////////
+    /////ACCION DEL BOTÓN FinalizarCita
+    @RequestMapping(params = "FinalizarCita", method = RequestMethod.POST)
+    public ModelAndView FinalizarCita(@ModelAttribute("cita") cita c, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) {
+
+        HttpSession session = hsr.getSession();                              //OBETENEMOS LA SESIÓN
+        String alert = (String) session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+
+        if (alert == null) {                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+            return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+        }
+
+       // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
+       
+         String sql = "update cita set estado=2  where no_cita=" + c.getNo_cita(); // ACTIVAMOS LA CITA
+
+            this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
+
+       
+       
+       
+       
+        ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+
+         sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+
+        sql = "select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta=" + c.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("ListaPacientes", datosL2);                                                       // Pasa la lilsta completa               
+
+        sql = "select no_cedulap from paciente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("pacientePsicologo", datosL2);                                                       // Pasa la lilsta completa               
+        mv.addObject("paciente", new Paciente());
+
+        sql = "select * from entrada where id_usuario=" + c.getNo_boleta() + " order by id_entrada desc;";                     // OBETENEMOS TODAS LAS ENTRADAS QUE HA HECHO NUESTRO PACIENTE A PARTIR DE LA MÁS RECIENTE
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("listaEntradas", datosL2);                                               // PASAMOS LA LISTA COMPLETA
+
+        //  System.out.println("LISTA ENTRADAS: "+datosL2);
+        sql = "select id_entrada,fecha from comentarios where id_usuario=" + c.getNo_boleta() + " order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("FechaComentarios", datosL2);
+
+        sql = "select id_entrada,titulo from entrada";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("NombreEntrada", datosL2);                                               // PASAMOS LA LISTA COMPLETA            
+
+        mv.addObject("entradaForo", new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
+
+        sql = "select no_cedula from nutriologo where no_empleado=" + alert;                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select no_cita,fecha,horario from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        // PASAMOS LA LISTA COMPLETA            
+
+        //  String cita=datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1); 
+        //   System.out.println("numero de cita: "+cita);
+        mv.addObject("datosCita", datosL2);
+        mv.addObject("cita", new cita());
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println("Fecha: " + dateFormat.format(date));
+
+        sql = "select fecha from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        int fechaCita = 0;
+        if (datosL2.isEmpty()) {
+            fechaCita = 0;
+        } else {
+            System.out.println("FECHA DE CITA: " + datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1));
+            String fechaAct = datosL2.get(0).toString().substring(7, 11) + "/" + datosL2.get(0).toString().substring(12, 14) + "/" + datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            System.out.println("FECHA ACTUAL: " + fechaAct);
+
+            if (fechaAct.equals(dateFormat.format(date))) {
+                fechaCita = 1;
+            }
+        }
+
+        mv.addObject("fechaCita", fechaCita);
+
+        sql = "select fecha_ini from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("fechaExpediente", datosL2);
+
+        sql = "select id_expediente from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+        return mv;
+
+    
+    }
 
     ///////////////////////////////
     ////Vista para canalizar a psicologia
