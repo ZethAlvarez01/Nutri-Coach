@@ -47,8 +47,8 @@ function myFunctionC(fechaCarga) {
      
     
         
-              $.ajax({
-        url : 'mostrarHorarioNutriologo.htm',
+          $.ajax({
+        url : 'mostrarHorarioPsicologo.htm',
                         data:{fechaConsulta:fechaSeleccionada, no_empleadoConsulta:empleado},
                         dataType: "json",
                         content:"application/json;  charset=utf-8",
