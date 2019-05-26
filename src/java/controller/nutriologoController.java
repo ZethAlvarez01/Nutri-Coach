@@ -32,6 +32,7 @@ import models.citaValidar;
 import models.comentarioValidar;
 import models.entradaForo;
 import models.expediente;
+import models.expedienteValidar;
 import models.foroValidar;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -59,6 +60,7 @@ public class nutriologoController {
     private foroValidar foroValidar;                                 //Variable para validar foro
     private comentarioValidar comentarioValidar;                     //Variable para validar comentarios
     private citaValidar citaValidar;                           //Variable para validar cita 
+    private expedienteValidar expedienteValidar;                                 //Variable para validar expediente
 
     public nutriologoController() {
 
@@ -67,6 +69,7 @@ public class nutriologoController {
         Conexion conn = new Conexion();                                 //Instacia a la conexión de base de datos
         this.jdbcTemplate = new JdbcTemplate(conn.conectar());         //Instacia a la conexión de base de datos
         this.citaValidar = new citaValidar();                      // Instancia de la clase diarioValidar
+        this.expedienteValidar = new expedienteValidar();                      // Instancia de la clase expedienteValidar
     }
 
     ///////////////////////////////
@@ -1972,8 +1975,311 @@ public class nutriologoController {
         if (alert == null) {                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
             return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
         }
+        
+         this.expedienteValidar.validate(ex, result);
+        // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+        if (result.hasErrors()) {  // INICIO IF
+            ModelAndView mv = new ModelAndView();                              //CREACIÓN DEL MODELO
+        mv.setViewName("expediente_nutriologo");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-        // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
+        String sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+
+        sql = "select no_boleta from cita where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        if (datosL2.isEmpty()) {
+            sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + ex.getNo_boleta();
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+        } else {
+            String boleta = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+            sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + boleta;
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+        }
+
+        mv.addObject("datosPaciente", datosL2);
+                                                             
+        mv.addObject("expediente", new expediente());
+        mv.addObject("cita", new cita());
+        
+        return mv;
+        }
+          
+        else{
+            
+        
+         String tipoAct = ex.getTipo_act();
+           
+
+          
+            String subAct = "";
+            for (int i = 0; i < ex.getTipo_act().length(); i++) {
+                if (ex.getTipo_act().charAt(i) == '\'') {
+                   subAct = subAct + "\\'";
+                } else {
+                    if (ex.getTipo_act().charAt(i) == '\\') {
+                        subAct = subAct + "\\\\";
+                    } else {
+                        subAct = subAct + ex.getTipo_act().charAt(i);
+                    }
+
+                }
+            }
+            
+             String padecimiento = ex.getPadecimiento();
+           
+
+            String subPade = "";
+            for (int i = 0; i < ex.getPadecimiento().length(); i++) {
+                if (ex.getPadecimiento().charAt(i) == '\'') {
+                   subPade = subPade + "\\'";
+                } else {
+                    if (ex.getPadecimiento().charAt(i) == '\\') {
+                        subPade = subPade + "\\\\";
+                    } else {
+                        subPade = subPade + ex.getPadecimiento().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+            String antec_hf = ex.getAntec_hf();
+           
+            String subAntec_hf = "";
+            for (int i = 0; i < ex.getAntec_hf().length(); i++) {
+                if (ex.getAntec_hf().charAt(i) == '\'') {
+                   subAntec_hf = subAntec_hf + "\\'";
+                } else {
+                    if (ex.getAntec_hf().charAt(i) == '\\') {
+                        subAntec_hf = subAntec_hf + "\\\\";
+                    } else {
+                        subAntec_hf = subAntec_hf + ex.getAntec_hf().charAt(i);
+                    }
+
+                }
+            }
+            
+            String m_anticonceptivo = ex.getM_anticonceptivo();
+           
+            String subM_anticonceptivo = "";
+            for (int i = 0; i < ex.getM_anticonceptivo().length(); i++) {
+                if (ex.getM_anticonceptivo().charAt(i) == '\'') {
+                   subM_anticonceptivo = subM_anticonceptivo + "\\'";
+                } else {
+                    if (ex.getM_anticonceptivo().charAt(i) == '\\') {
+                        subM_anticonceptivo = subM_anticonceptivo + "\\\\";
+                    } else {
+                        subM_anticonceptivo = subM_anticonceptivo + ex.getM_anticonceptivo().charAt(i);
+                    }
+
+                }
+            }
+           
+            
+            String tipoTerapia = ex.getTipoTerapia();
+           
+            String subTipoTerapia = "";
+            for (int i = 0; i < ex.getTipoTerapia().length(); i++) {
+                if (ex.getTipoTerapia().charAt(i) == '\'') {
+                   subTipoTerapia = subTipoTerapia + "\\'";
+                } else {
+                    if (ex.getTipoTerapia().charAt(i) == '\\') {
+                        subTipoTerapia = subTipoTerapia + "\\\\";
+                    } else {
+                        subTipoTerapia = subTipoTerapia + ex.getTipoTerapia().charAt(i);
+                    }
+
+                }
+            }
+            String dosis = ex.getDosis();
+           
+            String subdosis = "";
+            for (int i = 0; i < ex.getDosis().length(); i++) {
+                if (ex.getDosis().charAt(i) == '\'') {
+                   subdosis = subdosis + "\\'";
+                } else {
+                    if (ex.getDosis().charAt(i) == '\\') {
+                       subdosis = subdosis + "\\\\";
+                    } else {
+                        subdosis = subdosis + ex.getDosis().charAt(i);
+                    }
+
+                }
+            }
+            
+               String apct_grls = ex.getAspect_grls();
+           
+            String subAspec_grls = "";
+            for (int i = 0; i < ex.getAspect_grls().length(); i++) {
+                if (ex.getAspect_grls().charAt(i) == '\'') {
+                   subAspec_grls = subAspec_grls + "\\'";
+                } else {
+                    if (ex.getAspect_grls().charAt(i) == '\\') {
+                       subAspec_grls = subAspec_grls + "\\\\";
+                    } else {
+                        subAspec_grls = subAspec_grls + ex.getAspect_grls().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+               String tratamiento = ex.getTratamient();
+           
+            String subTratamiento = "";
+            for (int i = 0; i < ex.getTratamient().length(); i++) {
+                if (ex.getTratamient().charAt(i) == '\'') {
+                   subTratamiento = subTratamiento + "\\'";
+                } else {
+                    if (ex.getTratamient().charAt(i) == '\\') {
+                       subTratamiento = subTratamiento + "\\\\";
+                    } else {
+                        subTratamiento = subTratamiento + ex.getTratamient().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+             String tiempo= ex.getTiempo();
+           
+            String subTiempo = "";
+            for (int i = 0; i < ex.getTiempo().length(); i++) {
+                if (ex.getTiempo().charAt(i) == '\'') {
+                   subTiempo = subTiempo + "\\'";
+                } else {
+                    if (ex.getTiempo().charAt(i) == '\\') {
+                       subTiempo = subTiempo + "\\\\";
+                    } else {
+                        subTiempo = subTiempo + ex.getTiempo().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+              String postre= ex.getPostre();
+           
+            String subPostre = "";
+            for (int i = 0; i < ex.getPostre().length(); i++) {
+                if (ex.getPostre().charAt(i) == '\'') {
+                   subPostre = subPostre + "\\'";
+                } else {
+                    if (ex.getPostre().charAt(i) == '\\') {
+                       subPostre = subPostre + "\\\\";
+                    } else {
+                        subPostre = subPostre + ex.getPostre().charAt(i);
+                    }
+
+                }
+            }
+            
+             String HC= ex.getHorariosComida();
+           
+            String subHC= "";
+            for (int i = 0; i < ex.getHorariosComida().length(); i++) {
+                if (ex.getHorariosComida().charAt(i) == '\'') {
+                   subHC = subHC + "\\'";
+                } else {
+                    if (ex.getHorariosComida().charAt(i) == '\\') {
+                       subHC = subHC + "\\\\";
+                    } else {
+                        subHC = subHC + ex.getHorariosComida().charAt(i);
+                    }
+
+                }
+            }
+            
+              String alergias= ex.getAlergias();
+           
+            String subAlergias= "";
+            for (int i = 0; i < ex.getAlergias().length(); i++) {
+                if (ex.getAlergias().charAt(i) == '\'') {
+                   subAlergias = subAlergias + "\\'";
+                } else {
+                    if (ex.getAlergias().charAt(i) == '\\') {
+                       subAlergias = subAlergias + "\\\\";
+                    } else {
+                        subAlergias = subAlergias + ex.getAlergias().charAt(i);
+                    }
+
+                }
+            }
+            
+               String observaciones= ex.getObservaciones();
+           
+            String subObservaciones= "";
+            for (int i = 0; i < ex.getObservaciones().length(); i++) {
+                if (ex.getObservaciones().charAt(i) == '\'') {
+                   subObservaciones = subObservaciones + "\\'";
+                } else {
+                    if (ex.getObservaciones().charAt(i) == '\\') {
+                       subObservaciones = subObservaciones + "\\\\";
+                    } else {
+                        subObservaciones = subObservaciones + ex.getObservaciones().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+            
+               String recomendaciones= ex.getRecomendaciones();
+           
+            String subRecomendaciones= "";
+            for (int i = 0; i < ex.getRecomendaciones().length(); i++) {
+                if (ex.getRecomendaciones().charAt(i) == '\'') {
+                   subRecomendaciones = subRecomendaciones + "\\'";
+                } else {
+                    if (ex.getRecomendaciones().charAt(i) == '\\') {
+                       subRecomendaciones = subRecomendaciones + "\\\\";
+                    } else {
+                        subRecomendaciones = subRecomendaciones + ex.getRecomendaciones().charAt(i);
+                    }
+
+                }
+            }
+            
+              String tension= ex.getTension_art();
+           
+            String subTension= "";
+            for (int i = 0; i < ex.getTension_art().length(); i++) {
+                if (ex.getTension_art().charAt(i) == '\'') {
+                   subTension = subTension + "\\'";
+                } else {
+                    if (ex.getTension_art().charAt(i) == '\\') {
+                       subTension = subTension + "\\\\";
+                    } else {
+                        subTension = subTension + ex.getTension_art().charAt(i);
+                    }
+
+                }
+            }
+            
+              String frecuencia= ex.getFec_cardiaca();
+           
+            String subFrecuencia= "";
+            for (int i = 0; i < ex.getFec_cardiaca().length(); i++) {
+                if (ex.getFec_cardiaca().charAt(i) == '\'') {
+                   subFrecuencia = subFrecuencia + "\\'";
+                } else {
+                    if (ex.getFec_cardiaca().charAt(i) == '\\') {
+                       subFrecuencia = subFrecuencia + "\\\\";
+                    } else {
+                        subFrecuencia =subFrecuencia + ex.getFec_cardiaca().charAt(i);
+                    }
+
+                }
+            }
+            
+            
+            
+            
+    
         int Dulce = 1;
         int Amarga = 1;
         int Salada = 1;
@@ -2117,12 +2423,12 @@ public class nutriologoController {
         List datosL2 = this.jdbcTemplate.queryForList(sql);
 
         if (datosL2.isEmpty()) {
-            sql = "insert into expediente values(0," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + ex.getAntec_hf() + "','" + Act_f + "','" + ex.getTipo_act() + "','" + ex.getFrecuencia() + "','" + ex.getPadecimiento() + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + ex.getTratamient() + "','" + ex.getTiempo() + "','','','" + ex.getAlergias() + "','" + Postre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + ex.getM_anticonceptivo() + "','" + Terapia_rh + "','" + ex.getDosis() + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + ex.getTension_art() + "','" + ex.getFrecuencia() + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + ex.getAspect_grls() + "','','" + ex.getT_Gestacion() + "','" + ex.getTipoTerapia() + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + ex.getHorariosComida() + "','" + ex.getRecomendaciones() + "','" + ex.getObservaciones() + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+            sql = "insert into expediente values(0," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis+ "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
 
             this.jdbcTemplate.update(sql);
         } else {
             String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
-            sql = "insert into hojaexpediente values(0," + expediente + "," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + ex.getAntec_hf() + "','" + Act_f + "','" + ex.getTipo_act() + "','" + ex.getFrecuencia() + "','" + ex.getPadecimiento() + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + ex.getTratamient() + "','" + ex.getTiempo() + "','','','" + ex.getAlergias() + "','" + Postre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + ex.getM_anticonceptivo() + "','" + Terapia_rh + "','" + ex.getDosis() + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + ex.getTension_art() + "','" + ex.getFrecuencia() + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + ex.getAspect_grls() + "','','" + ex.getT_Gestacion() + "','" + ex.getTipoTerapia() + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + ex.getHorariosComida() + "','" + ex.getRecomendaciones() + "','" + ex.getObservaciones() + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+            sql = "insert into hojaexpediente values(0," + expediente + "," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones  + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
 
             this.jdbcTemplate.update(sql);
         }
@@ -2130,9 +2436,9 @@ public class nutriologoController {
         // REALIZAMOS LA INSERCIÓN
         ModelAndView mv = new ModelAndView();                              //CREACIÓN DEL MODELO
         mv.setViewName("cronograma");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
-
+        
         return mv;                                                                                           // RETORNAMOS EL MODELO
-
+        }
     }
 
     /////////////////////////////
