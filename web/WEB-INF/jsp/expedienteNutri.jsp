@@ -187,12 +187,15 @@
                                             <input type="submit" class="texto_menu" name="AtenderCita" value="Atender cita">
                                             <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
                                         </form:form>
-                                        <form:form method="post" commandName="cita">
+                                       
+                                         <form:form method="post" commandName="cita">
 
-                                            <input type="submit" class="texto_menu" name=FinalizarCita" value="Finalizar cita">
+                                            <input type="submit" class="texto_menu" name="FinalizarCitaN" value="Finalizar cita">
                                             <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
                                             <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
                                         </form:form>
+                                            
+                                            
                                         <form:form method="post" commandName="cita">
                                             <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
                                             <input type="submit" class="texto_menu" name="generarDieta" value="Generar Dieta">
