@@ -5,6 +5,12 @@
  */
 package models;
 
+/**
+ *
+ * @author jms-m
+ */
+
+
 public class Dieta {
     String hora_des;
     /*String hora_c1;
