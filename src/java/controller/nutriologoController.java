@@ -1957,10 +1957,92 @@ public class nutriologoController {
 
             }
 
-            ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
-            mv.setViewName("cronograma");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+             ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-            return mv;
+         sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+
+        sql = "select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta=" + c.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("ListaPacientes", datosL2);                                                       // Pasa la lilsta completa               
+
+        sql = "select no_cedulap from paciente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("pacientePsicologo", datosL2);                                                       // Pasa la lilsta completa               
+        mv.addObject("paciente", new Paciente());
+
+        sql = "select * from entrada where id_usuario=" + c.getNo_boleta() + " order by id_entrada desc;";                     // OBETENEMOS TODAS LAS ENTRADAS QUE HA HECHO NUESTRO PACIENTE A PARTIR DE LA MÁS RECIENTE
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("listaEntradas", datosL2);                                               // PASAMOS LA LISTA COMPLETA
+
+        //  System.out.println("LISTA ENTRADAS: "+datosL2);
+        sql = "select id_entrada,fecha from comentarios where id_usuario=" + c.getNo_boleta() + " order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("FechaComentarios", datosL2);
+
+        sql = "select id_entrada,titulo from entrada";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("NombreEntrada", datosL2);                                               // PASAMOS LA LISTA COMPLETA            
+
+        mv.addObject("entradaForo", new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
+
+        sql = "select no_cedula from nutriologo where no_empleado=" + alert;                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select no_cita,fecha,horario from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        // PASAMOS LA LISTA COMPLETA            
+
+        //  String cita=datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1); 
+        //   System.out.println("numero de cita: "+cita);
+        mv.addObject("datosCita", datosL2);
+        mv.addObject("cita", new cita());
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println("Fecha: " + dateFormat.format(date));
+
+        sql = "select fecha from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        int fechaCita = 0;
+        if (datosL2.isEmpty()) {
+            fechaCita = 0;
+        } else {
+            System.out.println("FECHA DE CITA: " + datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1));
+            String fechaAct = datosL2.get(0).toString().substring(7, 11) + "/" + datosL2.get(0).toString().substring(12, 14) + "/" + datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            System.out.println("FECHA ACTUAL: " + fechaAct);
+
+            if (fechaAct.equals(dateFormat.format(date))) {
+                fechaCita = 1;
+            }
+        }
+
+        mv.addObject("fechaCita", fechaCita);
+
+        sql = "select fecha_ini from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("fechaExpediente", datosL2);
+
+        sql = "select id_expediente from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+        return mv;
+
 
         }
 
@@ -2164,17 +2246,17 @@ public class nutriologoController {
             }
             
             
-              String postre= ex.getPostre();
+              String golosinas= ex.getGolosinas();
            
             String subPostre = "";
-            for (int i = 0; i < ex.getPostre().length(); i++) {
-                if (ex.getPostre().charAt(i) == '\'') {
+            for (int i = 0; i < ex.getGolosinas().length(); i++) {
+                if (ex.getGolosinas().charAt(i) == '\'') {
                    subPostre = subPostre + "\\'";
                 } else {
-                    if (ex.getPostre().charAt(i) == '\\') {
+                    if (ex.getGolosinas().charAt(i) == '\\') {
                        subPostre = subPostre + "\\\\";
                     } else {
-                        subPostre = subPostre + ex.getPostre().charAt(i);
+                        subPostre = subPostre + ex.getGolosinas().charAt(i);
                     }
 
                 }
@@ -2328,7 +2410,7 @@ public class nutriologoController {
             Dulce = 0;
 
         }
-        if (ex.getDulce() != null) {
+        if (ex.getDulce() =="true") {
             Dulce = Integer.parseInt(ex.getDulce().toString());
 
         }
@@ -2336,8 +2418,8 @@ public class nutriologoController {
             Amarga = 0;
 
         }
-        if (ex.getAmarga() != null) {
-            Amarga = Integer.parseInt(ex.getDulce().toString());
+        if (ex.getAmarga() =="true") {
+            Amarga = Integer.parseInt(ex.getAmarga().toString());
 
         }
         if (ex.getSalada() == null) {
@@ -2436,9 +2518,92 @@ public class nutriologoController {
         }
 
         // REALIZAMOS LA INSERCIÓN
-        ModelAndView mv = new ModelAndView();                              //CREACIÓN DEL MODELO
-        mv.setViewName("cronograma");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
-        
+         ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+
+         sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+
+        sql = "select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("ListaPacientes", datosL2);                                                       // Pasa la lilsta completa               
+
+        sql = "select no_cedulap from paciente where no_boleta=" + ex.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("pacientePsicologo", datosL2);                                                       // Pasa la lilsta completa               
+        mv.addObject("paciente", new Paciente());
+
+        sql = "select * from entrada where id_usuario=" + ex.getNo_boleta() + " order by id_entrada desc;";                     // OBETENEMOS TODAS LAS ENTRADAS QUE HA HECHO NUESTRO PACIENTE A PARTIR DE LA MÁS RECIENTE
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("listaEntradas", datosL2);                                               // PASAMOS LA LISTA COMPLETA
+
+        //  System.out.println("LISTA ENTRADAS: "+datosL2);
+        sql = "select id_entrada,fecha from comentarios where id_usuario=" + ex.getNo_boleta() + " order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("FechaComentarios", datosL2);
+
+        sql = "select id_entrada,titulo from entrada";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("NombreEntrada", datosL2);                                               // PASAMOS LA LISTA COMPLETA            
+
+        mv.addObject("entradaForo", new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
+
+        sql = "select no_cedula from nutriologo where no_empleado=" + alert;                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select no_cita,fecha,horario from cita where no_boleta=" + ex.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        // PASAMOS LA LISTA COMPLETA            
+
+        //  String cita=datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1); 
+        //   System.out.println("numero de cita: "+cita);
+        mv.addObject("datosCita", datosL2);
+        mv.addObject("cita", new cita());
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println("Fecha: " + dateFormat.format(date));
+
+        sql = "select fecha from cita where no_boleta=" + ex.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        int fechaCita = 0;
+        if (datosL2.isEmpty()) {
+            fechaCita = 0;
+        } else {
+            System.out.println("FECHA DE CITA: " + datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1));
+            String fechaAct = datosL2.get(0).toString().substring(7, 11) + "/" + datosL2.get(0).toString().substring(12, 14) + "/" + datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            System.out.println("FECHA ACTUAL: " + fechaAct);
+
+            if (fechaAct.equals(dateFormat.format(date))) {
+                fechaCita = 1;
+            }
+        }
+
+        mv.addObject("fechaCita", fechaCita);
+
+        sql = "select fecha_ini from expediente where no_boleta=" + ex.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("fechaExpediente", datosL2);
+
+        sql = "select id_expediente from expediente where no_boleta=" + ex.getNo_boleta(); 
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+      
+
         return mv;                                                                                           // RETORNAMOS EL MODELO
         }
     }
