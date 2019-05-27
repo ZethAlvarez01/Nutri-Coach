@@ -1374,9 +1374,9 @@ public class nutriologoController {
 
     }
 /////////////////////////////
-    /////ACCION DEL BOTÓN FinalizarCita
-    @RequestMapping(params = "FinalizarCita", method = RequestMethod.POST)
-    public ModelAndView FinalizarCita(@ModelAttribute("cita") cita c, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) {
+    /////ACCION DEL BOTÓN FinalizarCitaN
+    @RequestMapping(params = "FinalizarCitaN", method = RequestMethod.POST)
+    public ModelAndView FinalizarCitaNutriologo(@ModelAttribute("cita") cita c, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) {
 
         HttpSession session = hsr.getSession();                              //OBETENEMOS LA SESIÓN
         String alert = (String) session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
