@@ -1,3 +1,19 @@
+
+<%-- 
+    Document   : expedientePsicologico
+    Created on : 26-may-2019, 23:54:27
+    Author     : jms-m
+--%>
+
+<%
+    response.addHeader("Pragma", "no-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+    response.setDateHeader("Expires", 0);
+%>
+
+
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,6 +31,7 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/dieta_nutriologo.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+     <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
     
     <!-- Scripts -->
     
@@ -29,35 +46,54 @@
 </head>
 
 <body onscroll="bajar()">
-    <header>
-            <div class="container">
-                <div id="pleca">
-                    <div id="logoSEP">
-                        <a href="https://www.gob.mx/sep">
-                            <img src="<c:url value="/resource/imagenes/logo-sep.png" />" alt="Secretaría de Educación Pública">
-                        </a>
-                    </div>
-                    <div id="logoIPN">
-                        <a href="https://www.ipn.mx">
-                            <p>Instituto Politécnico Nacional</p>
-                            "La Técnica al Servicio de la Patria"
-                        </a>
-                        <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
-                    </div>
+   <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="<c:url value="/resource/imagenes/logo-sep.png" />" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                 </div>
             </div>
-            <!--Fin container-->
-        </header> 
-
+        </div>
+        <!--Fin container-->
+    </header>
     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
+
+                        <ul id="menu_nutrio">
+                            <form:form method="post" commandName="Nutriologo">
+                                <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                                <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+
+                                <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                                <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                                    <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                                </form:form>
+                        </ul>
+                    </c:forEach> 
+
+                </div>
+            </div>
+
         </div>
     </div>
-
     <div id="contenido">
         <div class="container">
-            <h1>Plan de alimentacion personalizado para ${paciente}</h1>
+            <h1>Plan de alimentacion personalizado para  ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno} ${datosPaciente[0].ap_dos}</h1>
            
             
             <div id="smae" style="display:none;">
@@ -2247,9 +2283,9 @@
             <div id="tabla_contenido">
                 <div id="datos">
                     <ul id="datos_p">
-                        <li>Edad: ${Edad}</li>
-                        <li>Estatura: ${Estatura}</li>
-                        <li>Peso: ${Peso}</li>
+                        <li>Edad: ${datosPaciente[0].edad} años</li>
+                        <li>Estatura: ${expedientePaciente[0].talla} cm</li>
+                        <li>Peso: ${expedientePaciente[0].peso} Kg</li>
                         <li id="fecha"></li>
 
                         <script>

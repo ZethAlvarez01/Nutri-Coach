@@ -135,56 +135,85 @@
                             <p id="datosGenerales2">  <b>Domicilio:</b>${ListaPacientes[0].domicilio} </p>
                             <p id="datosGenerales3">   <b>Teléfono:</b>${ListaPacientes[0].telefono}  <b>Correo:</b>${ListaPacientes[0].correo} </p>
 
-                            <c:if test= "${empty datosCita}">
 
 
-                                <p>NO HAY CITAS PROGRAMADAS</p>
-                                <form:form method="post" commandName="cita">
-                                    <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
-                                    <input type="submit" class="texto_menu" name="AgendarCita" value="Agendar Cita">
-
-                                </form:form>
-
-                                <form:form method="post" commandName="cita">
-                                    <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
-                                    <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
-
-                                </form:form>
-
-                            </c:if>
-                            <c:if test= "${not empty datosCita}">
-
-
-                                <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
-
+                            <c:if test= "${expedienteActivo==0}">
                                 <c:if test= "${fechaCita==1}">
-
-
                                     <form:form method="post" commandName="cita">
 
                                         <input type="submit" class="texto_menu" name="AtenderCita" value="Atender cita">
                                         <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
                                     </form:form>
-                                      <form:form method="post" commandName="cita">
+                                </c:if>
+                            </c:if>
+                            <c:if test= "${expedienteActivo==1}">
 
-                                        <input type="submit" class="texto_menu" name=FinalizarCita" value="Finalizar cita">
-                                        <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                                <c:if test= "${empty datosCita}">
+
+
+                                    <p>NO HAY CITAS PROGRAMADAS</p>
+                                    <form:form method="post" commandName="cita">
                                         <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                        <input type="submit" class="texto_menu" name="AgendarCita" value="Agendar Cita">
+
                                     </form:form>
 
-                                </c:if>
-                                <c:if test= "${fechaCita==0}">
                                     <form:form method="post" commandName="cita">
                                         <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
                                         <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
 
                                     </form:form>
+                                    <form:form method="post" commandName="cita">
+                                        <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                        <input type="submit" class="texto_menu" name="generarDieta" value="Generar Dieta">
+
+                                    </form:form>
+
                                 </c:if>
 
-                            </c:if>
 
 
-                            <c:if test= "${expedienteActivo==1}">
+
+                                <c:if test= "${not empty datosCita}">
+
+
+                                    <p id="poxCita"><b>Próxima cita:</b> ${datosCita[0].fecha} <b>Horario:</b>${datosCita[0].horario}</p>
+
+                                    <c:if test= "${fechaCita==1}">
+
+
+                                        <form:form method="post" commandName="cita">
+
+                                            <input type="submit" class="texto_menu" name="AtenderCita" value="Atender cita">
+                                            <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                                        </form:form>
+                                        <form:form method="post" commandName="cita">
+
+                                            <input type="submit" class="texto_menu" name=FinalizarCita" value="Finalizar cita">
+                                            <form:input path="no_cita" placeholder="${datosCita[0].no_cita}" value="${datosCita[0].no_cita}" type="hidden" />
+                                            <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                        </form:form>
+                                        <form:form method="post" commandName="cita">
+                                            <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                            <input type="submit" class="texto_menu" name="generarDieta" value="Generar Dieta">
+
+                                        </form:form>
+
+                                    </c:if>
+                                    <c:if test= "${fechaCita==0}">
+                                        <form:form method="post" commandName="cita">
+                                            <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                            <input type="submit" class="texto_menu" name="AtenderCita" value="Atender Emergencia">
+
+                                        </form:form>
+                                        <form:form method="post" commandName="cita">
+                                            <form:input path="no_boleta" placeholder="${ListaPacientes[0].no_boleta}" value="${ListaPacientes[0].no_boleta}" type="hidden" />
+                                            <input type="submit" class="texto_menu" name="generarDieta" value="Generar Dieta">
+
+                                        </form:form>
+                                    </c:if>
+
+                                </c:if>
 
 
                                 <form:form method="post" commandName="expediente">
