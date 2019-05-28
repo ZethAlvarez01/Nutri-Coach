@@ -17,11 +17,12 @@ public class Paciente {
     private String correo;
     private String contraseña;
     private String contraseña2;
+    private String estatus;
 
     public Paciente() {
     }
 
-    public Paciente(String no_boleta, String nombre, String ap_uno, String ap_dos, String sexo, String fecha_n, String telefono, String domicilio, String correo, String contraseña, String contraseña2) {
+    public Paciente(String no_boleta, String nombre, String ap_uno, String ap_dos, String sexo, String fecha_n, String telefono, String domicilio, String correo, String contraseña, String contraseña2, String estatus) {
         this.no_boleta = no_boleta;
         this.nombre = nombre;
         this.ap_uno = ap_uno;
@@ -33,6 +34,7 @@ public class Paciente {
         this.correo = correo;
         this.contraseña = contraseña;
         this.contraseña2 = contraseña2;
+        this.estatus = estatus;
     }
 
     public String getNo_boleta() {
@@ -123,4 +125,13 @@ public class Paciente {
         this.contraseña2 = contraseña2;
     }
 
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+ 
 }

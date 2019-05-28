@@ -19,11 +19,12 @@ public class Nutriologo {
     private String contraseña2;
     private String horaEntrada;
     private String horaSalida;
+    private String estatus;
 
     public Nutriologo() {
     }
 
-    public Nutriologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String institucion, String telefono, String consultorio, String correo, String contraseña, String contraseña2, String horaEntrada, String horaSalida) {
+    public Nutriologo(String no_cedula, String no_empleado, String nombre, String ap_uno, String ap_dos, String institucion, String telefono, String consultorio, String correo, String contraseña, String contraseña2, String horaEntrada, String horaSalida, String estatus) {
         this.no_cedula = no_cedula;
         this.no_empleado = no_empleado;
         this.nombre = nombre;
@@ -37,22 +38,7 @@ public class Nutriologo {
         this.contraseña2 = contraseña2;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
-    }
-
-    public String getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(String horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    public String getHoraSalida() {
-        return horaSalida;
-    }
-
-    public void setHoraSalida(String horaSalida) {
-        this.horaSalida = horaSalida;
+        this.estatus = estatus;
     }
 
     public String getNo_cedula() {
@@ -143,4 +129,29 @@ public class Nutriologo {
         this.contraseña2 = contraseña2;
     }
 
+    public String getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(String horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public String getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(String horaSalida) {
+        this.horaSalida = horaSalida;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    
 }
