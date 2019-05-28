@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Win64 (x86_64)
 --
 -- Host: localhost    Database: nutricoach
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -70,6 +70,32 @@ LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
 INSERT INTO `administrador` VALUES (2014310030,'Zeth','Alvarez','Hernandez','Administrador','12345','5547131440'),(11111111,'Juan','Martinez','Salinas','Administrador','Admin1234','55443322');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `alimento`
+--
+
+DROP TABLE IF EXISTS `alimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alimento` (
+  `id_alimento` int(11) NOT NULL AUTO_INCREMENT,
+  `cantidad` float DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `calorias` int(11) DEFAULT NULL,
+  `unidad` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_alimento`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alimento`
+--
+
+LOCK TABLES `alimento` WRITE;
+/*!40000 ALTER TABLE `alimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -156,6 +182,54 @@ LOCK TABLES `diario` WRITE;
 /*!40000 ALTER TABLE `diario` DISABLE KEYS */;
 INSERT INTO `diario` VALUES (3,1,'Diario de seguimiento','2019-05-07 19:55:50'),(4,3,'Diario de seguimiento','2019-05-19 00:46:41');
 /*!40000 ALTER TABLE `diario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dieta`
+--
+
+DROP TABLE IF EXISTS `dieta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dieta` (
+  `id_dieta` int(11) NOT NULL AUTO_INCREMENT,
+  `id_opDes1` int(11) DEFAULT NULL,
+  `id_opDes2` int(11) DEFAULT NULL,
+  `id_opDes3` int(11) DEFAULT NULL,
+  `id_opCo11` int(11) DEFAULT NULL,
+  `id_opCo12` int(11) DEFAULT NULL,
+  `id_opCom1` int(11) DEFAULT NULL,
+  `id_opCom2` int(11) DEFAULT NULL,
+  `id_opCom3` int(11) DEFAULT NULL,
+  `id_opCo21` int(11) DEFAULT NULL,
+  `id_opCo22` int(11) DEFAULT NULL,
+  `id_opCena1` int(11) DEFAULT NULL,
+  `id_opCena2` int(11) DEFAULT NULL,
+  `id_opCena3` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_dieta`),
+  KEY `id_opDes1` (`id_opDes1`),
+  KEY `id_opDes2` (`id_opDes2`),
+  KEY `id_opDes3` (`id_opDes3`),
+  KEY `id_opCo11` (`id_opCo11`),
+  KEY `id_opCo12` (`id_opCo12`),
+  KEY `id_opCom1` (`id_opCom1`),
+  KEY `id_opCom2` (`id_opCom2`),
+  KEY `id_opCom3` (`id_opCom3`),
+  KEY `id_opCo21` (`id_opCo21`),
+  KEY `id_opCo22` (`id_opCo22`),
+  KEY `id_opCena1` (`id_opCena1`),
+  KEY `id_opCena2` (`id_opCena2`),
+  KEY `id_opCena3` (`id_opCena3`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dieta`
+--
+
+LOCK TABLES `dieta` WRITE;
+/*!40000 ALTER TABLE `dieta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dieta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -616,6 +690,39 @@ INSERT INTO `nutriologo` VALUES (987654321,'Zeth','Alvarez','Hernandez','5511224
 UNLOCK TABLES;
 
 --
+-- Table structure for table `opciones`
+--
+
+DROP TABLE IF EXISTS `opciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opciones` (
+  `id_opcion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_alimento1` int(11) DEFAULT NULL,
+  `id_alimento2` int(11) DEFAULT NULL,
+  `id_alimento3` int(11) DEFAULT NULL,
+  `id_alimento4` int(11) DEFAULT NULL,
+  `id_alimento5` int(11) DEFAULT NULL,
+  `tipo` int(11) NOT NULL,
+  PRIMARY KEY (`id_opcion`),
+  KEY `id_alimento1` (`id_alimento1`),
+  KEY `id_alimento2` (`id_alimento2`),
+  KEY `id_alimento3` (`id_alimento3`),
+  KEY `id_alimento4` (`id_alimento4`),
+  KEY `id_alimento5` (`id_alimento5`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `opciones`
+--
+
+LOCK TABLES `opciones` WRITE;
+/*!40000 ALTER TABLE `opciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `opciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `paciente`
 --
 
@@ -779,4 +886,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-27 23:07:06
+-- Dump completed on 2019-05-28  2:20:22

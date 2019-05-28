@@ -33,11 +33,10 @@ var ind=0;
 function obtener(alimento,cantidad,unidad,flg){
     if(flg==1){
         if(confirm("¿Deseas agregar este alimento a la dieta?")){
-            var canti=document.createElement("form:p");
-            var uni=document.createElement("form:p");
-            var ali=document.createElement("form:p");
+            var canti=document.createElement("form:label");
+            var uni=document.createElement("form:label");
+            var ali=document.createElement("form:label");
             
-            var enter=document.createElement("br");
             
             var canttxt = document.createTextNode(cantidad); 
             var alitxt = document.createTextNode(" "+alimento+"\n"); 
@@ -52,7 +51,6 @@ function obtener(alimento,cantidad,unidad,flg){
             editar.appendChild(canti);
             editar.appendChild(uni);
             editar.appendChild(ali);
-            editar.appendChild(enter);
             arreglo[ind]=editar;
             ind++;
         }
