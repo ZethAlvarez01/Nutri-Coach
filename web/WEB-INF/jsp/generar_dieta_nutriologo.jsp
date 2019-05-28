@@ -2316,9 +2316,7 @@
                             <li id="caloriasPC">Calorias por consumir: </li>
                     </ul>
                 </div>
-
-               
-                <form:form method="post" commandName="Nutriologo">
+                        <form:form method="post" commandName="Nutriologo">
                             
                      
                 <div id="dieta">
@@ -2335,22 +2333,22 @@
                     
                     
                     <div id="desayuno_op1" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('desayuno_op1')">Buscar alimentos</a>
+                        <form:textarea path="no_empleado" id="desayuno_op1_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('desayuno_op1_txt')">Buscar alimentos</a>
                     </div>
                         
                           
                         
                     <div id="desayuno_op2" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('desayuno_op2')">Buscar alimentos</a>
+                        <form:textarea path="no_empleado"  id="desayuno_op2_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('desayuno_op2_txt')">Buscar alimentos</a>
                     </div>
                         
                      
                         
                     <div id="desayuno_op3" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('desayuno_op3')">Buscar alimentos</a>
+                        <form:textarea path="no_empleado" id="desayuno_op3_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('desayuno_op3_txt')">Buscar alimentos</a>
                     </div>
    
                         
@@ -2363,12 +2361,12 @@
                         
                         
                     <div id="colacionm_op1" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('colacionm_op1')">Buscar alimentos</a>
+                        <form:textarea path="no_empleado" id="colacionm_op1_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('colacionm_op1_txt')">Buscar alimentos</a>
                     </div>
                     <div id="colacionm_op2" class="bordes_c">
-                       
-                        <a class="boton_aux" onclick="cambiar('colacionm_op2')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="colacionm_op2_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('colacionm_op2_txt')">Buscar alimentos</a>
                     </div>
                     <div id="colacionm_op3" class="bordes_c"></div>
 
@@ -2378,13 +2376,16 @@
                         <a id="boton_h2_c" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c()">Cambiar</a>
                     </div>
                     <div id="comida_op1" class="bordes_c">
+                        <form:textarea path="no_empleado" id="comida_op1_txt" class="text_area_alimentos"/>
                         <a class="boton_aux" onclick="cambiar('comida_op1_txt')">Buscar alimentos</a>
                     </div>
                     <div id="comida_op2" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('comida_op2')">Buscar alimentos</a>
+                        <form:textarea path="no_empleado" id="comida_op2_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('comida_op2_txt')">Buscar alimentos</a>
                     </div>
                     <div id="comida_op3" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('comida_op3')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="comida_op3_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('comida_op3_txt')">Buscar alimentos</a>
                     </div>
 
                     <div id="colacionv_t" class="bordes">
@@ -2393,10 +2394,12 @@
                         <a id="boton_h2_c2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c2()">Cambiar</a>
                     </div>
                     <div id="colacionv_op1" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('colacionv_op1')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="colacionv_op1_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('colacionv_op1_txt')">Buscar alimentos</a>
                     </div>
                     <div id="colacionv_op2" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('colacionv_op2')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="colacionv_op2_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('colacionv_op2_txt')">Buscar alimentos</a>
                     </div>
                     <div id="colacionv_op3" class="bordes_c"></div>
 
@@ -2406,14 +2409,16 @@
                         <a id="boton_h2_ce" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_ce()">Cambiar</a>
                     </div>
                     <div id="cena_op1" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('cena_op1')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="cena_op1_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('cena_op1_txt')">Buscar alimentos</a>
                     </div>
                     <div id="cena_op2" class="bordes_c">
-                        <a class="boton_aux" onclick="cambiar('cena_op2')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="cena_op2_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('cena_op2_txt')">Buscar alimentos</a>
                     </div>
                     <div id="cena_op3" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('cena_op3')">Buscar alimentos</a>
+                         <form:textarea path="no_empleado" id="cena_op3_txt" class="text_area_alimentos"/>
+                        <a class="boton_aux" onclick="cambiar('cena_op3_txt')">Buscar alimentos</a>
                     </div>
                 
                     <div id="botones_1">
@@ -2426,7 +2431,6 @@
                     </div>
                            </form:form> 
                 </div>
-
             </div>
         </div>
     </div>

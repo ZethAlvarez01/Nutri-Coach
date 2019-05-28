@@ -32,7 +32,8 @@
         <!-- Scripts -->
         
         <script type="text/javascript" src="resource/scrips/script.js"/></script>  
-        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>  
+        <script type="text/javascript" src="resource/scrips/barra_script.js"/></script>
+ <script type="text/javascript" src="resource/scrips/busqueda.js"/></script>  
        
         
          
@@ -90,78 +91,7 @@
         <div class="container">
             <div id="grid">
                
-                <div id="listado">
-                    <div id="encabezado_lista" >
-                        <p id="sub-titulo">Listado de usuarios</p>
-                        <select id="listaUsuarios" onchange="TypeOption()" name="listaUsuarios" >
-                            <option  value="pacientes"  >Pacientes</option>
-                            <option  value="nutriologos" >Nutriólogos</option>
-                            <option  value="psicologos">Psicólogos</option>
-                        </select>
-                        <input type="text" placeholder="Buscar usuario">
-                        
-                    </div>
-
-                    <div id="paciente" class="listaUsuarios" style="display: block;">
-                          <p id="numero_usuarios">Número de usuarios: ${LongitudP}</p>  
-                         <c:forEach items="${ListaP}" var="item"> 
-                        <div class="usuario" onclick="TypeDiv('${item.no_boleta}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Edad: ${item.edad} Sexo:${item.sexo} Fecha de nacimiento:${item.fecha_n}',' domicilio: ${item.domicilio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
-                           
-                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user"> 
-                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                                
-                                
-                           
-                             </div>
-                            </c:forEach> 
-                            
-                          
-                        
-                    </div>
-                            
-                    <div id="psicologo" class="listaUsuarios"  style="display: none;">
-                        <p id="numero_usuarios">Número de usuarios: ${LongitudPs}</p>  
-                         <c:forEach items="${ListaPs}" var="item"> 
-                        <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}',' telefono:${item.telefono}','  correo:${item.correo}','','${item.estatus}')" name="usuario">
-                           
-                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                                
-                                
-                            </div>
-                             
-                            </c:forEach> 
-                       
-                     </div>
-                            
-                       <div id="nutriologo" class="listaUsuarios" style="display: none">   
-                           <p id="numero_usuarios">Número de usuarios: ${LongitudN}</p>  
-                         <c:forEach items="${ListaN}" var="item" > 
-                            <div class="usuario" onclick="TypeDiv('No. Cédula: ${item.no_cedula} No. Trabajador: ${item.no_empleado}','${item.nombre} ${item.ap_uno} ${item.ap_dos}','Institucion: ${item.institucion}',' consultorio: ${item.consultorio}',' telefono:${item.telefono}  correo:${item.correo}','${item.estatus}')" name="usuario">
-                        
-                            
-                                <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto">
-                            <div id="texto_user">
-                                <p id="nombre">${item.nombre} ${item.ap_uno} ${item.ap_dos}</p>
-                                <p id="nombre-info">Mas informacion</p>
-                            </div>
-                                
-                                
-                           
-                               </div>
-                            </c:forEach> 
-                      
-                        
-
-                    </div>
-
-                </div>
+              
 
                 <div id="informacion">
                     <div id="h3">
@@ -169,20 +99,42 @@
                     </div>
                     <div id="info_general">
                         <h2>Datos Generales</h2>
-                        <p id="etiqueta_estado" style="display: none;">Activo</p>
+                        <p id="etiqueta_estado" >Activo</p>
                         <div id="datos">
                             <p id="fecha"></p>
                             <script>
                                 fecha();
                             </script>
-                            <div id="info_completa" style="display: none;" name="info_completa">
+                            <div id="info_completa"  name="info_completa">
                                 <img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto de perfil" id="foto_info">
-                               
-                                <p id="num_boleta">ID</p>
-                                <p id="nombreUser">Nombre Completo:</p> 
-                                <p id="datosGenerales">  EDAD: SEXO: FECHA DE NACIMIENTO:  </p>
-                                <p id="datosGenerales2">  DOMICILIO:  </p>
-                                <p id="datosGenerales3">   TELEFONO:  CORREO: </p>
+                               <c:if test= "${p==1}">
+                                <p id="num_boleta">No. Boleta: ${datosU[0].no_boleta}</p>
+                                <p id="nombreUser">Nombre Completo: ${datosU[0].nombre} ${datosU[0].ap_uno} ${datosU[0].ap_dos}</p> 
+                                <p id="datosGenerales">  EDAD: SEXO: FECHA DE NACIMIENTO: ${datosU[0].fecha_n}</p>
+                                <p id="datosGenerales2">  DOMICILIO:  ${datosU[0].domicilio}</p>
+                                <p id="datosGenerales3">   TELEFONO: ${datosU[0].telefono} CORREO: ${datosU[0].correo}</p>
+                                
+                                
+                                </c:if>
+                                <c:if test= "${ps==1}">
+                                <p id="num_boleta">No. Cédula:${datosU[0].no_cedula}    No. Empleado: ${datosU[0].no_empleado}  </p>
+                                <p id="nombreUser">Nombre Completo: ${datosU[0].nombre} ${datosU[0].ap_uno} ${datosU[0].ap_dos}</p> 
+                                <p id="datosGenerales">  Institución ${datosU[0].institucion}   </p>
+                                <p id="datosGenerales2">  CONSULTORIO: ${datosU[0].consultorio} </p>
+                                <p id="datosGenerales3">   TELEFONO: ${datosU[0].telefono} CORREO: ${datosU[0].correo}</p>
+                                <p id="datosGenerales4">   Hora de Entrada: ${datosU[0].horaEntrada} Hora de Salida: ${datosU[0].horaSalida}</p>
+                                
+                                
+                                </c:if>
+                                <c:if test= "${N==1}">
+                                 <p id="num_boleta">No. Cédula:${datosU[0].no_cedula}    No. Empleado: ${datosU[0].no_empleado}  </p>
+                                <p id="nombreUser">Nombre Completo: ${datosU[0].nombre} ${datosU[0].ap_uno} ${datosU[0].ap_dos}</p> 
+                                <p id="datosGenerales">  Institución ${datosU[0].institucion}   </p>
+                                <p id="datosGenerales2">  CONSULTORIO: ${datosU[0].consultorio} </p>
+                                <p id="datosGenerales3">   TELEFONO: ${datosU[0].telefono} CORREO: ${datosU[0].correo}</p>
+                                <p id="datosGenerales4">   Hora de Entrada: ${datosU[0].horaEntrada} Hora de Salida: ${datosU[0].horaSalida}</p>
+                                
+                                </c:if>
                                 <br>
                                 <br>
                                 <br>
@@ -221,17 +173,101 @@
                     </div>
 
 
-                    <div id="estado" style="display: none;" name="estado">
+                    <div id="estado"  name="estado">
                         <h2 id="titulo_derecha">Cambiar estado del usuario</h2>
                         <p id="estado"></p>
-                        <div id="botones">
-                            <input type="radio" id="activo" name="group1" class="radioB" value="activo" > <label class="c_estado">Activo</label><br>
-                            <input type="radio" id="bloquear" name="group1" class="radioB" value="activo"> <label class="c_estado">Suspender</label><br>
-                            <input type="radio" id="baja" name="group1" class="radioB" value="activo"> <label class="c_estado">Dar de baja</label>
+                        <c:if test= "${p==1}">
+                            <div id="botones">
+                                       <form:form method="post" commandName="Paciente">
+                                <c:if test= "${datosU[0].estatus==1}">
+                                    
+                                 <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" checked="true" /> <label class="c_estado">Activo</label><br>
+                             <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                             
+                           <c:if test= "${datosU[0].estatus==2}">
+                                <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus"id="bloquear" name="group1" class="radioB" value="2" checked="true" /> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                            <c:if test= "${datosU[0].estatus==3}">
+                               <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1"  /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                            <form:radiobutton path="estatus"id="baja" name="group1" class="radioB" value="3" checked="true" /> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                       
+                        </div>
+
+                         <form:input path="no_boleta" placeholder="${datosU[0].no_boleta}" value="${datosU[0].no_boleta}" type="hidden" />
+                        <div id="boton" > <input type="submit"  name="CambioP" value="Guardar Cambio">  </div>
+                             </form:form>
                         </div>
 
                         
-                        <div id="boton" onclick="confirmacion()">Guardar cambio</div>
+                     
+                        </c:if>
+                        
+                         <c:if test= "${ps==1}">
+                             <div id="botones">
+                                 <form:form method="post" commandName="Psicologo">
+                                <c:if test= "${datosU[0].estatus==1}">
+                                    
+                                 <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" checked="true" /> <label class="c_estado">Activo</label><br>
+                             <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                             
+                           <c:if test= "${datosU[0].estatus==2}">
+                                <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus"id="bloquear" name="group1" class="radioB" value="2" checked="true" /> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                            <c:if test= "${datosU[0].estatus==3}">
+                               <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1"  /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                            <form:radiobutton path="estatus"id="baja" name="group1" class="radioB" value="3" checked="true" /> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                       
+                        </div>
+                       <form:input path="no_cedula" placeholder="${datosU[0].no_cedula}" value="${datosU[0].cedula}" type="hidden" />
+                         <div id="boton" > <input type="submit"  name="CambioPs" value="Guardar Cambio">  </div>
+                       
+                             </form:form>
+                        </c:if>
+                        
+                         <c:if test= "${N==1}">
+                            <div id="botones">
+                                       <form:form method="post" commandName="Nutriologo">
+                                <c:if test= "${datosU[0].estatus==1}">
+                                    
+                                 <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" checked="true" /> <label class="c_estado">Activo</label><br>
+                             <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                             
+                           <c:if test= "${datosU[0].estatus==2}">
+                                <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1" /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus"id="bloquear" name="group1" class="radioB" value="2" checked="true" /> <label class="c_estado">Suspender</label><br>
+                             <form:radiobutton path="estatus" id="baja" name="group1" class="radioB" value="3"/> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                            <c:if test= "${datosU[0].estatus==3}">
+                               <form:radiobutton path="estatus" id="activo" name="group1" class="radioB" value="1"  /> <label class="c_estado">Activo</label><br>
+                            <form:radiobutton path="estatus" id="bloquear" name="group1" class="radioB" value="2"/> <label class="c_estado">Suspender</label><br>
+                            <form:radiobutton path="estatus"id="baja" name="group1" class="radioB" value="3" checked="true" /> <label class="c_estado">Dar de baja</label>
+                                </c:if>
+                       
+                        </div>
+                       <form:input path="no_cedula" placeholder="${datosU[0].no_cedula}" value="${datosU[0].cedula}" type="hidden" />
+                        
+                        <div id="boton" > <input type="submit"  name="CambioN" value="Guardar Cambio">  </div>
+                             </form:form>
+                        </div>
+
+                        
+                        
+                        </c:if>
+                      
                         
                        
                         <h2 id="titulo_derecha">Enviar mensajes</h2>
@@ -240,6 +276,17 @@
                         <form:textarea path="contenido" id="textarea" cols="30" rows="10" placeholder="Mensaje"/>
                           
                         
+                        
+                        <c:if test= "${p==1}">
+                             <form:input path="id_usuario_emisor" placeholder="${datosU[0].no_boleta}" value="${datosU[0].no_boleta}" type="hidden" />
+                        </c:if>
+                        
+                        <c:if test= "${N==1}">
+                            <form:input path="id_usuario_emisor" placeholder="${datosU[0].no_empleado}" value="${datosU[0].no_empleado}" type="hidden" />
+                        </c:if>
+                        <c:if test= "${ps==1}">
+                            <form:input path="id_usuario_emisor" placeholder="${datosU[0].no_empleado}" value="${datosU[0].no_empleado}" type="hidden" />
+                        </c:if>
                         <form:button id="boton" type="submit" name="EnviarMensaje" value="EnviarMensaje" >Enviar mensaje</form:button>
                       
                         
