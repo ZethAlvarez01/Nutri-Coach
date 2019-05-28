@@ -2301,9 +2301,17 @@
 
                     <ul id="datos_c">
                         <li>Motivo de la consulta: ${Motivo}</li>
-                        <li>Calculo de calorias actuales: ${Calorias}</li>
-                        <li>Ajuste en calorias: <input type="number"></li>
-                        <li>Calorias por consumir: ${Calorias_x_consumir}</li>
+                        <li>Calculo de calorias actuales: ${calorias}</li>
+                        <li>Ajuste en calorias: <input type="number" min="-${calorias}" onchange="suma(${calorias},this)"></li>
+                        <script> 
+                            function suma(calorias,cuadrito){
+                                var cal=parseInt(calorias);
+                                var cuadritoVal=parseInt(cuadrito.value);
+                            var caloriasPC=cal+cuadritoVal;
+                            document.getElementById("caloriasPC").innerHTML="Calorias por consumir: "+caloriasPC;
+                            }
+                            </script>
+                            <li id="caloriasPC">Calorias por consumir: </li>
                     </ul>
                 </div>
 
@@ -2396,7 +2404,7 @@
                         <textarea id="cena_op3_txt" class="text_area_alimentos"></textarea>
                         <a class="boton_aux" onclick="cambiar('cena_op3_txt')">Buscar alimentos</a>
                     </div>
-
+                     
                     <div id="botones_1">
                         <input type="button" value="Guardar" class="guardar">
                     </div>
