@@ -1395,7 +1395,7 @@ public class nutriologoController {
        
        
        
-        ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO
+        ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO INICIO DE METODO
         mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
          sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
@@ -1479,7 +1479,7 @@ public class nutriologoController {
         }
         mv.addObject("expedienteActivo", expedienteActivo);
         mv.addObject("expediente", new expediente());
-        return mv;
+        return mv;          // FINAL DE METODO
 
     
     }
@@ -1776,10 +1776,95 @@ public class nutriologoController {
 
             this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
 
-            ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
-            mv.setViewName("cronograma");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+            
+        ModelAndView mv = new ModelAndView();                            //CREACIÓN DEL MODELO
+        mv.setViewName("expedienteNutri");               //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-            return mv;
+         sql = "select nombre,ap_uno,ap_dos, no_empleado,no_cedula from nutriologo where no_empleado=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
+
+        sql = "select no_boleta,nombre,ap_uno,ap_dos,edad,sexo,fecha_n,telefono,domicilio,correo  from paciente where no_boleta=" + c.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("ListaPacientes", datosL2);                                                       // Pasa la lilsta completa               
+
+        sql = "select no_cedulap from paciente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+
+        mv.addObject("pacientePsicologo", datosL2);                                                       // Pasa la lilsta completa               
+        mv.addObject("paciente", new Paciente());
+
+        sql = "select * from entrada where id_usuario=" + c.getNo_boleta() + " order by id_entrada desc;";                     // OBETENEMOS TODAS LAS ENTRADAS QUE HA HECHO NUESTRO PACIENTE A PARTIR DE LA MÁS RECIENTE
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("listaEntradas", datosL2);                                               // PASAMOS LA LISTA COMPLETA
+
+        //  System.out.println("LISTA ENTRADAS: "+datosL2);
+        sql = "select id_entrada,fecha from comentarios where id_usuario=" + c.getNo_boleta() + " order by fecha desc";      // OBETENEMOS LA FECHA DE LOS COMENTARIOS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("FechaComentarios", datosL2);
+
+        sql = "select id_entrada,titulo from entrada";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        mv.addObject("NombreEntrada", datosL2);                                               // PASAMOS LA LISTA COMPLETA            
+
+        mv.addObject("entradaForo", new entradaForo());                                   //PASAMOS EL OBJETO ENTRADA EN EL FORO
+
+        sql = "select no_cedula from nutriologo where no_empleado=" + alert;                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select no_cita,fecha,horario from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        // PASAMOS LA LISTA COMPLETA            
+
+        //  String cita=datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length()-1); 
+        //   System.out.println("numero de cita: "+cita);
+        mv.addObject("datosCita", datosL2);
+        mv.addObject("cita", new cita());
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println("Fecha: " + dateFormat.format(date));
+
+        sql = "select fecha from cita where no_boleta=" + c.getNo_boleta() + " and no_cedula=" + cedula + " and estado=3";                                                      // OBETENEMOS EL NOMBRE DE TODAS LAS ENTRADAS REALIZADOS POR EL USUARIO
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                       // ASIGNAMOS EL RESULTADO DE LA CONSULTA
+        int fechaCita = 0;
+        if (datosL2.isEmpty()) {
+            fechaCita = 0;
+        } else {
+            System.out.println("FECHA DE CITA: " + datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1));
+            String fechaAct = datosL2.get(0).toString().substring(7, 11) + "/" + datosL2.get(0).toString().substring(12, 14) + "/" + datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            System.out.println("FECHA ACTUAL: " + fechaAct);
+
+            if (fechaAct.equals(dateFormat.format(date))) {
+                fechaCita = 1;
+            }
+        }
+
+        mv.addObject("fechaCita", fechaCita);
+
+        sql = "select fecha_ini from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("fechaExpediente", datosL2);
+
+        sql = "select id_expediente from expediente where no_boleta=" + c.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+        return mv;
+
+
+           
 
         }
 
@@ -2507,12 +2592,19 @@ public class nutriologoController {
         List datosL2 = this.jdbcTemplate.queryForList(sql);
 
         if (datosL2.isEmpty()) {
-            sql = "insert into expediente values(0," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis+ "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+            sql = "insert into expediente values(0," + ex.getNo_boleta() + ",'" + ex.getFecha_ini()+"');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+
+            this.jdbcTemplate.update(sql);
+            sql = "select id_expediente from expediente where no_boleta=" + ex.getNo_boleta();
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+            
+            String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            sql = "insert into hojaexpediente values(0," + expediente + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones  + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
 
             this.jdbcTemplate.update(sql);
         } else {
             String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
-            sql = "insert into hojaexpediente values(0," + expediente + "," + ex.getNo_boleta() + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones  + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
+            sql = "insert into hojaexpediente values(0," + expediente + ",'','','" + ex.getFecha_ini() + "',0,0,0,0,0,0,'" + subAntec_hf + "','" + Act_f + "','" + subAct + "','" + ex.getFrecuencia() + "','" + subPade + "','" + Tabaco + "','" + ex.getFrec_tabaco() + "','" + Alcohol + "','" + ex.getFrec_alcohol() + "','" + subTratamiento + "','" + subTiempo + "','','','" + subAlergias + "','" + subPostre + "',0,0,0,0,0,'" + Dulce + "','" + Amarga + "','" + Salada + "','" + Picante + "','" + Acida + "','" + Act_sex + "','" + Edo_gestacion + "','" + subM_anticonceptivo + "','" + Terapia_rh + "','" + subdosis + "','" + ex.getPeso() + "','" + ex.getTalla() + "','" + ex.getTemperatura() + "','" + subTension + "','" + subFrecuencia + "','',0.0,'" + ex.getCuello() + "','" + ex.getBrazo() + "','" + ex.getCadera() + "','" + ex.getTorax() + "','" + ex.getAntebrazo() + "','" + ex.getAbdomen() + "','" + ex.getMulso() + "','" + ex.getPierna() + "','" + subAspec_grls + "','','" + ex.getT_Gestacion() + "','" + subTipoTerapia + "','" + Cantidad_ingesta + "','" + Horario_Comida + "','" + subHC + "','" + subRecomendaciones + "','" + subObservaciones  + "','" + Tratamiento_n + "','" + ex.getGolosinas() + "');";   // INSERTAMOS EN LA TABLA ENTRADA NUESTRO id_usuario mientras el dato de session alert, el titulo de nuestra entrada y el contenido
 
             this.jdbcTemplate.update(sql);
         }
@@ -2633,59 +2725,64 @@ public class nutriologoController {
         sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("datosPaciente", datosL2);
-
-        sql = "select * from expediente where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        
+        sql="select id_expediente from expediente where no_boleta="+ex.getNo_boleta();
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        String expediente=datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
+        
+        
+        sql = "select * from hojaexpediente where id_expediente=" + expediente+" order by fecha_ini limit 1";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
         mv.addObject("ExpedienteBase", datosL2);
         // Pasa la lilsta completa
         mv.addObject("expediente", new expediente());
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteEnero", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteFebrero", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMarzo", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAbril", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMayo", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJunio", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJulio", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAgosto", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteSeptiembre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteOctubre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteNoviembre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + ex.getNo_boleta() + " and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteDiciembre", datosL2);
 
@@ -2715,12 +2812,19 @@ public class nutriologoController {
         mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
         mv.addObject("Nutriologo", new Nutriologo());                                             //PASAMOS OBJETO PSICOLOGO   
 
-        if (ex.getId_expediente() == null) {
+      
             sql = "select * from hojaexpediente where id_hojaExpediente=" + ex.getId_hojaexpediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosExpediente", datosL2);
+
+            
             System.out.println(datosL2);
-            sql = "select no_boleta from hojaexpediente where id_hojaExpediente=" + ex.getId_hojaexpediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
+            
+            sql="select id_expediente from hojaexpediente where id_hojaExpediente="+ex.getId_hojaexpediente();
+             datosL2 = this.jdbcTemplate.queryForList(sql);   
+             String expediente=datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
+
+            sql = "select no_boleta from expediente where id_expediente=" + expediente;   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             String boleta = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
 
@@ -2728,22 +2832,7 @@ public class nutriologoController {
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosPaciente", datosL2);
 
-        } else {
-            sql = "select * from expediente where id_expediente=" + ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosExpediente", datosL2);
-
-            System.out.println(datosL2);
-
-            sql = "select no_boleta from expediente where id_expediente=" + ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            String boleta = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-            sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + boleta;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosPaciente", datosL2);
-
-        }
+       
 
         return mv;                                                                                           // RETORNAMOS EL MODELO
 
@@ -2923,30 +3012,24 @@ public class nutriologoController {
 
          String talla="";
          String peso="";
+         String actividad="";
          
          
-         if(datosL2.isEmpty()){
-            sql="select talla,peso from expediente where id_expediente="+expediente; 
-            datosL2 = this.jdbcTemplate.queryForList(sql); 
-            mv.addObject("expedientePaciente",datosL2);
-            
-           sql="select talla from expediente where id_expediente="+expediente; 
-            datosL2 = this.jdbcTemplate.queryForList(sql); 
-            talla=datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);
-            sql="select peso from expediente where id_expediente="+expediente; 
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            peso=datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);
-         }
-         else{
+       
+     
             mv.addObject("expedientePaciente",datosL2);  
-            sql="select talla from expediente where id_expediente="+expediente; 
+            sql="select talla from hojaexpediente where id_expediente="+expediente+" order by fecha_ini desc limit 1"; 
             datosL2 = this.jdbcTemplate.queryForList(sql); 
              talla=datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length()-1);
             
-            sql="select peso from expediente where id_expediente="+expediente; 
+            sql="select peso from hojaexpediente where id_expediente="+expediente+" order by fecha_ini desc limit 1"; 
             datosL2 = this.jdbcTemplate.queryForList(sql);
             peso=datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);
-         }
+            
+            sql="select frecuencia  from hojaexpediente where id_expediente="+expediente+" order by fecha_ini desc limit 1"; 
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+            actividad=datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length()-1);
+         
         
        
            
@@ -2957,15 +3040,27 @@ public class nutriologoController {
             sql="select sexo from paciente where no_boleta="+c.getNo_boleta(); 
             datosL2 = this.jdbcTemplate.queryForList(sql);
            String Sexo=datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);
+           
+           sql="select edad from paciente where no_boleta="+c.getNo_boleta(); 
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+           String Edad=datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length()-1);
+           
             System.out.println(Sexo);
+               System.out.println(Edad);
+               Double calorias=0.0;
+               
+               
+               
+               
+               
         //////////////FORMULA PARA CALCULAR CALORIAS YA ESTA LA TALLA, EL PESO  Y EL SEXO SEPARADOS PARA SOLO INSERTAR EN LA FORMULA
              if(Sexo.equals("H")){
                  //FORMULA PARA HOMBRE
-                 
+                calorias=66+(13.7*(Double.parseDouble(peso)))+(5*(Double.parseDouble(talla)))-6.8*(Integer.parseInt(Edad));
              }
              if(Sexo.equals("M")){
                  //FORMULA PARA MUJER
-                 
+                calorias=655+(9.6*(Double.parseDouble(peso)))+(1.8*(Double.parseDouble(talla)))-4.7*(Integer.parseInt(Edad));
              }
              
              if(Sexo.equals("O")){
@@ -2973,6 +3068,26 @@ public class nutriologoController {
                  
              }
         
+             System.out.println(actividad+" actividad");
+             
+             switch(Integer.parseInt(actividad)){
+                 case 0: calorias=calorias*1.2;
+                 break;
+                 case 1: 
+                 case 2:
+                 case 3: calorias=calorias*1.375;
+                 break;
+                 case 4: 
+                 case 5: calorias=calorias*1.55;
+                 break;
+                 case 6: 
+                 case 7: calorias=calorias*1.725;
+                 break;
+                         
+             }
+             System.out.println(calorias);
+             int caloriasF=(int)  Math.round(calorias);
+             mv.addObject("calorias",caloriasF);
         return mv;
         
     }

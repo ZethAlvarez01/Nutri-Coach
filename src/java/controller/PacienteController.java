@@ -532,165 +532,7 @@ public class PacienteController {
             sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
             datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            if (datosL2.isEmpty()) {
-                System.out.println("NO TIENE MAS EXPEDIENTES");
-                sql = "select peso from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                sql = "select talla from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                sql = "select dulce from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-                String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                sql = "select amarga from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select salada from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select picante from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                sql = "select acida from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select act_f from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                sql = "select id_diario from diario where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String ansiedad = "0";
-                String depresion = "0";
-                String ira = "0";
-                String estres = "0";
-                String felicidad = "0";
-
-                if (datosL2.isEmpty()) {
-
-                    System.out.println("EL PACIENTE NO TIENE DIARIO");
-                } else {
-                    String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                    sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                    System.out.println("ID HOJAS " + diario);
-
-                    sql = "select sentimiento from hojas where id_hojas=" + diario;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                    if (sentimiento.equals("Ansioso")) {
-                        ansiedad = "1";
-                    }
-                    if (sentimiento.equals("Estresado")) {
-                        estres = "1";
-                    }
-                    if (sentimiento.equals("Enojado")) {
-                        ira = "1";
-                    }
-                    if (sentimiento.equals("Triste")) {
-                        depresion = "1";
-                    }
-                    if (sentimiento.equals("Feliz")) {
-                        felicidad = "1";
-                    }
-                }
-
-                sql = "select suplementos from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                sql = "select motivacional from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                sql = "select deportes from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                sql = "select salud from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                double pesoD = Double.parseDouble(peso);
-                int pesoI = (int) pesoD;
-                String pesoS = pesoI + "";
-
-                System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                        depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                        acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                        deportes, medicamentos, salud);
-
-                double[] x = tr.vector();
-                ArrayList<Capa_neuronas> neural_net;
-                libMatrices op = new libMatrices();
-
-                Crear_RN redRecomendaciones = new Crear_RN();
-                neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                neural_net.get(0).w = pesos.get(0);
-                neural_net.get(0).b = pesos.get(1);
-
-                neural_net.get(1).w = pesos.get(2);
-                neural_net.get(1).b = pesos.get(3);
-
-                Implementacion exe = new Implementacion(neural_net);
-                double[][] output = exe.prediction(x);
-                System.out.println("Entrada: ");
-                double[][] xa = new double[1][];
-                xa[0] = x;
-                op.print(xa);
-
-                System.out.println("Salida: ");
-                op.print(output);
-
-                ArrayList<String> salida = tr.seleccion(output[0]);
-
-                System.out.println(salida + " salida de la red neuronal");
-                mv.addObject("respuesta", salida.get(0));
-
-            } else {
+            
                 String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
 
                 sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
@@ -849,7 +691,7 @@ public class PacienteController {
                 System.out.println(salida + " salida de la red neuronal");
                 mv.addObject("respuesta", salida.get(0));
 
-            }
+            
 
         }
 
@@ -2835,58 +2677,62 @@ public class PacienteController {
         mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
         mv.addObject("Paciente", new Paciente());                                            // PASAMOS EL OBJETO PACIENTE
 
-        sql = "select * from expediente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql="select id_expediente from expediente where no_boleta="+ex.getNo_boleta();
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-
+        String expediente=datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
+        
+         sql = "select * from hojaexpediente where id_expediente=" + expediente+" order by fecha_ini limit 1";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);    
+        
         mv.addObject("ExpedienteBase", datosL2);
         // Pasa la lilsta completa
         mv.addObject("expediente", new expediente());
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190101' and '20190131' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteEnero", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+" and fecha_ini between '20190201' and '20190229' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteFebrero", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+" and fecha_ini between '20190301' and '20190331' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMarzo", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190401' and '20190430' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAbril", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190501' and '20190531' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMayo", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190601' and '20190630' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJunio", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190701' and '20190731' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJulio", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190801' and '20190831' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAgosto", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20190901' and '20190930' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteSeptiembre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191001' and '20191031' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteOctubre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191101' and '20191130' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteNoviembre", datosL2);
 
-        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where no_boleta=" + alert + " and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha_ini,id_hojaexpediente from hojaexpediente where id_expediente=" + expediente+ " and fecha_ini between '20191201' and '20191231' order by fecha_ini desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteDiciembre", datosL2);
 
@@ -2916,7 +2762,7 @@ public class PacienteController {
         mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
         mv.addObject("Paciente", new Paciente());                                            // PASAMOS EL OBJETO PACIENTE
 
-        if (ex.getId_expediente() == null) {
+       
             sql = "select * from hojaexpediente where id_hojaExpediente=" + ex.getId_hojaexpediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosExpediente", datosL2);
@@ -2926,16 +2772,7 @@ public class PacienteController {
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosPaciente", datosL2);
 
-        } else {
-            sql = "select * from expediente where id_expediente=" + ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosExpediente", datosL2);
-
-            sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosPaciente", datosL2);
-
-        }
+        
 
         return mv;                                                                                           // RETORNAMOS EL MODELO
 
