@@ -88,6 +88,7 @@
                 <prop key="siguientePsicologo.htm">PsicologoController</prop>
                 <prop key="ExpedienteGeneralPaciente.htm">PacienteController</prop>
                 <prop key="generar_dieta_nutriologo.htm">nutriologoController</prop> 
+                <prop key="ConsultarUsuarioAdminPrincipal.htm">AdministradorController</prop>
             </props>
         </property>
     </bean>
