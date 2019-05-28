@@ -294,7 +294,7 @@ public class InicioController {
                          
                         
         
-                         return new ModelAndView("redirect:/bienvenida_admin.htm");
+                         return new ModelAndView("redirect:/ConsultarUsuarioAdminPrincipal.htm");
                         
                         
                         }
@@ -554,7 +554,7 @@ public class InicioController {
                          
                         
         
-                         return new ModelAndView("redirect:/bienvenida_admin.htm");
+                         return new ModelAndView("redirect:/ConsultarUsuarioAdminPrincipal.htm");
        
                        
             }
