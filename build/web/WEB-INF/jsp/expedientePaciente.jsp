@@ -205,10 +205,17 @@
                     </div>
                     <div class="recomendacion">
                     <p class="titulo">Recomendación diaria</p>
-                    <p id="tipo">Tipo: <c:out value="${respuesta}"/></p>
-                    <div class="contenido-E">
+                    <c:if test= "${empty respuesta}">
+                                       <div class="contenido-E">
                         No disponible.
-                    </div>
+                    </div>   
+                    </c:if><c:if test= "${not empty respuesta}">
+                         <p id="tipo">Tipo: <c:out value="${respuesta}"/></p>
+                    <div class="contenido-E">
+                      
+                    </div>             
+                    </c:if>
+                    
                     </div>
                     <div class="dieta">
                     <p class="titulo">Tu dieta de hoy</p>

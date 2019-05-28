@@ -1,3 +1,19 @@
+
+<%-- 
+    Document   : expedientePsicologico
+    Created on : 26-may-2019, 23:54:27
+    Author     : jms-m
+--%>
+
+<%
+    response.addHeader("Pragma", "no-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.addHeader("Cache-Control", "pre-check=0, post-check=0");
+    response.setDateHeader("Expires", 0);
+%>
+
+
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,6 +31,7 @@
     <link rel="stylesheet" href="<c:url value="/resource/estilos/pleca.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/dieta_nutriologo.css" />" />
     <link rel="stylesheet" href="<c:url value="/resource/estilos/footer.css" />" />
+     <link rel="stylesheet" href="<c:url value="/resource/estilos/barra_menu.css" />" />
     
     <!-- Scripts -->
     
@@ -29,35 +46,54 @@
 </head>
 
 <body onscroll="bajar()">
-    <header>
-            <div class="container">
-                <div id="pleca">
-                    <div id="logoSEP">
-                        <a href="https://www.gob.mx/sep">
-                            <img src="<c:url value="/resource/imagenes/logo-sep.png" />" alt="Secretaría de Educación Pública">
-                        </a>
-                    </div>
-                    <div id="logoIPN">
-                        <a href="https://www.ipn.mx">
-                            <p>Instituto Politécnico Nacional</p>
-                            "La Técnica al Servicio de la Patria"
-                        </a>
-                        <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
-                    </div>
+   <header>
+        <div class="container">
+            <div id="pleca">
+                <div id="logoSEP">
+                    <a href="https://www.gob.mx/sep">
+                        <img src="<c:url value="/resource/imagenes/logo-sep.png" />" alt="Secretaría de Educación Pública">
+                    </a>
+                </div>
+                <div id="logoIPN">
+                    <a href="https://www.ipn.mx">
+                        <p>Instituto Politécnico Nacional</p>
+                        "La Técnica al Servicio de la Patria"
+                    </a>
+                    <img src="<c:url value="/resource/imagenes/logo-ipn.jpg" />" alt="Instituto Politécnico Nacional">
                 </div>
             </div>
-            <!--Fin container-->
-        </header> 
-
+        </div>
+        <!--Fin container-->
+    </header>
     <div id="barra">
         <div class="container">
-            <a href="inicio.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+            <div id="cont_barra">
+                <div id="imagen_barra">
+                    <a href="cronograma.htm "><img id="imagen" src="<c:url value="/resource/imagenes/logo-nutri.png" />" alt="Nutri-Coach"></a>
+                </div>
+                <div id="menu">
+                    <c:forEach items="${datos}" var="item"> 
+
+                        <ul id="menu_nutrio">
+                            <form:form method="post" commandName="Nutriologo">
+                                <li><a class="texto_menu" href="cronograma.htm">Cronograma</a></li>
+                                <li><a class="texto_menu" href="mensajeriaN.htm">Mensajes</a></li>
+
+                                <li><a class="texto_menu" href="foroN.htm">Foro</a></li>
+                                <li><input type="submit" class="texto_menu" name="cerrar" value="Cerrar Sesion"></li>
+                                    <form:input path="no_empleado" placeholder="${item.no_empleado}" value="${item.no_empleado}" type="hidden" />
+                                </form:form>
+                        </ul>
+                    </c:forEach> 
+
+                </div>
+            </div>
+
         </div>
     </div>
-
     <div id="contenido">
         <div class="container">
-            <h1>Plan de alimentacion personalizado para ${paciente}</h1>
+            <h1>Plan de alimentacion personalizado para  ${datosPaciente[0].nombre} ${datosPaciente[0].ap_uno} ${datosPaciente[0].ap_dos}</h1>
            
             
             <div id="smae" style="display:none;">
@@ -2247,9 +2283,9 @@
             <div id="tabla_contenido">
                 <div id="datos">
                     <ul id="datos_p">
-                        <li>Edad: ${Edad}</li>
-                        <li>Estatura: ${Estatura}</li>
-                        <li>Peso: ${Peso}</li>
+                        <li>Edad: ${datosPaciente[0].edad} años</li>
+                        <li>Estatura: ${expedientePaciente[0].talla} cm</li>
+                        <li>Peso: ${expedientePaciente[0].peso} Kg</li>
                         <li id="fecha"></li>
 
                         <script>
@@ -2265,111 +2301,121 @@
 
                     <ul id="datos_c">
                         <li>Motivo de la consulta: ${Motivo}</li>
-                        <li>Calculo de calorias actuales: ${Calorias}</li>
-                        <li>Ajuste en calorias: <input type="number"></li>
-                        <li>Calorias por consumir: ${Calorias_x_consumir}</li>
+                        <li>Calculo de calorias actuales: ${calorias}</li>
+                        <li>Ajuste en calorias: <input type="number" min="-${calorias}" onchange="suma(${calorias},this)"></li>
+                        <script> 
+                            function suma(calorias,cuadrito){
+                                var cal=parseInt(calorias);
+                                var cuadritoVal=parseInt(cuadrito.value);
+                            var caloriasPC=cal+cuadritoVal;
+                            document.getElementById("caloriasPC").innerHTML="Calorias por consumir: "+caloriasPC;
+                            }
+                            </script>
+                            <li id="caloriasPC">Calorias por consumir: </li>
                     </ul>
                 </div>
+                
+                    <div id="dieta">
+                        <div id="titulo_t" class="bordes">Tipo de comida</div>
+                        <div id="titulo_op1" class="bordes_c">Opción 1</div>
+                        <div id="titulo_op2" class="bordes_c">Opción 2</div>
+                        <div id="titulo_op3" class="bordes_c">Opción 3</div>
+                        <form:form>
+                            <div id="desayuno_t" class="bordes">
+                                <div id="tipo" class="texto_tipo" onclick="editar(this)">Desayuno <br><br>7:30 am</div>
+                                <input type="time" id="edit_h" style="display:none;" min="00:00" max="12:00" value="07:30">
+                                <a id="boton_h2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar()">Cambiar</a>
+                            </div>
+                            <div id="desayuno_op1" class="bordes_c">
 
-                <div id="dieta">
-                    <div id="titulo_t" class="bordes">Tipo de comida</div>
-                    <div id="titulo_op1" class="bordes_c">Opción 1</div>
-                    <div id="titulo_op2" class="bordes_c">Opción 2</div>
-                    <div id="titulo_op3" class="bordes_c">Opción 3</div>
+                                <a class="boton_aux" onclick="cambiar('desayuno_op1')">Buscar alimentos</a>
+                            </div>
+                            <div id="desayuno_op2" class="bordes_c">
 
-                    <div id="desayuno_t" class="bordes">
-                        <div id="tipo" class="texto_tipo" onclick="editar(this)">Desayuno <br><br>7:30 am</div>
-                        <input type="time" id="edit_h" style="display:none;" min="00:00" max="12:00" value="07:30">
-                        <a id="boton_h2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar()">Cambiar</a>
-                    </div>
-                    <div id="desayuno_op1" class="bordes_c">
-                        <textarea id="desayuno_op1_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op1_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="desayuno_op2" class="bordes_c">
-                        <textarea id="desayuno_op2_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op2_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="desayuno_op3" class="bordes_c">
-                        <textarea id="desayuno_op3_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op3_txt')">Buscar alimentos</a>
-                    </div>
+                                <a class="boton_aux" onclick="cambiar('desayuno_op2')">Buscar alimentos</a>
+                            </div>
+                            <div id="desayuno_op3" class="bordes_c">
 
-                    <div id="colacionm_t" class="bordes">
-                        <div id="tipo_c1" class="texto_tipo" onclick="editar_c1(this)">Colación matutina <br><br>11:30 am</div>
-                        <input type="time" id="edit_h_c1" style="display:none;" min="00:00" max="12:00" value="11:30">
-                        <a id="boton_h2_c1" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c1()">Cambiar</a>
-                    </div>
-                    <div id="colacionm_op1" class="bordes_c">
-                        <textarea id="colacionm_op1_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('colacionm_op1_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="colacionm_op2" class="bordes_c">
-                        <textarea id="colacionm_op2_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('colacionm_op2_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="colacionm_op3" class="bordes_c"></div>
+                                <a class="boton_aux" onclick="cambiar('desayuno_op3')">Buscar alimentos</a>
+                            </div>
 
-                    <div id="comida_t" class="bordes">
-                        <div id="tipo_c" class="texto_tipo" onclick="editar_c(this)">Comida <br><br>2:30 pm</div>
-                        <input type="time" id="edit_h_c" style="display:none;" min="00:00" max="12:00" value="14:30">
-                        <a id="boton_h2_c" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c()">Cambiar</a>
-                    </div>
-                    <div id="comida_op1" class="bordes_c">
-                        <textarea id="comida_op1_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('comida_op1_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="comida_op2" class="bordes_c">
-                        <textarea id="comida_op2_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('comida_op2_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="comida_op3" class="bordes_c">
-                        <textarea id="comida_op3_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('comida_op3_txt')">Buscar alimentos</a>
-                    </div>
+                            <div id="colacionm_t" class="bordes">
+                                <div id="tipo_c1" class="texto_tipo" onclick="editar_c1(this)">Colación matutina <br><br>11:30 am</div>
+                                <input type="time" id="edit_h_c1" style="display:none;" min="00:00" max="12:00" value="11:30">
+                                <a id="boton_h2_c1" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c1()">Cambiar</a>
+                            </div>
+                            <div id="colacionm_op1" class="bordes_c">
 
-                    <div id="colacionv_t" class="bordes">
-                        <div id="tipo_c2" class="texto_tipo" onclick="editar_c2(this)">Colación vespertina <br><br>6:00 pm</div>
-                        <input type="time" id="edit_h_c2" style="display:none;" min="00:00" max="12:00" value="18:30">
-                        <a id="boton_h2_c2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c2()">Cambiar</a>
-                    </div>
-                    <div id="colacionv_op1" class="bordes_c">
-                        <textarea id="colacionv_op1_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('colacionv_op1_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="colacionv_op2" class="bordes_c">
-                        <textarea id="colacionv_op2_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('colacionv_op2_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="colacionv_op3" class="bordes_c"></div>
+                                <a class="boton_aux" onclick="cambiar('colacionm_op1')">Buscar alimentos</a>
+                            </div>
+                            <div id="colacionm_op2" class="bordes_c">
 
-                    <div id="cena_t" class="bordes">
-                        <div id="tipo_ce" class="texto_tipo" onclick="editar_ce(this)">Cena <br><br>9:00 pm</div>
-                        <input type="time" id="edit_h_ce" style="display:none;" min="00:00" max="12:00" value="20:30">
-                        <a id="boton_h2_ce" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_ce()">Cambiar</a>
-                    </div>
-                    <div id="cena_op1" class="bordes_c">
-                        <textarea id="cena_op1_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('cena_op1_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="cena_op2" class="bordes_c">
-                        <textarea id="cena_op2_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('cena_op2_txt')">Buscar alimentos</a>
-                    </div>
-                    <div id="cena_op3" class="bordes_c">
-                        <textarea id="cena_op3_txt" class="text_area_alimentos"></textarea>
-                        <a class="boton_aux" onclick="cambiar('cena_op3_txt')">Buscar alimentos</a>
-                    </div>
+                                <a class="boton_aux" onclick="cambiar('colacionm_op2')">Buscar alimentos</a>
+                            </div>
+                            <div id="colacionm_op3" class="bordes_c"></div>
 
-                    <div id="botones_1">
-                        <input type="button" value="Guardar" class="guardar">
-                    </div>
+                            <div id="comida_t" class="bordes">
+                                <div id="tipo_c" class="texto_tipo" onclick="editar_c(this)">Comida <br><br>2:30 pm</div>
+                                <input type="time" id="edit_h_c" style="display:none;" min="00:00" max="12:00" value="14:30">
+                                <a id="boton_h2_c" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c()">Cambiar</a>
+                            </div>
+                            <div id="comida_op1" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('comida_op1')">Buscar alimentos</a>
+                            </div>
+                            <div id="comida_op2" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('comida_op2')">Buscar alimentos</a>
+                            </div>
+                            <div id="comida_op3" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('comida_op3')">Buscar alimentos</a>
+                            </div>
+
+                            <div id="colacionv_t" class="bordes">
+                                <div id="tipo_c2" class="texto_tipo" onclick="editar_c2(this)">Colación vespertina <br><br>6:00 pm</div>
+                                <input type="time" id="edit_h_c2" style="display:none;" min="00:00" max="12:00" value="18:30">
+                                <a id="boton_h2_c2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c2()">Cambiar</a>
+                            </div>
+                            <div id="colacionv_op1" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('colacionv_op1')">Buscar alimentos</a>
+                            </div>
+                            <div id="colacionv_op2" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('colacionv_op2')">Buscar alimentos</a>
+                            </div>
+                            <div id="colacionv_op3" class="bordes_c"></div>
+
+                            <div id="cena_t" class="bordes">
+                                <div id="tipo_ce" class="texto_tipo" onclick="editar_ce(this)">Cena <br><br>9:00 pm</div>
+                                <input type="time" id="edit_h_ce" style="display:none;" min="00:00" max="12:00" value="20:30">
+                                <a id="boton_h2_ce" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_ce()">Cambiar</a>
+                            </div>
+                            <div id="cena_op1" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('cena_op1')">Buscar alimentos</a>
+                            </div>
+                            <div id="cena_op2" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('cena_op2')">Buscar alimentos</a>
+                            </div>
+                            <div id="cena_op3" class="bordes_c">
+
+                                <a class="boton_aux" onclick="cambiar('cena_op3')">Buscar alimentos</a>
+                            </div>
+
+                            <div id="botones_1">
+                               <form:input path="guardar" class="guardar" value="Guardar" type="button" />
+                            </div>
 
 
-                    <div id="botones_2">
-                        <input type="button" value="Guardar y enviar" class="guardar">
+                            <div id="botones_2">
+                                <input type="button" value="Guardar y enviar" class="guardar">
+                            </div>
+                        </form:form>
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>

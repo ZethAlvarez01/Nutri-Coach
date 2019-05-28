@@ -213,6 +213,7 @@ function actualizar() {
     let caja2 = document.getElementById("anio");
 
     caja2.value = fecha.getFullYear();
+   
 }
 
 function myFunction(obj) {
@@ -256,7 +257,7 @@ function myFunction(obj) {
     
 
     var fechaSeleccionada = valorA + "-" + getMes + "-" + obj.innerHTML;
-    alert(fechaSeleccionada);
+   // alert(fechaSeleccionada);
     let elemento = document.getElementById("valor");
    // elemento.innerHTML = consultaChida;
 
@@ -308,18 +309,20 @@ function myFunction(obj) {
                         dataType: "json",
                         content:"application/json;  charset=utf-8",
                         
-                        success : function (data){
+                          success : function (data){
 
-                               
-                               if (data=== null) {
-                               $("#citas").empty();
+                          if (data=== null) {
+                               $("#citas").empty(); 
                               $("#citas").append("<h1>No hay citas</h1>");
                           }
                           else{
                            $("#citas").empty();
                                         $.each(data, function(i, option) {
-                                        $("#citas").append( option.nombre, " "+ option.ap_uno,+" "+option.ap_dos +" Horario: "+  option.horario 
-                                                + " <input type='submit'> Atender cita </input> <input value='"+option.no_cita+"' />");
+                                        
+                                        
+                                        $("#citas").append( option.nombre, " "+ option.ap_uno+" "+option.ap_dos +" Horario: "+  option.horario +"<br>");
+                                        
+                                                
                                         });   
                           }
                                
