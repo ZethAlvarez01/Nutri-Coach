@@ -1899,58 +1899,62 @@ public class PsicologoController {
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("datosPaciente", datosL2);
 
-        sql = "select * from expedientepsicologico where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select id_expediente from expedientepsicologico where no_boleta=" + ex.getNo_boleta();   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-
+        String expediente=datosL2.get(0).toString().substring(15,datosL2.get(0).toString().length()-1);
+        
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " order by fecha limit 1";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);         
+        
         mv.addObject("ExpedienteBase", datosL2);
         // Pasa la lilsta completa
         mv.addObject("expediente", new expedientePsicologico());
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190101' and '20190131' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190101' and '20190131' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteEnero", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190201' and '20190229' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190201' and '20190229' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteFebrero", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190301' and '20190331' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190301' and '20190331' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMarzo", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190401' and '20190430' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190401' and '20190430' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAbril", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190501' and '20190531' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190501' and '20190531' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteMayo", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190601' and '20190630' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190601' and '20190630' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJunio", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190701' and '20190731' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190701' and '20190731' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteJulio", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190801' and '20190831' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190801' and '20190831' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteAgosto", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20190901' and '20190930' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20190901' and '20190930' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteSeptiembre", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20191001' and '20191031' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20191001' and '20191031' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteOctubre", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20191101' and '20191130' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20191101' and '20191130' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteNoviembre", datosL2);
 
-        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where no_boleta=" + ex.getNo_boleta() + " and fecha between '20191201' and '20191231' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
+        sql = "select fecha,id_hojaPsicologo from hojaPsicologo where id_expediente=" + expediente + " and fecha between '20191201' and '20191231' order by fecha desc";   // CONSULTA PARA EXTRAER DATOS DE SESION
         datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
         mv.addObject("expedienteDiciembre", datosL2);
 
@@ -1980,36 +1984,28 @@ public class PsicologoController {
         mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
         mv.addObject("Psicologo", new Psicologo());                                             //PASAMOS OBJETO PSICOLOGO   
 
-        if (ex.getId_expediente() == null) {
+        
             sql = "select * from hojaPsicologo where id_hojaPsicologo=" + ex.getId_hojaPsicologo();   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosExpediente", datosL2);
             System.out.println(datosL2);
-            sql = "select no_boleta from hojaPsicologo where id_hojaPsicologo=" + ex.getId_hojaPsicologo();   // CONSULTA PARA EXTRAER DATOS DE SESION
+            sql = "select id_expediente from hojaPsicologo where id_hojaPsicologo=" + ex.getId_hojaPsicologo();   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+            String expediente=datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length()-1);
+            
+            sql = "select no_boleta from expedientepsicologico where id_expediente=" + expediente;   // CONSULTA PARA EXTRAER DATOS DE SESION
+            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+            
+            
+            
+            
             String boleta = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
 
             sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + boleta;   // CONSULTA PARA EXTRAER DATOS DE SESION
             datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
             mv.addObject("datosPaciente", datosL2);
 
-        } else {
-            sql = "select * from expedientepsicologico where id_expediente=" + ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosExpediente", datosL2);
-
-            System.out.println(datosL2);
-
-            sql = "select no_boleta from expedientepsicologico where id_expediente=" + ex.getId_expediente();   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            String boleta = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-            sql = "select nombre,ap_uno,ap_dos,no_boleta from paciente where no_boleta=" + boleta;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
-            mv.addObject("datosPaciente", datosL2);
-
-        }
-
+         
         return mv;                                                                                           // RETORNAMOS EL MODELO
 
     }
@@ -2029,10 +2025,8 @@ public class PsicologoController {
         // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS 
         String sql = "select id_expediente from expedientePsicologico where no_boleta=" + ex.getNo_boleta();
         List datosL2 = this.jdbcTemplate.queryForList(sql);
-
-        if (datosL2.isEmpty()) {
-
-            String contenido = ex.getContenido();
+        
+        String contenido = ex.getContenido();
             String subContenido = "";
             for (int i = 0; i < ex.getContenido().length(); i++) {
                 if (contenido.charAt(i) == '\'') {
@@ -2047,12 +2041,27 @@ public class PsicologoController {
                 }
             }
 
-            sql = "insert into expedientePsicologico values(0,'" + ex.getFecha() + "'," + ex.getNo_cedula() + "," + ex.getNo_boleta() + ",'" + subContenido + "');";
+        if (datosL2.isEmpty()) {
+
+           
+
+            sql = "insert into expedientePsicologico values(0,'" + ex.getFecha() + "'," + ex.getNo_cedula() + "," + ex.getNo_boleta() + ");";
 
             this.jdbcTemplate.update(sql);
-        } else {
+            System.out.println("NO TIENE EXPEDIENTE Y LE GENERE UNO");
+            
+            
+            sql = "select id_expediente from expedientePsicologico where no_boleta=" + ex.getNo_boleta();
+            datosL2 = this.jdbcTemplate.queryForList(sql);
             String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
-            sql = "insert into hojaPsicologo values(0," + expediente + ",'" + ex.getFecha() + "'," + ex.getNo_cedula() + "," + ex.getNo_boleta() + ",'" + ex.getContenido() + "');";
+            sql = "insert into hojaPsicologo values(0," + expediente + ",'" + ex.getFecha() + "','" + ex.getContenido() + "');";
+
+            this.jdbcTemplate.update(sql);
+            
+        } else {
+            System.out.println("Si tiene expediente y solo guardo la entrada");
+            String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            sql = "insert into hojaPsicologo values(0," + expediente + ",'" + ex.getFecha() + "','" + ex.getContenido() + "');";
 
             this.jdbcTemplate.update(sql);
         }

@@ -815,7 +815,7 @@ public class PacienteController {
         }
 
         // EN CASO DE TENER UNA SESIÓN ACTIVA CONTINUAMOS
-        ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
+         ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
         mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
         String sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
@@ -851,165 +851,7 @@ public class PacienteController {
             sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
             datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            if (datosL2.isEmpty()) {
-                System.out.println("NO TIENE MAS EXPEDIENTES");
-                sql = "select peso from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                sql = "select talla from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                sql = "select dulce from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-                String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                sql = "select amarga from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select salada from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select picante from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                sql = "select acida from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                sql = "select act_f from expediente where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                sql = "select id_diario from diario where id_expediente=" + expediente;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String ansiedad = "0";
-                String depresion = "0";
-                String ira = "0";
-                String estres = "0";
-                String felicidad = "0";
-
-                if (datosL2.isEmpty()) {
-
-                    System.out.println("EL PACIENTE NO TIENE DIARIO");
-                } else {
-                    String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                    sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                    System.out.println("ID HOJAS " + diario);
-
-                    sql = "select sentimiento from hojas where id_hojas=" + diario;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                    if (sentimiento.equals("Ansioso")) {
-                        ansiedad = "1";
-                    }
-                    if (sentimiento.equals("Estresado")) {
-                        estres = "1";
-                    }
-                    if (sentimiento.equals("Enojado")) {
-                        ira = "1";
-                    }
-                    if (sentimiento.equals("Triste")) {
-                        depresion = "1";
-                    }
-                    if (sentimiento.equals("Feliz")) {
-                        felicidad = "1";
-                    }
-                }
-
-                sql = "select suplementos from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                sql = "select motivacional from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                sql = "select deportes from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                sql = "select salud from preferencias where no_boleta=" + alert;
-                datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                double pesoD = Double.parseDouble(peso);
-                int pesoI = (int) pesoD;
-                String pesoS = pesoI + "";
-
-                System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                        depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                        acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                        deportes, medicamentos, salud);
-
-                double[] x = tr.vector();
-                ArrayList<Capa_neuronas> neural_net;
-                libMatrices op = new libMatrices();
-
-                Crear_RN redRecomendaciones = new Crear_RN();
-                neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                neural_net.get(0).w = pesos.get(0);
-                neural_net.get(0).b = pesos.get(1);
-
-                neural_net.get(1).w = pesos.get(2);
-                neural_net.get(1).b = pesos.get(3);
-
-                Implementacion exe = new Implementacion(neural_net);
-                double[][] output = exe.prediction(x);
-                System.out.println("Entrada: ");
-                double[][] xa = new double[1][];
-                xa[0] = x;
-                op.print(xa);
-
-                System.out.println("Salida: ");
-                op.print(output);
-
-                ArrayList<String> salida = tr.seleccion(output[0]);
-
-                System.out.println(salida + " salida de la red neuronal");
-                mv.addObject("respuesta", salida.get(0));
-
-            } else {
+            
                 String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
 
                 sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
@@ -1168,7 +1010,7 @@ public class PacienteController {
                 System.out.println(salida + " salida de la red neuronal");
                 mv.addObject("respuesta", salida.get(0));
 
-            }
+            
 
         }
 
@@ -2259,398 +2101,240 @@ public class PacienteController {
             this.jdbcTemplate.update(sql);       // INSERTAMOS LA CITA
 
             ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
-            mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+        mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-            sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
-            mv.addObject("Paciente", new Paciente());
-            mv.addObject("preferencias", new Preferencias());
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Paciente", new Paciente());
+        mv.addObject("preferencias", new Preferencias());
 
-            sql = "select * from preferencias where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        sql = "select * from preferencias where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datosPreferencia", datosL2);
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
+        mv.addObject("datosPreferencia", datosL2);
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        if (datosL2.isEmpty()) {
+            System.out.println("NO TIENE EXPEDIENTE");
+        } else {
+
+            String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+
+            sql = "select edad from paciente where no_boleta=" + alert;
             datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            if (datosL2.isEmpty()) {
-                System.out.println("NO TIENE EXPEDIENTE");
-            } else {
+            String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
 
-                String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            sql = "select sexo from paciente where no_boleta=" + alert;
+            datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                sql = "select edad from paciente where no_boleta=" + alert;
+            String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+
+            sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+
+            
+                String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
+
+                sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
+                String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
 
-                sql = "select sexo from paciente where no_boleta=" + alert;
+                sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+                String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
 
-                sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+                sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
+
+                sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
+
+                sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
+
+                sql = "select id_diario from diario where id_expediente=" + expediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+                String ansiedad = "0";
+                String depresion = "0";
+                String ira = "0";
+                String estres = "0";
+                String felicidad = "0";
 
                 if (datosL2.isEmpty()) {
-                    System.out.println("NO TIENE MAS EXPEDIENTES");
-                    sql = "select peso from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-
-                        System.out.println("EL PACIENTE NO TIENE DIARIO");
-                    } else {
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-                    }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
-
+                    System.out.println("NO TIENE DIARIO");
                 } else {
-                    String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
 
-                    sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+                    sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
+                    System.out.println("ID HOJAS " + diario);
 
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    sql = "select sentimiento from hojas where id_hojas=" + diario;
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
 
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-                        System.out.println("NO TIENE DIARIO");
-                    } else {
-
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-
+                    if (sentimiento.equals("Ansioso")) {
+                        ansiedad = "1";
                     }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
+                    if (sentimiento.equals("Estresado")) {
+                        estres = "1";
+                    }
+                    if (sentimiento.equals("Enojado")) {
+                        ira = "1";
+                    }
+                    if (sentimiento.equals("Triste")) {
+                        depresion = "1";
+                    }
+                    if (sentimiento.equals("Feliz")) {
+                        felicidad = "1";
+                    }
 
                 }
 
-            }
+                sql = "select suplementos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            int expedienteActivo = 0;
-            if (datosL2.isEmpty()) {
-                expedienteActivo = 0;
-            } else {
-                expedienteActivo = 1;
-            }
-            mv.addObject("expedienteActivo", expedienteActivo);
-            mv.addObject("expediente", new expediente());
+                String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
 
-            sql = "select no_cedula from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select motivacional from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+                String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select preparacionA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            mv.addObject("citaNutriologo", datosL2);
+                String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
 
-            sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("nombreN", datosL2);
+                sql = "select beneficiosA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select no_cedulap from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
 
-            cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+                sql = "select deportes from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("citaPsicologo", datosL2);
+                String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
 
-            //System.out.println(datas);
-            return mv;
+                sql = "select medicamentos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
+
+                sql = "select salud from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
+
+                double pesoD = Double.parseDouble(peso);
+                int pesoI = (int) pesoD;
+                String pesoS = pesoI + "";
+
+                System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
+
+                Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
+                        depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
+                        acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
+                        deportes, medicamentos, salud);
+
+                double[] x = tr.vector();
+                ArrayList<Capa_neuronas> neural_net;
+                libMatrices op = new libMatrices();
+
+                Crear_RN redRecomendaciones = new Crear_RN();
+                neural_net = redRecomendaciones.create_nn(topology, 0);
+
+                ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
+
+                neural_net.get(0).w = pesos.get(0);
+                neural_net.get(0).b = pesos.get(1);
+
+                neural_net.get(1).w = pesos.get(2);
+                neural_net.get(1).b = pesos.get(3);
+
+                Implementacion exe = new Implementacion(neural_net);
+                double[][] output = exe.prediction(x);
+                System.out.println("Entrada: ");
+                double[][] xa = new double[1][];
+                xa[0] = x;
+                op.print(xa);
+
+                System.out.println("Salida: ");
+                op.print(output);
+
+                ArrayList<String> salida = tr.seleccion(output[0]);
+
+                System.out.println(salida + " salida de la red neuronal");
+                mv.addObject("respuesta", salida.get(0));
+
+            
+
+        }
+
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+
+        sql = "select no_cedula from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        mv.addObject("citaNutriologo", datosL2);
+
+        sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("nombreN", datosL2);
+
+        sql = "select no_cedulap from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("citaPsicologo", datosL2);
+
+        //System.out.println(datas);
+        return mv;
         }                                                                                                 // CIERRE ELSE
 
     }
@@ -2797,398 +2481,240 @@ public class PacienteController {
 
             //volvemos al formulario porque los datos ingresados son incorrectos
             ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
-            mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+        mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-            String sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        String sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
-            mv.addObject("Paciente", new Paciente());
-            mv.addObject("preferencias", new Preferencias());
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Paciente", new Paciente());
+        mv.addObject("preferencias", new Preferencias());
 
-            sql = "select * from preferencias where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        sql = "select * from preferencias where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datosPreferencia", datosL2);
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
+        mv.addObject("datosPreferencia", datosL2);
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        if (datosL2.isEmpty()) {
+            System.out.println("NO TIENE EXPEDIENTE");
+        } else {
+
+            String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+
+            sql = "select edad from paciente where no_boleta=" + alert;
             datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            if (datosL2.isEmpty()) {
-                System.out.println("NO TIENE EXPEDIENTE");
-            } else {
+            String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
 
-                String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            sql = "select sexo from paciente where no_boleta=" + alert;
+            datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                sql = "select edad from paciente where no_boleta=" + alert;
+            String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+
+            sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+
+            
+                String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
+
+                sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
+                String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
 
-                sql = "select sexo from paciente where no_boleta=" + alert;
+                sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+                String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
 
-                sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+                sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
+
+                sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
+
+                sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
+
+                sql = "select id_diario from diario where id_expediente=" + expediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+                String ansiedad = "0";
+                String depresion = "0";
+                String ira = "0";
+                String estres = "0";
+                String felicidad = "0";
 
                 if (datosL2.isEmpty()) {
-                    System.out.println("NO TIENE MAS EXPEDIENTES");
-                    sql = "select peso from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-
-                        System.out.println("EL PACIENTE NO TIENE DIARIO");
-                    } else {
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-                    }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
-
+                    System.out.println("NO TIENE DIARIO");
                 } else {
-                    String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
 
-                    sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+                    sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
+                    System.out.println("ID HOJAS " + diario);
 
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    sql = "select sentimiento from hojas where id_hojas=" + diario;
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
 
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-                        System.out.println("NO TIENE DIARIO");
-                    } else {
-
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-
+                    if (sentimiento.equals("Ansioso")) {
+                        ansiedad = "1";
                     }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
+                    if (sentimiento.equals("Estresado")) {
+                        estres = "1";
+                    }
+                    if (sentimiento.equals("Enojado")) {
+                        ira = "1";
+                    }
+                    if (sentimiento.equals("Triste")) {
+                        depresion = "1";
+                    }
+                    if (sentimiento.equals("Feliz")) {
+                        felicidad = "1";
+                    }
 
                 }
 
-            }
+                sql = "select suplementos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            int expedienteActivo = 0;
-            if (datosL2.isEmpty()) {
-                expedienteActivo = 0;
-            } else {
-                expedienteActivo = 1;
-            }
-            mv.addObject("expedienteActivo", expedienteActivo);
-            mv.addObject("expediente", new expediente());
+                String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
 
-            sql = "select no_cedula from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select motivacional from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+                String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select preparacionA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            mv.addObject("citaNutriologo", datosL2);
+                String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
 
-            sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("nombreN", datosL2);
+                sql = "select beneficiosA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select no_cedulap from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
 
-            cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+                sql = "select deportes from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("citaPsicologo", datosL2);
+                String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
 
-            //System.out.println(datas);
-            return mv;
+                sql = "select medicamentos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
+
+                sql = "select salud from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
+
+                double pesoD = Double.parseDouble(peso);
+                int pesoI = (int) pesoD;
+                String pesoS = pesoI + "";
+
+                System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
+
+                Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
+                        depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
+                        acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
+                        deportes, medicamentos, salud);
+
+                double[] x = tr.vector();
+                ArrayList<Capa_neuronas> neural_net;
+                libMatrices op = new libMatrices();
+
+                Crear_RN redRecomendaciones = new Crear_RN();
+                neural_net = redRecomendaciones.create_nn(topology, 0);
+
+                ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
+
+                neural_net.get(0).w = pesos.get(0);
+                neural_net.get(0).b = pesos.get(1);
+
+                neural_net.get(1).w = pesos.get(2);
+                neural_net.get(1).b = pesos.get(3);
+
+                Implementacion exe = new Implementacion(neural_net);
+                double[][] output = exe.prediction(x);
+                System.out.println("Entrada: ");
+                double[][] xa = new double[1][];
+                xa[0] = x;
+                op.print(xa);
+
+                System.out.println("Salida: ");
+                op.print(output);
+
+                ArrayList<String> salida = tr.seleccion(output[0]);
+
+                System.out.println(salida + " salida de la red neuronal");
+                mv.addObject("respuesta", salida.get(0));
+
+            
+
+        }
+
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+
+        sql = "select no_cedula from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        mv.addObject("citaNutriologo", datosL2);
+
+        sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("nombreN", datosL2);
+
+        sql = "select no_cedulap from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("citaPsicologo", datosL2);
+
+        //System.out.println(datas);
+        return mv;
         } // CIERRE DE IF
         else {                                                                           // INICIO ELSE
             int suplementosA = 0;
@@ -3224,399 +2750,241 @@ public class PacienteController {
 
             this.jdbcTemplate.update(sql);                                                                              // REALIZAMOS LA INSERCIÓN
 
-            ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
-            mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
+             ModelAndView mv = new ModelAndView();                          //CREACIÓN DEL MODELO
+        mv.setViewName("expedientePaciente");                        //NOMBRA AL MODELO, A ESTA VISTA SE ACCEDERÁ
 
-            sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
-            List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        sql = "select nombre,ap_uno,ap_dos,no_boleta,no_cedula,no_cedulap from paciente where no_boleta=" + alert;   // CONSULTA PARA EXTRAER DATOS DE SESION
+        List datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
-            mv.addObject("Paciente", new Paciente());
-            mv.addObject("preferencias", new Preferencias());
+        mv.addObject("datos", datosL2);                                                       // Pasa la lilsta completa
+        mv.addObject("Paciente", new Paciente());
+        mv.addObject("preferencias", new Preferencias());
 
-            sql = "select * from preferencias where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
+        sql = "select * from preferencias where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);                                  //ASIGNACIÓN DE RESULTADO DE CONSULTA
 
-            mv.addObject("datosPreferencia", datosL2);
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
+        mv.addObject("datosPreferencia", datosL2);
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        if (datosL2.isEmpty()) {
+            System.out.println("NO TIENE EXPEDIENTE");
+        } else {
+
+            String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+
+            sql = "select edad from paciente where no_boleta=" + alert;
             datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            if (datosL2.isEmpty()) {
-                System.out.println("NO TIENE EXPEDIENTE");
-            } else {
+            String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
 
-                String expediente = datosL2.get(0).toString().substring(15, datosL2.get(0).toString().length() - 1);
+            sql = "select sexo from paciente where no_boleta=" + alert;
+            datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                sql = "select edad from paciente where no_boleta=" + alert;
+            String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+
+            sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+            datosL2 = this.jdbcTemplate.queryForList(sql);
+
+            
+                String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
+
+                sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String edad = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                  //DATO DE PACIENTE
+                String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
 
-                sql = "select sexo from paciente where no_boleta=" + alert;
+                sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
 
-                String sexo = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                 // DATO DE PACIENTE 
+                String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
 
-                sql = "select id_hojaExpediente from hojaexpediente where id_expediente=" + expediente + " order by id_hojaExpediente desc limit 1";
+                sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
                 datosL2 = this.jdbcTemplate.queryForList(sql);
+                String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
+
+                sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
+
+                sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
+
+                sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
+
+                sql = "select id_diario from diario where id_expediente=" + expediente;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+                String ansiedad = "0";
+                String depresion = "0";
+                String ira = "0";
+                String estres = "0";
+                String felicidad = "0";
 
                 if (datosL2.isEmpty()) {
-                    System.out.println("NO TIENE MAS EXPEDIENTES");
-                    sql = "select peso from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from expediente where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-
-                        System.out.println("EL PACIENTE NO TIENE DIARIO");
-                    } else {
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-                    }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
-
+                    System.out.println("NO TIENE DIARIO");
                 } else {
-                    String hojaexpediente = datosL2.get(0).toString().substring(19, datosL2.get(0).toString().length() - 1);
 
-                    sql = "select peso from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+                    sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
+                    System.out.println("ID HOJAS " + diario);
 
-                    String peso = datosL2.get(0).toString().substring(6, datosL2.get(0).toString().length() - 1);                     // DATO DEL EXPEDIENTE
-
-                    sql = "select talla from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
+                    sql = "select sentimiento from hojas where id_hojas=" + diario;
                     datosL2 = this.jdbcTemplate.queryForList(sql);
+                    String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
 
-                    String altura = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select dulce from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String dulce = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);               // DATO DEL EXPEDIENTE
-
-                    sql = "select amarga from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String amarga = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select salada from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salada = datosL2.get(0).toString().substring(8, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select picante from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String picante = datosL2.get(0).toString().substring(9, datosL2.get(0).toString().length() - 1);          // DATO DEL EXPEDIENTE
-
-                    sql = "select acida from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String acida = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENTE
-
-                    sql = "select act_f from hojaexpediente where id_hojaExpediente=" + hojaexpediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String act_f = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);             // DATO DEL EXPEDIENT
-
-                    sql = "select id_diario from diario where id_expediente=" + expediente;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-                    String ansiedad = "0";
-                    String depresion = "0";
-                    String ira = "0";
-                    String estres = "0";
-                    String felicidad = "0";
-
-                    if (datosL2.isEmpty()) {
-                        System.out.println("NO TIENE DIARIO");
-                    } else {
-
-                        String diario = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
-
-                        sql = "select id_hojas from hojas where id_diario=" + diario + " order by id_hojas desc limit 1 ";
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        diario = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);
-                        System.out.println("ID HOJAS " + diario);
-
-                        sql = "select sentimiento from hojas where id_hojas=" + diario;
-                        datosL2 = this.jdbcTemplate.queryForList(sql);
-                        String sentimiento = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);
-
-                        if (sentimiento.equals("Ansioso")) {
-                            ansiedad = "1";
-                        }
-                        if (sentimiento.equals("Estresado")) {
-                            estres = "1";
-                        }
-                        if (sentimiento.equals("Enojado")) {
-                            ira = "1";
-                        }
-                        if (sentimiento.equals("Triste")) {
-                            depresion = "1";
-                        }
-                        if (sentimiento.equals("Feliz")) {
-                            felicidad = "1";
-                        }
-
+                    if (sentimiento.equals("Ansioso")) {
+                        ansiedad = "1";
                     }
-
-                    sql = "select suplementos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
-
-                    sql = "select motivacional from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select preparacionA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
-
-                    sql = "select beneficiosA from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
-
-                    sql = "select deportes from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
-
-                    sql = "select medicamentos from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
-
-                    sql = "select salud from preferencias where no_boleta=" + alert;
-                    datosL2 = this.jdbcTemplate.queryForList(sql);
-
-                    String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
-
-                    double pesoD = Double.parseDouble(peso);
-                    int pesoI = (int) pesoD;
-                    String pesoS = pesoI + "";
-
-                    System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
-
-                    Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
-                            depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
-                            acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
-                            deportes, medicamentos, salud);
-
-                    double[] x = tr.vector();
-                    ArrayList<Capa_neuronas> neural_net;
-                    libMatrices op = new libMatrices();
-
-                    Crear_RN redRecomendaciones = new Crear_RN();
-                    neural_net = redRecomendaciones.create_nn(topology, 0);
-
-                    ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
-
-                    neural_net.get(0).w = pesos.get(0);
-                    neural_net.get(0).b = pesos.get(1);
-
-                    neural_net.get(1).w = pesos.get(2);
-                    neural_net.get(1).b = pesos.get(3);
-
-                    Implementacion exe = new Implementacion(neural_net);
-                    double[][] output = exe.prediction(x);
-                    System.out.println("Entrada: ");
-                    double[][] xa = new double[1][];
-                    xa[0] = x;
-                    op.print(xa);
-
-                    System.out.println("Salida: ");
-                    op.print(output);
-
-                    ArrayList<String> salida = tr.seleccion(output[0]);
-
-                    System.out.println(salida + " salida de la red neuronal");
-                    mv.addObject("respuesta", salida.get(0));
+                    if (sentimiento.equals("Estresado")) {
+                        estres = "1";
+                    }
+                    if (sentimiento.equals("Enojado")) {
+                        ira = "1";
+                    }
+                    if (sentimiento.equals("Triste")) {
+                        depresion = "1";
+                    }
+                    if (sentimiento.equals("Feliz")) {
+                        felicidad = "1";
+                    }
 
                 }
 
-            }
+                sql = "select suplementos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select id_expediente from expediente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            int expedienteActivo = 0;
-            if (datosL2.isEmpty()) {
-                expedienteActivo = 0;
-            } else {
-                expedienteActivo = 1;
-            }
-            mv.addObject("expedienteActivo", expedienteActivo);
-            mv.addObject("expediente", new expediente());
+                String suplementos = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);          //DATO DE PREFERENCIAS
 
-            sql = "select no_cedula from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select motivacional from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+                String motivacional = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                sql = "select preparacionA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            mv.addObject("citaNutriologo", datosL2);
+                String preparacionA = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);       // DATO DE PREFERENCIAS
 
-            sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("nombreN", datosL2);
+                sql = "select beneficiosA from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select no_cedulap from paciente where no_boleta=" + alert;
-            datosL2 = this.jdbcTemplate.queryForList(sql);
+                String beneficiosA = datosL2.get(0).toString().substring(13, datosL2.get(0).toString().length() - 1);         // DATO DE PREFERENCIAS  
 
-            cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+                sql = "select deportes from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
 
-            sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
-            datosL2 = this.jdbcTemplate.queryForList(sql);
-            mv.addObject("citaPsicologo", datosL2);
+                String deportes = datosL2.get(0).toString().substring(10, datosL2.get(0).toString().length() - 1);              // DATO DE PREFERENCIAS
 
-            //System.out.println(datas);
-            return mv;
+                sql = "select medicamentos from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String medicamentos = datosL2.get(0).toString().substring(14, datosL2.get(0).toString().length() - 1);        // DATO DE PREFERENCIAS
+
+                sql = "select salud from preferencias where no_boleta=" + alert;
+                datosL2 = this.jdbcTemplate.queryForList(sql);
+
+                String salud = datosL2.get(0).toString().substring(7, datosL2.get(0).toString().length() - 1);                      // DATO DE PREFERENCAS
+
+                double pesoD = Double.parseDouble(peso);
+                int pesoI = (int) pesoD;
+                String pesoS = pesoI + "";
+
+                System.out.println(edad + " " + pesoS + " " + sexo + " " + dulce + " " + medicamentos + " " + act_f);
+
+                Tratamiento tr = new Tratamiento(edad, sexo, pesoS, altura, ansiedad,
+                        depresion, ira, estres, felicidad, dulce, amarga, salada, picante,
+                        acida, act_f, suplementos, motivacional, preparacionA, beneficiosA,
+                        deportes, medicamentos, salud);
+
+                double[] x = tr.vector();
+                ArrayList<Capa_neuronas> neural_net;
+                libMatrices op = new libMatrices();
+
+                Crear_RN redRecomendaciones = new Crear_RN();
+                neural_net = redRecomendaciones.create_nn(topology, 0);
+
+                ArrayList<double[][]> pesos = redRecomendaciones.asignarPesos();
+
+                neural_net.get(0).w = pesos.get(0);
+                neural_net.get(0).b = pesos.get(1);
+
+                neural_net.get(1).w = pesos.get(2);
+                neural_net.get(1).b = pesos.get(3);
+
+                Implementacion exe = new Implementacion(neural_net);
+                double[][] output = exe.prediction(x);
+                System.out.println("Entrada: ");
+                double[][] xa = new double[1][];
+                xa[0] = x;
+                op.print(xa);
+
+                System.out.println("Salida: ");
+                op.print(output);
+
+                ArrayList<String> salida = tr.seleccion(output[0]);
+
+                System.out.println(salida + " salida de la red neuronal");
+                mv.addObject("respuesta", salida.get(0));
+
+            
+
+        }
+
+        sql = "select id_expediente from expediente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        int expedienteActivo = 0;
+        if (datosL2.isEmpty()) {
+            expedienteActivo = 0;
+        } else {
+            expedienteActivo = 1;
+        }
+        mv.addObject("expedienteActivo", expedienteActivo);
+        mv.addObject("expediente", new expediente());
+
+        sql = "select no_cedula from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        String cedula = datosL2.get(0).toString().substring(11, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        mv.addObject("citaNutriologo", datosL2);
+
+        sql = "select nombre,ap_uno,ap_dos,no_cedula,institucion,correo,telefono,consultorio from nutriologo where no_cedula=" + cedula;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("nombreN", datosL2);
+
+        sql = "select no_cedulap from paciente where no_boleta=" + alert;
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+
+        cedula = datosL2.get(0).toString().substring(12, datosL2.get(0).toString().length() - 1);
+
+        sql = "select fecha,horario from cita where no_boleta=" + alert + " and no_cedula=" + cedula + " and estado=3";
+        datosL2 = this.jdbcTemplate.queryForList(sql);
+        mv.addObject("citaPsicologo", datosL2);
+
+        //System.out.println(datas);
+        return mv;
         }                                                                                                   // CIERRE DE ELSE
 
     }
