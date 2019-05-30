@@ -13,13 +13,16 @@ import models.Dieta;
 import models.NeuralNet.Capa_neuronas;
 import models.NeuralNet.Crear_RN;
 import models.NeuralNet.Implementacion;
+import models.Nutriologo;
 import models.Psicologo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 /**
  *
@@ -31,7 +34,36 @@ public class DietaController {
     public ModelAndView generar_dieta_nutriologo(){
         ModelAndView mv=new ModelAndView();
         mv.setViewName("generar_dieta_nutriologo");
-        Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
+        
+        return mv;
+    }
+    
+   
+    @RequestMapping(params = "Dieta", method = RequestMethod.POST)
+    public ModelAndView registroDieta(@ModelAttribute("Dieta") Dieta n, BindingResult result, SessionStatus status) {
+        // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+        if (result.hasErrors()) {
+            //volvemos al formulario porque los datos ingresados son incorrectos
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("generar_dieta_nutriologo");
+            mav.addObject("Dieta", new Dieta());
+            return mav;
+        } else {
+            
+                ModelAndView mv = new ModelAndView();
+                mv.setViewName("bienvenida_nutriologo"); //Pasamos a la vista de nombre exito
+                mv.addObject("hora_des", n.getHora_des()); //Se agrega el campo No_cedula al modelo
+                System.out.println(n.getHora_des());
+                mv.addObject("hora_col1", n.getHora_col1()); //Se agrega el campo No_cedula al modelo
+                System.out.println(n.getHora_col1());
+                mv.addObject("hora_com", n.getHora_com()); //Se agrega el campo No_cedula al modelo
+                System.out.println(n.getHora_com());
+                mv.addObject("hora_col2", n.getHora_col2()); //Se agrega el campo No_cedula al modelo
+                System.out.println(n.getHora_col2());
+                mv.addObject("hora_cena", n.getHora_cena()); //Se agrega el campo No_cedula al modelo
+                System.out.println(n.getHora_cena());
+                
+                Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
         JdbcTemplate jdbc=new JdbcTemplate(conn.conectar("smae"));
         
         String t1="select*from aceitesygrasas"; // 1
@@ -168,21 +200,14 @@ public class DietaController {
         mv.addObject("datoT41",datosT41);
         mv.addObject("datoT42",datosT42);
         mv.addObject("datoT43",datosT43);
-        
 
-
-        return mv;
+        mv.addObject("Dieta", new Dieta());
+                
+                return mv;
+        } 
     }
     
-    @RequestMapping(value="generar_dieta_nutriologo",method = RequestMethod.POST)
-  
-     public ModelAndView insertar_datos(@ModelAttribute("generar_dieta_nutriologo") Dieta dieta){
-         System.out.println("Boton guardar");
-         System.out.println(dieta.getHora_des());
-         
-     return null;
-     }
-     
+
      
      @RequestMapping(value="generar_dieta_nutriologo",method = RequestMethod.POST)
   

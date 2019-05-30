@@ -68,59 +68,59 @@ public class RegistroController {
         return mav;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView registroN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status) {
-        this.nutriologoValidar.validate(n, result);
-        // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
-        if (result.hasErrors()) {
+@RequestMapping(method = RequestMethod.POST)
+public ModelAndView registroN(@ModelAttribute("Nutriologo") Nutriologo n, BindingResult result, SessionStatus status) {
+    this.nutriologoValidar.validate(n, result);
+    // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
+    if (result.hasErrors()) {
 
-            //volvemos al formulario porque los datos ingresados son incorrectos
+        //volvemos al formulario porque los datos ingresados son incorrectos
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("registroN");
+        mav.addObject("Nutriologo", new Nutriologo());
+        return mav;
+    } else {
+        //El usuario ingreso bien los datos
+        if (n.getContraseña().equals(n.getContraseña2())) {
+
+            String sql = "insert into nutriologo values(" + n.getNo_cedula() + ",'" + n.getNombre() + "','" + n.getAp_uno() + "','" + n.getAp_dos() + "','" + n.getTelefono() + "','" + n.getConsultorio() + "','" + n.getCorreo() + "'," + n.getNo_empleado() + ",'" + n.getContraseña() + "','" + n.getInstitucion() + "',0,'" + n.getHoraEntrada() + "','" + n.getHoraSalida() + "');";
+
+            this.jdbcTemplate.update(sql);
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("exito1"); //Pasamos a la vista de nombre exito
+            mav.addObject("no_cedula", n.getNo_cedula()); //Se agrega el campo No_cedula al modelo
+            System.out.println(n.getNo_cedula());
+            mav.addObject("no_empleado", n.getNo_empleado()); //Se agrega el campo No_empleado al modelo
+            System.out.println(n.getNo_empleado());
+            mav.addObject("nombre", n.getNombre()); //Se agrega el campo Nombre al modelo
+            System.out.println(n.getNombre());
+            mav.addObject("ap_uno", n.getAp_uno()); //Se agrega el campo Ap_uno al modelo
+            System.out.println(n.getAp_uno());
+            mav.addObject("ap_dos", n.getAp_dos()); //Se agrega el campo Ap_dos al modelo
+            System.out.println(n.getAp_dos());
+            mav.addObject("institucion", n.getInstitucion()); //Se agrega el campo InstituciÃ³n al modelo
+            System.out.println(n.getInstitucion());
+            mav.addObject("consultorio", n.getConsultorio()); //Se agrega el campo Consultorio al modelo
+            System.out.println(n.getConsultorio());
+            mav.addObject("telefono", n.getTelefono()); //Se agrega el campo Telefono al modelo
+            System.out.println(n.getTelefono());
+            mav.addObject("correo", n.getCorreo()); //Se agrega el campo Correo al modelo
+            System.out.println(n.getCorreo());
+            mav.addObject("contraseña", n.getContraseña()); //Se agrega el campo Contraseña al modelo
+            System.out.println(n.getContraseña());
+            mav.addObject("contraseña2", n.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
+            System.out.println(n.getContraseña2());
+
+            return mav;
+        } else {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registroN");
             mav.addObject("Nutriologo", new Nutriologo());
             return mav;
-        } else {
-            //El usuario ingreso bien los datos
-            if (n.getContraseña().equals(n.getContraseña2())) {
-
-                String sql = "insert into nutriologo values(" + n.getNo_cedula() + ",'" + n.getNombre() + "','" + n.getAp_uno() + "','" + n.getAp_dos() + "','" + n.getTelefono() + "','" + n.getConsultorio() + "','" + n.getCorreo() + "'," + n.getNo_empleado() + ",'" + n.getContraseña() + "','" + n.getInstitucion() + "',0,'" + n.getHoraEntrada() + "','" + n.getHoraSalida() + "');";
-
-                this.jdbcTemplate.update(sql);
-
-                ModelAndView mav = new ModelAndView();
-                mav.setViewName("exito1"); //Pasamos a la vista de nombre exito
-                mav.addObject("no_cedula", n.getNo_cedula()); //Se agrega el campo No_cedula al modelo
-                System.out.println(n.getNo_cedula());
-                mav.addObject("no_empleado", n.getNo_empleado()); //Se agrega el campo No_empleado al modelo
-                System.out.println(n.getNo_empleado());
-                mav.addObject("nombre", n.getNombre()); //Se agrega el campo Nombre al modelo
-                System.out.println(n.getNombre());
-                mav.addObject("ap_uno", n.getAp_uno()); //Se agrega el campo Ap_uno al modelo
-                System.out.println(n.getAp_uno());
-                mav.addObject("ap_dos", n.getAp_dos()); //Se agrega el campo Ap_dos al modelo
-                System.out.println(n.getAp_dos());
-                mav.addObject("institucion", n.getInstitucion()); //Se agrega el campo InstituciÃ³n al modelo
-                System.out.println(n.getInstitucion());
-                mav.addObject("consultorio", n.getConsultorio()); //Se agrega el campo Consultorio al modelo
-                System.out.println(n.getConsultorio());
-                mav.addObject("telefono", n.getTelefono()); //Se agrega el campo Telefono al modelo
-                System.out.println(n.getTelefono());
-                mav.addObject("correo", n.getCorreo()); //Se agrega el campo Correo al modelo
-                System.out.println(n.getCorreo());
-                mav.addObject("contraseña", n.getContraseña()); //Se agrega el campo Contraseña al modelo
-                System.out.println(n.getContraseña());
-                mav.addObject("contraseña2", n.getContraseña2()); //Se agrega el campo Contraseña2 al modelo
-                System.out.println(n.getContraseña2());
-
-                return mav;
-            } else {
-                ModelAndView mav = new ModelAndView();
-                mav.setViewName("registroN");
-                mav.addObject("Nutriologo", new Nutriologo());
-                return mav;
-            }
         }
     }
+}
     ///////////////////////////////////////////////////////////////////////// 
     //REGISTRO DE PACIENTE
 

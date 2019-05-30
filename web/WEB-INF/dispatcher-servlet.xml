@@ -132,5 +132,7 @@
      <bean name="PacienteController"
           class="controller.PacienteController" />
     
+     <bean name="DietaController"
+          class="controller.DietaController" />
 
 </beans>

@@ -2296,9 +2296,8 @@
 
                             document.getElementById("fecha").innerHTML = cadena;
                         </script>
-                        <form:form method="post" commandName="Nutriologo">
                             <input type="submit" value="Cargar dieta" class="cargar">
-                        </form:form>
+                        
                     </ul>
 
                     <ul id="datos_c">
@@ -2316,9 +2315,21 @@
                             <li id="caloriasPC">Calorias por consumir: </li>
                     </ul>
                 </div>
-                        <form:form method="post" commandName="Nutriologo">
-                            
-                     
+                        
+                <form:form commandName="Dieta" method="post">
+                        <form:label path="hora_des">7:30 am</form:label>
+                        <form:input path="hora_des" value="7:30 am"/>
+                        <form:label path="hora_col1">11:30 am</form:label>
+                        <form:input path="hora_col1" value="11:30 am"/>
+                        <form:label path="hora_com">2:30 pm</form:label>
+                        <form:input path="hora_com" value="2:30 pm"/>
+                        <form:label path="hora_col2">6:00 pm</form:label>
+                        <form:input path="hora_col2" value="6:00 pm"/>
+                        <form:label path="hora_cena">9:00 pm</form:label>
+                        <form:input path="hora_cena" value="9:00 pm"/>
+                        <form:button id="guardar" name="Dieta" type="submit">Registrar</form:button>
+                </form:form>
+
                 <div id="dieta">
                     <div id="titulo_t" class="bordes">Tipo de comida</div>
                     <div id="titulo_op1" class="bordes_c">Opción 1</div>
@@ -2327,110 +2338,113 @@
 
                     <div id="desayuno_t" class="bordes">
                         <div id="tipo" class="texto_tipo" onclick="editar(this)">Desayuno <br><br>7:30 am</div>
-                        <form:input path="no_empleado" type="time" id="edit_h" style="display:none;" min="00:00" max="12:00" value="07:30"/>
+                        <input type="time" id="edit_h" style="display:none;" min="00:00" max="12:00" value="07:30"/>
+                        
                         <a id="boton_h2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar()">Cambiar</a>
-                    </div>
-                    
+                    </div>                  
                     
                     <div id="desayuno_op1" class="bordes_c">
-                        <form:textarea path="no_empleado" id="desayuno_op1_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op1_txt')">Buscar alimentos</a>
-                    </div>
-                        
-                          
-                        
-                    <div id="desayuno_op2" class="bordes_c">
-                        <form:textarea path="no_empleado"  id="desayuno_op2_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op2_txt')">Buscar alimentos</a>
-                    </div>
-                        
-                     
-                        
-                    <div id="desayuno_op3" class="bordes_c">
-                        <form:textarea path="no_empleado" id="desayuno_op3_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('desayuno_op3_txt')">Buscar alimentos</a>
+                        <div id="panel_d_op1" style="width: 250px; height: 80px; overflow: scroll;">
+                            
+                        </div>
+                        <a class="boton_aux" onclick="cambiar('panel_d_op1')">Buscar alimentos</a>
                     </div>
    
+                    <div id="desayuno_op2" class="bordes_c">
                         
+                        <a class="boton_aux" onclick="cambiar('desayuno_op2')">Buscar alimentos</a>
+                    </div>
+
+                    <div id="desayuno_op3" class="bordes_c">
+                        
+                        <a class="boton_aux" onclick="cambiar('desayuno_op3')">Buscar alimentos</a>
+                    </div>
+   
                     <div id="colacionm_t" class="bordes">
                         <div id="tipo_c1" class="texto_tipo" onclick="editar_c1(this)">Colación matutina <br><br>11:30 am</div>
-                        <form:input  path="no_empleado" type="time" id="edit_h_c1" style="display:none;" min="00:00" max="12:00" value="11:30"/>
+                        <input type="time" id="edit_h_c1" style="display:none;" min="00:00" max="12:00" value="11:30"/>
+                        
                         <a id="boton_h2_c1" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c1()">Cambiar</a>
                     </div>
-                         
-                        
+
                         
                     <div id="colacionm_op1" class="bordes_c">
-                        <form:textarea path="no_empleado" id="colacionm_op1_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('colacionm_op1_txt')">Buscar alimentos</a>
+                        
+                        <a class="boton_aux" onclick="cambiar('colacionm_op1')">Buscar alimentos</a>
                     </div>
                     <div id="colacionm_op2" class="bordes_c">
-                         <form:textarea path="no_empleado" id="colacionm_op2_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('colacionm_op2_txt')">Buscar alimentos</a>
+                        
+                        <a class="boton_aux" onclick="cambiar('colacionm_op2')">Buscar alimentos</a>
                     </div>
                     <div id="colacionm_op3" class="bordes_c"></div>
 
                     <div id="comida_t" class="bordes">
                         <div id="tipo_c" class="texto_tipo" onclick="editar_c(this)">Comida <br><br>2:30 pm</div>
-                        <form:input  path="no_empleado" type="time" id="edit_h_c" style="display:none;" min="00:00" max="12:00" value="14:30"/>
+
+                        <input type="time" id="edit_h_c" style="display:none;" min="00:00" max="12:00" value="14:30"/>
                         <a id="boton_h2_c" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c()">Cambiar</a>
                     </div>
                     <div id="comida_op1" class="bordes_c">
-                        <form:textarea path="no_empleado" id="comida_op1_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('comida_op1_txt')">Buscar alimentos</a>
+                        
+                        <a class="boton_aux" onclick="cambiar('comida_op1')">Buscar alimentos</a>
                     </div>
                     <div id="comida_op2" class="bordes_c">
-                        <form:textarea path="no_empleado" id="comida_op2_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('comida_op2_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('comida_op2')">Buscar alimentos</a>
                     </div>
                     <div id="comida_op3" class="bordes_c">
-                         <form:textarea path="no_empleado" id="comida_op3_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('comida_op3_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('comida_op3')">Buscar alimentos</a>
                     </div>
 
                     <div id="colacionv_t" class="bordes">
                         <div id="tipo_c2" class="texto_tipo" onclick="editar_c2(this)">Colación vespertina <br><br>6:00 pm</div>
-                       <form:input path="no_empleado" type="time" id="edit_h_c2" style="display:none;" min="00:00" max="12:00" value="18:30"/>
+                        
+                       <input type="time" id="edit_h_c2" style="display:none;" min="00:00" max="12:00" value="18:30"/>
                         <a id="boton_h2_c2" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_c2()">Cambiar</a>
                     </div>
                     <div id="colacionv_op1" class="bordes_c">
-                         <form:textarea path="no_empleado" id="colacionv_op1_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('colacionv_op1_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('colacionv_op1')">Buscar alimentos</a>
                     </div>
                     <div id="colacionv_op2" class="bordes_c">
-                         <form:textarea path="no_empleado" id="colacionv_op2_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('colacionv_op2_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('colacionv_op2')">Buscar alimentos</a>
                     </div>
                     <div id="colacionv_op3" class="bordes_c"></div>
 
                     <div id="cena_t" class="bordes">
                         <div id="tipo_ce" class="texto_tipo" onclick="editar_ce(this)">Cena <br><br>9:00 pm</div>
-                        <form:input path="no_empleado" type="time" id="edit_h_ce" style="display:none;" min="00:00" max="12:00" value="20:30"/>
+                        
+                        <input type="time" id="edit_h_ce" style="display:none;" min="00:00" max="12:00" value="20:30"/>
                         <a id="boton_h2_ce" class="boton_aux" style="display:none; cursor: pointer;" onclick="actualizar_ce()">Cambiar</a>
                     </div>
                     <div id="cena_op1" class="bordes_c">
-                         <form:textarea path="no_empleado" id="cena_op1_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('cena_op1_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('cena_op1')">Buscar alimentos</a>
                     </div>
                     <div id="cena_op2" class="bordes_c">
-                         <form:textarea path="no_empleado" id="cena_op2_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('cena_op2_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('cena_op2')">Buscar alimentos</a>
                     </div>
                     <div id="cena_op3" class="bordes_c">
-                         <form:textarea path="no_empleado" id="cena_op3_txt" class="text_area_alimentos"/>
-                        <a class="boton_aux" onclick="cambiar('cena_op3_txt')">Buscar alimentos</a>
+
+                        <a class="boton_aux" onclick="cambiar('cena_op3')">Buscar alimentos</a>
                     </div>
                 
                     <div id="botones_1">
-                        <input type="submit" value="Guardar" class="guardar">
+                        <input type="submit" class="guardar"/>Guardar
                     </div>
                      
 
                     <div id="botones_2">
                         <input type="submit" value="Guardar y enviar" class="guardar">
                     </div>
-                           </form:form> 
+
                 </div>
+                            
+                
+                        
             </div>
         </div>
     </div>

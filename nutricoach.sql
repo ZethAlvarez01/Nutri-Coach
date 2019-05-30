@@ -723,6 +723,34 @@ LOCK TABLES `opciones` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `paci_dieta_nutri`
+--
+
+DROP TABLE IF EXISTS `paci_dieta_nutri`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paci_dieta_nutri` (
+  `id_pdn` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paciente` bigint(20) DEFAULT NULL,
+  `id_dieta` int(11) DEFAULT NULL,
+  `id_nutriologo` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id_pdn`),
+  KEY `id_paciente` (`id_paciente`),
+  KEY `id_dieta` (`id_dieta`),
+  KEY `id_nutriologo` (`id_nutriologo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paci_dieta_nutri`
+--
+
+LOCK TABLES `paci_dieta_nutri` WRITE;
+/*!40000 ALTER TABLE `paci_dieta_nutri` DISABLE KEYS */;
+/*!40000 ALTER TABLE `paci_dieta_nutri` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `paciente`
 --
 
@@ -886,4 +914,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28  2:20:22
+-- Dump completed on 2019-05-30  0:46:50

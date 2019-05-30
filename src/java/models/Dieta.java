@@ -5,19 +5,12 @@
  */
 package models;
 
-/**
- *
- * @author jms-m
- */
-
-
 public class Dieta {
     String hora_des;
-    /*String hora_c1;
+    String hora_col1;
     String hora_com;
-    String hora_c2;
+    String hora_col2;
     String hora_cena;
-    */
 
     public Dieta() {
 
@@ -30,6 +23,40 @@ public class Dieta {
     public void setHora_des(String hora_des) {
         this.hora_des = hora_des;
     }
+
+    public String getHora_col1() {
+        return hora_col1;
+    }
+
+    public void setHora_col1(String hora_col1) {
+        this.hora_col1 = hora_col1;
+    }
+
+    public String getHora_com() {
+        return hora_com;
+    }
+
+    public void setHora_com(String hora_com) {
+        this.hora_com = hora_com;
+    }
+
+    public String getHora_col2() {
+        return hora_col2;
+    }
+
+    public void setHora_col2(String hora_col2) {
+        this.hora_col2 = hora_col2;
+    }
+
+    public String getHora_cena() {
+        return hora_cena;
+    }
+
+    public void setHora_cena(String hora_cena) {
+        this.hora_cena = hora_cena;
+    }
+
+
     
     
 }

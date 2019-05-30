@@ -27,16 +27,28 @@ function abrir_menu(boton){
     } 
 }
 
-var arreglo=[];
-var ind=0;
+
 
 function obtener(alimento,cantidad,unidad,flg){
+    let elemento=0;
     if(flg==1){
         if(confirm("¿Deseas agregar este alimento a la dieta?")){
+            elemento++;
             var canti=document.createElement("form:label");
             var uni=document.createElement("form:label");
             var ali=document.createElement("form:label");
             
+            let canti_id="canti*"+elemento+"*"+dia;
+            let uni_id="uni*"+elemento+"*"+dia;
+            let ali_id="ali*"+elemento+"*"+dia;
+            
+            console.log(canti_id);
+            console.log(uni_id);
+            console.log(ali_id);
+            
+            canti.setAttribute("id",canti_id);
+            uni.setAttribute("id",uni_id);
+            ali.setAttribute("id",ali_id);
             
             var canttxt = document.createTextNode(cantidad); 
             var alitxt = document.createTextNode(" "+alimento+"\n"); 
@@ -51,13 +63,21 @@ function obtener(alimento,cantidad,unidad,flg){
             editar.appendChild(canti);
             editar.appendChild(uni);
             editar.appendChild(ali);
-            arreglo[ind]=editar;
-            ind++;
+
         }
     }else{
         if(confirm("¿Deseas agregar este alimento a la dieta?")){
+
+            var ali=document.createElement("form:label");
+            
+            var alitxt = document.createTextNode(alimento+"\n"); 
+
+            ali.appendChild(alitxt);
+            
             let editar=document.getElementById(dia);
-            editar.innerHTML+=alimento+"\n";
+            //editar.innerHTML+=cantidad+" "+unidad+" de "+alimento+"\n";
+
+            editar.appendChild(ali);
         }
     }
     

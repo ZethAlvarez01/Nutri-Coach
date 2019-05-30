@@ -2838,7 +2838,33 @@ public class nutriologoController {
 
     }
 
+    @RequestMapping(params = "Dieta", method = RequestMethod.POST)
+    public ModelAndView GuardarDieta(@ModelAttribute("Dieta") Dieta n, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) 
+    {
+
+        HttpSession session = hsr.getSession();                              //OBETENEMOS LA SESIÓN
+        String alert = (String) session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+
+        if (alert == null) {                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+            return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+        }
+        
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("bienvenida_nutriologo");
+        mv.addObject("hora_des", n.getHora_des()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_des());
+        mv.addObject("hora_col1", n.getHora_col1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_col1());
+        mv.addObject("hora_com", n.getHora_com()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_com());
+        mv.addObject("hora_col2", n.getHora_col2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_col2());
+        mv.addObject("hora_cena", n.getHora_cena()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_cena());
+        
+        return mv;
     
+    }
     
   /////////////////////
     /////ACION BOTON generar_dieta_nutriologo
@@ -3033,7 +3059,7 @@ public class nutriologoController {
         
        
            
-        mv.addObject("dieta",new Dieta());
+        mv.addObject("Dieta",new Dieta());
        
         
          
@@ -3092,7 +3118,7 @@ public class nutriologoController {
         
     }
     
-    
+   
     
     
     
