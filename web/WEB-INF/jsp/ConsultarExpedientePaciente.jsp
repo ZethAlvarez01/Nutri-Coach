@@ -431,7 +431,8 @@
             </div>
              
             
-            
+                   <form:input path="id_hojaexpediente"  value="${datosExpediente[0].id_hojaExpediente}"  />
+            <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
           
              </form:form>
             

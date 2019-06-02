@@ -138,7 +138,7 @@
                                 <tr>
                                     <div class="usuario">             
 
-                                        <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
+                                       
                                         <td>${item.no_boleta}</td>
                                         <td>${item.nombre}</td>
                                         <td>${item.ap_uno}</td>
@@ -195,7 +195,7 @@
                                 <tr>
                                     <div class="usuario">             
 
-                                        <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
+                                        
                                         <td>${item.no_cedula}</td>
                                         <td>${item.nombre}</td>
                                         <td>${item.ap_uno}</td>
@@ -245,7 +245,7 @@
                                 <tr>
                                     <div class="usuario">             
 
-                                        <td><img src="<c:url value="/resource/imagenes/foto-prueba.png"/>" alt="Foto"></td>
+                                       
                                         <td>${item.no_cedula}</td>
                                         <td>${item.nombre}</td>
                                         <td>${item.ap_uno}</td>

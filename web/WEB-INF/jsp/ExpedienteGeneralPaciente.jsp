@@ -144,7 +144,8 @@
                          <p><b>Primer expediente: </b>   
                              
                         <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${ExpedienteBase[0].fecha_ini}">${ExpedienteBase[0].fecha_ini}</form:button>
-                           </p>
+                         <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
+                         </p>
                             <form:input path="id_hojaexpediente"  value="${ExpedienteBase[0].id_hojaExpediente}" type="hidden" />
                             <form:input path="id_expediente"  value="${ExpedienteBase[0].id_expediente}" type="hidden" />
                            </form:form>
@@ -165,7 +166,8 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
-                         </p>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
+                          </p>
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -190,7 +192,8 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
-                         </p>
+                         <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
+                          </p>
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                                 
@@ -211,6 +214,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                           <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -236,6 +240,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                           <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -260,6 +265,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -283,6 +289,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -307,6 +314,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                           <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -331,6 +339,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                       <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -354,6 +363,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -380,6 +390,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                         <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
@@ -404,7 +415,8 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
-                         </p>
+                         <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
+                          </p>
                         <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>
                             </div>
@@ -426,6 +438,7 @@
                           
                           <p> <b>Fecha: </b> 
                                 <form:button id="button" class="button" type="submit" name="consultarEntradaExpedientePaciente" value="${item.fecha_ini}">${item.fecha_ini}</form:button>
+                          <input  class="cita" type="submit" name="ImprimirPDFP" value="Descargar">
                           </p>
                        <form:input path="id_hojaexpediente" placeholder="${item.id_hojaExpediente}" value="${item.id_hojaExpediente}" type="hidden" />
                        </form:form>

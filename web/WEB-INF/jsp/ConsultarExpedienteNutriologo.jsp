@@ -300,13 +300,13 @@
 
                         
                         
-                         <c:if test= "${datosExpediente[0].postre == '1'}">
+                         <c:if test= "${datosExpediente[0].postre == 'true'}">
                             
                              <input path="postre" type="radio"  name="golosina"  value="${datosExpediente[0].postre}" disabled="true"checked="true"> Si
                               
                              <input path="postre" type="radio" name="golosina"  value="${datosExpediente[0].postre}" disabled="true" disabled="true" > No<br>                      
                         </c:if>
-                          <c:if test= "${datosExpediente[0].postre == '0'}">
+                          <c:if test= "${datosExpediente[0].postre == 'false'}">
                             
                            <input path="postre" type="radio" name="golosina"  value="${datosExpediente[0].postre}" disabled="true"  disabled="true" > Si
                               
@@ -380,11 +380,11 @@
 
                           <c:if test= "${datosExpediente[0].acida == 'true'}">
                             
-                             <input type="checkbox" path ="picante"  path="acida"  name="alimento5" value="${datosExpediente[0].acida}" checked="true" disabled="true"> Acida<br>                      
+                             <input type="checkbox" path ="acida"  path="acida"  name="alimento5" value="${datosExpediente[0].acida}" checked="true" disabled="true"> Acida<br>                      
                         </c:if>
                           <c:if test= "${datosExpediente[0].acida == 'false'}">
                             
-                              <input type="checkbox" path ="picante" path="acida"  name="alimento5" value="${datosExpediente[0].acida}"   disabled="true"> Acida<br>                   
+                              <input type="checkbox" path ="acida" path="acida"  name="alimento5" value="${datosExpediente[0].acida}"   disabled="true"> Acida<br>                   
                         </c:if> 
 
                       
@@ -406,8 +406,9 @@
                         
                    
             </div>
-             
-            
+                
+               <form:input path="id_hojaexpediente"  value="${datosExpediente[0].id_hojaExpediente}"  />
+            <input  class="cita" type="submit" name="ImprimirPDFN" value="Descargar">
             
           
              </form:form>
