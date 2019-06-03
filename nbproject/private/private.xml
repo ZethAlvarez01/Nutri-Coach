@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/resource/scrips/filtro_smae.js</file>
-            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/generar_dieta_nutriologo.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/models/Paciente_dieta.java</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/expedientePaciente.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/ConsultarPacientePrincipaln.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/vista_dieta_paciente.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/jsp/ConsultarPacientePrincipalp.jsp</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/zetok/Desktop/Nutri-Coach/src/java/controller/nutriologoController.java</file>
         </group>
     </open-files>
 </project-private>

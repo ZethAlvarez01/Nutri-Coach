@@ -38,7 +38,7 @@ public class DietaController {
         return mv;
     }
     
-   
+   /*
     @RequestMapping(params = "Dieta", method = RequestMethod.POST)
     public ModelAndView registroDieta(@ModelAttribute("Dieta") Dieta n, BindingResult result, SessionStatus status) {
         // SE VERIFICA QUE NUESTRO FORMULARIO NO CONTENGA ERRORES 
@@ -206,7 +206,7 @@ public class DietaController {
                 return mv;
         } 
     }
-    
+    */
 
      
      @RequestMapping(value="generar_dieta_nutriologo",method = RequestMethod.POST)

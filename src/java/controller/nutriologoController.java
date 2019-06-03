@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import models.Administrador;
 import models.Comentario;
 import models.Conexion;
@@ -27,6 +28,7 @@ import models.NeuralNet.Tratamiento;
 import models.NeuralNet.libMatrices;
 import models.Nutriologo;
 import models.Paciente;
+import models.Paciente_dieta;
 import models.Psicologo;
 import models.cita;
 import models.citaValidar;
@@ -2851,25 +2853,2314 @@ public class nutriologoController {
         
         ModelAndView mv=new ModelAndView();
         mv.setViewName("bienvenida_nutriologo");
+        
+        ArrayList<Integer> id=new ArrayList<>();
+        ArrayList<Integer> id_opcion=new ArrayList<>();
+        
+        //Desayuno
+        
+        System.out.println("DESAYUNO");
+        
         mv.addObject("hora_des", n.getHora_des()); //Se agrega el campo No_cedula al modelo
         System.out.println(n.getHora_des());
-        mv.addObject("hora_col1", n.getHora_col1()); //Se agrega el campo No_cedula al modelo
-        System.out.println(n.getHora_col1());
-        mv.addObject("hora_com", n.getHora_com()); //Se agrega el campo No_cedula al modelo
-        System.out.println(n.getHora_com());
-        mv.addObject("hora_col2", n.getHora_col2()); //Se agrega el campo No_cedula al modelo
-        System.out.println(n.getHora_col2());
+
+        //Opcion 1
+
+        mv.addObject("cantidad_d_a1_op1", n.getCantidad_d_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a1_op1());
+        mv.addObject("unidad_d_a1_op1", n.getUnidad_d_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a1_op1());
+        mv.addObject("alimento_d_a1_op1", n.getAlimento_d_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a1_op1());
+        mv.addObject("calorias_d_a1_op1", n.getCalorias_d_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a1_op1());
+        
+        if(n.getCalorias_d_a1_op1().equals("0") && n.getAlimento_d_a1_op1().equals("0") && 
+           n.getUnidad_d_a1_op1().equals("0") && n.getCantidad_d_a1_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a1_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a1_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a1_op1());         
+            String nombre=n.getAlimento_d_a1_op1()+" ";
+            String uni=n.getUnidad_d_a1_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+
+
+        mv.addObject("cantidad_d_a2_op1", n.getCantidad_d_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a2_op1());
+        mv.addObject("unidad_d_a2_op1", n.getUnidad_d_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a2_op1());
+        mv.addObject("alimento_d_a2_op1", n.getAlimento_d_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a2_op1());
+        mv.addObject("calorias_d_a2_op1", n.getCalorias_d_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a2_op1());
+        
+        if(n.getCalorias_d_a2_op1().equals("0") && n.getAlimento_d_a2_op1().equals("0") && 
+           n.getUnidad_d_a2_op1().equals("0") && n.getCantidad_d_a2_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a2_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a2_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a2_op1());
+
+            String nombre=n.getAlimento_d_a2_op1()+" ";
+            String uni=n.getUnidad_d_a2_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a3_op1", n.getCantidad_d_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a3_op1());
+        mv.addObject("unidad_d_a3_op1", n.getUnidad_d_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a3_op1());
+        mv.addObject("alimento_d_a3_op1", n.getAlimento_d_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a3_op1());
+        mv.addObject("calorias_d_a3_op1", n.getCalorias_d_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a3_op1());
+        
+        if(n.getCalorias_d_a3_op1().equals("0") && n.getAlimento_d_a3_op1().equals("0") && 
+           n.getUnidad_d_a3_op1().equals("0") && n.getCantidad_d_a3_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a3_op1());
+            String nombre=n.getAlimento_d_a3_op1()+" ";
+            String uni=n.getUnidad_d_a3_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a4_op1", n.getCantidad_d_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a4_op1());
+        mv.addObject("unidad_d_a4_op1", n.getUnidad_d_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a4_op1());
+        mv.addObject("alimento_d_a4_op1", n.getAlimento_d_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a4_op1());
+        mv.addObject("calorias_d_a4_op1", n.getCalorias_d_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a4_op1());
+        
+        if(n.getCalorias_d_a4_op1().equals("0") && n.getAlimento_d_a4_op1().equals("0") && 
+           n.getUnidad_d_a4_op1().equals("0") && n.getCantidad_d_a4_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a4_op1());
+            String nombre=n.getAlimento_d_a4_op1()+" ";
+            String uni=n.getUnidad_d_a4_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a5_op1", n.getCantidad_d_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a5_op1());
+        mv.addObject("unidad_d_a5_op1", n.getUnidad_d_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a5_op1());
+        mv.addObject("alimento_d_a5_op1", n.getAlimento_d_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a5_op1());
+        mv.addObject("calorias_d_a5_op1", n.getCalorias_d_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a5_op1());
+        
+        if(n.getCalorias_d_a5_op1().equals("0") && n.getAlimento_d_a5_op1().equals("0") && 
+           n.getUnidad_d_a5_op1().equals("0") && n.getCantidad_d_a5_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a5_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a5_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a5_op1());
+            String nombre=n.getAlimento_d_a5_op1()+" ";
+            String uni=n.getUnidad_d_a5_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        
+        String aux="";
+        String sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_des()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+
+        id.clear();
+        
+        //Opcion 2
+
+        mv.addObject("cantidad_d_a1_op2", n.getCantidad_d_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a1_op2());
+        mv.addObject("unidad_d_a1_op2", n.getUnidad_d_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a1_op2());
+        mv.addObject("alimento_d_a1_op2", n.getAlimento_d_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a1_op2());
+        mv.addObject("calorias_d_a1_op2", n.getCalorias_d_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a1_op2());
+        
+        if(n.getCalorias_d_a1_op2().equals("0") && n.getAlimento_d_a1_op2().equals("0") && 
+           n.getUnidad_d_a1_op2().equals("0") && n.getCantidad_d_a1_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a1_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a1_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a1_op2());
+            String nombre=n.getAlimento_d_a1_op2()+" ";
+            String uni=n.getUnidad_d_a1_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a2_op2", n.getCantidad_d_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a2_op2());
+        mv.addObject("unidad_d_a2_op2", n.getUnidad_d_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a2_op2());
+        mv.addObject("alimento_d_a2_op2", n.getAlimento_d_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a2_op2());
+        mv.addObject("calorias_d_a2_op2", n.getCalorias_d_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a2_op2());
+        
+        if(n.getCalorias_d_a2_op2().equals("0") && n.getAlimento_d_a2_op2().equals("0") && 
+           n.getUnidad_d_a2_op2().equals("0") && n.getCantidad_d_a2_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a2_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a2_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a2_op2());
+            String nombre=n.getAlimento_d_a2_op2()+" ";
+            String uni=n.getUnidad_d_a2_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a3_op2", n.getCantidad_d_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a3_op2());
+        mv.addObject("unidad_d_a3_op2", n.getUnidad_d_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a3_op2());
+        mv.addObject("alimento_d_a3_op2", n.getAlimento_d_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a3_op2());
+        mv.addObject("calorias_d_a3_op2", n.getCalorias_d_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a3_op2());
+        
+        if(n.getCalorias_d_a3_op2().equals("0") && n.getAlimento_d_a3_op2().equals("0") && 
+           n.getUnidad_d_a3_op2().equals("0") && n.getCantidad_d_a3_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a3_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a3_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a3_op2());
+            String nombre=n.getAlimento_d_a3_op2()+" ";
+            String uni=n.getUnidad_d_a3_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a4_op2", n.getCantidad_d_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a4_op2());
+        mv.addObject("unidad_d_a4_op2", n.getUnidad_d_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a4_op2());
+        mv.addObject("alimento_d_a4_op2", n.getAlimento_d_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a4_op2());
+        mv.addObject("calorias_d_a4_op2", n.getCalorias_d_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a4_op2());
+        
+        if(n.getCalorias_d_a4_op2().equals("0") && n.getAlimento_d_a4_op2().equals("0") && 
+           n.getUnidad_d_a4_op2().equals("0") && n.getCantidad_d_a4_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a4_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a4_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a4_op2());
+            String nombre=n.getAlimento_d_a4_op2()+" ";
+            String uni=n.getUnidad_d_a4_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a5_op2", n.getCantidad_d_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a5_op2());
+        mv.addObject("unidad_d_a5_op2", n.getUnidad_d_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a5_op2());
+        mv.addObject("alimento_d_a5_op2", n.getAlimento_d_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a5_op2());
+        mv.addObject("calorias_d_a5_op2", n.getCalorias_d_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a5_op2());
+        
+        if(n.getCalorias_d_a5_op2().equals("0") && n.getAlimento_d_a5_op2().equals("0") && 
+           n.getUnidad_d_a5_op2().equals("0") && n.getCantidad_d_a5_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a5_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a5_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a5_op2());
+            String nombre=n.getAlimento_d_a5_op2()+" ";
+            String uni=n.getUnidad_d_a5_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_des()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 3
+
+        mv.addObject("cantidad_d_a1_op3", n.getCantidad_d_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a1_op3());
+        mv.addObject("unidad_d_a1_op3", n.getUnidad_d_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a1_op3());
+        mv.addObject("alimento_d_a1_op3", n.getAlimento_d_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a1_op3());
+        mv.addObject("calorias_d_a1_op3", n.getCalorias_d_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a1_op3());
+        
+        if(n.getCalorias_d_a1_op3().equals("0") && n.getAlimento_d_a1_op3().equals("0") && 
+           n.getUnidad_d_a1_op3().equals("0") && n.getCantidad_d_a1_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a1_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a1_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a1_op3());
+            String nombre=n.getAlimento_d_a1_op3()+" ";
+            String uni=n.getUnidad_d_a1_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a2_op3", n.getCantidad_d_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a2_op3());
+        mv.addObject("unidad_d_a2_op3", n.getUnidad_d_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a2_op3());
+        mv.addObject("alimento_d_a2_op3", n.getAlimento_d_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a2_op3());
+        mv.addObject("calorias_d_a2_op3", n.getCalorias_d_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a2_op3());
+        
+        if(n.getCalorias_d_a2_op3().equals("0") && n.getAlimento_d_a2_op3().equals("0") && 
+           n.getUnidad_d_a2_op3().equals("0") && n.getCantidad_d_a2_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a2_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a2_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a2_op3());
+            String nombre=n.getAlimento_d_a2_op3()+" ";
+            String uni=n.getUnidad_d_a2_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a3_op3", n.getCantidad_d_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a3_op3());
+        mv.addObject("unidad_d_a3_op3", n.getUnidad_d_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a3_op3());
+        mv.addObject("alimento_d_a3_op3", n.getAlimento_d_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a3_op3());
+        mv.addObject("calorias_d_a3_op3", n.getCalorias_d_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a3_op3());
+        
+        if(n.getCalorias_d_a3_op3().equals("0") && n.getAlimento_d_a3_op3().equals("0") && 
+           n.getUnidad_d_a3_op3().equals("0") && n.getCantidad_d_a3_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a3_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a3_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a3_op3());
+            String nombre=n.getAlimento_d_a3_op3()+" ";
+            String uni=n.getUnidad_d_a3_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a4_op3", n.getCantidad_d_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a4_op3());
+        mv.addObject("unidad_d_a4_op3", n.getUnidad_d_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a4_op3());
+        mv.addObject("alimento_d_a4_op3", n.getAlimento_d_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a4_op3());
+        mv.addObject("calorias_d_a4_op3", n.getCalorias_d_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a4_op3());
+        
+        if(n.getCalorias_d_a4_op3().equals("0") && n.getAlimento_d_a4_op3().equals("0") && 
+           n.getUnidad_d_a4_op3().equals("0") && n.getCantidad_d_a4_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a4_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a4_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a4_op3());
+            String nombre=n.getAlimento_d_a4_op3()+" ";
+            String uni=n.getUnidad_d_a4_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_d_a5_op3", n.getCantidad_d_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_d_a5_op3());
+        mv.addObject("unidad_d_a5_op3", n.getUnidad_d_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_d_a5_op3());
+        mv.addObject("alimento_d_a5_op3", n.getAlimento_d_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_d_a5_op3());
+        mv.addObject("calorias_d_a5_op3", n.getCalorias_d_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_d_a5_op3());
+        
+        if(n.getCalorias_d_a5_op3().equals("0") && n.getAlimento_d_a5_op3().equals("0") && 
+           n.getUnidad_d_a5_op3().equals("0") && n.getCantidad_d_a5_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_d_a5_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_d_a5_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_d_a5_op3());
+            String nombre=n.getAlimento_d_a5_op3()+" ";
+            String uni=n.getUnidad_d_a5_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_des()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        if(id_opcion.size()<3){
+            for(int i=id_opcion.size();i<3;i++){
+                id_opcion.add(null);
+            }
+        }
+        
+        System.out.println("ID_OP: "+id_opcion);
+        
+        //Colacion 1
+        
+        System.out.println("COLACION I");
+        
+        mv.addObject("hora_col_1", n.getHora_col_1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_col_1());
+
+        //Opcion 1
+
+        mv.addObject("cantidad_c1_a1_op1", n.getCantidad_c1_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a1_op1());
+        mv.addObject("unidad_c1_a1_op1", n.getUnidad_c1_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a1_op1());
+        mv.addObject("alimento_c1_a1_op1", n.getAlimento_c1_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a1_op1());
+        mv.addObject("calorias_c1_a1_op1", n.getCalorias_c1_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a1_op1());
+        
+        if(n.getCalorias_c1_a1_op1().equals("0") && n.getAlimento_c1_a1_op1().equals("0") && 
+           n.getUnidad_c1_a1_op1().equals("0") && n.getCantidad_c1_a1_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a1_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a1_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a1_op1());         
+            String nombre=n.getAlimento_c1_a1_op1()+" ";
+            String uni=n.getUnidad_c1_a1_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a2_op1", n.getCantidad_c1_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a2_op1());
+        mv.addObject("unidad_c1_a2_op1", n.getUnidad_c1_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a2_op1());
+        mv.addObject("alimento_c1_a2_op1", n.getAlimento_c1_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a2_op1());
+        mv.addObject("calorias_c1_a2_op1", n.getCalorias_c1_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a2_op1());
+        
+        if(n.getCalorias_c1_a2_op1().equals("0") && n.getAlimento_c1_a2_op1().equals("0") && 
+           n.getUnidad_c1_a2_op1().equals("0") && n.getCantidad_c1_a2_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a2_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a2_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a2_op1());         
+            String nombre=n.getAlimento_c1_a2_op1()+" ";
+            String uni=n.getUnidad_c1_a2_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a3_op1", n.getCantidad_c1_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a3_op1());
+        mv.addObject("unidad_c1_a3_op1", n.getUnidad_c1_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a3_op1());
+        mv.addObject("alimento_c1_a3_op1", n.getAlimento_c1_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a3_op1());
+        mv.addObject("calorias_c1_a3_op1", n.getCalorias_c1_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a3_op1());
+        
+        if(n.getCalorias_c1_a3_op1().equals("0") && n.getAlimento_c1_a3_op1().equals("0") && 
+           n.getUnidad_c1_a3_op1().equals("0") && n.getCantidad_c1_a3_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a3_op1());         
+            String nombre=n.getAlimento_c1_a3_op1()+" ";
+            String uni=n.getUnidad_c1_a3_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a4_op1", n.getCantidad_c1_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a4_op1());
+        mv.addObject("unidad_c1_a4_op1", n.getUnidad_c1_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a4_op1());
+        mv.addObject("alimento_c1_a4_op1", n.getAlimento_c1_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a4_op1());
+        mv.addObject("calorias_c1_a4_op1", n.getCalorias_c1_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a4_op1());
+        
+        if(n.getCalorias_c1_a4_op1().equals("0") && n.getAlimento_c1_a4_op1().equals("0") && 
+           n.getUnidad_c1_a4_op1().equals("0") && n.getCantidad_c1_a4_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a4_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a4_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a4_op1());         
+            String nombre=n.getAlimento_c1_a4_op1()+" ";
+            String uni=n.getUnidad_c1_a4_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a5_op1", n.getCantidad_c1_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a5_op1());
+        mv.addObject("unidad_c1_a5_op1", n.getUnidad_c1_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a5_op1());
+        mv.addObject("alimento_c1_a5_op1", n.getAlimento_c1_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a5_op1());
+        mv.addObject("calorias_c1_a5_op1", n.getCalorias_c1_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a5_op1());
+        
+        
+        if(n.getCalorias_c1_a5_op1().equals("0") && n.getAlimento_c1_a5_op1().equals("0") && 
+           n.getUnidad_c1_a5_op1().equals("0") && n.getCantidad_c1_a5_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a5_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a5_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a5_op1());         
+            String nombre=n.getAlimento_c1_a5_op1()+" ";
+            String uni=n.getUnidad_c1_a5_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_col_1()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 2
+
+        mv.addObject("cantidad_c1_a1_op2", n.getCantidad_c1_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a1_op2());
+        mv.addObject("unidad_c1_a1_op2", n.getUnidad_c1_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a1_op2());
+        mv.addObject("alimento_c1_a1_op2", n.getAlimento_c1_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a1_op2());
+        mv.addObject("calorias_c1_a1_op2", n.getCalorias_c1_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a1_op2());
+        
+        if(n.getCalorias_c1_a1_op2().equals("0") && n.getAlimento_c1_a1_op2().equals("0") && 
+           n.getUnidad_c1_a1_op2().equals("0") && n.getCantidad_c1_a1_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a1_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a1_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a1_op2());         
+            String nombre=n.getAlimento_c1_a1_op2()+" ";
+            String uni=n.getUnidad_c1_a1_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a2_op2", n.getCantidad_c1_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a2_op2());
+        mv.addObject("unidad_c1_a2_op2", n.getUnidad_c1_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a2_op2());
+        mv.addObject("alimento_c1_a2_op2", n.getAlimento_c1_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a2_op2());
+        mv.addObject("calorias_c1_a2_op2", n.getCalorias_c1_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a2_op2());
+        
+        if(n.getCalorias_c1_a2_op2().equals("0") && n.getAlimento_c1_a2_op2().equals("0") && 
+           n.getUnidad_c1_a2_op2().equals("0") && n.getCantidad_c1_a2_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a2_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a2_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a2_op2());         
+            String nombre=n.getAlimento_c1_a2_op2()+" ";
+            String uni=n.getUnidad_c1_a2_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a3_op2", n.getCantidad_c1_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a3_op2());
+        mv.addObject("unidad_c1_a3_op2", n.getUnidad_c1_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a3_op2());
+        mv.addObject("alimento_c1_a3_op2", n.getAlimento_c1_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a3_op2());
+        mv.addObject("calorias_c1_a3_op2", n.getCalorias_c1_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a3_op2());
+        
+        if(n.getCalorias_c1_a3_op2().equals("0") && n.getAlimento_c1_a3_op2().equals("0") && 
+           n.getUnidad_c1_a3_op2().equals("0") && n.getCantidad_c1_a3_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a3_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a3_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a3_op2());         
+            String nombre=n.getAlimento_c1_a3_op2()+" ";
+            String uni=n.getUnidad_c1_a3_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a4_op2", n.getCantidad_c1_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a4_op2());
+        mv.addObject("unidad_c1_a4_op2", n.getUnidad_c1_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a4_op2());
+        mv.addObject("alimento_c1_a4_op2", n.getAlimento_c1_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a4_op2());
+        mv.addObject("calorias_c1_a4_op2", n.getCalorias_c1_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a4_op2());
+        
+        if(n.getCalorias_c1_a4_op2().equals("0") && n.getAlimento_c1_a4_op2().equals("0") && 
+           n.getUnidad_c1_a4_op2().equals("0") && n.getCantidad_c1_a4_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a4_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a4_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a4_op2());         
+            String nombre=n.getAlimento_c1_a4_op2()+" ";
+            String uni=n.getUnidad_c1_a4_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c1_a5_op2", n.getCantidad_c1_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c1_a5_op2());
+        mv.addObject("unidad_c1_a5_op2", n.getUnidad_c1_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c1_a5_op2());
+        mv.addObject("alimento_c1_a5_op2", n.getAlimento_c1_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c1_a5_op2());
+        mv.addObject("calorias_c1_a5_op2", n.getCalorias_c1_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c1_a5_op2());
+        
+        if(n.getCalorias_c1_a5_op2().equals("0") && n.getAlimento_c1_a5_op2().equals("0") && 
+           n.getUnidad_c1_a5_op2().equals("0") && n.getCantidad_c1_a5_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c1_a5_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c1_a5_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c1_a5_op2());         
+            String nombre=n.getAlimento_c1_a5_op2()+" ";
+            String uni=n.getUnidad_c1_a5_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_col_1()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        if(id_opcion.size()<5){
+            for(int i=id_opcion.size();i<5;i++){
+                id_opcion.add(null);
+            }
+        }
+        
+        System.out.println("ID_OP: "+id_opcion);
+        
+        //Comida
+        
+        System.out.println("COMIDA");
+        
+        mv.addObject("hora_comida", n.getHora_comida()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_comida());
+        
+        System.out.println("OPCION 1");
+        
+        mv.addObject("cantidad_c_a1_op1", n.getCantidad_c_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a1_op1());
+        mv.addObject("unidad_c_a1_op1", n.getUnidad_c_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a1_op1());
+        mv.addObject("alimento_c_a1_op1", n.getAlimento_c_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a1_op1());
+        mv.addObject("calorias_c_a1_op1", n.getCalorias_c_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a1_op1());
+        
+        if(n.getCalorias_c_a1_op1().equals("0") && n.getAlimento_c_a1_op1().equals("0") && 
+           n.getUnidad_c_a1_op1().equals("0") && n.getCantidad_c_a1_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a1_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a1_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a1_op1());         
+            String nombre=n.getAlimento_c_a1_op1()+" ";
+            String uni=n.getUnidad_c_a1_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a2_op1", n.getCantidad_c_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a2_op1());
+        mv.addObject("unidad_c_a2_op1", n.getUnidad_c_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a2_op1());
+        mv.addObject("alimento_c_a2_op1", n.getAlimento_c_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a2_op1());
+        mv.addObject("calorias_c_a2_op1", n.getCalorias_c_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a2_op1());
+        
+        if(n.getCalorias_c_a2_op1().equals("0") && n.getAlimento_c_a2_op1().equals("0") && 
+           n.getUnidad_c_a2_op1().equals("0") && n.getCantidad_c_a2_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a2_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a2_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a2_op1());         
+            String nombre=n.getAlimento_c_a2_op1()+" ";
+            String uni=n.getUnidad_c_a2_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a3_op1", n.getCantidad_c_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a3_op1());
+        mv.addObject("unidad_c_a3_op1", n.getUnidad_c_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a3_op1());
+        mv.addObject("alimento_c_a3_op1", n.getAlimento_c_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a3_op1());
+        mv.addObject("calorias_c_a3_op1", n.getCalorias_c_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a3_op1());
+        
+        if(n.getCalorias_c_a3_op1().equals("0") && n.getAlimento_c_a3_op1().equals("0") && 
+           n.getUnidad_c_a3_op1().equals("0") && n.getCantidad_c_a3_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a3_op1());         
+            String nombre=n.getAlimento_c_a3_op1()+" ";
+            String uni=n.getUnidad_c_a3_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        
+        mv.addObject("cantidad_c_a4_op1", n.getCantidad_c_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a4_op1());
+        mv.addObject("unidad_c_a4_op1", n.getUnidad_c_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a4_op1());
+        mv.addObject("alimento_c_a4_op1", n.getAlimento_c_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a4_op1());
+        mv.addObject("calorias_c_a4_op1", n.getCalorias_c_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a4_op1());
+        
+        if(n.getCalorias_c_a4_op1().equals("0") && n.getAlimento_c_a4_op1().equals("0") && 
+           n.getUnidad_c_a4_op1().equals("0") && n.getCantidad_c_a4_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a4_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a4_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a4_op1());         
+            String nombre=n.getAlimento_c_a4_op1()+" ";
+            String uni=n.getUnidad_c_a4_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        
+        mv.addObject("cantidad_c_a5_op1", n.getCantidad_c_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a5_op1());
+        mv.addObject("unidad_c_a5_op1", n.getUnidad_c_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a5_op1());
+        mv.addObject("alimento_c_a5_op1", n.getAlimento_c_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a5_op1());
+        mv.addObject("calorias_c_a5_op1", n.getCalorias_c_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a5_op1());
+        
+        if(n.getCalorias_c_a5_op1().equals("0") && n.getAlimento_c_a5_op1().equals("0") && 
+           n.getUnidad_c_a5_op1().equals("0") && n.getCantidad_c_a5_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a5_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a5_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a5_op1());         
+            String nombre=n.getAlimento_c_a5_op1()+" ";
+            String uni=n.getUnidad_c_a5_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_comida()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 2
+        System.out.println("OPCION 2");
+        
+        mv.addObject("cantidad_c_a1_op2", n.getCantidad_c_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a1_op2());
+        mv.addObject("unidad_c_a1_op2", n.getUnidad_c_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a1_op2());
+        mv.addObject("alimento_c_a1_op2", n.getAlimento_c_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a1_op2());
+        mv.addObject("calorias_c_a1_op2", n.getCalorias_c_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a1_op2());
+        
+        if(n.getCalorias_c_a1_op2().equals("0") && n.getAlimento_c_a1_op2().equals("0") && 
+           n.getUnidad_c_a1_op2().equals("0") && n.getCantidad_c_a1_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a1_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a1_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a1_op2());         
+            String nombre=n.getAlimento_c_a1_op2()+" ";
+            String uni=n.getUnidad_c_a1_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a2_op2", n.getCantidad_c_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a2_op2());
+        mv.addObject("unidad_c_a2_op2", n.getUnidad_c_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a2_op2());
+        mv.addObject("alimento_c_a2_op2", n.getAlimento_c_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a2_op2());
+        mv.addObject("calorias_c_a2_op2", n.getCalorias_c_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a2_op2());
+        
+        if(n.getCalorias_c_a2_op2().equals("0") && n.getAlimento_c_a2_op2().equals("0") && 
+           n.getUnidad_c_a2_op2().equals("0") && n.getCantidad_c_a2_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a2_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a2_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a2_op2());         
+            String nombre=n.getAlimento_c_a2_op2()+" ";
+            String uni=n.getUnidad_c_a2_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a3_op2", n.getCantidad_c_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a3_op2());
+        mv.addObject("unidad_c_a3_op2", n.getUnidad_c_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a3_op2());
+        mv.addObject("alimento_c_a3_op2", n.getAlimento_c_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a3_op2());
+        mv.addObject("calorias_c_a3_op2", n.getCalorias_c_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a3_op2());
+        
+        if(n.getCalorias_c_a3_op2().equals("0") && n.getAlimento_c_a3_op2().equals("0") && 
+           n.getUnidad_c_a3_op2().equals("0") && n.getCantidad_c_a3_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a3_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a3_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a3_op2());         
+            String nombre=n.getAlimento_c_a3_op2()+" ";
+            String uni=n.getUnidad_c_a3_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a4_op2", n.getCantidad_c_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a4_op2());
+        mv.addObject("unidad_c_a4_op2", n.getUnidad_c_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a4_op2());
+        mv.addObject("alimento_c_a4_op2", n.getAlimento_c_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a4_op2());
+        mv.addObject("calorias_c_a4_op2", n.getCalorias_c_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a4_op2());
+        
+        if(n.getCalorias_c_a4_op2().equals("0") && n.getAlimento_c_a4_op2().equals("0") && 
+           n.getUnidad_c_a4_op2().equals("0") && n.getCantidad_c_a4_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a4_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a4_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a4_op2());         
+            String nombre=n.getAlimento_c_a4_op2()+" ";
+            String uni=n.getUnidad_c_a4_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a5_op2", n.getCantidad_c_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a5_op2());
+        mv.addObject("unidad_c_a5_op2", n.getUnidad_c_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a5_op2());
+        mv.addObject("alimento_c_a5_op2", n.getAlimento_c_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a5_op2());
+        mv.addObject("calorias_c_a5_op2", n.getCalorias_c_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a5_op2());
+        
+        if(n.getCalorias_c_a5_op2().equals("0") && n.getAlimento_c_a5_op2().equals("0") && 
+           n.getUnidad_c_a5_op2().equals("0") && n.getCantidad_c_a5_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a5_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a5_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a5_op2());         
+            String nombre=n.getAlimento_c_a5_op2()+" ";
+            String uni=n.getUnidad_c_a5_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_comida()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 3
+         System.out.println("OPCION 3");
+        
+        mv.addObject("cantidad_c_a1_op3", n.getCantidad_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a1_op3());
+        mv.addObject("unidad_c_a1_op3", n.getUnidad_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a1_op3());
+        mv.addObject("alimento_c_a1_op3",n.getAlimento_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a1_op3());
+        mv.addObject("calorias_c_a1_op3", n.getCalorias_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a1_op3());
+        
+        if(n.getCalorias_c_a1_op3().equals("0") && n.getAlimento_c_a1_op3().equals("0") && 
+           n.getUnidad_c_a1_op3().equals("0") && n.getCantidad_c_a1_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a1_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a1_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a1_op3());         
+            String nombre=n.getAlimento_c_a1_op3()+" ";
+            String uni=n.getUnidad_c_a1_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a2_op3", n.getCantidad_c_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a2_op3());
+        mv.addObject("unidad_c_a2_op3", n.getUnidad_c_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a2_op3());
+        mv.addObject("alimento_c_a2_op3", n.getAlimento_c_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a2_op3());
+        mv.addObject("calorias_c_a2_op3", n.getCalorias_c_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a2_op3());
+        
+        if(n.getCalorias_c_a2_op3().equals("0") && n.getAlimento_c_a2_op3().equals("0") && 
+           n.getUnidad_c_a2_op3().equals("0") && n.getCantidad_c_a2_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a2_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a2_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a2_op3());         
+            String nombre=n.getAlimento_c_a2_op3()+" ";
+            String uni=n.getUnidad_c_a2_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a3_op3", n.getCantidad_c_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a3_op3());
+        mv.addObject("unidad_c_a3_op3", n.getUnidad_c_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a3_op3());
+        mv.addObject("alimento_c_a3_op3", n.getAlimento_c_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a3_op3());
+        mv.addObject("calorias_c_a3_op3", n.getCalorias_c_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a3_op3());
+        
+        if(n.getCalorias_c_a3_op3().equals("0") && n.getAlimento_c_a3_op3().equals("0") && 
+           n.getUnidad_c_a3_op3().equals("0") && n.getCantidad_c_a3_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a3_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a3_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a3_op3());         
+            String nombre=n.getAlimento_c_a3_op3()+" ";
+            String uni=n.getUnidad_c_a3_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a4_op3", n.getCantidad_c_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a4_op3());
+        mv.addObject("unidad_c_a4_op3", n.getUnidad_c_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a4_op3());
+        mv.addObject("alimento_c_a4_op3", n.getAlimento_c_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a4_op3());
+        mv.addObject("calorias_c_a4_op3", n.getCalorias_c_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a4_op3());
+        
+        if(n.getCalorias_c_a4_op3().equals("0") && n.getAlimento_c_a4_op3().equals("0") && 
+           n.getUnidad_c_a4_op3().equals("0") && n.getCantidad_c_a4_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a4_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a4_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a4_op3());         
+            String nombre=n.getAlimento_c_a4_op3()+" ";
+            String uni=n.getUnidad_c_a4_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a5_op3", n.getCantidad_c_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a5_op3());
+        mv.addObject("unidad_c_a5_op3", n.getUnidad_c_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a5_op3());
+        mv.addObject("alimento_c_a5_op3", n.getAlimento_c_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a5_op3());
+        mv.addObject("calorias_c_a5_op3", n.getCalorias_c_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a5_op3());
+        
+        if(n.getCalorias_c_a5_op3().equals("0") && n.getAlimento_c_a5_op3().equals("0") && 
+           n.getUnidad_c_a5_op3().equals("0") && n.getCantidad_c_a5_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c_a5_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c_a5_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c_a5_op3());         
+            String nombre=n.getAlimento_c_a5_op3()+" ";
+            String uni=n.getUnidad_c_a5_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_comida()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        if(id_opcion.size()<8){
+            for(int i=id_opcion.size();i<8;i++){
+                id_opcion.add(null);
+            }
+        }
+        
+        System.out.println("ID_OP: "+id_opcion);
+
+        //Colacion II
+        
+        System.out.println("COLACION II");
+        
+        mv.addObject("hora_col_2", n.getHora_col_2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getHora_col_2());
+
+
+        //Opcion 1
+
+        mv.addObject("cantidad_c2_a1_op1", n.getCantidad_c2_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a1_op1());
+        mv.addObject("unidad_c2_a1_op1", n.getUnidad_c2_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a1_op1());
+        mv.addObject("alimento_c2_a1_op1", n.getAlimento_c2_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a1_op1());
+        mv.addObject("calorias_c2_a1_op1", n.getCalorias_c2_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a1_op1());
+        
+        if(n.getCalorias_c2_a1_op1().equals("0") && n.getAlimento_c2_a1_op1().equals("0") && 
+           n.getUnidad_c2_a1_op1().equals("0") && n.getCantidad_c2_a1_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a1_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a1_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a1_op1());         
+            String nombre=n.getAlimento_c2_a1_op1()+" ";
+            String uni=n.getUnidad_c2_a1_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a2_op1", n.getCantidad_c2_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a2_op1());
+        mv.addObject("unidad_c2_a2_op1", n.getUnidad_c2_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a2_op1());
+        mv.addObject("alimento_c2_a2_op1", n.getAlimento_c2_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a2_op1());
+        mv.addObject("calorias_c2_a2_op1", n.getCalorias_c2_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a2_op1());
+        
+        if(n.getCalorias_c2_a2_op1().equals("0") && n.getAlimento_c2_a2_op1().equals("0") && 
+           n.getUnidad_c2_a2_op1().equals("0") && n.getCantidad_c2_a2_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a2_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a2_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a2_op1());         
+            String nombre=n.getAlimento_c2_a2_op1()+" ";
+            String uni=n.getUnidad_c2_a2_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a3_op1", n.getCantidad_c2_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a3_op1());
+        mv.addObject("unidad_c2_a3_op1", n.getUnidad_c2_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a3_op1());
+        mv.addObject("alimento_c2_a3_op1", n.getAlimento_c2_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a3_op1());
+        mv.addObject("calorias_c2_a3_op1", n.getCalorias_c2_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a3_op1());
+        
+        if(n.getCalorias_c2_a3_op1().equals("0") && n.getAlimento_c2_a3_op1().equals("0") && 
+           n.getUnidad_c2_a3_op1().equals("0") && n.getCantidad_c2_a3_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a3_op1());         
+            String nombre=n.getAlimento_c2_a3_op1()+" ";
+            String uni=n.getUnidad_c2_a3_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a4_op1", n.getCantidad_c2_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a4_op1());
+        mv.addObject("unidad_c2_a4_op1", n.getUnidad_c2_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a4_op1());
+        mv.addObject("alimento_c2_a4_op1", n.getAlimento_c2_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a4_op1());
+        mv.addObject("calorias_c2_a4_op1", n.getCalorias_c2_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a4_op1());
+        
+        if(n.getCalorias_c2_a4_op1().equals("0") && n.getAlimento_c2_a4_op1().equals("0") && 
+           n.getUnidad_c2_a4_op1().equals("0") && n.getCantidad_c2_a4_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a4_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a4_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a4_op1());         
+            String nombre=n.getAlimento_c2_a4_op1()+" ";
+            String uni=n.getUnidad_c2_a4_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a5_op1", n.getCantidad_c2_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a5_op1());
+        mv.addObject("unidad_c2_a5_op1", n.getUnidad_c2_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a5_op1());
+        mv.addObject("alimento_c2_a5_op1", n.getAlimento_c2_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a5_op1());
+        mv.addObject("calorias_c2_a5_op1", n.getCalorias_c2_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a5_op1());
+        
+        if(n.getCalorias_c2_a5_op1().equals("0") && n.getAlimento_c2_a5_op1().equals("0") && 
+           n.getUnidad_c2_a5_op1().equals("0") && n.getCantidad_c2_a5_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a5_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a5_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a5_op1());         
+            String nombre=n.getAlimento_c2_a5_op1()+" ";
+            String uni=n.getUnidad_c2_a5_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_col_2()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 2
+
+        mv.addObject("cantidad_c2_a1_op2", n.getCantidad_c2_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a1_op2());
+        mv.addObject("unidad_c2_a1_op2", n.getUnidad_c2_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a1_op2());
+        mv.addObject("alimento_c2_a1_op2", n.getAlimento_c2_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a1_op2());
+        mv.addObject("calorias_c2_a1_op2", n.getCalorias_c2_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a1_op2());
+        
+        if(n.getCalorias_c2_a1_op2().equals("0") && n.getAlimento_c2_a1_op2().equals("0") && 
+           n.getUnidad_c2_a1_op2().equals("0") && n.getCantidad_c2_a1_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a1_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a1_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a1_op2());         
+            String nombre=n.getAlimento_c2_a1_op2()+" ";
+            String uni=n.getUnidad_c2_a1_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a2_op2", n.getCantidad_c2_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a2_op2());
+        mv.addObject("unidad_c2_a2_op2", n.getUnidad_c2_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a2_op2());
+        mv.addObject("alimento_c2_a2_op2", n.getAlimento_c2_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a2_op2());
+        mv.addObject("calorias_c2_a2_op2", n.getCalorias_c2_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a2_op2());
+        
+        if(n.getCalorias_c2_a2_op2().equals("0") && n.getAlimento_c2_a2_op2().equals("0") && 
+           n.getUnidad_c2_a2_op2().equals("0") && n.getCantidad_c2_a2_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a2_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a2_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a2_op2());         
+            String nombre=n.getAlimento_c2_a2_op2()+" ";
+            String uni=n.getUnidad_c2_a2_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a3_op2", n.getCantidad_c2_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a3_op2());
+        mv.addObject("unidad_c2_a3_op2", n.getUnidad_c2_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a3_op2());
+        mv.addObject("alimento_c2_a3_op2", n.getAlimento_c2_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a3_op2());
+        mv.addObject("calorias_c2_a3_op2", n.getCalorias_c2_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a3_op2());
+        
+        if(n.getCalorias_c2_a3_op2().equals("0") && n.getAlimento_c2_a3_op2().equals("0") && 
+           n.getUnidad_c2_a3_op2().equals("0") && n.getCantidad_c2_a3_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a3_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a3_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a3_op2());         
+            String nombre=n.getAlimento_c2_a3_op2()+" ";
+            String uni=n.getUnidad_c2_a3_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        
+        mv.addObject("cantidad_c2_a4_op2", n.getCantidad_c2_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a4_op2());
+        mv.addObject("unidad_c2_a4_op2", n.getUnidad_c2_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a4_op2());
+        mv.addObject("alimento_c2_a4_op2", n.getAlimento_c2_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a4_op2());
+        mv.addObject("calorias_c2_a4_op2", n.getCalorias_c2_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a4_op2());
+        
+        if(n.getCalorias_c2_a4_op2().equals("0") && n.getAlimento_c2_a4_op2().equals("0") && 
+           n.getUnidad_c2_a4_op2().equals("0") && n.getCantidad_c2_a4_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a4_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a4_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a4_op2());         
+            String nombre=n.getAlimento_c2_a4_op2()+" ";
+            String uni=n.getUnidad_c2_a4_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c2_a5_op2", n.getCantidad_c2_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c2_a5_op2());
+        mv.addObject("unidad_c2_a5_op2", n.getUnidad_c2_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c2_a5_op2());
+        mv.addObject("alimento_c2_a5_op2", n.getAlimento_c2_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c2_a5_op2());
+        mv.addObject("calorias_c2_a5_op2", n.getCalorias_c2_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c2_a5_op2());
+        
+        if(n.getCalorias_c2_a5_op2().equals("0") && n.getAlimento_c2_a5_op2().equals("0") && 
+           n.getUnidad_c2_a5_op2().equals("0") && n.getCantidad_c2_a5_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_c2_a5_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_c2_a5_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_c2_a5_op2());         
+            String nombre=n.getAlimento_c2_a5_op2()+" ";
+            String uni=n.getUnidad_c2_a5_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_col_2()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        if(id_opcion.size()<10){
+            for(int i=id_opcion.size();i<10;i++){
+                id_opcion.add(null);
+            }
+        }
+        
+        System.out.println("ID_OP: "+id_opcion);
+        
+        //Cena
+        
+        System.out.println("CENA");
+        
         mv.addObject("hora_cena", n.getHora_cena()); //Se agrega el campo No_cedula al modelo
         System.out.println(n.getHora_cena());
+        
+        //Opcion 1
+        
+         mv.addObject("cantidad_ce_a1_op1", n.getCantidad_ce_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a1_op1());
+        mv.addObject("unidad_ce_a1_op1", n.getUnidad_ce_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a1_op1());
+        mv.addObject("alimento_ce_a1_op1", n.getAlimento_ce_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a1_op1());
+        mv.addObject("calorias_ce_a1_op1", n.getCalorias_ce_a1_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a1_op1());
+        
+        if(n.getCalorias_ce_a1_op1().equals("0") && n.getAlimento_ce_a1_op1().equals("0") && 
+           n.getUnidad_ce_a1_op1().equals("0") && n.getCantidad_ce_a1_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a1_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a1_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a1_op1());         
+            String nombre=n.getAlimento_ce_a1_op1()+" ";
+            String uni=n.getUnidad_ce_a1_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_c_a2_op1", n.getCantidad_ce_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a2_op1());
+        mv.addObject("unidad_c_a2_op1", n.getUnidad_ce_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a2_op1());
+        mv.addObject("alimento_c_a2_op1", n.getAlimento_ce_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a2_op1());
+        mv.addObject("calorias_c_a2_op1", n.getCalorias_ce_a2_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a2_op1());
+        
+        if(n.getCalorias_ce_a2_op1().equals("0") && n.getAlimento_ce_a2_op1().equals("0") && 
+           n.getUnidad_ce_a2_op1().equals("0") && n.getCantidad_ce_a2_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a2_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a2_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a2_op1());         
+            String nombre=n.getAlimento_ce_a2_op1()+" ";
+            String uni=n.getUnidad_ce_a2_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a3_op1", n.getCantidad_ce_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a3_op1());
+        mv.addObject("unidad_ce_a3_op1", n.getUnidad_ce_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a3_op1());
+        mv.addObject("alimento_ce_a3_op1", n.getAlimento_ce_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a3_op1());
+        mv.addObject("calorias_ce_a3_op1", n.getCalorias_ce_a3_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a3_op1());
+        
+        if(n.getCalorias_ce_a3_op1().equals("0") && n.getAlimento_ce_a3_op1().equals("0") && 
+           n.getUnidad_ce_a3_op1().equals("0") && n.getCantidad_ce_a3_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a3_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a3_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a3_op1());         
+            String nombre=n.getAlimento_ce_a3_op1()+" ";
+            String uni=n.getUnidad_ce_a3_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a4_op1", n.getCantidad_ce_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a4_op1());
+        mv.addObject("unidad_ce_a4_op1", n.getUnidad_ce_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a4_op1());
+        mv.addObject("alimento_ce_a4_op1", n.getAlimento_ce_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a4_op1());
+        mv.addObject("calorias_ce_a4_op1", n.getCalorias_ce_a4_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a4_op1());
+        
+        if(n.getCalorias_ce_a4_op1().equals("0") && n.getAlimento_ce_a4_op1().equals("0") && 
+           n.getUnidad_ce_a4_op1().equals("0") && n.getCantidad_ce_a4_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a4_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a4_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a4_op1());         
+            String nombre=n.getAlimento_ce_a4_op1()+" ";
+            String uni=n.getUnidad_ce_a4_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a5_op1", n.getCantidad_ce_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a5_op1());
+        mv.addObject("unidad_ce_a5_op1", n.getUnidad_ce_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a5_op1());
+        mv.addObject("alimento_ce_a5_op1", n.getAlimento_ce_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a5_op1());
+        mv.addObject("calorias_ce_a5_op1", n.getCalorias_ce_a5_op1()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a5_op1());
+        
+        if(n.getCalorias_ce_a5_op1().equals("0") && n.getAlimento_ce_a5_op1().equals("0") && 
+           n.getUnidad_ce_a5_op1().equals("0") && n.getCantidad_ce_a5_op1().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a5_op1().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a5_op1());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a5_op1());         
+            String nombre=n.getAlimento_ce_a5_op1()+" ";
+            String uni=n.getUnidad_ce_a5_op1()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_cena()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        //Opcion 2
+        
+        mv.addObject("cantidad_ce_a1_op2", n.getCantidad_ce_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a1_op2());
+        mv.addObject("unidad_ce_a1_op2", n.getUnidad_ce_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a1_op2());
+        mv.addObject("alimento_ce_a1_op2", n.getAlimento_ce_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a1_op2());
+        mv.addObject("calorias_ce_a1_op2", n.getCalorias_ce_a1_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a1_op2());
+        
+        if(n.getCalorias_ce_a1_op2().equals("0") && n.getAlimento_ce_a1_op2().equals("0") && 
+           n.getUnidad_ce_a1_op2().equals("0") && n.getCantidad_ce_a1_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a1_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a1_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a1_op2());         
+            String nombre=n.getAlimento_ce_a1_op2()+" ";
+            String uni=n.getUnidad_ce_a1_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a2_op2", n.getCantidad_ce_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a2_op2());
+        mv.addObject("unidad_ce_a2_op2", n.getUnidad_ce_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a2_op2());
+        mv.addObject("alimento_ce_a2_op2", n.getAlimento_ce_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a2_op2());
+        mv.addObject("calorias_ce_a2_op2", n.getCalorias_ce_a2_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a2_op2());
+        
+        if(n.getCalorias_ce_a2_op2().equals("0") && n.getAlimento_ce_a2_op2().equals("0") && 
+           n.getUnidad_ce_a2_op2().equals("0") && n.getCantidad_ce_a2_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a2_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a2_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a2_op2());         
+            String nombre=n.getAlimento_ce_a2_op2()+" ";
+            String uni=n.getUnidad_ce_a2_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a3_op2", n.getCantidad_ce_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a3_op2());
+        mv.addObject("unidad_ce_a3_op2", n.getUnidad_ce_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a3_op2());
+        mv.addObject("alimento_ce_a3_op2", n.getAlimento_ce_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a3_op2());
+        mv.addObject("calorias_ce_a3_op2", n.getCalorias_ce_a3_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a3_op2());
+        
+        if(n.getCalorias_ce_a3_op2().equals("0") && n.getAlimento_ce_a3_op2().equals("0") && 
+           n.getUnidad_ce_a3_op2().equals("0") && n.getCantidad_ce_a3_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a3_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a3_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a3_op2());         
+            String nombre=n.getAlimento_ce_a3_op2()+" ";
+            String uni=n.getUnidad_ce_a3_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a4_op2", n.getCantidad_ce_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a4_op2());
+        mv.addObject("unidad_ce_a4_op2", n.getUnidad_ce_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a4_op2());
+        mv.addObject("alimento_ce_a4_op2", n.getAlimento_ce_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a4_op2());
+        mv.addObject("calorias_ce_a4_op2", n.getCalorias_ce_a4_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a4_op2());
+        
+        if(n.getCalorias_ce_a4_op2().equals("0") && n.getAlimento_ce_a4_op2().equals("0") && 
+           n.getUnidad_ce_a4_op2().equals("0") && n.getCantidad_ce_a4_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a4_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a4_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a4_op2());         
+            String nombre=n.getAlimento_ce_a4_op2()+" ";
+            String uni=n.getUnidad_ce_a4_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a5_op2", n.getCantidad_ce_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a5_op2());
+        mv.addObject("unidad_ce_a5_op2", n.getUnidad_ce_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a5_op2());
+        mv.addObject("alimento_ce_a5_op2", n.getAlimento_ce_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a5_op2());
+        mv.addObject("calorias_ce_a5_op2", n.getCalorias_ce_a5_op2()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a5_op2());
+        
+        if(n.getCalorias_ce_a5_op2().equals("0") && n.getAlimento_ce_a5_op2().equals("0") && 
+           n.getUnidad_ce_a5_op2().equals("0") && n.getCantidad_ce_a5_op2().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a5_op2().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a5_op2());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a5_op2());         
+            String nombre=n.getAlimento_ce_a5_op2()+" ";
+            String uni=n.getUnidad_ce_a5_op2()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_cena()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+        
+        
+        //Opcion 3
+        
+        mv.addObject("cantidad_ce_a1_op3", n.getCantidad_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_c_a1_op3());
+        mv.addObject("unidad_ce_a1_op3", n.getUnidad_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_c_a1_op3());
+        mv.addObject("alimento_ce_a1_op3", n.getAlimento_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_c_a1_op3());
+        mv.addObject("calorias_ce_a1_op3", n.getCalorias_c_a1_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_c_a1_op3());
+        
+        if(n.getCalorias_ce_a1_op3().equals("0") && n.getAlimento_ce_a1_op3().equals("0") && 
+           n.getUnidad_ce_a1_op3().equals("0") && n.getCantidad_ce_a1_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a1_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a1_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a1_op3());         
+            String nombre=n.getAlimento_ce_a1_op3()+" ";
+            String uni=n.getUnidad_ce_a1_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a2_op3", n.getCantidad_ce_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a2_op3());
+        mv.addObject("unidad_ce_a2_op3", n.getUnidad_ce_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a2_op3());
+        mv.addObject("alimento_ce_a2_op3", n.getAlimento_ce_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a2_op3());
+        mv.addObject("calorias_ce_a2_op3", n.getCalorias_ce_a2_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a2_op3());
+        
+        if(n.getCalorias_ce_a2_op3().equals("0") && n.getAlimento_ce_a2_op3().equals("0") && 
+           n.getUnidad_ce_a2_op3().equals("0") && n.getCantidad_ce_a2_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a2_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a2_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a2_op3());         
+            String nombre=n.getAlimento_ce_a2_op3()+" ";
+            String uni=n.getUnidad_ce_a2_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a3_op3", n.getCantidad_ce_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a3_op3());
+        mv.addObject("unidad_ce_a3_op3", n.getUnidad_ce_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a3_op3());
+        mv.addObject("alimento_ce_a3_op3", n.getAlimento_ce_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a3_op3());
+        mv.addObject("calorias_ce_a3_op3", n.getCalorias_ce_a3_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a3_op3());
+        
+        if(n.getCalorias_ce_a3_op3().equals("0") && n.getAlimento_ce_a3_op3().equals("0") && 
+           n.getUnidad_ce_a3_op3().equals("0") && n.getCantidad_ce_a3_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a3_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a3_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a3_op3());         
+            String nombre=n.getAlimento_ce_a3_op3()+" ";
+            String uni=n.getUnidad_ce_a3_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a4_op3", n.getCantidad_ce_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a4_op3());
+        mv.addObject("unidad_ce_a4_op3", n.getUnidad_ce_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a4_op3());
+        mv.addObject("alimento_ce_a4_op3", n.getAlimento_ce_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a4_op3());
+        mv.addObject("calorias_ce_a4_op3", n.getCalorias_ce_a4_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a4_op3());
+        
+        if(n.getCalorias_ce_a4_op3().equals("0") && n.getAlimento_ce_a4_op3().equals("0") && 
+           n.getUnidad_ce_a4_op3().equals("0") && n.getCantidad_ce_a4_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a4_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a4_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a4_op3());         
+            String nombre=n.getAlimento_ce_a4_op3()+" ";
+            String uni=n.getUnidad_ce_a4_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        mv.addObject("cantidad_ce_a5_op3", n.getCantidad_ce_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCantidad_ce_a5_op3());
+        mv.addObject("unidad_ce_a5_op3", n.getUnidad_ce_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getUnidad_ce_a5_op3());
+        mv.addObject("alimento_ce_a5_op3", n.getAlimento_ce_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getAlimento_ce_a5_op3());
+        mv.addObject("calorias_ce_a5_op3", n.getCalorias_ce_a5_op3()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getCalorias_ce_a5_op3());
+        
+        if(n.getCalorias_ce_a5_op3().equals("0") && n.getAlimento_ce_a5_op3().equals("0") && 
+           n.getUnidad_ce_a5_op3().equals("0") && n.getCantidad_ce_a5_op3().equals("0")){
+            
+        }else{
+            double calorias;
+            if(n.getCalorias_ce_a5_op3().equals("undefined")){
+                calorias=0;
+            }else{
+                calorias=Double.parseDouble(n.getCalorias_ce_a5_op3());
+            }
+            double cantidad=Double.parseDouble(n.getCantidad_ce_a5_op3());         
+            String nombre=n.getAlimento_ce_a5_op3()+" ";
+            String uni=n.getUnidad_ce_a5_op3()+" ";;
+
+            String sql="insert into alimento values("+'0'+","+cantidad+",'"+nombre+"',"+calorias+",'"+uni+"');";
+            this.jdbcTemplate.update(sql); 
+
+            id.add(this.jdbcTemplate.queryForInt("select max(id_alimento) from alimento"));
+        }
+        
+        aux="";
+        sql2="";
+        
+        if(!id.isEmpty()){
+            for(int i=0;i<5;i++){
+                if(i<id.size()){
+                    aux+=id.get(i)+",";
+                }else{
+                    aux+="null,";
+                }
+            }
+            sql2="insert into opciones value("+'0'+","+aux+""+"'"+n.getHora_cena()+"'"+");";
+            this.jdbcTemplate.update(sql2); 
+            System.out.println(sql2);
+            id_opcion.add(this.jdbcTemplate.queryForInt("select max(id_opcion) from opciones"));
+        }
+        
+        id.clear();
+
+        mv.addObject("paciente", n.getPaciente()); //Se agrega el campo No_cedula al modelo
+        System.out.println(n.getPaciente()+" "+alert);
+        
+        
+        if(id_opcion.size()<13){
+            for(int i=id_opcion.size();i<13;i++){
+                id_opcion.add(null);
+            }
+        }
+        
+        System.out.println("ID_OP: "+id_opcion);
+        aux="";
+        for(int i=0;i<id_opcion.size();i++){
+            aux+=","+id_opcion.get(i);
+        }
+        
+        sql2="insert into dieta value("+'0'+aux+");";
+    
+        System.out.println(sql2);
+        this.jdbcTemplate.update(sql2); 
+        
+        int llave_dieta=this.jdbcTemplate.queryForInt("select max(id_dieta) from dieta");
+        
+        sql2="insert into paci_dieta_nutri value("+'0'+","+n.getPaciente()+","+llave_dieta+","+alert+");";
+        
+        this.jdbcTemplate.update(sql2); 
         
         return mv;
     
     }
     
+    
+     @RequestMapping(params = "vista_dieta_paciente", method = RequestMethod.POST)
+    public ModelAndView vista_dieta_paciente(@ModelAttribute("cita") cita c, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) {
+
+        HttpSession session = hsr.getSession();                              //OBETENEMOS LA SESIÓN
+        String alert = (String) session.getAttribute("Nutri");             //EXTRAEMOS EL ATRIBUTO RELACIONADO A SESION DE PACIENTES
+
+        if (alert == null) {                                                  //VERIFICAMOS QUE EL ATRIBUTO NO ESTE NULO
+            return new ModelAndView("redirect:/login.htm");                  // EN CASO DE QUE SEA NULO REDIRECCIONAMOS A LA VISTA DE LOGIN
+        }
+        
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("vista_dieta_paciente");
+        Conexion conn=new Conexion();                                 //Instacia a la conexión de base de datos
+        JdbcTemplate jdbc=new JdbcTemplate(conn.conectar("nutricoach"));
+        mv.addObject("no_boleta", c.getNo_boleta());
+
+        mv.addObject("Paciente_dieta",new Paciente_dieta());
+       
+        
+        return mv;
+        
+    }
+    
+   
+
+    
+    
+    
+    
+    
+    
+    
   /////////////////////
     /////ACION BOTON generar_dieta_nutriologo
     
-     @RequestMapping(params = "generarDieta", method = RequestMethod.POST)
+    @RequestMapping(params = "generarDieta", method = RequestMethod.POST)
     public ModelAndView GenerarDieta(@ModelAttribute("cita") cita c, BindingResult result, HttpServletRequest hsr, HttpServletResponse hsrl) {
 
         HttpSession session = hsr.getSession();                              //OBETENEMOS LA SESIÓN
@@ -3119,24 +5410,7 @@ public class nutriologoController {
     }
     
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     ////////////////////
     //ACCIÓN DEL BOTON CERRAR

@@ -90,6 +90,14 @@ public class VistaController {
         return mv;
     }
     
+    @RequestMapping("vista_dieta_paciente.htm")
+    public ModelAndView vista_dieta_paciente(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("vista dieta paciente");
+        return mv;
+    }
+    
+    
     
     
     

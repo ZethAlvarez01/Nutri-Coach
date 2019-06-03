@@ -661,7 +661,7 @@
                             </tr>
 
                             <c:forEach items="${datoT12}" var="item">
-                                <tr onclick="obtener('${item.alimento}'),' ',' ',0,,${item.Kcal}">
+                                <tr onclick="obtener('${item.alimento}'),' ',' ',0,${item.Kcal}">
                                     <th><c:out value="${item.id}"/></th>
                                     <td><c:out value="${item.alimento}"/></td>
                                     <td><c:out value="${item.Kcal}"/></td>
@@ -2316,78 +2316,63 @@
                     </ul>
                 </div>
                      
-                 <!--  <form:form commandName="Dieta" method="post">
-                        <form:label path="hora_des">7:30 am</form:label>
-                        <form:input path="hora_des" value="7:30 am"/>
-                        <form:label path="hora_col1">11:30 am</form:label>
-                        <form:input path="hora_col1" value="11:30 am"/>
-                        <form:label path="hora_com">2:30 pm</form:label>
-                        <form:input path="hora_com" value="2:30 pm"/>
-                        <form:label path="hora_col2">6:00 pm</form:label>
-                        <form:input path="hora_col2" value="6:00 pm"/>
-                        <form:label path="hora_cena">9:00 pm</form:label>
-                        <form:input path="hora_cena" value="9:00 pm"/>
-                        <form:button id="guardar" name="Dieta" type="submit">Registrar</form:button>
-                </form:form>-->
+                
                 
 
-                <div id="dieta">
+            <div id="dieta">
+                <form:form commandName="Dieta" method="post">
 
-                    <!--<div id="desayuno_op1" class="bordes_c">
-
-                        <a class="boton_aux" onclick="cambiar('panel_d_op1')">Buscar alimentos</a>
-                    </div>-->
                     <div id="Desayuno">
                         <h2>Desayuno</h2>
-                        <input type="time" value="11:30" />
+                        <form:input path="hora_des" type="time" value="07:30" />
                         <div id="opcion_1_d" style="display: block;">
                             <h3>Opción 1</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_d',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_d',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_d',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_d',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a1_op1" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_d',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a1_op1" id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_d',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a1_op1" id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_d',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a1_op1" id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_d',0)" value="0"/>
                                 <a onclick="cambiar('opcion_1_d','Desayuno',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_d',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_d',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_d',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_d',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_d',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a2_op1" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_d',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a2_op1" id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_d',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a2_op1" id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_d',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a2_op1" id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_d',1)" value="0"/>
                                 <a onclick="cambiar('opcion_1_d','Desayuno',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_d',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_d',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_d',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_d',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_d',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a3_op1" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_d',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a3_op1" id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_d',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a3_op1" id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_d',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a3_op1" id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_d',2)" value="0"/>
                                 <a onclick="cambiar('opcion_1_d','Desayuno',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_d',2)" style="display: block;">Limpiar</a>
                             </div>
-
+                                
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_d',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_d',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_d',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_d',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a4_op1" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_d',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a4_op1" id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_d',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a4_op1" id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_d',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a4_op1" id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_d',3)" value="0"/>
                                 <a onclick="cambiar('opcion_1_d','Desayuno',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_d',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_d',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_d',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_d',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_d',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a5_op1" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_d',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a5_op1" id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_d',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a5_op1" id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_d',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a5_op1" id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_d',4)" value="0"/>
                                 <a onclick="cambiar('opcion_1_d','Desayuno',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_d',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2397,50 +2382,50 @@
                             <h3>Opción 2</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_d',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_d',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_d',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_d',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a1_op2" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_d',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a1_op2" id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_d',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a1_op2" id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_d',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a1_op2" id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_d',0)" value="0"/>
                                 <a onclick="cambiar('opcion_2_d','Desayuno',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_d',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_d',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_d',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_d',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_d',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a2_op2" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_d',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a2_op2" id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_d',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a2_op2" id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_d',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a2_op2" id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_d',1)" value="0"/>
                                 <a onclick="cambiar('opcion_2_d','Desayuno',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_d',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_d',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_d',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_d',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_d',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a3_op2" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_d',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a3_op2" id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_d',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a3_op2" id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_d',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a3_op2" id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_d',2)" value="0"/>
                                 <a onclick="cambiar('opcion_2_d','Desayuno',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_d',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_d',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_d',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_d',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_d',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a4_op2" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_d',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a4_op2" id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_d',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a4_op2" id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_d',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a4_op2" id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_d',3)" value="0"/>
                                 <a onclick="cambiar('opcion_2_d','Desayuno',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_d',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_d',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_d',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_d',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_d',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a5_op2" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_d',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a5_op2" id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_d',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a5_op2" id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_d',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a5_op2" id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_d',4)" value="0"/>
                                 <a onclick="cambiar('opcion_2_d','Desayuno',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_d',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2450,107 +2435,108 @@
                             <h3>Opción 3</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_d',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_d',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_d',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_d',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a1_op3" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_d',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a1_op3" id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_d',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a1_op3" id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_d',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a1_op3" id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_d',0)" value="0"/>
                                 <a onclick="cambiar('opcion_3_d','Desayuno',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_d',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_d',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_d',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_d',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_d',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a2_op3" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_d',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a2_op3" id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_d',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a2_op3" id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_d',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a2_op3" id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_d',1)" value="0"/>
                                 <a onclick="cambiar('opcion_3_d','Desayuno',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_d',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_d',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_d',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_d',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_d',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a3_op3" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_d',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a3_op3" id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_d',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a3_op3" id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_d',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a3_op3" id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_d',2)" value="0"/>
                                 <a onclick="cambiar('opcion_3_d','Desayuno',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_d',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_d',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_d',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_d',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_d',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a4_op3" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_d',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a4_op3" id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_d',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a4_op3" id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_d',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a4_op3" id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_d',3)" value="0"/>
                                 <a onclick="cambiar('opcion_3_d','Desayuno',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_d',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_d',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_d',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_d',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_d',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_d_a5_op3" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_d',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_d_a5_op3" id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_d',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_d_a5_op3" id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_d',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_d_a5_op3" id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_d',4)" value="0"/>
                                 <a onclick="cambiar('opcion_3_d','Desayuno',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_d',4)" style="display: block;">Limpiar</a>
                             </div>
                         </div>
+                        
                     </div>
                     
                     <div id="Colacion_1">
                         <h2>colación I</h2>
-                        <input type="time" value="07:30" />
+                        <form:input path="hora_col_1" type="time" value="11:30" />
                         <div id="opcion_1_c_1" style="display: block;">
                             <h3>Opción 1</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a1_op1" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a1_op1" id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a1_op1" id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a1_op1" id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c_1',0)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_1','Colacion_1',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_1',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a2_op1" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a2_op1" id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a2_op1" id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a2_op1" id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c_1',1)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_1','Colacion_1',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_1',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a3_op1" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a3_op1" id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a3_op1" id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a3_op1" id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c_1',2)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_1','Colacion_1',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_1',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a4_op1"  id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a4_op1"  id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a4_op1"  id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a4_op1"  id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c_1',3)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_1','Colacion_1',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_1',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a5_op1"  id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a5_op1"  id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a5_op1"  id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a5_op1"  id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c_1',4)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_1','Colacion_1',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_1',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2560,107 +2546,107 @@
                             <h3>Opción 2</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a1_op2" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a1_op2" id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a1_op2" id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a1_op2" id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c_1',0)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_1','Colacion_1',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_1',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a2_op2" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a2_op2" id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a2_op2" id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a2_op2" id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c_1',1)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_1','Colacion_1',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_1',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a3_op2" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a3_op2" id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a3_op2" id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a3_op2" id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c_1',2)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_1','Colacion_1',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_1',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a4_op2" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a4_op2" id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a4_op2" id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a4_op2" id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c_1',3)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_1','Colacion_1',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_1',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c1_a5_op2" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c1_a5_op2" id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c1_a5_op2" id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c1_a5_op2" id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c_1',4)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_1','Colacion_1',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_1',4)" style="display: block;">Limpiar</a>
                             </div>
                         </div>
                     </div>
-                    
+                
                     <div id="Comida">
                         <h2>Comida</h2>
-                        <input type="time" value="14:30" />
+                        <form:input path="hora_comida" type="time" value="14:30" />
                         <div id="opcion_1_c" style="display: block;">
                             <h3>Opción 1</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a1_op1" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a1_op1" id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a1_op1" id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a1_op1" id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c',0)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c','Comida',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a2_op1" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a2_op1" id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a2_op1" id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a2_op1" id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c',1)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c','Comida',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a3_op1" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a3_op1" id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a3_op1" id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a3_op1" id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c',2)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c','Comida',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a4_op1" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a4_op1" id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a4_op1" id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a4_op1" id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c',3)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c','Comida',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a5_op1" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a5_op1" id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a5_op1" id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a5_op1" id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c',4)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c','Comida',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2670,50 +2656,50 @@
                             <h3>Opción 2</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a1_op2" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a1_op2" id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a1_op2" id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a1_op2" id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c',0)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c','Comida',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a2_op2" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a2_op2" id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a2_op2" id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a2_op2" id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c',1)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c','Comida',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a3_op2" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a3_op2" id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a3_op2" id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a3_op2" id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c',2)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c','Comida',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a4_op2" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a4_op2" id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a4_op2" id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a4_op2" id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c',3)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c','Comida',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a5_op2" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a5_op2" id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a5_op2" id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a5_op2" id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c',4)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c','Comida',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2723,50 +2709,50 @@
                             <h3>Opción 3</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_c',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_c',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_c',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_c',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a1_op3" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_c',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a1_op3" id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_c',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a1_op3" id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_c',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a1_op3" id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_c',0)" value="0"/>
                                 <a onclick="cambiar('opcion_3_c','Comida',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_c',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_c',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_c',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_c',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_c',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a2_op3" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_c',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a2_op3" id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_c',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a2_op3" id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_c',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a2_op3" id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_c',1)" value="0"/>
                                 <a onclick="cambiar('opcion_3_c','Comida',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_c',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_c',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_c',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_c',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_c',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a3_op3" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_c',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a3_op3" id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_c',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a3_op3" id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_c',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a3_op3" id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_c',2)" value="0"/>
                                 <a onclick="cambiar('opcion_3_c','Comida',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_c',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_c',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_c',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_c',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_c',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a4_op3" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_c',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a4_op3" id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_c',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a4_op3" id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_c',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a4_op3" id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_c',3)" value="0"/>
                                 <a onclick="cambiar('opcion_3_c','Comida',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_c',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_c',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_c',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_c',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_c',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c_a5_op3" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_c',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c_a5_op3" id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_c',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c_a5_op3" id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_c',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c_a5_op3" id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_c',4)" value="0"/>
                                 <a onclick="cambiar('opcion_3_c','Comida',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_c',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2775,55 +2761,55 @@
                     
                     <div id="Colacion_2">
                         <h2>colación II</h2>
-                        <input type="time" value="18:00" />
+                        <form:input path="hora_col_2" type="time" value="18:00" />
                         <div id="opcion_1_c_2" style="display: block;">
                             <h3>Opción 1</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a1_op1" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a1_op1" id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a1_op1" id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a1_op1" id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_c_2',0)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_2','Colacion_2',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_2',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a2_op1" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a2_op1" id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a2_op1" id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a2_op1" id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_c_2',1)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_2','Colacion_2',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_2',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a3_op1" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a3_op1" id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a3_op1" id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a3_op1" id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_c_2',2)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_2','Colacion_2',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_2',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a4_op1" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a4_op1" id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a4_op1" id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a4_op1" id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_c_2',3)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_2','Colacion_2',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_2',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a5_op1" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a5_op1" id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a5_op1" id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a5_op1" id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_c_2',4)" value="0"/>
                                 <a onclick="cambiar('opcion_1_c_2','Colacion_2',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_c_2',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2833,107 +2819,107 @@
                             <h3>Opción 2</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a1_op2" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a1_op2" id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a1_op2" id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a1_op2" id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_c_2',0)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_2','Colacion_2',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_2',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a2_op2" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a2_op2" id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a2_op2" id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a2_op2" id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_c_2',1)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_2','Colacion_2',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_2',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a3_op2" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a3_op2" id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a3_op2" id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a3_op2" id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_c_2',2)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_2','Colacion_2',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_2',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a4_op2" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a4_op2" id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a4_op2" id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a4_op2" id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_c_2',3)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_2','Colacion_2',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_2',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_c2_a5_op2" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_c2_a5_op2" id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_c2_a5_op2" id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_c2_a5_op2" id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_c_2',4)" value="0"/>
                                 <a onclick="cambiar('opcion_2_c_2','Colacion_2',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_c_2',4)" style="display: block;">Limpiar</a>
                             </div>
                         </div>
                     </div>
-
+                        
                     <div id="Cena">
                         <h2>Cena</h2>
-                        <input type="time" value="14:30" />
+                        <form:input path="hora_cena" type="time" value="21:00" />
                         <div id="opcion_1_cena" style="display: block;">
                             <h3>Opción 1</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a1_op1" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a1_op1" id="unidad_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a1_op1" id="alimento_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a1_op1" id="calorias_1" style="display: block;" onclick="mostrar('opcion_1_cena',0)" value="0"/>
                                 <a onclick="cambiar('opcion_1_cena','Cena',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_cena',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a2_op1"  id="cantidad_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a2_op1" id="unidad_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a2_op1" id="alimento_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a2_op1" id="calorias_2" style="display: block;" onclick="mostrar('opcion_1_cena',1)" value="0"/>
                                 <a onclick="cambiar('opcion_1_cena','Cena',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_cena',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a3_op1" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a3_op1" id="unidad_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a3_op1" id="alimento_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a3_op1" id="calorias_3" style="display: block;" onclick="mostrar('opcion_1_cena',2)" value="0"/>
                                 <a onclick="cambiar('opcion_1_cena','Cena',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_cena',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a4_op1" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a4_op1" id="unidad_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a4_op1" id="alimento_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a4_op1" id="calorias_4" style="display: block;" onclick="mostrar('opcion_1_cena',3)" value="0"/>
                                 <a onclick="cambiar('opcion_1_cena','Cena',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_cena',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a5_op1" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a5_op1" id="unidad_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a5_op1" id="alimento_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a5_op1" id="calorias_5" style="display: block;" onclick="mostrar('opcion_1_cena',4)" value="0"/>
                                 <a onclick="cambiar('opcion_1_cena','Cena',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_1_cena',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2943,50 +2929,50 @@
                             <h3>Opción 2</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a1_op2" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a1_op2" id="unidad_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a1_op2" id="alimento_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a1_op2"id="calorias_1" style="display: block;" onclick="mostrar('opcion_2_cena',0)" value="0"/>
                                 <a onclick="cambiar('opcion_2_cena','Cena',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_cena',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a2_op2" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a2_op2" id="unidad_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a2_op2" id="alimento_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a2_op2" id="calorias_2" style="display: block;" onclick="mostrar('opcion_2_cena',1)" value="0"/>
                                 <a onclick="cambiar('opcion_2_cena','Cena',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_cena',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a3_op2" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a3_op2" id="unidad_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a3_op2" id="alimento_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a3_op2" id="calorias_3" style="display: block;" onclick="mostrar('opcion_2_cena',2)" value="0"/>
                                 <a onclick="cambiar('opcion_2_cena','Cena',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_cena',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a4_op2" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a4_op2" id="unidad_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a4_op2" id="alimento_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a4_op2" id="calorias_4" style="display: block;" onclick="mostrar('opcion_2_cena',3)" value="0"/>
                                 <a onclick="cambiar('opcion_2_cena','Cena',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_cena',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a5_op2" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a5_op2" id="unidad_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a5_op2" id="alimento_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a5_op2" id="calorias_5" style="display: block;" onclick="mostrar('opcion_2_cena',4)" value="0"/>
                                 <a onclick="cambiar('opcion_2_cena','Cena',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_2_cena',4)" style="display: block;">Limpiar</a>
                             </div>
@@ -2996,56 +2982,62 @@
                             <h3>Opción 3</h3>
                             <div id="alimento_1" style="display: block;">
                                 <h3>Alimento 1</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a1_op3" id="cantidad_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a1_op3" id="unidad_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a1_op3" id="alimento_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a1_op3" id="calorias_1" style="display: block;" onclick="mostrar('opcion_3_cena',0)" value="0"/>
                                 <a onclick="cambiar('opcion_3_cena','Cena',0)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_cena',0)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_2" style="display:none;">
                                 <h3>Alimento 2</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a2_op3" id="cantidad_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a2_op3" id="unidad_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a2_op3" id="alimento_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a2_op3" id="calorias_2" style="display: block;" onclick="mostrar('opcion_3_cena',1)" value="0"/>
                                 <a onclick="cambiar('opcion_3_cena','Cena',1)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_cena',1)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_3" style="display:none;">
                                 <h3>Alimento 3</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a3_op3" id="cantidad_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a3_op3" id="unidad_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a3_op3" id="alimento_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a3_op3" id="calorias_3" style="display: block;" onclick="mostrar('opcion_3_cena',2)" value="0"/>
                                 <a onclick="cambiar('opcion_3_cena','Cena',2)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_cena',2)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_4" style="display:none;">
                                 <h3>Alimento 4</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a4_op3" id="cantidad_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a4_op3" id="unidad_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a4_op3" id="alimento_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a4_op3" id="calorias_4" style="display: block;" onclick="mostrar('opcion_3_cena',3)" value="0"/>
                                 <a onclick="cambiar('opcion_3_cena','Cena',3)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_cena',3)" style="display: block;">Limpiar</a>
                             </div>
 
                             <div id="alimento_5" style="display:none;">
                                 <h3>Alimento 5</h3>
-                                <p style="display: none;">Cantidad: </p><input id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)"/>
-                                <p style="display: none;">Unidad: </p><input id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)"/>
-                                <p style="display: none;">Alimento: </p><input id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)"/>
-                                <p style="display: none;">Kcalorias: </p><input id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)"/>
+                                <p style="display: none;">Cantidad: </p><form:input path="cantidad_ce_a5_op3" id="cantidad_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)" value="0"/>
+                                <p style="display: none;">Unidad: </p><form:input path="unidad_ce_a5_op3" id="unidad_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)" value="0"/>
+                                <p style="display: none;">Alimento: </p><form:input path="alimento_ce_a5_op3" id="alimento_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)" value="0"/>
+                                <p style="display: none;">Kcalorias: </p><form:input path="calorias_ce_a5_op3" id="calorias_5" style="display: block;" onclick="mostrar('opcion_3_cena',4)" value="0"/>
                                 <a onclick="cambiar('opcion_3_cena','Cena',4)" style="display: block;">Buscar alimentos</a>
                                 <a onclick="limpiar('opcion_3_cena',4)" style="display: block;">Limpiar</a>
                             </div>
                         </div>
                     </div>
-                        
+                    
+                    <form:input path="paciente" style="display: none;" value="${datosPaciente[0].no_boleta}"/>
+                               
+                    <form:button id="guardar" name="Dieta" type="submit" style="display: block;">Guardar</form:button>
+                    
+                </form:form>
+                    
             </div>
         </div>
     </div>

@@ -10,8 +10,8 @@ import java.util.Collections;
 public class Tratamiento {
     int edad;
     String sexo;
-    int peso;
-    int altura;
+    float peso;
+    float altura;
     String ansiedad;
     String depresion;
     String ira;
@@ -34,8 +34,8 @@ public class Tratamiento {
     public Tratamiento(String edad, String sexo, String peso, String altura, String ansiedad, String depresion, String ira, String estres, String feliz, String dulce, String amarga, String salada, String picante, String acida, String actividad, String suplementos, String motivacion, String preparar, String beneficios, String deportes, String medicamentos, String salud) {
         this.edad=Integer.parseInt(edad);
         this.sexo = sexo;
-        this.peso =Integer.parseInt(peso);
-        this.altura =Integer.parseInt(altura);
+        this.peso = Float.parseFloat(peso);
+        this.altura = Float.parseFloat(altura);
         this.ansiedad = ansiedad;
         this.depresion = depresion;
         this.ira = ira;
@@ -78,9 +78,9 @@ public class Tratamiento {
                 break;
         }
 
-        aux=binario(peso,0);
+        aux=binario(Math.round(peso),0);
         binario.addAll(aux);        
-        aux=binario(altura,1);
+        aux=binario(Math.round(altura),1);
         binario.addAll(aux);
         
         if(ansiedad.equals("true")){

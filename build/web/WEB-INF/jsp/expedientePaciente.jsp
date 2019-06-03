@@ -220,7 +220,10 @@
                     <div class="dieta">
                     <p class="titulo">Tu dieta de hoy</p>
                     <div class="contenido-E">
-                        No disponible.
+                        <form:form method="post" commandName="vista_dieta_paciente">
+                            <input type="submit"  name="vista_dieta_paciente" value="Ver dieta de la semana">  
+                            <form:input path="no_boleta" placeholder="${item.no_boleta}" value="${item.no_boleta}" type="hidden" />
+                        </form:form>
                     </div>
                     </div>
                  
