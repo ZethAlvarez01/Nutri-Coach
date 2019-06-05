@@ -105,6 +105,7 @@ function limpiar(elemento,indice){
     inp[2].style="display: block;";
     inp[3].style="display: block;";
     
+    /*Alert*/
     
     op=document.getElementById(elemento);
     val=op.getElementsByTagName("div");
